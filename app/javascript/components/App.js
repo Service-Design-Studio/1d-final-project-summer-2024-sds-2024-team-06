@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
-import Home from './Home';
-import GalleryWalk from './GalleryWalk';
+import Home from '../pages/Home';
+import GalleryWalk from '../pages/GalleryWalk';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 const App = () => {
@@ -25,6 +25,6 @@ const App = () => {
       </div>
     </Router>
   );
-};
+}
 
 export default App;

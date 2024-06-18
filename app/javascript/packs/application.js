@@ -23,6 +23,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 // Import the App component
 import App from 'components/App';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// If you need to use Bootstrap's JavaScript features, also import the JS
+import 'bootstrap';
 
 document.addEventListener('DOMContentLoaded', () => {
     const rootElement = document.getElementById('react-app');
