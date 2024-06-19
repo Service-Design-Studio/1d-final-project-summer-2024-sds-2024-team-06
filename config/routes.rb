@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   namespace :api do
-    resources :art_pieces, only: [:index, :show] #api/art_pieces/
+    resources :art_pieces, only: [:index, :show] do #api/art_pieces/
+    end
   end
 
 

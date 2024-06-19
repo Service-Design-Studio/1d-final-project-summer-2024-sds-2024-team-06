@@ -8,6 +8,7 @@ end
 When('I choose a picture from the carousel') do
   click_on 'Picture' #If "Picture" is a link or button in your application's UI
   # (e.g., a thumbnail of a picture in a carousel), Capybara will simulate clicking on that link or button.
+  #check if page is on /gallery-walk/{pic_num}
 end
 
 Then('a mp3 audio player and text box will be displayed alongside picture') do
@@ -23,7 +24,7 @@ end
 ##Scenario 2: During the Activity, play voiceover to start
 
 Given('I want to begin listening to voiceover') do
-  visit '/gallery-walk'
+  visit '/gallery-walk/1'
 end
 
 When('I click the play button') do
@@ -38,7 +39,7 @@ end
 ##Scenario 3: During the Activity, write text
 
 Given('I am listening to the voice-over') do
-  visit '/gallery-walk'
+  visit '/gallery-walk/1'
 end
 
 When('I want to express my emotions in writing') do
@@ -52,7 +53,7 @@ end
 ##Scenario 4: User has completed the Gallery Walk Activity
 
 Given('User is done with the gallery walk') do
-  visit '/gallery-walk'
+  visit '/gallery-walk/1'
 end
 
 When('they click the end activity button') do
