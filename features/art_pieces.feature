@@ -6,9 +6,14 @@ Feature: Gallery Walk
   Scenario: Participant begins Gallery Walk activity
     Given participant chosen to partake in the Gallery Walk
     When I choose a picture from the carousel
-    Then the other pictures should disappear, a mp3 audio player and text box will be displayed
+    Then a mp3 audio player and text box will be displayed alongside picture
 
-  Scenario: During the activity
+  Scenario: During the activity, play voiceover to start
+    Given I want to begin listening to voiceover
+    When I click the play button
+    Then audio will play
+
+  Scenario: During the activity, write text
     Given I am listening to the voice-over
     When I want to express my emotions in writing
     Then text will be shown in the text box as accordance to user input
@@ -20,5 +25,5 @@ Feature: Gallery Walk
 
   Scenario: Viewing the list of art gallery
     Given there are art pieces in the database
-    When I visit the art pieces page
+    When I visit the gallery walk page
     Then I should see a list of art pieces
