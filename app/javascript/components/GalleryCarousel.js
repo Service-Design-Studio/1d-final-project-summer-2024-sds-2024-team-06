@@ -9,16 +9,19 @@ const GalleryCarousel = () => {
   const slides = [
       {
           title: "First slide",
+          photoId: 1,
           content: () => <p>First slide content</p>,
           image: "/images/ageOfFullBloom.png"
       },
       {
           title: "Second slide",
+          photoId: 2,
           content: () => <p>Second slide content</p>,
           image: "/images/ageOfFullBloom.png" 
       },
       {
           title: "Third slide",
+          photoId: 3,
           content: () => <p>Third slide content</p>,
           image: "/images/ageOfFullBloom.png" 
       }
@@ -72,21 +75,21 @@ const GalleryCarousel = () => {
     return(
         
 
-<div id="carousel-example" className="relative mx-auto w-full max-w-4xl">
+<div id="carousel-example" className="relative mx-auto w-full max-w-4xl h-full items-center">
     
     <div
-        className="relative w-full h-64 md:h-80 lg:h-96"
+        className="relative h-96 rounded-lg"
     >
         {
             slides.map((slide, index) => (
                 <div
                     key={index}
                     id={`carousel-item-${index}`}
-                    className={`absolute inset-0 w-full h-full transition-opacity duration-700 ${currentSlide === index ? 'opacity-100' : 'hidden'}`}
+                    className="hidden duration-700 ease-in-out"
                 >
                     <img
                         src={slide.image}
-                        className="object-contain w-full h-full"
+                        className={`object-contain absolute left-1/2 top-1/2 block h-5/6 w-full -translate-x-1/2 -translate-y-1/2 ${index === currentSlide ? "" : 'hidden'}`}
                         alt="..."
                     />
                 </div>
@@ -95,42 +98,36 @@ const GalleryCarousel = () => {
     </div>
 
     <div
-        className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3"
+        className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse"
     >
 
-        {
-        slides.map((slide, index) => (
-            <button
-                id={`carousel-indicator-${index}`}
-                key={index}
-                type="button"
-                className={`h-3 w-3 rounded-full ${
-                    index === 0 ? 'bg-white' : 'bg-white/50'
-                }`}
-                aria-current={index === 0 ? 'true' : 'false'}
-                aria-label={`Slide ${index}`}
-                onClick={() => {
-                    console.log('clicked', index);
-                    carousel.slideTo(index)
-                    setCurrentSlide(index)
-                    console.log(currentSlide);}}
-            ></button>
-        ))
-        }
+    {slides.map((slide, index) => (
+        <button
+            id={`carousel-indicator-${index}`}
+            key={index}
+            type="button"
+            className={`h-3 w-3 rounded-full border-4 border-sky-500 ${currentSlide === index ? 'bg-white dark:bg-gray-800' : 'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800'}`}
+            aria-current="true"
+            aria-label={`Slide ${index}`}
+            onClick={() => {
+                setCurrentSlide(index)
+                carousel.slideTo(index)
+                }}
+        ></button>
+    ))}
     </div>
  
     <button
         id="data-carousel-prev"
         type="button"
-        className="absolute left-0 top-1/2 z-30 flex items-center justify-center w-12 h-12 bg-white bg-opacity-50 rounded-full transform -translate-y-1/2 -translate-x-2 hover:bg-opacity-75 focus:outline-none"
-        onClick={() => {carousel.prev(); 
+        className="group absolute left-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none border-4 border-sky-500"
+        onClick={() => {
             if (currentSlide === 0) {
-                setCurrentSlide(slideLimit)}
-            else {
+                setCurrentSlide(slideLimit)
+            } else {
                 setCurrentSlide(currentSlide - 1)
             }
-            console.log(currentSlide);
-        }}
+            carousel.prev()}}
     >
         <span
             className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70"
@@ -156,15 +153,15 @@ const GalleryCarousel = () => {
     <button
         id="data-carousel-next"
         type="button"
-        className="absolute right-0 top-1/2 z-30 flex items-center justify-center w-12 h-12 bg-white bg-opacity-50 rounded-full transform -translate-y-1/2 translate-x-2 hover:bg-opacity-75 focus:outline-none"
-        onClick={() => {carousel.next(); 
-            if (slideLimit === currentSlide) {
-            setCurrentSlide(0)}
-            else {
+        className="group absolute right-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none border-4 border-sky-500"
+        onClick={() => {
+            if (currentSlide === slideLimit) {
+                setCurrentSlide(0)
+            } else {
                 setCurrentSlide(currentSlide + 1)
             }
-            console.log(currentSlide);
-        }}
+            carousel.next()
+            }}
     >
         <span
             className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70"
