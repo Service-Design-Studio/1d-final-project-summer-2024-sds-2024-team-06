@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Carousel } from "flowbite";
+import { Link } from "react-router-dom";
 
 const GalleryCarousel = () => {
     
@@ -11,7 +12,7 @@ const GalleryCarousel = () => {
           title: "First slide",
           photoId: 1,
           content: () => <p>First slide content</p>,
-          image: "/images/ageOfFullBloom.png"
+          image: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg"
       },
       {
           title: "Second slide",
@@ -46,7 +47,20 @@ const GalleryCarousel = () => {
             activeclassNamees: 'bg-white dark:bg-gray-800',
             inactiveclassNamees:
                 'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800',
-            slides,
+            items: [
+            {
+                position: 0,
+                el: document.getElementById('carousel-indicator-0'),
+            },
+            {
+                position: 1,
+                el: document.getElementById('carousel-indicator-1'),
+            },
+            {
+                position: 2,
+                el: document.getElementById('carousel-indicator-2'),
+            },
+        ],
         },
   
         // callback functions
@@ -72,26 +86,47 @@ const GalleryCarousel = () => {
   
   },[])
 
+    const handleNext = () => {
+        const nextSlide = currentSlide === slideLimit ? 0 : currentSlide + 1;
+        setCurrentSlide(nextSlide);
+        carousel.next();
+    };
+
+    const handlePrev = () => {
+        const prevSlide = currentSlide === 0 ? slideLimit : currentSlide - 1;
+        setCurrentSlide(prevSlide);
+        carousel.prev();
+    };
+
+    useEffect(() => {
+        if (carousel === null) return;
+        console.log("currentSlide updated: " + currentSlide);
+        // Move the carousel to the new slide
+        carousel.slideTo(currentSlide);
+        }, [currentSlide, carousel]);
+
     return(
         
 
-<div id="carousel-example" className="relative mx-auto w-full max-w-4xl h-full items-center">
+<div id="carousel-example" className="relative mx-auto w-full max-w-4xl h-full items-center bg-center">
     
     <div
-        className="relative h-96 rounded-lg"
+        className="h-96 rounded-lg relative items-center"
     >
         {
             slides.map((slide, index) => (
                 <div
                     key={index}
                     id={`carousel-item-${index}`}
-                    className="hidden duration-700 ease-in-out"
+                    className="hidden duration-700 ease-in-out object-contain absolute left-1/2 top-1/2 h-5/6 w-full "
                 >
+                <Link to={`/gallery-walk/${slide.photoId}`} className={`-translate-x-1/2 -translate-y-1/2 ${index === currentSlide ? "" : 'hidden'}`}>
                     <img
                         src={slide.image}
-                        className={`object-contain absolute left-1/2 top-1/2 block h-5/6 w-full -translate-x-1/2 -translate-y-1/2 ${index === currentSlide ? "" : 'hidden'}`}
+                        className="h-2/3 border-black border-4"
                         alt="..."
                     />
+                </Link>
                 </div>
             ))
         }
@@ -101,16 +136,20 @@ const GalleryCarousel = () => {
         className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse"
     >
 
-    {slides.map((slide, index) => (
+    {
+
+        slides.map((slide, index) => (
         <button
             id={`carousel-indicator-${index}`}
             key={index}
             type="button"
-            className={`h-3 w-3 rounded-full border-4 border-sky-500 ${currentSlide === index ? 'bg-white dark:bg-gray-800' : 'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800'}`}
-            aria-current="true"
+            className="h-3 w-3 rounded-full border-4 border-sky-500"
+            aria-current={index === currentSlide ? 'true' : 'false'}
             aria-label={`Slide ${index}`}
             onClick={() => {
+                console.log("currentSlide before slide: " + currentSlide);
                 setCurrentSlide(index)
+                console.log("currentSlide: " + currentSlide);
                 carousel.slideTo(index)
                 }}
         ></button>
@@ -120,14 +159,8 @@ const GalleryCarousel = () => {
     <button
         id="data-carousel-prev"
         type="button"
-        className="group absolute left-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none border-4 border-sky-500"
-        onClick={() => {
-            if (currentSlide === 0) {
-                setCurrentSlide(slideLimit)
-            } else {
-                setCurrentSlide(currentSlide - 1)
-            }
-            carousel.prev()}}
+        className=" group absolute left-0 top-0 z-30 flex cursor-pointer items-center justify-center px-4 focus:outline-none border-4 border-sky-500"
+        onClick={handlePrev}
     >
         <span
             className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70"
@@ -153,15 +186,8 @@ const GalleryCarousel = () => {
     <button
         id="data-carousel-next"
         type="button"
-        className="group absolute right-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none border-4 border-sky-500"
-        onClick={() => {
-            if (currentSlide === slideLimit) {
-                setCurrentSlide(0)
-            } else {
-                setCurrentSlide(currentSlide + 1)
-            }
-            carousel.next()
-            }}
+        className="group absolute right-0 top-0 z-30 flex cursor-pointer items-center justify-center px-4 focus:outline-none border-4 border-sky-500"
+        onClick={handleNext}
     >
         <span
             className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70"
