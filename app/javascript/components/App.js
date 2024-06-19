@@ -3,12 +3,10 @@ import Navbar from './Navbar';
 import Home from '../pages/Home';
 import GalleryWalk from '../pages/GalleryWalk';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import ArtPieceList from './Jonas';
+import GalleryWalkSession from '../pages/GalleryWalkSession';
+import { Toaster } from './sonner';
 
 const App = () => {
-
-  const artPieces = ArtPieceList();
-  console.log(artPieces)
 
   const appStyle = {
     height: '100vh',
@@ -19,15 +17,19 @@ const App = () => {
 
   return (
     <Router>
-      <div style={appStyle}>
-        <Navbar />
+      <div style={appStyle} className='grid grid-cols-12 grid-rows-1'>
+        <div className='col-span-2'>
+          <Navbar />
+        </div>
         {/* Other components like routes go here */}
-        <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
-
-          
-        </Routes>
+        <div className='col-span-10'>
+          <Routes>
+            <Route exact path="/" element={<Home />}></Route>
+            <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
+            <Route exact path="/gallery-walk/:id" element={<GalleryWalkSession />}></Route>
+          </Routes>
+        </div>
+        <Toaster id=".toaster"/>
       </div>
     </Router>
   );

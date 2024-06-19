@@ -7,6 +7,7 @@
 
 require 'cucumber/rails'
 Capybara.default_driver = :selenium_chrome
+Capybara.app_host = 'http://127.0.0.1:3000'
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how
