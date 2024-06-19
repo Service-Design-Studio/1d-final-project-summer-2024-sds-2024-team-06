@@ -1,0 +1,2 @@
+module ArtPiecesHelper
+end

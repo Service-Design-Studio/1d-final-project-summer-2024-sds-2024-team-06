@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 import Home from '../pages/Home';
 import GalleryWalk from '../pages/GalleryWalk';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import ArtPieceList from './Jonas';
 
 const App = () => {
+
+  const artPieces = ArtPieceList();
+  console.log(artPieces)
 
   const appStyle = {
     height: '100vh',
@@ -21,6 +25,8 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
+
+          
         </Routes>
       </div>
     </Router>
@@ -28,3 +34,5 @@ const App = () => {
 }
 
 export default App;
+
+
