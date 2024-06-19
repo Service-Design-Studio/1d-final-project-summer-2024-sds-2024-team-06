@@ -1,7 +1,7 @@
 ##Scenario 1: Participant begins Gallery Walk activity
 
 Given('participant chosen to partake in the Gallery Walk') do
-  visit gallery_walk_path ##visit is a method that instructs the testing framework to
+  visit '/gallery-walk' ##visit is a method that instructs the testing framework to
   #simulate a browser visit to that location
 end
 
@@ -23,7 +23,7 @@ end
 ##Scenario 2: During the Activity, play voiceover to start
 
 Given('I want to begin listening to voiceover') do
-  visit gallery_walk_path
+  visit '/gallery-walk'
 end
 
 When('I click the play button') do
@@ -38,7 +38,7 @@ end
 ##Scenario 3: During the Activity, write text
 
 Given('I am listening to the voice-over') do
-  visit gallery_walk_path
+  visit '/gallery-walk'
 end
 
 When('I want to express my emotions in writing') do
@@ -52,7 +52,7 @@ end
 ##Scenario 4: User has completed the Gallery Walk Activity
 
 Given('User is done with the gallery walk') do
-  visit gallery_walk_path
+  visit '/gallery-walk'
 end
 
 When('they click the end activity button') do
@@ -61,7 +61,7 @@ end
 
 Then('the journal entry is automatically saved to their journal tab, browser redirect to journal') do
   expect(page).to have_text('Journal entry saved') # Assuming there's a confirmation message indicating successful saving
-  expect(page).to have_current_path(journal_path) # Assuming `journal_path` is the path to the journal page
+  expect(page).to have_current_path('/journal') # Assuming `/journal` is the path to the journal page
 end
 
 ##Scenario 5: Viewing the list of art gallery
@@ -74,7 +74,7 @@ Given('there are art pieces in the database') do
 end
 
 When('I visit the gallery walk page') do
-  visit gallery_walk_path
+  visit '/gallery-walk'
 end
 
 Then('I should see a list of art pieces') do
