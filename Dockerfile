@@ -1,67 +1,67 @@
-# syntax = docker/dockerfile:1
+# Use the official Ruby image from Docker Hub
+FROM ruby:3.3.3
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.3.3
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
-
-# Rails app lives here
-WORKDIR /rails
-
-# Set production environment
-ENV RAILS_ENV="production" \
-    BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+# Set the working directory in the container
+WORKDIR /app
 
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
-
-# Install packages needed to build gems
+# Install dependencies
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libvips pkg-config
+    apt-get install -y build-essential bash-completion libffi-dev tzdata git libvips libpq-dev nodejs npm && \
+    npm install -g yarn
 
-# Install application gems
+# # Install Cloud SQL Proxy
+# RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy && \
+#     chmod +x cloud_sql_proxy
+
+# Copy the setup script and make it executable
+# COPY scripts/setupdb.sh /usr/local/bin/setupdb.sh
+# RUN chmod +x /usr/local/bin/setupdb.sh
+
+
+
+# Copy Gemfile and Gemfile.lock and install gems
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
 
-# Copy application code
-COPY . .
+RUN gem install bundler && \
+    bundle config set --local deployment 'true' && \
+    bundle config set --local without 'development test' && \
+    bundle install
 
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
+# RUN gem install bundler
+# RUN bundle install
 
-# Adjust binfiles to be executable on Linux
-RUN chmod +x bin/* && \
-    sed -i "s/\r$//g" bin/* && \
-    sed -i 's/ruby\.exe$/ruby/' bin/*
-
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# Copy the application code into the container
+COPY . /app
 
 
-# Final stage for app image
-FROM base
+# Set production environment variables
+ENV RAILS_ENV=production
+ENV RAILS_LOG_TO_STDOUT=true
+ENV RAILS_SERVE_STATIC_FILES=true
+ENV SECRET_KEY_BASE=316d1b20f08892246a54a8d5b676f08cfe5c660ccb773d235424fa53e9a57fe2b8ab81a6cc28568c5ef36a44ce076bfbe939caaba88a33f63c8caf07b4645ead
+# ENV DB_HOST=
+# ENV DB_NAME=natgallery_production
+# ENV DB_USERNAME=artviewer
+# ENV DB_PASSWORD=iloveart123
 
-# Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+# RUN mkdir /cloudsql && \
+#     touch /cloudsql/team6sds:asia-southeast1:natgallerysql
 
-# Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
+RUN yarn install --silent && \
+    yarn add tailwindcss-animate flowbite 
+    # webpack webpack-cli shakapacker webpack-assets-manifest
+    
 
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
-USER rails:rails
+# Precompile assets, create and migrate the database, and seed if necessary
+RUN bundle exec rake assets:precompile --trace
 
-# Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD ["./bin/rails", "server"]
+# ENTRYPOINT ["scripts/setupdb.sh"]
+# Expose port 8080 to the Docker host, so we can access Rails server
+EXPOSE 8080
+
+# Start Cloud SQL Proxy in the background and then start the Rails server
+# CMD ["sh", "-c", "./cloud_sql_proxy -dir=/cloudsql -instances=team6sds:asia-southeast1:natgallerysql=tcp:5432 & bundle exec rails server -b 0.0.0.0 -p 8080"]
+# Start the Rails server
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "8080"]
