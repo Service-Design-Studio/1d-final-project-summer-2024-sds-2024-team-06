@@ -58,7 +58,7 @@ RUN yarn install --silent && \
 RUN bundle exec rake assets:precompile --trace
 
 
-# ENTRYPOINT ["scripts/setupdb.sh"]
+ENTRYPOINT ["scripts/setupdb.sh"]
 # Expose port 8080 to the Docker host, so we can access Rails server
 EXPOSE 8080
 
