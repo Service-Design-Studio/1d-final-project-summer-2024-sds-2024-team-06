@@ -16,6 +16,8 @@ gem "puma", ">= 5.0"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem "dotenv"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -35,6 +37,13 @@ gem "pry"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
+
+gem "shakapacker", "~> 8.0"
+
+gem "react-rails", "~> 3.2"
+gem "strict", "~> 1.5"
+
+gem "tailwindcss-rails", "~> 2.6"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -69,10 +78,3 @@ group :production do
   gem 'pg', '~> 1.5', '>= 1.5.6' #For Heroku deployment
   gem 'rails_12factor'
 end
-
-gem "shakapacker", "~> 8.0"
-
-gem "react-rails", "~> 3.2"
-gem "strict", "~> 1.5"
-
-gem "tailwindcss-rails", "~> 2.6"
