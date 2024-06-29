@@ -22,11 +22,17 @@ test:
 
 production:
   adapter: postgresql
-  encoding: unicode
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   # host: <%= ENV.fetch('DB_HOST') {'/cloudsql'} %>
-  host: <%= ENV.fetch("DB_HOST") { '/cloudsql' } %>/<%= ENV["CLOUD_SQL_CONNECTION_NAME"] %>  
-  database: <%= ENV['DB_NAME'] %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  secret_key_base: <%= ENV['SECRET_KEY_BASE'] %>
+  # host: <%= ENV.fetch("DB_HOST") { '/cloudsql' } %>/<%= ENV["CLOUD_SQL_CONNECTION_NAME"] %>  
+  # host: <%= ENV['DB_HOST'] %>  
+  host: /cloudsql/team6sds:asia-southeast1:natgallerysql
+  database: natgallery_production
+  username: artviewer
+  password: iloveart123
+  # database: <%= ENV['DB_NAME'] %>
+  # username: <%= ENV['DB_USERNAME'] %>
+  # password: <%= ENV['DB_PASSWORD'] %>
+  # # secret_key_base: <%= ENV['SECRET_KEY_BASE'] %>
+  port: 5432

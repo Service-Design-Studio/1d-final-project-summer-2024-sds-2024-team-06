@@ -39,6 +39,15 @@ steps:
     name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/team6sds/${_SERVICE_NAME}"]
 
+  # - id: "apply migrations"
+  #   name: "gcr.io/google-appengine/exec-wrapper"
+  #   entrypoint: "bash"
+  #   args:
+  #     [
+  #       "-c",
+  #       "source .env && /buildstep/execute.sh -i gcr.io/team6sds/${_SERVICE_NAME} -s team6sds:${_REGION}:${_INSTANCE_NAME} -- bundle exec rake db:migrate"
+  #     ]
+
   - id: "apply migrations"
     name: "gcr.io/google-appengine/exec-wrapper"
     entrypoint: "bash"
@@ -47,6 +56,25 @@ steps:
         "-c",
         "/buildstep/execute.sh -i gcr.io/team6sds/${_SERVICE_NAME} -s team6sds:${_REGION}:${_INSTANCE_NAME} -- bundle exec rake db:migrate"
       ]
+  
+  # - id: "seed database"
+  #   name: "gcr.io/google-appengine/exec-wrapper"
+  #   entrypoint: "bash"
+  #   args:
+  #     [
+  #       "-c",
+  #       "source .env && /buildstep/execute.sh -i gcr.io/team6sds/${_SERVICE_NAME} -s team6sds:${_REGION}:${_INSTANCE_NAME} -- bundle exec rake db:seed"
+  #     ]
+  
+  - id: "seed database"
+    name: "gcr.io/google-appengine/exec-wrapper"
+    entrypoint: "bash"
+    args:
+      [
+        "-c",
+        "/buildstep/execute.sh -i gcr.io/team6sds/${_SERVICE_NAME} -s team6sds:${_REGION}:${_INSTANCE_NAME} -- bundle exec rake db:seed"
+      ]
+
   - id: "run deploy"
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: gcloud

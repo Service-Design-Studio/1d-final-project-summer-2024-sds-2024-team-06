@@ -14,7 +14,7 @@ RUN apt-get update -qq && \
 # RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy && \
 #     chmod +x cloud_sql_proxy
 
-# Copy the setup script and make it executable
+# # Copy the setup script and make it executable
 # COPY scripts/setupdb.sh /usr/local/bin/setupdb.sh
 # RUN chmod +x /usr/local/bin/setupdb.sh
 
@@ -58,7 +58,7 @@ RUN yarn install --silent && \
 RUN bundle exec rake assets:precompile --trace
 
 
-ENTRYPOINT ["scripts/setupdb.sh"]
+# ENTRYPOINT ["scripts/setupdb.sh"]
 # Expose port 8080 to the Docker host, so we can access Rails server
 EXPOSE 8080
 
