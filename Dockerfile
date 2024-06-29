@@ -23,12 +23,13 @@ RUN apt-get update -qq && \
 # Copy Gemfile and Gemfile.lock and install gems
 COPY Gemfile Gemfile.lock ./
 
-RUN gem install bundler && \
-    bundle config set --local deployment 'true' && \
-    bundle config set --local without 'development test' && \
-    bundle install
 
-# RUN gem install bundler
+RUN gem install bundler
+
+RUN bundle config set --local deployment 'true' && \
+    bundle config set --local without 'development test'
+
+RUN bundle install
 # RUN bundle install
 
 # Copy the application code into the container
