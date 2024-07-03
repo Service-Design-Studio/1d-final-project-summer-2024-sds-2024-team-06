@@ -1,34 +1,4 @@
-# steps:
-#   # Step 1: Build the Docker image
-#   - id: "build image"
-#     name: 'gcr.io/cloud-builders/docker'
-#     args: ['build', '-t', 'gcr.io/team6sds/ngswebapphub', '.']
 
-#   # Step 2: Push the Docker image to Google Container Registry
-#   - id: "push image"
-#     name: 'gcr.io/cloud-builders/docker'
-#     args: ['push', 'gcr.io/team6sds/ngswebapphub']
-
-#   # Step 3: Deploy the Docker image to Cloud Run
-#   - name: 'gcr.io/cloud-builders/gcloud'
-#     args:
-#       - 'run'
-#       - 'deploy'
-#       - 'ngswebapphub'
-#       - '--image=gcr.io/team6sds/ngswebapphub'
-#       - '--platform=managed'
-#       - '--region=asia-southeast1'
-#       - '--add-cloudsql-instances=team6sds:asia-southeast1:natgallerysql'
-#       - '--set-env-vars=DATABASE_URL=postgres://artviewer:iloveart123@/natgallery_production?host=/cloudsql/natgallerysql'
-
-# options:
-#   logging: CLOUD_LOGGING_ONLY
-
-# images:
-#   - 'gcr.io/team6sds/ngswebapphub'
-
-
-# [START cloudrun_rails_cloudbuild]
 steps:
   - id: "build image"
     name: "gcr.io/cloud-builders/docker"
@@ -39,14 +9,6 @@ steps:
     name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/team6sds/${_SERVICE_NAME}"]
 
-  # - id: "apply migrations"
-  #   name: "gcr.io/google-appengine/exec-wrapper"
-  #   entrypoint: "bash"
-  #   args:
-  #     [
-  #       "-c",
-  #       "source .env && /buildstep/execute.sh -i gcr.io/team6sds/${_SERVICE_NAME} -s team6sds:${_REGION}:${_INSTANCE_NAME} -- bundle exec rake db:migrate"
-  #     ]
 
   - id: "apply migrations"
     name: "gcr.io/google-appengine/exec-wrapper"
@@ -63,17 +25,8 @@ steps:
   #   args:
   #     [
   #       "-c",
-  #       "source .env && /buildstep/execute.sh -i gcr.io/team6sds/${_SERVICE_NAME} -s team6sds:${_REGION}:${_INSTANCE_NAME} -- bundle exec rake db:seed"
+  #       "/buildstep/execute.sh -i gcr.io/team6sds/${_SERVICE_NAME} -s team6sds:${_REGION}:${_INSTANCE_NAME} -- bundle exec rake db:seed"
   #     ]
-  
-  - id: "seed database"
-    name: "gcr.io/google-appengine/exec-wrapper"
-    entrypoint: "bash"
-    args:
-      [
-        "-c",
-        "/buildstep/execute.sh -i gcr.io/team6sds/${_SERVICE_NAME} -s team6sds:${_REGION}:${_INSTANCE_NAME} -- bundle exec rake db:seed"
-      ]
 
   - id: "run deploy"
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk"

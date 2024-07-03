@@ -5,6 +5,7 @@ import GalleryWalk from '../pages/GalleryWalk';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import GalleryWalkSession from '../pages/GalleryWalkSession';
 import { Toaster } from './sonner';
+import { Carousel, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
 
 const App = () => {
 
