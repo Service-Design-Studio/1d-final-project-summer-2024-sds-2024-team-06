@@ -4,11 +4,13 @@ FROM ruby:3.3.3
 # Set the working directory in the container
 WORKDIR /app
 
-
 # Install dependencies
 RUN apt-get update -qq && \
     apt-get install -y build-essential bash-completion libffi-dev tzdata git libvips libpq-dev nodejs npm && \
     npm install -g yarn
+
+ARG MASTER_KEY
+ENV RAILS_MASTER_KEY=${MASTER_KEY}
 
 # # Install Cloud SQL Proxy
 # RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy && \
@@ -18,11 +20,8 @@ RUN apt-get update -qq && \
 # COPY scripts/setupdb.sh /usr/local/bin/setupdb.sh
 # RUN chmod +x /usr/local/bin/setupdb.sh
 
-
-
 # Copy Gemfile and Gemfile.lock and install gems
 COPY Gemfile Gemfile.lock ./
-
 
 RUN gem install bundler
 
@@ -44,7 +43,7 @@ ENV SECRET_KEY_BASE=316d1b20f08892246a54a8d5b676f08cfe5c660ccb773d235424fa53e9a5
 # ENV DB_HOST=
 # ENV DB_NAME=natgallery_production
 # ENV DB_USERNAME=artviewer
-# ENV DB_PASSWORD=iloveart123
+# ENV DB_PASSWORD=
 
 # RUN mkdir /cloudsql && \
 #     touch /cloudsql/team6sds:asia-southeast1:natgallerysql

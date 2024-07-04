@@ -5,8 +5,8 @@ import useFetch from '../components/useFetch'
 
 export default function GalleryWalk() {
 
-  const {data: artPieces, error, isPending} = useFetch('http://127.0.0.1:3000/api/art_pieces')
-  console.log(artPieces)
+  const {data: artPieces, error, isPending} = useFetch('https://ngswebapp-67fxypa3ea-as.a.run.app/api/art_pieces')
+  console.log(artPieces) 
 
     
   return (
