@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   end
 
 
+  resources :journals, only: [:create, :index, :show]
+
+
+
+
   root 'homepage#index'
 
   # Catch-all route for React Router
