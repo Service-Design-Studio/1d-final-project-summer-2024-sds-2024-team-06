@@ -58,4 +58,4 @@ availableSecrets:
 images:
   - "gcr.io/team6sds/${_SERVICE_NAME}"
 # [END cloudrun_rails_cloudbuild]
-
+#.
