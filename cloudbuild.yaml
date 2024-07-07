@@ -57,5 +57,8 @@ availableSecrets:
 
 images:
   - "gcr.io/team6sds/${_SERVICE_NAME}"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
 # [END cloudrun_rails_cloudbuild]
 #.
