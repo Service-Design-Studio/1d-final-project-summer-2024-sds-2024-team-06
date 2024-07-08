@@ -5,7 +5,6 @@ import GalleryWalk from '../pages/GalleryWalk';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import GalleryWalkSession from '../pages/GalleryWalkSession';
 import { Toaster } from './sonner';
-import { Carousel, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
 
 const App = () => {
 
@@ -16,6 +15,38 @@ const App = () => {
     backgroundSize: 'cover'
   };
 
+  function createFlowerForUser(userId, flowerData) {
+    flowerData.user_id = userId;
+    fetch(`/api/users/${userId}/flowers`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Include other headers as needed, like authorization tokens
+      },
+      body: JSON.stringify({ flower: flowerData })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Flower created:', data);
+      // Handle success, update UI accordingly
+    })
+    .catch((error) => {
+      console.error('Error creating flower:', error);
+      // Handle error
+    });
+  }
+  
+  // Example usage
+  const flowerData = {
+    emotion: 'happy',
+    color: 'yellow',
+    date_created: new Date().toISOString(),
+    // userId is not needed in the body since it's inferred from the URL
+  };
+  
+  // Assuming you have the current user's ID
+  const currentUserId = 2;
+
   return (
 
       <Router>
@@ -23,6 +54,7 @@ const App = () => {
         <div className='col-span-2'>
           <Navbar />
         </div>
+        <button onClick={() => createFlowerForUser(currentUserId, flowerData)}>Create Flower</button>
         <div className='col-span-10'>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>

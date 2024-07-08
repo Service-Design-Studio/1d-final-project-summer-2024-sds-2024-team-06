@@ -18,11 +18,15 @@ Rails.application.routes.draw do
   namespace :api do
     resources :art_pieces, only: [:index, :show] do #api/art_pieces/
     end
+
+    resources :users do
+      resources :flowers
+    end
+    
   end
 
 
   resources :journals, only: [:create, :index, :show]
-
 
 
 
