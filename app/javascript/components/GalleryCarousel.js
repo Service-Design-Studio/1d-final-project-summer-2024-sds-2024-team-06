@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "./carousel";
-import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "./carousel";
 import { Link } from "react-router-dom";
-import { Card, CardContent } from "./Card";
 import { Card, CardContent } from "./Card";
 
 const GalleryCarousel = ({artPieces}) => {
@@ -15,17 +13,11 @@ const GalleryCarousel = ({artPieces}) => {
 
 //   useEffect(() => {
 //     const carouselElement = document.getElementById('carousel-example');
-//   useEffect(() => {
-//     const carouselElement = document.getElementById('carousel-example');
     
 //     for (let i = 0; i < artPieces.length; i++) {
 //         artPieces[i].position = i;
 //         artPieces[i].el = document.getElementById(`carousel-item-${i}`);
 //     }
-//     for (let i = 0; i < artPieces.length; i++) {
-//         artPieces[i].position = i;
-//         artPieces[i].el = document.getElementById(`carousel-item-${i}`);
-//     }
 
 //     const items = [];
 //     for (let i = 0; i < artPieces.length; i++) {
@@ -34,29 +26,12 @@ const GalleryCarousel = ({artPieces}) => {
 //             el: document.getElementById(`carousel-item-${i}`),
 //         });
 //     }
-//     const items = [];
-//     for (let i = 0; i < artPieces.length; i++) {
-//         items.push({
-//             position: i,
-//             el: document.getElementById(`carousel-item-${i}`),
-//         });
-//     }
   
 //     // options with default values
 //     const options = {
 //         defaultPosition: 0,
 //         interval: 3000,
-//     // options with default values
-//     const options = {
-//         defaultPosition: 0,
-//         interval: 3000,
   
-//         indicators: {
-//             activeclassNamees: 'bg-white dark:bg-gray-800',
-//             inactiveclassNamees:
-//                 'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800',
-//             items: items,
-//         },
 //         indicators: {
 //             activeclassNamees: 'bg-white dark:bg-gray-800',
 //             inactiveclassNamees:
@@ -75,23 +50,7 @@ const GalleryCarousel = ({artPieces}) => {
 //             console.log('new slider item has been shown');
 //         },
 //     };
-//         // callback functions
-//         onNext: () => {
-//             console.log('next slider item is shown');
-//         },
-//         onPrev: () => {
-//             console.log('previous slider item is shown');
-//         },
-//         onChange: () => {
-//             console.log('new slider item has been shown');
-//         },
-//     };
   
-//     // instance options object
-//     const instanceOptions = {
-//     id: 'carousel-example',
-//     override: true
-//     };
 //     // instance options object
 //     const instanceOptions = {
 //     id: 'carousel-example',
@@ -100,17 +59,9 @@ const GalleryCarousel = ({artPieces}) => {
 
 //     console.log(artPieces);
 //     setCarousel(new Carousel(carouselElement, artPieces, options, instanceOptions));
-//     console.log(artPieces);
-//     setCarousel(new Carousel(carouselElement, artPieces, options, instanceOptions));
   
 //   },[])
-//   },[])
 
-//     const handleNext = () => {
-//         const nextSlide = currentSlide === slideLimit ? 0 : currentSlide + 1;
-//         setCurrentSlide(nextSlide);
-//         carousel.next();
-//     };
 //     const handleNext = () => {
 //         const nextSlide = currentSlide === slideLimit ? 0 : currentSlide + 1;
 //         setCurrentSlide(nextSlide);
@@ -122,18 +73,7 @@ const GalleryCarousel = ({artPieces}) => {
 //         setCurrentSlide(prevSlide);
 //         carousel.prev();
 //     };
-//     const handlePrev = () => {
-//         const prevSlide = currentSlide === 0 ? slideLimit : currentSlide - 1;
-//         setCurrentSlide(prevSlide);
-//         carousel.prev();
-//     };
 
-//     useEffect(() => {
-//         if (carousel === null) return;
-//         console.log("currentSlide updated: " + currentSlide);
-//         // Move the carousel to the new slide
-//         carousel.slideTo(currentSlide);
-//         }, [currentSlide, carousel]);
 //     useEffect(() => {
 //         if (carousel === null) return;
 //         console.log("currentSlide updated: " + currentSlide);
