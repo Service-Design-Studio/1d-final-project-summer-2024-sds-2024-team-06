@@ -81,3 +81,15 @@ group :production do
   gem 'pg', '~> 1.5', '>= 1.5.6' #For Heroku deployment
   gem 'rails_12factor'
 end
+
+gem "shakapacker", "~> 8.0"
+
+gem "react-rails", "~> 3.2"
+gem "strict", "~> 1.5"
+
+gem "tailwindcss-rails", "~> 2.6"
+
+group :test do
+  gem 'simplecov', '~> 0.21.2'
+  gem 'simplecov-lcov', require: false
+end

@@ -12,6 +12,7 @@ Feature: Gallery Walk
     Given I want to begin listening to voiceover
     When I click the play button
     Then audio will play
+    Then captions will start
 
   Scenario: During the activity, write text
     Given I am listening to the voice-over

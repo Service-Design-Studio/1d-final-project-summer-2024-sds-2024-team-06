@@ -17,12 +17,12 @@ const App = () => {
   };
 
   return (
-    <Router>
+
+      <Router>
       <div style={appStyle} className='grid grid-cols-12 grid-rows-1'>
         <div className='col-span-2'>
           <Navbar />
         </div>
-        {/* Other components like routes go here */}
         <div className='col-span-10'>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
@@ -33,9 +33,9 @@ const App = () => {
         <Toaster id=".toaster"/>
       </div>
     </Router>
+
   );
 }
-
 export default App;
 
 

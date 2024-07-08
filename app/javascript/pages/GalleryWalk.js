@@ -12,7 +12,7 @@ export default function GalleryWalk() {
 
     
   return (
-    <div>
+    <div className="h-full w-full m-20">
       {isPending && 
       <div className="h-full w-full flex justify-center items-center">
         <h1>Loading...</h1>
