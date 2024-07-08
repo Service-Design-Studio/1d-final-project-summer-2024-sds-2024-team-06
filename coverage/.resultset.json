@@ -1,0 +1,584 @@
+{
+  "Cucumber Features": {
+    "coverage": {
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/config/environment.rb": {
+        "lines": [
+          null,
+          1,
+          null,
+          null,
+          1
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/config/application.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/config/boot.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/config/environments/test.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/config/initializers/assets.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/config/initializers/content_security_policy.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/config/initializers/filter_parameter_logging.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/config/initializers/inflections.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/config/initializers/permissions_policy.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/config/routes.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/features/step_definitions/art_pieces_steps.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/models/art_piece.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      }
+    },
+    "timestamp": 1720411858
+  },
+  "RSpec": {
+    "coverage": {
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/channels/application_cable/channel.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/channels/application_cable/connection.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/art_pieces_controller.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/application_controller.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/homepage_controller.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/journals_controller.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/application_helper.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/art_pieces_helper.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/homepage_helper.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/journals_helper.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/jobs/application_job.rb": {
+        "lines": [
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/mailers/application_mailer.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/models/application_record.rb": {
+        "lines": [
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/models/art_piece.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/models/journal.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      }
+    },
+    "timestamp": 1720411652
+  }
+}

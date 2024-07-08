@@ -80,7 +80,7 @@ When('I visit the gallery walk page') do
 end
 
 Then('I should see a list of art pieces') do
-  binding.pry
+  # binding.pry
   @art_pieces.each do |art_piece|
     expect(page).to have_selector("img[='#{art_piece.artTitle}']")
     expect(page).to have_selector("img[src='#{art_piece.image_url}']")
