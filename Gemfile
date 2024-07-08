@@ -76,3 +76,8 @@ gem "react-rails", "~> 3.2"
 gem "strict", "~> 1.5"
 
 gem "tailwindcss-rails", "~> 2.6"
+
+group :test do
+  gem 'simplecov', '~> 0.21.2'
+  gem 'simplecov-lcov', require: false
+end

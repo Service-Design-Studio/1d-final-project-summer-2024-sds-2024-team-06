@@ -1,0 +1,164 @@
+{
+  "RSpec": {
+    "coverage": {
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/channels/application_cable/channel.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/channels/application_cable/connection.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/art_pieces_controller.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/application_controller.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/homepage_controller.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/application_helper.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/art_pieces_helper.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/homepage_helper.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/jobs/application_job.rb": {
+        "lines": [
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/mailers/application_mailer.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/models/application_record.rb": {
+        "lines": [
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/mdamm/Downloads/SDS/1d-final-project-summer-2024-sds-2024-team-06/app/models/art_piece.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0
+        ],
+        "branches": {
+        }
+      }
+    },
+    "timestamp": 1720064058
+  }
+}

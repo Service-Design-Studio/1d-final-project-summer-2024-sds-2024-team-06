@@ -4,10 +4,11 @@ require 'simplecov'
 
 ENV['RACK_ENV'] = 'test'
 
-require File.join(File.dirname(__FILE__), '..', '..', 'app')
+require File.expand_path(File.join(File.dirname(__FILE__), '../../config/environment'))
 
 require 'capybara'
 require 'capybara/cucumber'
+require 'cucumber/rails'
 require 'rspec'
 require 'rack_session_access'
 require 'byebug'
