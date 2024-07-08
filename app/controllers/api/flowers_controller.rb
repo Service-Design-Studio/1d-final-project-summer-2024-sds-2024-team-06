@@ -25,7 +25,7 @@ module Api
       private
     
       def flower_params
-        params.require(:flower).permit(:emotion, :color, :date_created, :user_id)
+        params.require(:flower).permit(:mood, :color, :date_created, :user_id)
       end
   end
   end

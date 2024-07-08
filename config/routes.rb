@@ -21,8 +21,9 @@ Rails.application.routes.draw do
 
     resources :users do
       resources :flowers
+      resources :moods
     end
-    
+
   end
 
 

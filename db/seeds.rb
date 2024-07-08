@@ -38,3 +38,29 @@ daily_login = [{:mood_name => 'Angry', :rating => 'G', :updated_at => '25-June-2
 daily_login.each do |mood|
   daily_login.create!(mood)
 end
+
+# standard_moods = [
+#   { name: 'Excited', color: 'Neon green', hexcode: '#39FF14' },
+#   { name: 'Very happy', color: 'Yellow', hexcode: '#FFFF00' },
+#   { name: 'Meh', color: 'Bright blue', hexcode: '#007FFF' },
+#   { name: 'Tired', color: 'Black', hexcode: '#000000' },
+#   { name: 'Content', color: 'Brown', hexcode: '#964B00' },
+#   { name: 'Angry', color: 'Red', hexcode: '#FF0000' },
+#   { name: 'Happy', color: 'Lime green', hexcode: '#32CD32' },
+#   { name: 'In love', color: 'Pink', hexcode: '#FFC0CB' },
+#   { name: 'Unhappy', color: 'Navy blue', hexcode: '#000080' },
+#   { name: 'Teary', color: 'Light purple', hexcode: '#E6E6FA' },
+#   { name: 'Upset', color: 'Dark blue', hexcode: '#00008B' },
+#   { name: 'Confused', color: 'Gray', hexcode: '#808080' },
+# ]
+
+# standard_moods.each do |mood_attributes|
+#   Mood.find_or_create_by!(mood_attributes)
+# end
+
+# User.find_each do |user|
+#   Mood.all.each do |mood|
+#     mood.user_id = user.id
+#     user.moods << mood unless user.moods.include?(mood)
+#   end
+# end
