@@ -82,9 +82,3 @@ group :production do
   gem 'rails_12factor'
 end
 
-gem "shakapacker", "~> 8.0"
-
-gem "react-rails", "~> 3.2"
-gem "strict", "~> 1.5"
-
-gem "tailwindcss-rails", "~> 2.6"
