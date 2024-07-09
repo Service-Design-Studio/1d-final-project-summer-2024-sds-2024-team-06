@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function UpdateMoodForm(props) {
+export default function UpdateMoodForm() {
   const [selectedMood, setSelectedMood] = useState('');
   const [color, setColor] = useState('');
   const [hexcode, setHexcode] = useState('');
@@ -14,7 +14,7 @@ export default function UpdateMoodForm(props) {
   const handleMoodChange = (e) => {
     e.preventDefault();
     const moodData = { color, hexcode };
-    fetch(`/api/users/${props.currentUserId}/moods/${selectedMood}`, {
+    fetch(`/api/moods/${selectedMood}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

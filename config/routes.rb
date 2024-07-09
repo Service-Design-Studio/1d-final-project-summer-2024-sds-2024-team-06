@@ -21,14 +21,12 @@ Rails.application.routes.draw do
     resources :art_pieces, only: [:index, :show] do #api/art_pieces/
     end
 
-    resources :users do
-      resources :flowers
-      resources :moods
-    end
 
+    resources :flowers
+    resources :moods
     resources :journals, only: [:create, :index, :show]
-
   end
+
 
 
 

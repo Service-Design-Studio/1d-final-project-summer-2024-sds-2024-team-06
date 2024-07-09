@@ -42,12 +42,12 @@ const App = () => {
   ]
   
   //fake user id
-  const currentUserId = 1;
+  // const currentUserId = 1;
 
   //function to create a flower for a user
-  function createFlowerForUser(userId, flowerData) {
-    flowerData.user_id = userId;
-    fetch(`/api/users/${userId}/flowers`, {
+  function createFlowerForUser(flowerData) {
+    // flowerData.user_id = userId;
+    fetch(`/api/flowers`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,8 +65,8 @@ const App = () => {
   
 
   //function to create a standard mood for a user
-  function createMoods(userId, moodData) {
-    fetch(`/api/users/${userId}/moods`, {
+  function createMoods(moodData) {
+    fetch(`/api/moods`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -83,9 +83,9 @@ const App = () => {
   }
 
   //function to lop through all standard moods to add them to a user
-  function addAllMoodsToCurrentUser(userId, moods) {
+  function addAllMoodsToCurrentUser(moods) {
     moods.forEach(mood => {
-      createMoods(userId, mood);
+      createMoods(mood);
     });
   }
 
@@ -96,9 +96,9 @@ const App = () => {
         <div className='col-span-2'>
           <Navbar />
         </div>
-        <button onClick={() => createFlowerForUser(currentUserId, flowerData)}>Create Flower</button>
-        <button onClick={() => addAllMoodsToCurrentUser(currentUserId, standard_moods)}>Add All Moods to Current User</button>
-        <UpdateMoodForm currentUserId={currentUserId}/>
+        <button onClick={() => createFlowerForUser(flowerData)}>Create Flower</button>
+        <button onClick={() => addAllMoodsToCurrentUser(standard_moods)}>Add All Moods to Current User</button>
+        <UpdateMoodForm />
         <div className='col-span-10'>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
