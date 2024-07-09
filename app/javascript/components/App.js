@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Home from '../pages/Home';
 import GalleryWalk from '../pages/GalleryWalk';
@@ -6,9 +6,11 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import GalleryWalkSession from '../pages/GalleryWalkSession';
 import { Toaster } from './sonner';
 import UpdateMoodForm from './UpdateMoodForm';
-
+import { useUser } from '../pages/User';
 
 const App = () => {
+
+  const { currentUser } = useUser();
 
   const appStyle = {
     height: '100vh',
@@ -41,8 +43,8 @@ const App = () => {
     { name: 'Confused', color: 'Gray', hexcode: '#808080' },
   ]
   
-  //fake user id
-  // const currentUserId = 1;
+  //To get user id => currentUser.id
+  //To check if user is guest => currentUser.guest = true or false
 
   //function to create a flower for a user
   function createFlowerForUser(flowerData) {
@@ -96,12 +98,16 @@ const App = () => {
         <div className='col-span-2'>
           <Navbar />
         </div>
-        <button onClick={() => createFlowerForUser(flowerData)}>Create Flower</button>
-        <button onClick={() => addAllMoodsToCurrentUser(standard_moods)}>Add All Moods to Current User</button>
-        <UpdateMoodForm />
+        {currentUser?.guest? null : 
+        <div>
+          <button onClick={() => createFlowerForUser(flowerData)}>Create Flower</button>
+          <button onClick={() => addAllMoodsToCurrentUser(standard_moods)}>Add All Moods to Current User</button>
+          <UpdateMoodForm /> 
+        </div>}
+        
         <div className='col-span-10'>
           <Routes>
-            <Route exact path="/" element={<Home />}></Route>
+          {currentUser?.guest ? <Route exact path="/" element={<GalleryWalk />}></Route> : <Route exact path="/" element={<Home />}></Route>}
             <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
             <Route exact path="/gallery-walk/:id" element={<GalleryWalkSession />}></Route>
             <Route exact path="/check-in" element={<GalleryWalk />}></Route>

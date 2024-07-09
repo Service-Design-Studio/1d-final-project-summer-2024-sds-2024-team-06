@@ -20,17 +20,19 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  devise_scope :user do
+    post 'guest_login', to: 'users/sessions#guest_login'
+  end
+
   namespace :api do
+    get 'current_user', to: 'users#current'
     resources :art_pieces, only: [:index, :show] do #api/art_pieces/
     end
-
 
     resources :flowers
     resources :moods
     resources :journals, only: [:create, :index, :show]
   end
-
-  post 'guest_login', to: 'api/users#guest_login'
 
   root 'homepage#index'
 

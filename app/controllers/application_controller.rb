@@ -12,17 +12,11 @@ class ApplicationController < ActionController::Base
     end
 
     def check_guest_user
-        authenticate_user! unless guest_user_signed_in?
-    end
-
-    def guest_user_signed_in?
-        # Implement logic to check if the current user is a guest user
-        # This could be a simple flag check or a more complex logic depending on your application requirements
-        current_user&.guest?
+        authenticate_user! unless current_user&.guest?
     end
 
     def user_or_guest_signed_in?
-        user_signed_in? || guest_user_signed_in?
+        user_signed_in? || current_user&.guest?
     end
     
 end

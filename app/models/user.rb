@@ -21,11 +21,17 @@ class User < ApplicationRecord
   end
 
   def self.guest
-    find_or_create_by!(email: "guest@example.com") do |user|
-      user.password = SecureRandom.hex(10)
-      user.username = "Guest"
+    password = SecureRandom.urlsafe_base64
+    #create(guest: true, username:"guest", email: "guest_#{Time.now.to_i}#{rand(1000)}@example.com", password: password, password_confirmation: password, user_id:1)
+    user = find_or_create_by(email: "guest@example.com") do |user|
+      user.username = "guest"
+      user.password = password
+      user.password_confirmation = password
+      user.user_id = SecureRandom.uuid
       user.guest = true
     end
+    user.update(password: password, password_confirmation: password, user_id: SecureRandom.uuid) unless user.guest
+    user
   end
 
   private
