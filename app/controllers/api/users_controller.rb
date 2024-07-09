@@ -1,5 +1,6 @@
 module Api
 class UsersController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:guest_login]
     def index
         @users = User.all
         render json: @users
@@ -18,10 +19,17 @@ class UsersController < ApplicationController
           render json: @user.errors, status: :unprocessable_entity
         end
       end
+
+      def guest_login
+        user = User.guest
+        sign_in(user)
+        redirect_to root_path, notice: 'Signed in successfully as a guest.'
+      end
     
       private
     
       def user_params
         params.require(:user).permit(:username, :user_id)
       end
+  end
 end

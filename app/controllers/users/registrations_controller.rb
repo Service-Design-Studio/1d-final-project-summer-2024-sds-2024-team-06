@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     private
   
     def redirect_if_authenticated
-      if user_signed_in?
+      if user_signed_in? || current_user&.guest?
         redirect_to root_path
       end
     end

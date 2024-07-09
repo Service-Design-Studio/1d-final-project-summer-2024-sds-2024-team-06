@@ -20,6 +20,14 @@ class User < ApplicationRecord
     self.dateLastLoggedIn = date
   end
 
+  def self.guest
+    find_or_create_by!(email: "guest@example.com") do |user|
+      user.password = SecureRandom.hex(10)
+      user.username = "Guest"
+      user.guest = true
+    end
+  end
+
   private
   def validate_mood_limit
       if moods.count >= MAX_MOODS_PER_USER

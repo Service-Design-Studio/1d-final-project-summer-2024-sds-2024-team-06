@@ -30,10 +30,7 @@ Rails.application.routes.draw do
     resources :journals, only: [:create, :index, :show]
   end
 
-
-
-
-
+  post 'guest_login', to: 'api/users#guest_login'
 
   root 'homepage#index'
 
