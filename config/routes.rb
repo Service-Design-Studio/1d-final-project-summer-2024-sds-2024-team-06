@@ -15,6 +15,8 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  devise_for :users
+
   namespace :api do
     resources :art_pieces, only: [:index, :show] do #api/art_pieces/
     end
@@ -24,10 +26,12 @@ Rails.application.routes.draw do
       resources :moods
     end
 
+    resources :journals, only: [:create, :index, :show]
+
   end
 
 
-  resources :journals, only: [:create, :index, :show]
+
 
 
 
