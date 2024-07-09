@@ -71,9 +71,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_09_023952) do
     t.string "name"
     t.string "color"
     t.string "hexcode"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
