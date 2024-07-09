@@ -24,17 +24,17 @@ image_url: "https://preview.redd.it/9eqy5o91stf61.jpg?width=1080&crop=smart&auto
 artvoice:"https://storage.googleapis.com/art_storage/Slow%20Art%20Guide%20for%20%F0%9D%98%88%F0%9D%98%A8%F0%9D%98%A6%20%F0%9D%98%B0%F0%9D%98%A7%20%F0%9D%98%8D%F0%9D%98%B6%F0%9D%98%AD%F0%9D%98%AD%20%F0%9D%98%89%F0%9D%98%AD%F0%9D%98%B0%F0%9D%98%B0%F0%9D%98%AE%20by%20San%20Minn.mp3")
 
 
-daily_login = [{:mood_name => 'Angry', :rating => 'G', :updated_at => '25-June-2024'},
-        {:mood_name => 'Happy', :color => 'Yellow', :updated_at => '26-June-2024'},
-        {:mood_name => 'Sad', :color => 'Blue', :updated_at => '27-June-2024'},
-          {:mood_name => 'Bored', :color => 'Grey', :updated_at => '29-June-2024'},
-          {:mood_name => 'Sad', :color => 'Blue', :updated_at => '30-June-2024'},
-          {:mood_name => 'Excited', :color => 'Orange', :updated_at => '31-June-2024'},
-          {:mood_name => 'Meh', :color => 'Light_Gray', :updated_at => '01-July-2024'},
-          {:mood_name => 'Happy', :color => 'Yellow', :updated_at => '03-July-2024'},
+daily_login = [{:name => 'Angry', :color => 'G', :updated_at => '25-June-2024'},
+        {:name => 'Happy', :color => 'Yellow', :updated_at => '26-June-2024'},
+        {:name => 'Sad', :color => 'Blue', :updated_at => '27-June-2024'},
+          {:name => 'Bored', :color => 'Grey', :updated_at => '29-June-2024'},
+          {:name => 'Sad', :color => 'Blue', :updated_at => '30-June-2024'},
+          {:name => 'Excited', :color => 'Orange', :updated_at => '31-June-2024'},
+          {:name => 'Meh', :color => 'Light_Gray', :updated_at => '01-July-2024'},
+          {:name => 'Happy', :color => 'Yellow', :updated_at => '03-July-2024'},
 
      ]
 
-daily_login.each do |mood|
-  daily_login.create!(mood)
+moods do |mood|
+  Mood.create!(mood)
 end

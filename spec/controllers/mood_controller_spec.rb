@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe MoodsController, type: :controller do
+  before(:all) do
+    Mood.find_or_create_by(name: "happy", color: "yellow")
+    Mood.find_or_create_by(name: "sad", color: "nil")
+    Mood.find_or_create_by(name: "nil", color: "green")
+  end
+
   describe "GET #index" do
     it "renders the daily check-in page" do
       get :index
@@ -9,9 +15,9 @@ RSpec.describe MoodsController, type: :controller do
   end
 
   describe "POST #select_mood" do
-    context "when a valid mood is selected" do
-      let!(:mood) { Mood.create(name: 'happy', color: 'yellow') }
+    let!(:mood) { Mood.find_by(name: "happy") }
 
+    context "when a valid mood is selected" do
       it "redirects to home page with a success message" do
         post :select_mood, params: { mood_id: mood.id }
         expect(response).to redirect_to home_path

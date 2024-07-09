@@ -1,0 +1,16 @@
+<!-- app/views/moods/index.html.erb -->
+
+<h1>Daily Check-In</h1>
+
+<p>Select your mood for today:</p>
+
+<div class="moods">
+  <% @moods.each do |mood| %>
+    <div class="mood" style="background-color: <%= mood.color %>;">
+      <%= mood.name %>
+      <%= link_to 'Select', select_mood_moods_path(mood_id: mood.id), method: :post, class: 'select-mood' %>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to 'Home', home_path %>
