@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_04_021905) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_09_023952) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,12 +49,46 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_04_021905) do
     t.string "artvoice"
   end
 
+  create_table "flowers", force: :cascade do |t|
+    t.string "color"
+    t.string "mood"
+    t.date "date_created"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_flowers_on_user_id"
+  end
+
   create_table "journals", force: :cascade do |t|
     t.text "journalentry"
-    t.integer "userid"
+    t.integer "user_id"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "moods", force: :cascade do |t|
+    t.string "name"
+    t.string "color"
+    t.string "hexcode"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.integer "user_id"
+    t.date "dateLastLoggedIn"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

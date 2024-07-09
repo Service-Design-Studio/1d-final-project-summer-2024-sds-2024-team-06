@@ -47,6 +47,8 @@ gem "strict", "~> 1.5"
 
 gem "tailwindcss-rails", "~> 2.6"
 
+gem 'devise'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
@@ -73,6 +75,7 @@ group :test do
   gem "cucumber-rails", require: false
   gem "database_cleaner"
   gem 'simplecov', require: false, group: :test
+  
 
 
 end
@@ -81,4 +84,3 @@ group :production do
   gem 'pg', '~> 1.5', '>= 1.5.6' #For Heroku deployment
   gem 'rails_12factor'
 end
-
