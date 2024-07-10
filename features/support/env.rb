@@ -3,11 +3,19 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
+
+require 'capybara/cucumber'
+require 'selenium/webdriver'
+
 require 'simplecov'
 SimpleCov.start
 
+# Previous content of test helper now starts here
+
 require 'cucumber/rails'
 Capybara.default_driver = :selenium_chrome
+Capybara.server_port = 3000 
+Capybara.app_host = 'http://127.0.0.1:3000'
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how

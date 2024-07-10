@@ -13,6 +13,10 @@
 # end
 
 Rails.application.routes.draw do
+
+  post 'select_mood', to: 'moods#select_mood', as: 'select_mood'
+  post 'same_mood_color', to: 'moods#same_mood_color', as: 'same_mood_color'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   devise_for :users, controllers: {
@@ -28,11 +32,15 @@ Rails.application.routes.draw do
     get 'current_user', to: 'users#current'
     resources :art_pieces, only: [:index, :show] do #api/art_pieces/
     end
-
-    resources :flowers
-    resources :moods
-    resources :journals, only: [:create, :index, :show]
   end
+
+
+  resources :flowers
+  resources :moods 
+  resources :journals, only: [:create, :index, :show]
+  
+
+  get 'homepage', to: 'home#index'
 
   root 'homepage#index'
 

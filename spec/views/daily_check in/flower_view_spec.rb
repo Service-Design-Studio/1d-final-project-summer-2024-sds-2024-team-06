@@ -1,22 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe "home/index.html.erb", type: :view do
-    before (:all) do
-        if Mood.where(:name => "happy").empty?
-            Mood.create(:name => "happy", :color => "yellow")
-        end
+  before(:all) do
+    Mood.find_or_create_by(name: "happy", color: "yellow")
+    Mood.find_or_create_by(name: "sad", color: "nil")
+    Mood.find_or_create_by(name: "nil", color: "green")
+  end
 
-        if Mood.where(:name => "sad").empty?
-        Mood.create(:name => "sad", :color => "nil")
-        end
-
-        if Mood.where(:color => "green").empty?
-            Mood.create(:name => "nil", :color => "green")
-        end
-    end
+  before do
+    mood = Mood.find_by(name: 'happy')
+    Flower.create(mood: mood)
+    assign(:flowers, Flower.all)
+    render
+  end
 
   it "displays the flower with the corresponding mood color" do
-    visit homepage_path
-    expect(page).to have_selector(Mood.find_by_name("happy"))
+    expect(rendered).to have_selector('.flower', style: 'background-color: yellow;')
   end
 end
