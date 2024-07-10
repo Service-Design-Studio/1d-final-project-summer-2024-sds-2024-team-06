@@ -69,26 +69,26 @@
 #   end
 # end
 
-# User.create!(
-#   dateLastLoggedIn: Date.today,
-#   email: "test_user@example.com",
-#   password: "password", # Devise will handle the encryption
-#   password_confirmation: "password"
-# )
+User.create!(
+  dateLastLoggedIn: Date.today,
+  email: "test_user@example.com",
+  password: "password", # Devise will handle the encryption
+  password_confirmation: "password"
+)
 
-# User.create!(
-#   dateLastLoggedIn: Date.today,
-#   email: "bob@example.com",
-#   password: "password", # Devise will handle the encryption
-#   password_confirmation: "password"
-# )
+User.create!(
+  dateLastLoggedIn: Date.today,
+  email: "bob@example.com",
+  password: "password", # Devise will handle the encryption
+  password_confirmation: "password"
+)
 
-# User.create!(
-#   dateLastLoggedIn: Date.today,
-#   email: "alice@example.com",
-#   password: "password", # Devise will handle the encryption
-#   password_confirmation: "password"
-# # )
+User.create!(
+  dateLastLoggedIn: Date.today,
+  email: "alice@example.com",
+  password: "password", # Devise will handle the encryption
+  password_confirmation: "password"
+)
 
 ArtPiece.create([
   {artID: 00001,

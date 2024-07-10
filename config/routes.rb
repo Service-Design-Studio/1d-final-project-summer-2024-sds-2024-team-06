@@ -33,12 +33,33 @@ Rails.application.routes.draw do
     resources :art_pieces, only: [:index, :show] do #api/art_pieces/
     end
 
-    resources :flowers
-    resources :moods
+    resources :flowers do
+      post :same_mood_color, on: :collection
+    end
+
+    
     resources :journals, only: [:create, :index, :show]
   end
 
-  root 'homepage#index'
+  root 'home#index', as: 'homepage'  # This sets the root path and names it `homepage_path`
+
+  # namespace :api do
+  #   resources :moods do
+  #     collection do
+  #       post 'select_mood', on: :collection
+  #       get 'same_mood_color'
+  #     end
+  #   end
+  # end
+  namespace :api do
+    resources :moods do
+      collection do
+        post 'select_mood'
+      end
+    end
+  end
+
+
 
   # Catch-all route for React Router
   get '*path', to: 'homepage#index', constraints: ->(request) { request.format.html? }

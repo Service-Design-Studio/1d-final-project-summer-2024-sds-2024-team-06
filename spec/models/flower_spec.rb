@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Flower, type: :model do
   before do
-    @user = User.create(username:"guest", email: "guest@example.com" , password: "password", user_id: "1")
+    Mood.destroy_all
+    @user = User.create(email: "guest@example.com" , password: "password")
     mood = Mood.create!(name: "happy", color: "yellow", hexcode: "#0000", user: @user)
     flower = Flower.create!(color: mood.color, mood: mood.name, date_created: Date.new(2022, 7, 10), user: @user, created_at: "12/07/2024", updated_at: "12/07/2024", user_id: "1")
     if flower.persisted?
@@ -26,4 +27,10 @@ RSpec.describe Flower, type: :model do
     flower = Flower.new(color: "green", date_created: Date.new(2022, 7, 10), user: @user, created_at: "12/07/2024", updated_at: "12/07/2024", user_id: "1")
     expect(flower).to_not be_valid
   end
+
+  it "returns flower color corresponding to user's mood" do
+    flower = Flower.create(mood: "happy", color: "yellow")
+    expect(flower.mood).to eq @user.find_mood_by_name(flower.mood).name
+  end
+
 end

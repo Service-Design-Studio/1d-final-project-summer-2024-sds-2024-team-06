@@ -26,6 +26,30 @@ module Api
         end
       end
 
+      def same_mood_color
+        mood = Mood.find_by(name: params[:name])
+        if mood.present?
+          @user = User.create(email: "a@example.com" , password: "password")
+          flower = Flower.create(color: mood.color, mood: mood.name, date_created: "12/07/2024", user: @user, created_at: "12/07/2024", updated_at: "12/07/2024", user_id: "1")
+          if flower.persisted?
+            Rails.logger.debug "Flower created successfully: #{flower.color}, #{flower.color}"
+          else
+            Rails.logger.debug "Flower creation failed: #{flower.errors.full_messages.join(', ')}"
+          end
+          if flower.present?
+            Rails.logger.debug "flower found: #{flower.color}"
+            redirect_to homepage_path(flower), notice: 'Flower created with the same color as the mood.'
+          else
+            Rails.logger.debug "flower not found for name: #{params[:name]}"
+            redirect_to api_moods_path, alert: 'Failed to create flower.'
+          end
+        else
+          redirect_to api_moods_path, alert: 'Invalid mood selected.'
+        end
+      end
+
+      
+
 
 
       private

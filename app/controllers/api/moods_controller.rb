@@ -8,7 +8,7 @@ module Api
 
       def index
         @moods = current_user.moods
-      render json: @moods, status: :ok
+        render json: @moods, status: :ok
       end
 
       def show
@@ -40,6 +40,18 @@ module Api
       def destroy
         @mood.destroy
         head :no_content
+      end
+
+  
+
+      def select_mood
+        @mood = current_user.moods.find_by(name: params[:name])
+        if @mood.present?
+          redirect_to homepage_path, notice: 'Mood selected successfully.'
+        else
+          redirect_to api_moods_path, alert: 'Invalid mood selected.'
+        end
+        
       end
 
       private

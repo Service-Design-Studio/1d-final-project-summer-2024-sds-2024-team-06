@@ -30,6 +30,10 @@ class User < ApplicationRecord
     user
   end
 
+  def find_mood_by_name(mood_name)
+    moods.find_by(name: mood_name)
+  end
+
   private
   def validate_mood_limit
       if moods.count >= MAX_MOODS_PER_USER
@@ -37,3 +41,4 @@ class User < ApplicationRecord
       end
   end
 end
+

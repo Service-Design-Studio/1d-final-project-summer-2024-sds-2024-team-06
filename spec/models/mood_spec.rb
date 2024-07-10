@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Mood, type: :model do
   before do
-    @user = User.create(username:"guest", email: "guest@example.com" , password: "password", user_id: "1")
+    Mood.destroy_all
+    @user = User.create(email: "a@example.com" , password: "password")
     mood = Mood.create!(name: "happy", color: "yellow", hexcode: "#0000", user: @user)
     
     if mood.persisted?
