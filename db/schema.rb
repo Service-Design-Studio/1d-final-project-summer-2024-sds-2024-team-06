@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_10_014749) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_10_063139) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -40,13 +40,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_014749) do
   end
 
   create_table "art_pieces", force: :cascade do |t|
-    t.integer "artID"
-    t.text "captions"
+    t.string "artID"
+    t.string "captions"
     t.string "artTitle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image_url"
     t.string "artvoice"
+    t.string "artist"
+    t.string "dateYear"
+    t.string "imageURL"
+    t.string "audio"
+    t.string "image_url"
   end
 
   create_table "flowers", force: :cascade do |t|
@@ -71,9 +75,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_014749) do
     t.string "name"
     t.string "color"
     t.string "hexcode"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,5 +96,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_014749) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "flowers", "users"
 end
