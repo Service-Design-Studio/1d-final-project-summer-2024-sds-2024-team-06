@@ -22,10 +22,17 @@ const dottedPaper = {
 // Routing
 const App = () => {
   return (
-    <Router>
-      
-      <div>
-        
+
+      <Router>
+      <div style={appStyle}>
+        <Navbar />
+        {/* {currentUser?.guest? null : 
+        <div>
+          <button onClick={() => createFlowerForUser(flowerData)}>Create Flower</button>
+          <button onClick={() => addAllMoodsToCurrentUser(standard_moods)}>Add All Moods to Current User</button>
+          <UpdateMoodForm /> 
+        </div>} */}
+        <div className='w-full'>
         <Routes>
           <Route exact path="/" element={<Landing />}></Route>
           {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
@@ -41,6 +48,8 @@ const App = () => {
             <GalleryWalkSession />
             </>}></Route>
         </Routes>
+        </div>
+        <Toaster id=".toaster"/>
       </div>
       
     </Router>
