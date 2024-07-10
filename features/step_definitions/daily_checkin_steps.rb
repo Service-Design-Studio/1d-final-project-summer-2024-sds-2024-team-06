@@ -1,13 +1,16 @@
-#others
-Given /not done check-in/ do
-  #not sure how to check for this yet
+
+#Background:
+
+Given /Given that I am a user who is logging in for the first time today/ do
+  #create database for bob too
+  
 end
 
 
-#Scenario 1:redirected to daily check-in page upon log in
-
+#Scenario 1 : redirected to check-in page upon log in
 Given /I am on the landing page/ do
   visit '/'
+  click_on("continue")
 end
 
 When /I want to log in as Bob/ do   #Assumes that Bob has not logged in yet
@@ -17,10 +20,28 @@ When /I want to log in as Bob/ do   #Assumes that Bob has not logged in yet
   click_button("commit")
 end
 
-Then /I should be redirected to the mood selection page/ do
+Then /I should be redirected to the check-in page/ do
   current_path = URI.parse(current_url).path
-  assert_equal(current_path,'/daily-check-in')
+  assert_equal(current_path,'/check-in')
 end
+
+#Scenario 2a : Mood Selection Availability on check-in Page
+
+
+
+
+
+
+
+
+
+
+
+#Scenario 1:redirected to daily check-in page upon log in
+
+
+
+
 
 
 #Scenario 2 : Mood Selection Availability on mood selection Page
@@ -54,7 +75,13 @@ end
 And /I should see a "(.*)" flower of the correct color/ do |tmood| 
   mood = StandardMood.where(name: tmood).first
   flower_hexcode=mood.hexcode
+  expect(page).to have_selector('#element-id')  #id of calendar grid
+
+
   expect(page).to have_content("moodblock_#{tmood}") 
+  within('.calendar-grid') do
+    expect(page).to have_content('Date')
+  end
 end
 
 

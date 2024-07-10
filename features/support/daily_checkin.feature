@@ -5,61 +5,44 @@ I want: to develop a habit of mindfulness and look back upon my emotional varian
 so that: I may learn to reflect on my emotions and control them better, I have a simple and interactive way to reflect and visually articulate my emotions, the monthly emotion tracker gradually fills up
 
 
-Scenario 1 : redirected to daily check-in page upon log in
+Background: Given that I am a user who is logging in for the first time today
+
+Scenario 1 : redirected to check-in page upon log in
 
 Given I am on the landing page
-When I want to log in as bob 
-Then I should be redirected to the mood selection page
+When I log in
+Then I should be redirected to the check-in page
 
-Scenario 2 : Mood Selection Availability on Daily Check-In Page
 
-When I am on mood selection page
+Scenario 2a : Mood Selection Availability on check-in Page
+
+When I am on the check-in page
 Then I should see a selection of moodblocks
 
-Scenario 3 : Choosing a moodblock
-Given I am on the mood selection page
+
+Scenario 2b : Correct number of flowers displayed
+When I am on the check-in page
+Then I should see the correct number of flowers shown in the grids
+And the grid for today should be empty
+
+
+Scenario 3a : Choosing a Moodblock
+Given I am on the check-in page
 When I click on the "angry" moodblock
-Then I will be redirected to the flower field page
-And I should see a "angry" flower of the correct color
-#And flower should be in today's grid
-#----------------
+Then The "angry" moodblock should be selected
 
+Scenario 3b : Submitting the Mood Selection
+Given I have selected the "angry" moodblock
+When I click on the submit button
+Then I should see a "angry" flower of the correct color added to today's grid
 
+Scenario 3c : Redirecting to Activities Page
+Given I have submitted my mood selection
+When I am on the check-in page
+Then I will be redirected to the activities page
 
+Scenario 4 : Returning to check-in page again
+Given I have already submited the mood for today
+when I return to the check-in page
+Then I should not see selection of moodblocks
 
-
-
-
-#------
-
-Given I am logged in 
-Given not done check-in
-When I visit the homepage
-
-
-Then redirect to daily check-in page
-And I should see a selection of ‘mood blocks’
-
-
-
-Scenario: Correct number of total flowers
-Given I have done check in before
-When I am on the homepage
-Then I should see exactly 3 happy flowers
-
-Scenario: Redirecting to activities
-Given I am on the homepage
-When I click on the museum
-Then I should visit activities page
-
-###########################################################
-
-Scenario: Not logged in
-Given I am not logged in
-When I visit homepage
-Then I get directed to the activities page
-
-Scenario: Revisiting the homepage
-Given I have already done check in
-When I visit the homepage
-Then I should not see selection of ‘mood blocks’
