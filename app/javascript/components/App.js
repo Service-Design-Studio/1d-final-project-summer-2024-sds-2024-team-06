@@ -6,6 +6,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import GalleryWalkSession from '../pages/GalleryWalkSession';
 import { Toaster } from './sonner';
 import UpdateMoodForm from './UpdateMoodForm';
+import Checkin from '../pages/Checkin';
 
 
 const App = () => {
@@ -96,15 +97,15 @@ const App = () => {
         <div className='col-span-2'>
           <Navbar />
         </div>
-        <button onClick={() => createFlowerForUser(flowerData)}>Create Flower</button>
+        {/* <button onClick={() => createFlowerForUser(flowerData)}>Create Flower</button>
         <button onClick={() => addAllMoodsToCurrentUser(standard_moods)}>Add All Moods to Current User</button>
-        <UpdateMoodForm />
+        <UpdateMoodForm /> */}
         <div className='col-span-10'>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
             <Route exact path="/gallery-walk/:id" element={<GalleryWalkSession />}></Route>
-            <Route exact path="/check-in" element={<GalleryWalk />}></Route>
+            <Route exact path="/check-in" element={<Checkin />}></Route>
           </Routes>
         </div>
         <Toaster id=".toaster"/>
