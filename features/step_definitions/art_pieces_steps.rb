@@ -43,6 +43,7 @@ end
 Then('audio will play') do
   expect(page).to have_selector('.audio-player') # Assuming there's an audio player element
   expect(page).to have_selector('.audio-playing') # Assuming the audio player indicates that it's playing
+end
 
 Then('captions will start') do
   expect(page).to have
