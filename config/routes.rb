@@ -13,6 +13,10 @@
 # end
 
 Rails.application.routes.draw do
+
+  post 'select_mood', to: 'moods#select_mood', as: 'select_mood'
+  post 'same_mood_color', to: 'moods#same_mood_color', as: 'same_mood_color'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   devise_for :users
@@ -20,24 +24,18 @@ Rails.application.routes.draw do
   namespace :api do
     resources :art_pieces, only: [:index, :show] do #api/art_pieces/
     end
-
-
-    resources :flowers
-    resources :moods
-    resources :journals, only: [:create, :index, :show]
   end
 
 
-
-
-
- # Define resources for moods if you haven't already
- resources :moods, only: [:index]
-
- # Add a custom route for select_mood action
- post 'select_mood', to: 'moods#select_mood'
-
- # Define homepage path
- get 'homepage', to: 'home#index', as: 'homepage'
+  resources :flowers
+  resources :moods 
+  resources :journals, only: [:create, :index, :show]
   
+
+  get 'homepage', to: 'home#index'
+
+  root 'homepage#index'
+
+  # Catch-all route for React Router
+  get '*path', to: 'homepage#index', constraints: ->(request) { request.format.html? }
 end
