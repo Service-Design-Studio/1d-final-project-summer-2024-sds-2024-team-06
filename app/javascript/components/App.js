@@ -6,7 +6,7 @@ import { Toaster } from './sonner';
 // import from pages
 import Navigation from './Navigation';
 import Landing from '../pages/Landing';
-import CheckIn from '../pages/DailyCheckIn';
+//import CheckIn from '../pages/DailyCheckIn';
 import GalleryWalk from '../pages/GalleryWalk';
 import GalleryWalkSession from '../pages/GalleryWalkSession';
 import UpdateMoodForm from './UpdateMoodForm';
@@ -107,7 +107,7 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Landing />}></Route>
           {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
-          <Route exact path="/daily-check-in" element={<CheckIn />}></Route>
+          <Route exact path="/daily-check-in" element={<Checkin />}></Route>
           <Route exact path="/gallery-walk" element={
             <>
             <Navigation />
