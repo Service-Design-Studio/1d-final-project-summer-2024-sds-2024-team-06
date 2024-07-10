@@ -6,8 +6,6 @@ class User < ApplicationRecord
   has_many :moods, dependent: :destroy
   has_many :journals, dependent: :destroy
 
-  validates :username, presence: true
-  validates :user_id, presence: true, uniqueness: true
   validate :validate_mood_limit, on: :create
 
   MAX_MOODS_PER_USER = 12
