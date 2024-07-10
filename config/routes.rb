@@ -19,20 +19,24 @@ Rails.application.routes.draw do
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
 
-  namespace :api do
-    resources :art_pieces, only: [:index, :show] do #api/art_pieces/
-    end
+  devise_scope :user do
+    post 'guest_login', to: 'users/sessions#guest_login'
   end
 
+  namespace :api do
+    get 'current_user', to: 'users#current'
+    resources :art_pieces, only: [:index, :show] do #api/art_pieces/
+    end
 
-  resources :flowers
-  resources :moods 
-  resources :journals, only: [:create, :index, :show]
-  
-
-  get 'homepage', to: 'home#index'
+    resources :flowers
+    resources :moods
+    resources :journals, only: [:create, :index, :show]
+  end
 
   root 'homepage#index'
 

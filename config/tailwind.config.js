@@ -18,6 +18,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        grey: "#262520",
+        orange: "#f1ba5b",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -58,8 +60,8 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-        sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
+        sans: ["brevia"],
+        //sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {

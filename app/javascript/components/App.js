@@ -1,21 +1,31 @@
 import React, { useEffect } from 'react';
-import Navbar from './Navbar';
-import Home from '../pages/Home';
-import GalleryWalk from '../pages/GalleryWalk';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import GalleryWalkSession from '../pages/GalleryWalkSession';
 import { Toaster } from './sonner';
+
+
+// import from pages
+import Navigation from './Navigation';
+import Landing from '../pages/Landing';
+import CheckIn from '../pages/DailyCheckIn';
+import GalleryWalk from '../pages/GalleryWalk';
+import GalleryWalkSession from '../pages/GalleryWalkSession';
 import UpdateMoodForm from './UpdateMoodForm';
+import Checkin from '../pages/Checkin';
+import { useUser } from '../pages/User';
+import Navbar from './Navbar';
 
 
+// To use dotted paper background: <div style={dottedPaper}></div>
+const dottedPaper = {
+  height: '100vh',
+  width: '100vw',
+  background: 'url(/images/background-dottedpaper.svg) no-repeat center center fixed',
+  backgroundSize: 'cover',
+};
+
+// Routing
 const App = () => {
-
-  const appStyle = {
-    height: '100vh',
-    width: '100vw',
-    background: 'url(/images/dotted_paper.svg) no-repeat center center fixed',
-    backgroundSize: 'cover'
-  };
+  const { currentUser } = useUser();
 
   //fake flower data
   const flowerData = {
@@ -41,8 +51,8 @@ const App = () => {
     { name: 'Confused', color: 'Gray', hexcode: '#808080' },
   ]
   
-  //fake user id
-  // const currentUserId = 1;
+  //To get user id => currentUser.id
+  //To check if user is guest => currentUser.guest = true or false
 
   //function to create a flower for a user
   function createFlowerForUser(flowerData) {
@@ -88,31 +98,35 @@ const App = () => {
       createMoods(mood);
     });
   }
-
   return (
 
       <Router>
-      <div style={appStyle} className='grid grid-cols-12 grid-rows-1'>
-        <div className='col-span-2'>
-          <Navbar />
-        </div>
-        <button onClick={() => createFlowerForUser(flowerData)}>Create Flower</button>
-        <button onClick={() => addAllMoodsToCurrentUser(standard_moods)}>Add All Moods to Current User</button>
-        <UpdateMoodForm />
-        <div className='col-span-10'>
-          <Routes>
-            <Route exact path="/" element={<Home />}></Route>
-            <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
-            <Route exact path="/gallery-walk/:id" element={<GalleryWalkSession />}></Route>
-            <Route exact path="/check-in" element={<GalleryWalk />}></Route>
-          </Routes>
+      <div style={dottedPaper}>
+        <Navbar />
+        <div className='w-full'>
+        <Routes>
+          <Route exact path="/" element={<Landing />}></Route>
+          {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
+          <Route exact path="/daily-check-in" element={<CheckIn />}></Route>
+          <Route exact path="/gallery-walk" element={
+            <>
+            <Navigation />
+            <GalleryWalk />
+            </>}></Route>
+          <Route exact path="/gallery-walk/:id" element={
+            <>
+            <Navigation />
+            <GalleryWalkSession />
+            </>}></Route>
+        </Routes>
         </div>
         <Toaster id=".toaster"/>
       </div>
+      
     </Router>
-
   );
 }
+
 export default App;
 
 

@@ -1,24 +1,30 @@
 import React from 'react'
-import GalleryCarousel from '../components/GalleryCarousel'
+//import GalleryCarousel from '../components/GalleryCarousel'
 import useFetch from '../components/useFetch'
+
+import MansoryGrid from '../components/MansoryGrid'
 
 
 export default function GalleryWalk() {
 
-  // const {data: artPieces, error, isPending} = useFetch('https://ngswebapp-67fxypa3ea-as.a.run.app/api/art_pieces')
-  // CHANGE TO ENVIRONMENT VARIABLE
-  const {data: artPieces, error, isPending} = useFetch('http://127.0.0.1:3000/api/art_pieces') 
-  console.log(artPieces) 
+  const {data: artPieces, error, isPending} = useFetch('http://127.0.0.1:3000/api/art_pieces')
+  //console.log(artPieces)
 
     
   return (
-    <div className="h-full w-full m-20">
+    <div>
+      
       {isPending && 
       <div className="h-full w-full flex justify-center items-center">
-        <h1>Loading...</h1>
+        <h1 className='text-4xl font-bold'>Loading gallery...</h1>
       </div>}
       {error && <div>{error}</div>}
-      {artPieces && <GalleryCarousel artPieces={artPieces}/>}
+      {artPieces && 
+      <>
+      <h1 className='text-4xl font-bold'>Gallery walk</h1>
+      <br/>
+      <MansoryGrid artPieces={artPieces}/>
+      </>}
     </div>
   )
 }

@@ -39,7 +39,7 @@ module Api
     end
 
       def flower_params
-        params.require(:flower).permit(:mood, :color, :date_created, :user_id)
+        params.require(:flower).permit(:mood, :color, :date_created, :user_id, :day)
       end
   end
   end

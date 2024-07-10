@@ -536,6 +536,8 @@
         "lines": [
           0,
           0,
+          0,
+          null,
           null,
           0
         ],
@@ -669,7 +671,7 @@
         "branches": {
         }
       },
-      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/application_controller.rb": {
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/flowers_controller.rb": {
         "lines": [
           0,
           0
@@ -698,6 +700,10 @@
           0,
           null,
           0,
+          0,
+          0,
+          0,
+          null,
           0,
           0,
           0,
@@ -740,6 +746,14 @@
         "branches": {
         }
       },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/flowers_helper.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/homepage_helper.rb": {
         "lines": [
           0,
@@ -749,6 +763,22 @@
         }
       },
       "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/journals_helper.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/moods_helper.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/helpers/users_helper.rb": {
         "lines": [
           0,
           0
@@ -793,6 +823,18 @@
           0,
           0,
           null,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/jonastest/1d-final-project-summer-2024-sds-2024-team-06/app/models/flower.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "branches": {

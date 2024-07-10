@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function UpdateMoodForm() {
-  const [selectedMood, setSelectedMood] = useState('');
+  const [selectedMood, setSelectedMood] = useState('Excited');
   const [color, setColor] = useState('');
   const [hexcode, setHexcode] = useState('');
 
@@ -14,6 +14,7 @@ export default function UpdateMoodForm() {
   const handleMoodChange = (e) => {
     e.preventDefault();
     const moodData = { color, hexcode };
+    console.log(`/api/moods/${selectedMood}`)
     fetch(`/api/moods/${selectedMood}`, {
       method: 'PUT',
       headers: {

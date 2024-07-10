@@ -14,7 +14,9 @@
   <body>
     <main class="">
       <%= yield %>
-      <div id="react-app"></div>
+      <% if user_signed_in? %>
+        <div id="react-app"></div>
+      <% end %>
     </main>
   </body>
 </html>
