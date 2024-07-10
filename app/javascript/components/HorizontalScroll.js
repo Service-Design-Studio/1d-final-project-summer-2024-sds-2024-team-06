@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
 
-const imgs = [
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-];
+
+const standard_moods = [
+  { name: 'Excited', color: 'Neon green', hexcode: '#39FF14', src: "images/excitedd.svg" },
+  { name: 'Very Happy', color: 'Yellow', hexcode: '#FFFF00', src: "images/nofeels.svg" }, // Need to change to very happy
+  { name: 'Meh', color: 'Bright blue', hexcode: '#007FFF', src: "images/mehh.svg" },
+  { name: 'Tired', color: 'Black', hexcode: '#000000', src: "images/tiredd.svg" },
+  { name: 'Content', color: 'Brown', hexcode: '#964B00', src: "images/nofeels.svg" },
+  { name: 'Angry', color: 'Red', hexcode: '#FF0000', src: "images/angryy.svg" },
+  { name: 'Happy', color: 'Lime green', hexcode: '#32CD32', src: "images/happyy.svg" },
+  { name: 'In love', color: 'Pink', hexcode: '#FFC0CB', src: "images/inlovee.svg" },
+  { name: 'Unhappy', color: 'Navy blue', hexcode: '#000080', src: "images/sadd.svg" },
+  { name: 'Teary', color: 'Light purple', hexcode: '#E6E6FA', src: "images/nofeels.svg" },
+  { name: 'Upset', color: 'Dark blue', hexcode: '#00008B', src: "images/upsett.svg" },
+  { name: 'Confused', color: 'Gray', hexcode: '#808080', src: "images/confused.svg" },
+]
+
 
 const ONE_SECOND = 1000;
 const AUTO_DELAY = ONE_SECOND * 10;
 const DRAG_BUFFER = 50;
 
 
-export const SwipeCarousel = () => {
+export const HorizontalScroll = () => {
   const [imgIndex, setImgIndex] = useState(0);
 
   const dragX = useMotionValue(0);
@@ -27,7 +34,7 @@ export const SwipeCarousel = () => {
 
       if (x === 0) {
         setImgIndex((pv) => {
-          if (pv === imgs.length - 1) {
+          if (pv === standard_moods.length - 1) {
             return 0;
           }
           return pv + 1;
@@ -41,7 +48,7 @@ export const SwipeCarousel = () => {
   const onDragEnd = () => {
     const x = dragX.get();
 
-    if (x <= -DRAG_BUFFER && imgIndex < imgs.length - 1) {
+    if (x <= -DRAG_BUFFER && imgIndex < standard_moods.length - 1) {
       setImgIndex((pv) => pv + 1);
     } else if (x >= DRAG_BUFFER && imgIndex > 0) {
       setImgIndex((pv) => pv - 1);
@@ -49,7 +56,7 @@ export const SwipeCarousel = () => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-neutral-950 py-8">
+    <div className="relative overflow-hidden py-8">
       <motion.div
         drag="x"
         dragConstraints={{
@@ -76,19 +83,21 @@ export const SwipeCarousel = () => {
 const Images = ({ imgIndex }) => {
   return (
     <>
-      {imgs.map((imgSrc, idx) => {
+      {standard_moods.map((mood, idx) => {
         return (
           <motion.div
             key={idx}
             style={{
-              backgroundImage: `url(${imgSrc})`,
+              backgroundImage: `url(${mood.src})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
+              height: "20vh",
+              width: "10vw"
             }}
             animate={{
               scale: imgIndex === idx ? 0.95 : 0.85,
             }}
-            className="aspect-video w-screen shrink-0 rounded-xl bg-neutral-800 object-cover"
+            className="shrink-0 rounded-xl object-cover"
           />
         );
       })}
@@ -99,7 +108,7 @@ const Images = ({ imgIndex }) => {
 const Dots = ({ imgIndex, setImgIndex }) => {
   return (
     <div className="mt-4 flex w-full justify-center gap-2">
-      {imgs.map((_, idx) => {
+      {standard_moods.map((_, idx) => {
         return (
           <button
             key={idx}
@@ -115,4 +124,4 @@ const Dots = ({ imgIndex, setImgIndex }) => {
 };
 
 
-export default SwipeCarousel;
+export default HorizontalScroll;

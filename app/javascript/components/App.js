@@ -4,15 +4,12 @@ import { Toaster } from './sonner';
 
 
 // import from pages
-import Navigation from './Navigation';
 import Landing from '../pages/Landing';
-//import CheckIn from '../pages/DailyCheckIn';
+import CheckIn from '../pages/DailyCheckIn';
 import GalleryWalk from '../pages/GalleryWalk';
 import GalleryWalkSession from '../pages/GalleryWalkSession';
 import UpdateMoodForm from './UpdateMoodForm';
-import Checkin from '../pages/Checkin';
 import { useUser } from '../pages/User';
-import Navbar from './Navbar';
 
 
 // To use dotted paper background: <div style={dottedPaper}></div>
@@ -101,28 +98,15 @@ const App = () => {
   return (
 
       <Router>
-      <div style={dottedPaper}>
-        <Navbar />
-        <div className='w-full'>
         <Routes>
           <Route exact path="/" element={<Landing />}></Route>
           {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
-          <Route exact path="/daily-check-in" element={<Checkin />}></Route>
-          <Route exact path="/gallery-walk" element={
-            <>
-            <Navigation />
-            <GalleryWalk />
-            </>}></Route>
-          <Route exact path="/gallery-walk/:id" element={
-            <>
-            <Navigation />
-            <GalleryWalkSession />
-            </>}></Route>
+          <Route exact path="/check-in" element={<CheckIn />}></Route>
+          <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
+          <Route exact path="/gallery-walk/:id" element={<GalleryWalkSession />}></Route>
         </Routes>
-        </div>
-        <Toaster id=".toaster"/>
-      </div>
-      
+        
+        {/*<Toaster id=".toaster"/>*/}
     </Router>
   );
 }

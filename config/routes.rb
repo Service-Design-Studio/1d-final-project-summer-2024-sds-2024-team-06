@@ -32,13 +32,14 @@ Rails.application.routes.draw do
     get 'current_user', to: 'users#current'
     resources :art_pieces, only: [:index, :show] do #api/art_pieces/
     end
+    resources :flowers
+    resources :moods
+    resources :journals, only: [:create, :index, :show]
   end
 
 
-  resources :flowers
-  resources :moods 
-  resources :journals, only: [:create, :index, :show]
-  
+
+
 
   get 'homepage', to: 'home#index'
 
