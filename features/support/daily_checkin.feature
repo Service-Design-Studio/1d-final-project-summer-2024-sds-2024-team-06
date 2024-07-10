@@ -5,22 +5,42 @@ I want: to develop a habit of mindfulness and look back upon my emotional varian
 so that: I may learn to reflect on my emotions and control them better, I have a simple and interactive way to reflect and visually articulate my emotions, the monthly emotion tracker gradually fills up
 
 
-#Background
+Scenario 1 : redirected to daily check-in page upon log in
+
+Given I am on the landing page
+When I want to log in as bob 
+Then I should be redirected to the mood selection page
+
+Scenario 2 : Mood Selection Availability on Daily Check-In Page
+
+When I am on mood selection page
+Then I should see a selection of moodblocks
+
+Scenario 3 : Choosing a moodblock
+Given I am on the mood selection page
+When I click on the "angry" moodblock
+Then I will be redirected to the flower field page
+And I should see a "angry" flower of the correct color
+#And flower should be in today's grid
+#----------------
 
 
 
-Scenario: Option to select mood
+
+
+
+
+#------
+
 Given I am logged in 
 Given not done check-in
 When I visit the homepage
+
+
 Then redirect to daily check-in page
 And I should see a selection of ‘mood blocks’
 
-Scenario: Choosing a mood blocks
-Given I am on the daily check-in page
-When I click on the "sad" mood block
-#Then data should exist in daily_checkin
-Then I should see a new flower with 'sad color'
+
 
 Scenario: Correct number of total flowers
 Given I have done check in before
