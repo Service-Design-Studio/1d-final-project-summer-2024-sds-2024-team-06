@@ -6,15 +6,20 @@
 
 require 'capybara/cucumber'
 require 'selenium/webdriver'
-
+require 'warden'
+require 'devise'
 require 'simplecov'
 SimpleCov.start
+
+World(Warden::Test::Helpers)
+Warden.test_mode!
+After { Warden.test_reset! } #devise inherits from warden, putting this here enables login_as methods in steps file
 
 # Previous content of test helper now starts here
 
 require 'cucumber/rails'
 Capybara.default_driver = :selenium_chrome
-Capybara.server_port = 3000 
+Capybara.server_port = 3000
 Capybara.app_host = 'http://127.0.0.1:3000'
 
 # By default, any exception happening in your Rails application will bubble up

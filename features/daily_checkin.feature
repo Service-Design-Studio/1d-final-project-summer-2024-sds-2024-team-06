@@ -3,39 +3,37 @@ Feature: Daily Check-in
   I want to develop a habit of mindfulness and look back upon my emotional variance
   so that I may learn to reflect on my emotions and control them better, I have a simple and interactive way to reflect and visually articulate my emotions, the monthly emotion tracker gradually fills up
 
-  Background: 
-    Given that I am a user who is logging in for the first time today
+  Scenario: Logging in on new browser
+    Given I am on a new browser
+    When I visit the landing page
+    Then I should be redirected to the log in page
 
-  Scenario: redirected to check-in page upon log in
-    Given I am on the landing page
-    When I log in
-    Then I should be redirected to the check-in page
+  Scenario: User is logged in and visits landing page
+    Given I am logged in
+    When I visit the landing page
+    Then the webpage should be displayed
 
-  Scenario: Mood Selection Availability on check-in Page
-    When I am on the check-in page
-    Then I should see a selection of moodblocks
+  Scenario: User is logged in as guest and visits landing page
+    Given I am logged in as guest
+    When I visit the landing page
+    Then the webpage should be displayed
+
+  Scenario: Mood Selection on check-in Page
+    Given I am logged in on the check-in page
+    When I click on 'sad' mood block
+    Then I should see a flower with sad colour
 
   Scenario: Correct number of flowers displayed
-    When I am on the check-in page
+    Given I am logged into an account with flowers
+    When I visit the check-in page
     Then I should see the correct number of flowers shown in the grids
-    And the grid for today should be empty
-
-  Scenario: Choosing a Moodblock
-    Given I am on the check-in page
-    When I click on the "angry" moodblock
-    Then the "angry" moodblock should be selected
-
-  Scenario: Submitting the Mood Selection
-    Given I have selected the "angry" moodblock
-    When I click on the submit button
-    Then I should see an "angry" flower of the correct color added to today's grid
-
-  Scenario: Redirecting to Activities Page
-    Given I have submitted my mood selection
-    When I am on the check-in page
-    Then I will be redirected to the activities page
 
   Scenario: Returning to check-in page again
     Given I have already submitted the mood for today
     When I return to the check-in page
     Then I should not see selection of moodblocks
+
+  Scenario: Not logged in User tries to directly access check-in
+    Given I am not logged in
+    When I visit the check-in page
+    Then I should be redirected to the log in page
