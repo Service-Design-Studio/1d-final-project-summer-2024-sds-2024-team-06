@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe MoodsController, type: :controller do
   before do
-    @user = User.create(username:"guest", email: "guest@example.com" , password: "password")
+    @user = User.create(username:"guest", email: "guest@example.com" , password: "password", user_id: "1")
     mood = Mood.create!(name: "happy", color: "yellow", hexcode: "#0000", user: @user)
     
     if mood.persisted?
@@ -47,7 +47,7 @@ RSpec.describe MoodsController, type: :controller do
         
         flower = Flower.last
         expect(flower.color).to eq("yellow")
-        expect(response).to redirect_to(flower_path(flower))
+        expect(response).to redirect_to(homepage_path(flower))
       end
     end
 

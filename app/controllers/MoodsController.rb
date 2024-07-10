@@ -64,9 +64,10 @@ class MoodsController < ApplicationController
   def same_mood_color
     mood = Mood.find_by(name: params[:name])
     if mood.present?
-      flower = Flower.create(color: mood.color, mood: mood.name, date_created: "12/07/2024", user: mood.user, created_at: "12/07/2024", updated_at: "12/07/2024")
+      @user = User.create(username:"guest", email: "guest@example.com" , password: "password")
+      flower = Flower.create(color: mood.color, mood: mood.name, date_created: "12/07/2024", user: @user, created_at: "12/07/2024", updated_at: "12/07/2024", user_id: "1")
       if flower.persisted?
-        Rails.logger.debug "Flower created successfully: #{flower.name}, #{flower.color}"
+        Rails.logger.debug "Flower created successfully: #{flower.color}, #{flower.color}"
       else
         Rails.logger.debug "Flower creation failed: #{flower.errors.full_messages.join(', ')}"
       end
