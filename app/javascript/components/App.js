@@ -25,8 +25,10 @@ const App = () => {
     <Router>
       
       <div>
+        
         <Routes>
           <Route exact path="/" element={<Landing />}></Route>
+          {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
           <Route exact path="/daily-check-in" element={<CheckIn />}></Route>
           <Route exact path="/gallery-walk" element={
             <>

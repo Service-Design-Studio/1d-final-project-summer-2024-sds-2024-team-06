@@ -60,6 +60,8 @@
 #   Mood.find_or_create_by!(mood_attributes)
 # end
 
+# seed users every fresh pull
+
 # User.find_each do |user|
 #   Mood.all.each do |mood|
 #     mood.user_id = user.id
@@ -67,23 +69,65 @@
 #   end
 # end
 
-User.create!(
-  dateLastLoggedIn: Date.today,
-  email: "test_user@example.com",
-  password: "password", # Devise will handle the encryption
-  password_confirmation: "password"
-)
+# User.create!(
+#   dateLastLoggedIn: Date.today,
+#   email: "test_user@example.com",
+#   password: "password", # Devise will handle the encryption
+#   password_confirmation: "password"
+# )
 
-User.create!(
-  dateLastLoggedIn: Date.today,
-  email: "bob@example.com",
-  password: "password", # Devise will handle the encryption
-  password_confirmation: "password"
-)
+# User.create!(
+#   dateLastLoggedIn: Date.today,
+#   email: "bob@example.com",
+#   password: "password", # Devise will handle the encryption
+#   password_confirmation: "password"
+# )
 
-User.create!(
-  dateLastLoggedIn: Date.today,
-  email: "alice@example.com",
-  password: "password", # Devise will handle the encryption
-  password_confirmation: "password"
-)
+# User.create!(
+#   dateLastLoggedIn: Date.today,
+#   email: "alice@example.com",
+#   password: "password", # Devise will handle the encryption
+#   password_confirmation: "password"
+# # )
+
+ArtPiece.create([
+  {artID: 00001,
+  artTitle: "The Face of Mediation",
+  artist: "Abdul Ghani Hamid",
+  dateYear: 1975,
+  imageURL: "https://www.nationalgallery.sg/sites/default/files/P-0233_Abd-Ghani-Hamid.jpg",
+  audio:"https://www.youtube.com/watch?v=ZKiXa4kI7ns",
+  captions: ""},
+
+  {artID: 00002,
+  artTitle: "Age of Full Bloom",
+  artist: "San Min",
+  dateYear: 1975,
+  imageURL: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg",
+  audio:"https://www.youtube.com/watch?v=q84AzQy-spw",
+  captions: ""},
+
+  {artID: 00003,
+  artTitle: "Irrawaddy",
+  artist: "Kim Lim",
+  dateYear: 1979,
+  imageURL: "https://www.roots.gov.sg/-/media/Roots/60-objects/112-irrawaddy.ashx",
+  audio:"https://www.youtube.com/watch?v=7GYc_pj583M&t=2s",
+  captions: ""},
+
+  {artID: 00004,
+  artTitle: "Wanderer above the Sea of Fog",
+  artist: "Caspar David Friedrich",
+  dateYear: 1818,
+  imageURL: "https://www.thehistoryofart.org/caspar-david-friedrich/Wanderer%20above%20the%20Sea%20of%20Fog%20Caspar%20David%20Friedrich.jpg?ezimgfmt=rs:400x512/rscb16/ngcb15/notWebP",
+  audio:"https://www.youtube.com/watch?v=42CPOtE8pGU",
+  captions: ""},
+
+  {artID: 00005,
+  artTitle: "Rain, Steam, and Speed",
+  artist: "Joseph Mallord William Turner",
+  dateYear: 1844,
+  imageURL: "https://miro.medium.com/v2/resize:fit:786/format:webp/0*qEnR_kFsH5UpcWBT.jpg",
+  audio:"https://www.youtube.com/watch?v=LQ3AC6CzlBA",
+  captions: ""},
+])
