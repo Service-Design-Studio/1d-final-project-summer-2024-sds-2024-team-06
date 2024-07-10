@@ -12,15 +12,15 @@ const NGSLanding = {
 export default function Landing() {
   return (
     <div style={NGSLanding} class="grid grid-rows-4 no-scrollbar">
-      <div class="row-span-1"></div>
-      <div class="row-span-2">
+      <div className="row-span-1"></div>
+      <div className="row-span-2">
         {/*Menu Items*/}
-        <h1 class='text-lg font-sans-900 text-grey font-bold'>stART</h1>
-        <h1 class='text-lg font-sans-800 text-grey'>New Journey</h1>
-        <a href="/daily-check-in"><h1 class='text-lg font-sans-800 text-grey'>Continue</h1></a>
-        <a href="https://www.nationalgallery.sg/start"><h1 class='text-lg font-sans-800 text-grey'>About stART</h1></a>
+        <h1 className='text-lg font-sans-900 text-grey font-bold'>stART</h1>
+        <h1 className='text-lg font-sans-800 text-grey'>New Journey</h1>
+        <a href="/daily-check-in"><h1 className='text-lg font-sans-800 text-grey'>Continue</h1></a>
+        <a href="https://www.nationalgallery.sg/start"><h1 className='text-lg font-sans-800 text-grey'>About stART</h1></a>
       </div>
-      <div class="row-span-1"></div>
+      <div className="row-span-1"></div>
       
     </div>
   )
