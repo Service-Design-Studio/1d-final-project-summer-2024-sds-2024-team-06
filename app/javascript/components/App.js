@@ -96,17 +96,15 @@ const App = () => {
   return (
 
       <Router>
-      <div style={appStyle} className='grid grid-cols-12 grid-rows-1'>
-        <div className='col-span-2'>
-          <Navbar />
-        </div>
+      <div style={appStyle}>
+        <Navbar />
         {/* {currentUser?.guest? null : 
         <div>
           <button onClick={() => createFlowerForUser(flowerData)}>Create Flower</button>
           <button onClick={() => addAllMoodsToCurrentUser(standard_moods)}>Add All Moods to Current User</button>
           <UpdateMoodForm /> 
         </div>} */}
-        <div className='col-span-10'>
+        <div className='w-full'>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>

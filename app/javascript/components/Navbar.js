@@ -8,15 +8,15 @@ const Navbar = () => {
     const svgStyle = "w-5 mr-2";
     const aStyle = isOpen ? "flex justify-start items-center ml-2" : "";
     const liStyle = "py-2";
-    const openNavStyle = "text-black pl-4 pr-6 pt-4 h-full fixed left-0 top-0 flex flex-col";
-    const closeNavStyle = "pl-4 pt-4";
+    const openNavStyle = "text-black pl-4 pr-6 pt-4 h-full fixed left-0 top-0 flex flex-col z-50";
+    const closeNavStyle = "pl-4 pt-4 fixed z-50";
 
     const navStyle = isOpen ? openNavStyle : closeNavStyle;
 
   return (
 
     <div className={navStyle}>
-        <div className='p-1 justify-start mb-5 cursor-pointer' id="closeButton" onClick={toggle}>
+        <div className='justify-start mb-5 cursor-pointer' id="closeButton" onClick={toggle}>
                 {isOpen && <svg className="w-9 h-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                 </svg>}

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // Color mapping
 const colorMap = {
   'Neon green': { hueRotate: '120deg', saturate: '500%' },
-  'Yellow': { hueRotate: '60deg', saturate: '400%' },
+  'yellow': { hueRotate: '60deg', saturate: '400%' },
   'Bright blue': { hueRotate: '200deg', saturate: '300%' },
   'Black': { grayscale: '100%' }, // Grayscale
   'Brown': { hueRotate: '30deg', saturate: '200%' },
