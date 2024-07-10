@@ -1,20 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react'
+
+import useFetch from '../components/useFetch'
+import mockUseFetch from '../components/mockUseFetch' // data to show flowers rendering
+import HorizontalScroll from '../components/HorizontalScroll'
+import CalendarGrid from '../components/CalendarGrid'
 
 
-// import from components
-import SwipeCarousel from '../components/HorizontalScroll';
-import UpdateMoodForm from '../components/UpdateMoodForm';
 
+// To use dotted paper background: <div style={dottedPaper}></div>
+const greenLand = {
+  height: '100vh',
+  width: '100vw',
+  background: 'url("https://t3.ftcdn.net/jpg/01/89/65/62/360_F_189656244_Z8CvqnmXU50rO0vwTLSPF5y3aUn1Pszp.jpg") no-repeat center center fixed',
+  backgroundSize: 'cover',
+};
 
-const CheckIn = () => {
-  //fake flower data
-  const flowerData = {
-    mood: 'happy',
-    color: 'yellow',
-    date_created: new Date().toISOString(),
-  };
-
-  //standard colors and emotions everyone starts off with
+//standard colors and emotions everyone starts off with
   //users cannot add/remove/change the mood name, but they can change the color and hexcode
   const standard_moods = [
     { name: 'Excited', color: 'Neon green', hexcode: '#39FF14' },
@@ -30,62 +31,31 @@ const CheckIn = () => {
     { name: 'Upset', color: 'Dark blue', hexcode: '#00008B' },
     { name: 'Confused', color: 'Gray', hexcode: '#808080' },
   ]
-  
-  //fake user id
-  // const currentUserId = 1;
 
-  //function to create a flower for a user
-  function createFlowerForUser(flowerData) {
-    // flowerData.user_id = userId;
-    fetch(`/api/flowers`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ flower: flowerData })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Flower created:', data);
-    })
-    .catch((error) => {
-      console.error('Error creating flower:', error);
-    });
-  }
-  
+export default function Checkin() {
 
-  //function to create a standard mood for a user
-  function createMoods(moodData) {
-    fetch(`/api/moods`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ mood: moodData })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Mood created:', data);
-    })
-    .catch((error) => {
-      console.error('Error creating mood:', error);
-    });
-  }
+  const {data: checkinData, error, isPending} = useFetch('http://127.0.0.1:3000/api/flowers')
 
-  //function to lop through all standard moods to add them to a user
-  function addAllMoodsToCurrentUser(moods) {
-    moods.forEach(mood => {
-      createMoods(mood);
-    });
-  }
+  {/*console.log("Checkin component rendered");
+  console.log(checkinData)
+  const backgroundImageUrl = 'https://t3.ftcdn.net/jpg/01/89/65/62/360_F_189656244_Z8CvqnmXU50rO0vwTLSPF5y3aUn1Pszp.jpg';*/}
+
 
   return (
     <>
-        <button onClick={() => createFlowerForUser(flowerData)}>Create Flower</button>
-        <button onClick={() => addAllMoodsToCurrentUser(standard_moods)}>Add All Moods to Current User</button>
-        <UpdateMoodForm />
+    {isPending && 
+    <div className="h-full w-full flex justify-center items-center">
+        <h1 className='h-full w-full'>Loading...</h1>
+    </div>}
+    {error && <div>{error}</div>}
+    {checkinData && (
+          <div style={greenLand} className="flex justify-center items-center no-scrollbar">
+            <HorizontalScroll />
+            <CalendarGrid checkinData={checkinData} />
+          </div>
+        )}
     </>
 
+    
   );
-}
-export default CheckIn;
+};
