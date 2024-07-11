@@ -46,9 +46,9 @@ const Navigation = () => { return(
       </div>
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         {/*Logo*/}
-        <div class="flex flex-shrink-0 items-center">
-          <a href="https://www.nationalgallery.sg/start"><img class="h-10 w-auto" src="images/START.svg" alt="stART"/></a>
-        </div>
+        {/* <div class="flex flex-shrink-0 items-center">
+          <img class="h-10 w-auto" src="images/START.svg" alt="stART"/>  {/* deleted href to natgal*/}
+        {/* </div> */}
         {/*Menu items*/}
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
