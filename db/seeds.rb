@@ -93,17 +93,46 @@ Mood.create!(
   {name: "ychjk", color: "gfcbjn", hexcode: "#cgvhbjn", user_id: 2},
 )
 
-Flower.create!(
-  { color: "Red", mood: "Happy", date_created: Date.today, user_id: 2, day: 1 },
-)
+# Flower.create!(
+#   { color: "Red", mood: "Happy", date_created: Date.today, user_id: 2, day: 1 },
+# )
 
 Mood.create!(
   {name: "ychjk", color: "gfcbjn", hexcode: "#cgvhbjn", user_id: 3},
 )
 
-Flower.create!(
-  { color: "Red", mood: "Happy", date_created: Date.today, user_id: 3, day: 1 },
-)
+# Flower.create!(
+#   # { color: "Red", mood: "Happy", date_created: Date.today, user_id: 3, day: 1 },
+# )
+
+Flower.create!([
+  { color: "Red", mood: "Happy", date_created: random_date, user_id: 3},
+  { color: "Yellow", mood: "Happy", date_created: random_date, user_id: 3 },
+  { color: "Blue", mood: "Sad", date_created: random_date, user_id: 3 },
+  { color: "Neon Green", mood: "Excited", date_created: random_date, user_id: 3 },
+  { color: "Blue", mood: "Sad", date_created: random_date, user_id: 3 },
+  { color: "Pink", mood: "In love", date_created: random_date, user_id: 3 },
+  { color: "Yellow", mood: "Happy", date_created: random_date, user_id: 3 },
+  { color: "Blue", mood: "Sad", date_created: random_date, user_id: 3 },
+  { color: "Neon Green", mood: "Excited", date_created: random_date, user_id: 3 },
+  { color: "Blue", mood: "Sad", date_created: random_date, user_id: 3 },
+  { color: "Pink", mood: "In love", date_created: random_date, user_id: 3 }
+])
+
+Flower.create!([
+  { color: "Red", mood: "Happy", date_created: random_date, user_id: 2},
+  { color: "Yellow", mood: "Happy", date_created: random_date, user_id: 2 },
+  { color: "Blue", mood: "Sad", date_created: random_date, user_id: 2 },
+  { color: "Neon Green", mood: "Excited", date_created: random_date, user_id: 2 },
+  { color: "Blue", mood: "Sad", date_created: random_date, user_id: 2 },
+  { color: "Pink", mood: "In love", date_created: random_date, user_id: 2 },
+  { color: "Yellow", mood: "Happy", date_created: random_date, user_id: 2 },
+  { color: "Blue", mood: "Sad", date_created: random_date, user_id: 2 },
+  { color: "Neon Green", mood: "Excited", date_created: random_date, user_id: 2 },
+  { color: "Blue", mood: "Sad", date_created: random_date, user_id: 2 },
+  { color: "Pink", mood: "In love", date_created: random_date, user_id: 2 }
+])
+
 
 
 
@@ -217,7 +246,21 @@ Flower.create!(
 #   imageURL: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg",
 #   audio:"https://www.youtube.com/watch?v=q84AzQy-spw",
 #   captions: ""},
+#   {artID: 00002,
+#   artTitle: "Age of Full Bloom",
+#   artist: "San Min",
+#   dateYear: 1975,
+#   imageURL: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg",
+#   audio:"https://www.youtube.com/watch?v=q84AzQy-spw",
+#   captions: ""},
 
+#   {artID: 00003,
+#   artTitle: "Irrawaddy",
+#   artist: "Kim Lim",
+#   dateYear: 1979,
+#   imageURL: "https://www.roots.gov.sg/-/media/Roots/60-objects/112-irrawaddy.ashx",
+#   audio:"https://www.youtube.com/watch?v=7GYc_pj583M&t=2s",
+#   captions: ""},
 #   {artID: 00003,
 #   artTitle: "Irrawaddy",
 #   artist: "Kim Lim",
@@ -233,7 +276,22 @@ Flower.create!(
 #   imageURL: "https://www.thehistoryofart.org/caspar-david-friedrich/Wanderer%20above%20the%20Sea%20of%20Fog%20Caspar%20David%20Friedrich.jpg?ezimgfmt=rs:400x512/rscb16/ngcb15/notWebP",
 #   audio:"https://www.youtube.com/watch?v=42CPOtE8pGU",
 #   captions: ""},
+#   {artID: 00004,
+#   artTitle: "Wanderer above the Sea of Fog",
+#   artist: "Caspar David Friedrich",
+#   dateYear: 1818,
+#   imageURL: "https://www.thehistoryofart.org/caspar-david-friedrich/Wanderer%20above%20the%20Sea%20of%20Fog%20Caspar%20David%20Friedrich.jpg?ezimgfmt=rs:400x512/rscb16/ngcb15/notWebP",
+#   audio:"https://www.youtube.com/watch?v=42CPOtE8pGU",
+#   captions: ""},
 
+#   {artID: 00005,
+#   artTitle: "Rain, Steam, and Speed",
+#   artist: "Joseph Mallord William Turner",
+#   dateYear: 1844,
+#   imageURL: "https://miro.medium.com/v2/resize:fit:786/format:webp/0*qEnR_kFsH5UpcWBT.jpg",
+#   audio:"https://www.youtube.com/watch?v=LQ3AC6CzlBA",
+#   captions: ""},
+# ])
 #   {artID: 00005,
 #   artTitle: "Rain, Steam, and Speed",
 #   artist: "Joseph Mallord William Turner",

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from "react";
 
 import useFetch from '../components/useFetch'
 import mockUseFetch from '../components/mockUseFetch' // data to show flowers rendering\
@@ -16,13 +17,22 @@ const greenLand = {
   backgroundSize: 'cover',
 };
 
+function get_date() {
+  //super();
+  const today = new Date();
+  const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+  return formattedDate
+}
+
 
 
 export default function Checkin() {
 
   //const {data: checkinData, error, isPending} = useFetch('http://127.0.0.1:3000/api/flowers')
   const {data: checkinData, error, isPending} = mockUseFetch('http://127.0.0.1:3000/api/flowers')
-
+  //console.log(checkinData)
+  //const [checkedIn, setcheckedIn] = useState(checkinData.date_created === new Date().toISOString() ? false : true);
+  const checkedIn = false
 
   return (
     <>
@@ -45,7 +55,7 @@ export default function Checkin() {
             <div className="row-span-1">
             {/*Mood carousel layer*/}
               {/*<HorizontalScroll  CarouselSwipe/>*/}
-              <HorizontalScroll />
+              <HorizontalScroll checkedIn={checkedIn}/>
             </div>
           </div>
         )}
