@@ -28,8 +28,8 @@ function get_date() {
 
 export default function Checkin() {
 
-  //const {data: checkinData, error, isPending} = useFetch('http://127.0.0.1:3000/api/flowers')
-  const {data: checkinData, error, isPending} = mockUseFetch('http://127.0.0.1:3000/api/flowers')
+  const {data: checkinData, error, isPending} = useFetch('http://127.0.0.1:3000/api/flowers')
+  // const {data: checkinData, error, isPending} = mockUseFetch('http://127.0.0.1:3000/api/flowers')
   //console.log(checkinData)
   //const [checkedIn, setcheckedIn] = useState(checkinData.date_created === new Date().toISOString() ? false : true);
   const checkedIn = false
