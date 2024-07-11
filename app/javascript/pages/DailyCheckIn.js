@@ -1,16 +1,11 @@
 import React from 'react'
 
 import useFetch from '../components/useFetch'
-import mockUseFetch from '../components/mockUseFetch' // data to show flowers rendering
-import HorizontalScroll from '../components/CarouselSwipe'
+import mockUseFetch from '../components/mockUseFetch' // data to show flowers rendering\
+import CarouselSwipe from '../components/CarouselSwipe'
+import HorizontalScroll from '../components/HorizontalScroll'
 import CalendarGrid from '../components/CalendarGrid'
 
-
-const messages = {
-  instruction: "How would you describe your mood?",
-  update: "Mood chosen is",
-  error: "Please choose a mood"
-}
 
 
 // To use dotted paper background: <div style={dottedPaper}></div>
@@ -28,10 +23,6 @@ export default function Checkin() {
   //const {data: checkinData, error, isPending} = useFetch('http://127.0.0.1:3000/api/flowers')
   const {data: checkinData, error, isPending} = mockUseFetch('http://127.0.0.1:3000/api/flowers')
 
-  {/*console.log("Checkin component rendered");
-  console.log(checkinData)
-  const backgroundImageUrl = 'https://t3.ftcdn.net/jpg/01/89/65/62/360_F_189656244_Z8CvqnmXU50rO0vwTLSPF5y3aUn1Pszp.jpg';*/}
-
 
   return (
     <>
@@ -43,16 +34,18 @@ export default function Checkin() {
     {checkinData && (
           <div style={greenLand} className="grid grid-rows-8 no-scrollbar"> 
             <div className="row-span-1" id="instructions">
+            {/*Instructions layer*/}
               <h1 className='text-4xl font-bold'>Daily Check-in</h1>
-              <h1 className='text-lg font-sans-800 text-grey'>{messages.instruction}</h1>
+              <h1 className='text-lg font-sans-800 text-grey'>How would you describe your mood?</h1>
             </div>
             <div className="row-span-6">
+            {/*Flower field layer*/}
               <CalendarGrid checkinData={checkinData} />
             </div>
             <div className="row-span-1">
-              Scroller here
-              {/*<HorizontalScroll />
-            */}
+            {/*Mood carousel layer*/}
+              {/*<HorizontalScroll  CarouselSwipe/>*/}
+              <HorizontalScroll />
             </div>
           </div>
         )}

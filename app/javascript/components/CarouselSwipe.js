@@ -3,18 +3,18 @@ import { motion, useMotionValue } from "framer-motion";
 
 
 const standard_moods = [
-  { name: 'Excited', color: 'Neon green', hexcode: '#39FF14', src: "images/excitedd.svg" },
-  { name: 'Very Happy', color: 'Yellow', hexcode: '#FFFF00', src: "images/nofeels.svg" }, // Need to change to very happy
-  { name: 'Meh', color: 'Bright blue', hexcode: '#007FFF', src: "images/mehh.svg" },
-  { name: 'Tired', color: 'Black', hexcode: '#000000', src: "images/tiredd.svg" },
-  { name: 'Content', color: 'Brown', hexcode: '#964B00', src: "images/nofeels.svg" },
-  { name: 'Angry', color: 'Red', hexcode: '#FF0000', src: "images/angryy.svg" },
-  { name: 'Happy', color: 'Lime green', hexcode: '#32CD32', src: "images/happyy.svg" },
-  { name: 'In love', color: 'Pink', hexcode: '#FFC0CB', src: "images/inlovee.svg" },
-  { name: 'Unhappy', color: 'Navy blue', hexcode: '#000080', src: "images/sadd.svg" },
-  { name: 'Teary', color: 'Light purple', hexcode: '#E6E6FA', src: "images/nofeels.svg" },
-  { name: 'Upset', color: 'Dark blue', hexcode: '#00008B', src: "images/upsett.svg" },
-  { name: 'Confused', color: 'Gray', hexcode: '#808080', src: "images/confused.svg" },
+  { name: 'Excited', color: 'Neon green', hexcode: '#39FF14', src: "images/emotion-excited.svg", id:"moodblock_excited"},
+  { name: 'Very Happy', color: 'Yellow', hexcode: '#FFFF00', src: "images/emotion-placeholder.svg", id:"moodblock_veryhappy" }, // Need to change to very happy
+  { name: 'Meh', color: 'Bright blue', hexcode: '#007FFF', src: "images/emotion-meh.svg", id:"moodblock_meh" },
+  { name: 'Tired', color: 'Black', hexcode: '#000000', src: "images/emotion-tired.svg", id:"moodblock_tired" },
+  { name: 'Content', color: 'Brown', hexcode: '#964B00', src: "images/emotion-placeholder.svg", id:"moodblock_content" },
+  { name: 'Angry', color: 'Red', hexcode: '#FF0000', src: "images/emotion-angry.svg", id:"moodblock_angry" },
+  { name: 'Happy', color: 'Lime green', hexcode: '#32CD32', src: "images/emotion-happy.svg", id:"moodblock_happy" },
+  { name: 'In love', color: 'Pink', hexcode: '#FFC0CB', src: "images/emotion-inlove.svg", id:"moodblock_inlove" },
+  { name: 'Unhappy', color: 'Navy blue', hexcode: '#000080', src: "images/emotion-sad.svg", id:"moodblock_unhappy" },
+  { name: 'Teary', color: 'Light purple', hexcode: '#E6E6FA', src: "images/emotion-placeholder.svg", id:"moodblock_teary" },
+  { name: 'Upset', color: 'Dark blue', hexcode: '#00008B', src: "images/emotion-upset.svg", id:"moodblock_upset" },
+  { name: 'Confused', color: 'Gray', hexcode: '#808080', src: "images/emotion-confused.svg", id:"moodblock_confused" },
 ]
 
 
@@ -56,7 +56,7 @@ export const CarouselSwipe = () => {
   };
 
   return (
-    <div className="relative overflow-hidden py-8">
+    <div className="relative overflow-hidden py-8" id="moodcarousel">
       <motion.div
         drag="x"
         dragConstraints={{
@@ -91,9 +91,10 @@ const Images = ({ imgIndex }) => {
               backgroundImage: `url(${mood.src})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              height: "20vh",
-              width: "10vw"
+              height: "max-h",
+              width: "auto",
             }}
+            id={mood.id}
             animate={{
               scale: imgIndex === idx ? 0.95 : 0.85,
             }}
