@@ -25,6 +25,8 @@ const CalendarGrid = ({ checkinData }) => {
     textAlign: 'center', // Center text horizontally
   };
 
+  
+
   return (
     
     <div style={gridContainerStyle}>
@@ -34,7 +36,7 @@ const CalendarGrid = ({ checkinData }) => {
           return (
             <div key={index} style={gridItemStyle}>
           {checkin && (
-                <div lassName="flex flex-col justify-between mt-2 text-sm" style={{ height: '150px' }}>
+                <div className="flex flex-col justify-between mt-2 text-sm" style={{ height: '50px' }}>
                     <FlowerImage colorName={checkin.color} />
                     <p style={{ fontSize: '10px' }}>{checkin.mood} </p>
                 </div>
