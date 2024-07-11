@@ -6,6 +6,7 @@ import { Toaster } from './sonner';
 // import from pages
 import Landing from '../pages/Landing';
 import CheckIn from '../pages/DailyCheckIn';
+import Activities from '../pages/Activities';
 import GalleryWalk from '../pages/GalleryWalk';
 import GalleryWalkSession from '../pages/GalleryWalkSession';
 import UpdateMoodForm from './UpdateMoodForm';
@@ -96,11 +97,14 @@ const App = () => {
     });
   }
   return (
-
+    <div>
+      {/* <button onClick={createFlowerForUser(flowerData)}>flower</button>
+      <button onClick={addAllMoodsToCurrentUser(standard_moods)}>mood</button> */}
       <Router>
         <Routes>
           <Route exact path="/" element={<Landing />}></Route>
           {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
+          <Route exact path="/activities" element={<Activities />}></Route>
           <Route exact path="/check-in" element={<CheckIn />}></Route>
           <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
           <Route exact path="/gallery-walk/:id" element={<GalleryWalkSession />}></Route>
@@ -108,6 +112,7 @@ const App = () => {
         
         {/*<Toaster id=".toaster"/>*/}
     </Router>
+    </div>
   );
 }
 
