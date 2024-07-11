@@ -98,7 +98,7 @@ export default function HorizontalScroll({checkedIn}) {
                 //post to end-api
                 
                 createFlowerForUser({
-                    mood: mood.name?.toLowerCase(),
+                    mood: mood.name, //mood.name?.toLowerCase()
                     color: mood.color,
                     user_id: currentUser.username,
                     date_created: new Date().toISOString(),
