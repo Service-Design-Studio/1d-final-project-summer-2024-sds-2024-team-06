@@ -7,8 +7,23 @@ class User < ApplicationRecord
   has_many :journals, dependent: :destroy
 
   validate :validate_mood_limit, on: :create
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, presence: true
 
   MAX_MOODS_PER_USER = 12
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def age
+    return if date_of_birth.nil?
+
+    today = Date.today
+    age = today.year - date_of_birth.year
+    age -= 1 if today.yday < date_of_birth.yday
+    age
+  end
 
   def getDate
     self.dateLastLoggedIn
@@ -30,6 +45,10 @@ class User < ApplicationRecord
     user
   end
 
+  def find_mood_by_name(mood_name)
+    moods.find_by(name: mood_name)
+  end
+
   private
   def validate_mood_limit
       if moods.count >= MAX_MOODS_PER_USER
@@ -37,3 +56,4 @@ class User < ApplicationRecord
       end
   end
 end
+

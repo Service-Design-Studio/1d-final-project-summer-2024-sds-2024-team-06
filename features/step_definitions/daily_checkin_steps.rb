@@ -115,7 +115,7 @@ When("user 1 visit api endpoint for flowers") do
 end
 
 Then("he will only see his own flowers") do
-  binding.pry
+  
 end
 
 

@@ -6,6 +6,10 @@ class Flower < ApplicationRecord
 
   before_save :set_day
 
+  def year_created
+    flower&.date_created&.year
+  end
+
   private
   
   def set_day

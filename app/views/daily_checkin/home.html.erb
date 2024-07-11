@@ -1,15 +1,14 @@
-<!-- app/views/home/index.html.erb -->
+<!-- app/views/daily_checkin/home.html.erb -->
 
 <h1>Home Page</h1>
 
 <p>Your selected flowers:</p>
 
-<div class="flowers">
-  <% @flowers.each do |flower| %>
-    <div class="flower" style="background-color: <%= flower.color %>;">
-      Flower with color: <%= flower.color %>
-    </div>
-  <% end %>
-</div>
+<% @flowers.each do |flower| %>
+  <div class="flower" style="background-color: <%= flower.color %>;">
+    <!-- Additional content about the flower can be added here -->
+    <p>Mood: <%= flower.mood %></p>
+    <p>Date Created: <%= flower.date_created %></p>
+  </div>
+<% end %>
 
-<%= link_to 'Daily Check-In', moods_path %>

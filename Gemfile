@@ -75,7 +75,7 @@ group :test do
   gem "cucumber-rails", require: false
   gem "database_cleaner"
   gem 'simplecov', require: false, group: :test
-  
+  gem "rack_session_access"
 
 
 end
