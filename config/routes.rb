@@ -32,10 +32,26 @@ Rails.application.routes.draw do
     get 'current_user', to: 'users#current'
     resources :art_pieces, only: [:index, :show] do #api/art_pieces/
     end
-    resources :flowers
+    resources :flowers 
     resources :moods
     resources :journals, only: [:create, :index, :show]
+    resources :flowers do
+      collection do
+        post :same_mood_color
+      end
+    end
   end
+
+  get '*path', to: 'homepage#index', constraints: ->(request) { request.format.html? }  # This sets the root path and names it `homepage_path`
+
+  namespace :api do
+    resources :moods do
+      collection do
+        post 'select_mood'
+      end
+    end
+  end
+
 
 
 

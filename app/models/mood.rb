@@ -1,9 +1,11 @@
 class Mood < ApplicationRecord
   belongs_to :user
+  has_one :flower
   validates :name, presence: true, uniqueness: { scope: :user_id }
   validates :color, presence: true, uniqueness: { scope: :user_id }
   validates :hexcode, presence: true, uniqueness: { scope: :user_id }
   before_update :prevent_name_change
+  
 
   def prevent_name_change
     # if name_changed? && persisted?

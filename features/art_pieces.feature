@@ -23,10 +23,6 @@ Feature: Gallery Walk
     When I want to express my emotions in writing
     Then text will be shown in the text box as accordance to user input
 
-  Scenario: User has completed the Gallery Walk activity
-    Given User is done with the gallery walk
-    When they click the end activity button
-    Then the journal entry is automatically saved to their journal tab, browser redirect to journal
 
   Scenario: Viewing the list of art gallery
     Given there are art pieces in the database

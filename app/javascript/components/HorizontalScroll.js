@@ -1,7 +1,6 @@
 import { MoveDown } from 'lucide-react'
 import React from 'react'
 import { useState } from "react";
-import { useUser } from '../pages/User';
 
 //standard colors and emotions everyone starts off with
 //users cannot add/remove/change the mood name, but they can change the color and hexcode
@@ -27,66 +26,41 @@ const messages = {
     error: "Please choose a mood"
   }
 
-
-
-export default function HorizontalScroll({checkedIn}) {
+export default function HorizontalScroll() {
 
   // captures the current mood of the user
   const [mood, setMood] = useState(null);
   const [msg, setMessage] = useState(messages.update);
-  const { currentUser } = useUser();
 
-    //function to create a standard mood for a user
-    function createFlowerForUser(flowerData) {
-        // flowerData.user_id = userId;
-        fetch(`/api/flowers`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ flower: flowerData })
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Flower created:', data);
-        })
-        .catch((error) => {
-          console.error('Error creating flower:', error);
-        });
-      }
-  
   return (
     <>
     {/* Message layer */}
     <h1 className='text-lg font-sans-800 text-grey'>{msg}</h1>
 
-    {/* Mood carousel layer that must be hidden once checked-in*/}
-    <div id="moodcarousel" className={checkedIn === false ? "visible" : "invisible"}>
-        {/* Mood carousel layer */}
-        <div className="relative border border-solid flex overflow-x-auto">
-        {/* individually spawns the pre-defined emotions */}
-        {standard_moods.map((mood, idx) => {
-            return (
-            <>
-            <button className="min-w-100 h-200 mr-4" id={mood.id}
-                key={idx}
-                style={{
-                backgroundImage: `url(${mood.src})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                //height: "max-h",
-                //width: "auto"
-                }}
-                onClick={() => {setMood(mood.name);
-                                setMessage(messages.update + mood.name)
-                                //console.log(mood);
-                                }}>
-                <label for={mood.id}>{mood.name}</label>
-                </button>
-            </>
-            );
-        })}   
-        </div>
+    {/* Mood carousel layer */}
+    <div className="relative border border-solid flex overflow-x-auto" id="moodcarousel">
+      {/* individually spawns the pre-defined emotions */}
+      {standard_moods.map((mood, idx) => {
+        return (
+        <>
+          <button className="min-w-100 h-200 mr-4" id={mood.id}
+            key={idx}
+            style={{
+              backgroundImage: `url(${mood.src})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              //height: "max-h",
+              //width: "auto"
+            }}
+            onClick={() => {setMood(mood.name);
+                            setMessage(messages.update + mood.name)
+                            //console.log(mood);
+                            }}>
+            <label for={mood.id}>{mood.name}</label>
+            </button>
+        </>
+        );
+      })}   
     </div>
 
     {/* Submit button layer */}
@@ -109,6 +83,7 @@ export default function HorizontalScroll({checkedIn}) {
             }
         }}>
     {checkedIn === false ? "Submit" : "To activities"}
+
     </button>
     </>
   )

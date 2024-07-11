@@ -97,7 +97,9 @@ const App = () => {
     });
   }
   return (
-
+    <div>
+      {/* <button onClick={createFlowerForUser(flowerData)}>flower</button>
+      <button onClick={addAllMoodsToCurrentUser(standard_moods)}>mood</button> */}
       <Router>
         <Routes>
           <Route exact path="/" element={<Landing />}></Route>
@@ -111,6 +113,7 @@ const App = () => {
         
         {/*<Toaster id=".toaster"/>*/}
     </Router>
+    </div>
   );
 }
 

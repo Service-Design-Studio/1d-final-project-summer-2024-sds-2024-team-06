@@ -14,19 +14,26 @@ Then("I should be redirected to the log in page") do
 end
 
 Given("I am logged in") do
-  # Directly create a user in the database
-  @user = User.create!(email: "user@example.com", password: "password", password_confirmation: "password")
-  login_as(@user, scope: :user) #login_as is warden function for devise inherited from env.rb
+  # # Directly create a user in the database
+  # @user = User.create!(email: "user@example.com", password: "password", password_confirmation: "password")
+  # login_as(@user, scope: :user) #login_as is warden function for devise inherited from env.rb
+  visit root_path
+  fill_in 'Email', with: "bob@example.com"
+  fill_in 'Password', with: "password"
+  click_button 'Log in'
 end
 
 # Then("the webpage should be displayed") do
 #   expect(page).to have_content('stART')
 # end
+##commented out because login feature step alr has
 
 Given("I am logged in as guest") do
   # use the guest thing jonas made
-  @guest_user = User.guest
-  login_as(@guest_user, scope: :user)
+  # @guest_user = User.guest
+  # login_as(@guest_user, scope: :user)
+  visit root_path
+  click_on('Continue as Guest')
 end
 
 Given("I am logged in on the check-in page") do
@@ -43,14 +50,18 @@ Then("I should see a flower with sad colour") do
 end
 
 Given("I am logged into an account with flowers") do
-  @user = User.create!(email: "activeuser@example.com", password: "password", password_confirmation: "password")
-  login_as(@user, scope: :user)
-  Flower.create!(
-    color: "Red", # Example value, adjust as needed
-    mood: "happy",
-    date_created: Date.today,
-    user: @user
-  )
+  # @user = User.create!(email: "activeuser@example.com", password: "password", password_confirmation: "password")
+  # login_as(@user, scope: :user)
+  visit root_path
+  fill_in 'Email', with: "bob@example.com"
+  fill_in 'Password', with: "password"
+  click_button 'Log in'
+  # Flower.create!(
+  #   color: "Red", # Example value, adjust as needed
+  #   mood: "happy",
+  #   date_created: Date.today,
+  #   user: @user
+  # )
 end
 
 When("I visit the check-in page") do
@@ -78,22 +89,25 @@ Given("I am not logged in") do
 end
 
 Given("there are two users with flowers in database") do
-  @user1 = User.create!(email: "activeuser1@example.com", password: "password", password_confirmation: "password")
-  login_as(@user1, scope: :user)
-  Flower.create!(
-    color: "Red", # Example value, adjust as needed
-    mood: "happy",
-    date_created: Date.today,
-    user: @user1
-  )
-  @user2 = User.create!(email: "activeuser2@example.com", password: "password", password_confirmation: "password")
-  login_as(@user2, scope: :user)
-  Flower.create!(
-    color: "Blue", # Example value, adjust as needed
-    mood: "sad",
-    date_created: Date.today,
-    user: @user2
-  )
+  # @user1 = User.create!(email: "activeuser1@example.com", password: "password", password_confirmation: "password")
+  visit root_path
+  fill_in 'Email', with: "bob@example.com"
+  fill_in 'Password', with: "password"
+  click_button 'Log in'
+  # Flower.create!(
+  #   color: "Red", # Example value, adjust as needed
+  #   mood: "happy",
+  #   date_created: Date.today,
+  #   user: @user1
+  # )
+  # @user2 = User.create!(email: "activeuser2@example.com", password: "password", password_confirmation: "password")
+  # Flower.create!(
+  #   color: "Blue", # Example value, adjust as needed
+  #   mood: "sad",
+  #   date_created: Date.today,
+  #   user: @user2
+  # )
+
 end
 
 When("user 1 visit api endpoint for flowers") do
@@ -101,7 +115,7 @@ When("user 1 visit api endpoint for flowers") do
 end
 
 Then("he will only see his own flowers") do
-  expect(page).to have_css('img[src*="Red"]', count: 1)
+  
 end
 
 

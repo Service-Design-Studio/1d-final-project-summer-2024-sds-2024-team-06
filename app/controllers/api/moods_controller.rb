@@ -8,7 +8,7 @@ module Api
 
       def index
         @moods = current_user.moods
-      render json: @moods, status: :ok
+        render json: @moods, status: :ok
       end
 
       def show
@@ -42,6 +42,15 @@ module Api
         head :no_content
       end
 
+      def select_mood
+        @mood = current_user.moods.find_by(name: params[:name])
+        if @mood.present?
+          redirect_to root_path, notice: 'Mood selected successfully.'
+        else
+          redirect_to api_moods_path, alert: 'Invalid mood selected.'
+        end
+      end
+
       private
         def set_mood
             @mood = Mood.find(params[:id])
@@ -60,4 +69,4 @@ module Api
           params.require(:mood).permit(:name, :color, :hexcode)
         end
     end
-  end
+end
