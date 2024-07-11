@@ -6,16 +6,15 @@ class Mood < ApplicationRecord
   before_update :prevent_name_change
 
   def prevent_name_change
-    if name_changed? && persisted?
-      errors.add(:name, "cannot be changed!")
-      throw(:abort)
-    end
+    # if name_changed? && persisted?
+    #   errors.add(:name, "cannot be changed!")
+    #   throw(:abort)
+    # end
   end
 
   has_many :flowers
-    
+
   def same_mood_color
     Flower.where(color: self.color)
   end
 end
-    
