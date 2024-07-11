@@ -20,8 +20,8 @@ const greenLand = {
 
 export default function Checkin() {
 
-  //const {data: checkinData, error, isPending} = useFetch('http://127.0.0.1:3000/api/flowers')
-  const {data: checkinData, error, isPending} = mockUseFetch('http://127.0.0.1:3000/api/flowers')
+  const {data: checkinData, error, isPending} = useFetch('http://127.0.0.1:3000/api/flowers')
+  //const {data: checkinData, error, isPending} = mockUseFetch('http://127.0.0.1:3000/api/flowers')
 
 
   return (

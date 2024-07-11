@@ -44,20 +44,143 @@
 #   end
 # end
 
+
+require 'date'
+
+def random_date 
+  seconds = 365*24*60*60
+  random_seconds = rand(seconds)
+  random_date = Time.now - random_seconds
+  iso_date = random_date.iso8601
+  iso_date
+end
+
+standard_moods = [
+    { name: 'Excited', color: 'Neon green', hexcode: '#39FF14' },
+    { name: 'Very happy', color: 'Yellow', hexcode: '#FFFF00' },
+    { name: 'Meh', color: 'Bright blue', hexcode: '#007FFF' },
+    { name: 'Tired', color: 'Black', hexcode: '#000000' },
+    { name: 'Content', color: 'Brown', hexcode: '#964B00' },
+    { name: 'Angry', color: 'Red', hexcode: '#FF0000' },
+    { name: 'Happy', color: 'Lime green', hexcode: '#32CD32' },
+    { name: 'In love', color: 'Pink', hexcode: '#FFC0CB' },
+    { name: 'Unhappy', color: 'Navy blue', hexcode: '#000080' },
+    { name: 'Teary', color: 'Light purple', hexcode: '#E6E6FA' },
+    { name: 'Upset', color: 'Dark blue', hexcode: '#00008B' },
+    { name: 'Confused', color: 'Gray', hexcode: '#808080' },
+  ]
+
 User.create([
   {dateLastLoggedIn: Date.today,
   email: "test_user@example.com",
   password: "password", # Devise will handle the encryption
   password_confirmation: "password"},
-  {dateLastLoggedIn: Date.today,
-  email: "bob@example.com",
-  password: "password", # Devise will handle the encryption
-  password_confirmation: "password"},
-  {dateLastLoggedIn: Date.today,
-  email: "alice@example.com",
-  password: "password", # Devise will handle the encryption
-  password_confirmation: "password"}
 ])
+
+@user = User.create({dateLastLoggedIn: Date.today,
+email: "bob@example.com",
+password: "password", # Devise will handle the encryption
+password_confirmation: "password"})
+
+
+Flower.create!({
+  mood: "Happy",
+  color: "Yellow",
+  date_created: random_date,
+  user: @user,
+  user_id: 3
+})
+
+Flower.create!({
+  mood: "Sad",
+  color: "Blue",
+  date_created: random_date,
+  user: @user,
+  user_id: 3
+})
+
+Flower.create!({
+  mood: "Excited",
+  color: "Neon Green",
+  date_created: random_date,
+  user: @user,
+  user_id: 3
+})
+
+Flower.create!({
+  mood: "Sad",
+  color: "Blue",
+  date_created: random_date,
+  user: @user,
+  user_id: 3
+})
+
+Flower.create!({
+  mood: "In love",
+  color: "Pink",
+  date_created: random_date,
+  user: @user,
+  user_id: 3
+})
+
+standard_moods.each do |mood|
+    mood[:user] = @user
+    mood[:user_id] = 3
+    Mood.create!(mood)
+end
+
+@user = User.create({dateLastLoggedIn: Date.today,
+email: "alice@example.com",
+password: "password", # Devise will handle the encryption
+password_confirmation: "password"})
+
+Flower.create({
+  mood: "Happy",
+  color: "Yellow",
+  date_created: random_date,
+  user: @user,
+  user_id: 4
+})
+
+Flower.create({
+  mood: "Sad",
+  color: "Blue",
+  date_created: random_date,
+  user: @user,
+  user_id: 4
+})
+
+Flower.create({
+  mood: "Excited",
+  color: "Neon Green",
+  date_created: random_date,
+  user: @user,
+  user_id: 4
+})
+
+Flower.create({
+  mood: "Sad",
+  color: "Blue",
+  date_created: random_date,
+  user: @user,
+  user_id: 4
+})
+
+Flower.create({
+  mood: "In love",
+  color: "Pink",
+  date_created: random_date,
+  user: @user,
+  user_id: 4
+})
+
+
+standard_moods.each do |mood|
+  mood[:user] = @user
+  mood[:user_id] = 4
+  Mood.create!(mood)
+end
+
 
 ArtPiece.create([
   {artID: 00001,

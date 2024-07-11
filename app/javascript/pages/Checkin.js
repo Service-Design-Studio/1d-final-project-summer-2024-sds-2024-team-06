@@ -6,7 +6,7 @@ import SwipeCarousel from '../components/HorizontalScroll';
 
 export default function Checkin() {
 
-  const {data: checkinData, error, isPending} = mockUseFetch('http://127.0.0.1:3000/api/flowers')
+  const {data: checkinData, error, isPending} = useFetch('http://127.0.0.1:3000/api/flowers')
 
   console.log("Checkin component rendered");
   console.log(checkinData)

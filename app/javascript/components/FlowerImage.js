@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 // Color mapping
 const colorMap = {
-  'Neon green': { hueRotate: '240deg', saturate: '500%' },
-  'yellow': { hueRotate: '180deg', saturate: '400%' },
+  'Neon Green': { hueRotate: '240deg', saturate: '500%' },
+  'Yellow': { hueRotate: '180deg', saturate: '400%' },
   'Bright blue': { hueRotate: '335deg', saturate: '50%' },
   'Black': { grayscale: '100%' }, // Grayscale
   'Brown': { hueRotate: '120deg', saturate: '75%' },
@@ -17,13 +17,12 @@ const colorMap = {
 };
 
 const FlowerImage = ({ colorName }) => {
-  const [baseImageUrl, setBaseImageUrl] = useState('https://example.com/path/to/greyscale-flower.png'); // Replace with your grayscale flower image URL
-  const [filterStyle, setFilterStyle] = useState({ filter: 'grayscale(100%)' }); // Default to grayscale
+  const baseImageUrl = 'https://parspng.com/wp-content/uploads/2021/10/blue-flower-png.parspng.com_.png'; // Replace with your grayscale flower image URL
+  const [filterStyle, setFilterStyle] = useState({ filter: '' }); // Default to grayscale
 
   useEffect(() => {
     if (colorMap[colorName]) {
-      const { hueRotate, saturate, grayscale } = colorMap[colorName];
-      setBaseImageUrl('https://parspng.com/wp-content/uploads/2021/10/blue-flower-png.parspng.com_.png'); // Replace with your colored flower image URL
+      const { hueRotate, saturate, grayscale } = colorMap[colorName]; // Replace with your colored flower image URL
       setFilterStyle({
         filter: ` ${hueRotate ? `hue-rotate(${hueRotate})` : ''} ${saturate ? `saturate(${saturate})` : ''}`,
       });
