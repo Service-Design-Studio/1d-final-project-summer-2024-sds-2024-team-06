@@ -33,7 +33,7 @@ export default function Checkin() {
 
         {checkinData && (
           <div className="flex justify-center items-center">
-            <SwipeCarousel></SwipeCarousel>
+            <SwipeCarousel />
             <CalendarGrid checkinData={checkinData} />
             
           </div>

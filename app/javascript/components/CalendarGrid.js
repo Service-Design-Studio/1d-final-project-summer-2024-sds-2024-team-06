@@ -10,9 +10,9 @@ const CalendarGrid = ({ checkinData }) => {
   const gridContainerStyle = {
     display: 'grid',
     gridTemplateColumns: 'repeat(36, 1fr)', // Adjust the number of columns as needed
-    gap: '5px', // Adjust gap between grid items
-    height: '100vh', // Fixed height of 100% viewport height
-    width: '100%',
+    //gap: '5px', // Adjust gap between grid items
+    height: 'inherit', // Fixed height of 100% inherited from parent div
+    width: 'w-full', // 100% of viewport width remains
     overflow: 'hidden', // Prevent overflow and disable scrolling
   };
 

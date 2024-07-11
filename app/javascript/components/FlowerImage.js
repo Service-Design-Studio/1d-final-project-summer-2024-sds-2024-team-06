@@ -31,7 +31,7 @@ const FlowerImage = ({ colorName }) => {
   }, [colorName]);
 
   const flowerImageStyle = {
-    width: '200px', // Adjust the width as needed
+    width: '150px', // Adjust the width as needed
     height: 'auto', // Maintain aspect ratio
     ...filterStyle,
   };
