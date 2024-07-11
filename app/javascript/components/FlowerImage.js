@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 
 // Color mapping
 const colorMap = {
-  'Neon green': { hueRotate: '120deg', saturate: '500%' },
-  'yellow': { hueRotate: '60deg', saturate: '400%' },
-  'Bright blue': { hueRotate: '200deg', saturate: '300%' },
+  'Neon green': { hueRotate: '240deg', saturate: '500%' },
+  'yellow': { hueRotate: '180deg', saturate: '400%' },
+  'Bright blue': { hueRotate: '335deg', saturate: '50%' },
   'Black': { grayscale: '100%' }, // Grayscale
-  'Brown': { hueRotate: '30deg', saturate: '200%' },
-  'Red': { hueRotate: '0deg', saturate: '400%' },
-  'Lime green': { hueRotate: '90deg', saturate: '300%' },
-  'Pink': { hueRotate: '330deg', saturate: '400%' },
-  'Navy blue': { hueRotate: '240deg', saturate: '200%' },
-  'Light purple': { hueRotate: '270deg', saturate: '250%' },
-  'Dark blue': { hueRotate: '210deg', saturate: '300%' },
+  'Brown': { hueRotate: '120deg', saturate: '75%' },
+  'Red': { hueRotate: '120deg', saturate: '800%' },
+  'Lime green': { hueRotate: '200deg', saturate: '300%' },
+  'Pink': { hueRotate: '90deg', saturate: '400%' },
+  'Navy blue': { hueRotate: '0deg', saturate: '800%' },
+  'Light purple': { hueRotate: '15deg', saturate: '250%' },
+  'Dark blue': { hueRotate: '0deg', saturate: '300%' },
   'Gray': { grayscale: '100%' }, // Grayscale
 };
 
@@ -31,7 +31,7 @@ const FlowerImage = ({ colorName }) => {
   }, [colorName]);
 
   const flowerImageStyle = {
-    width: '200px', // Adjust the width as needed
+    width: '150px', // Adjust the width as needed
     height: 'auto', // Maintain aspect ratio
     ...filterStyle,
   };

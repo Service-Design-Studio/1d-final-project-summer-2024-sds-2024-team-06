@@ -28,7 +28,7 @@ const mockUseFetch = (url) => {
       ]
 
       const mockData = [
-        {mood: 'very happy', color: "Yellow", day: 1},
+        {mood: 'in love', color: "Pink", day: 1},
         {mood: 'upset', color: "Dark blue", day: 2},
         {mood: 'angry', color: "Red", day: 3},
         {mood: 'in love', color: "Pink", day: 5},
@@ -38,17 +38,18 @@ const mockUseFetch = (url) => {
         {mood: 'content', color: "Brown", day: 13},
         {mood: 'tired', color: "Black", day: 15},
         {mood: 'excited', color: "Neon green", day: 17},
-        
-        {mood: 'very happy', color: "Yellow", day: 21},
+        {mood: 'in love', color: "Pink", day: 364},
         {mood: 'upset', color: "Dark blue", day: 22},
-        {mood: 'angry', color: "Red", day: 32},
-        {mood: 'in love', color: "Pink", day: 52},
+        {mood: 'angry', color: "Red", day: 33},
+        {mood: 'in love', color: "Pink", day: 34},
+        {mood: 'content', color: "Brown", day: 37},
+        {mood: 'content', color: "Brown", day: 38},
         {mood: 'meh', color: "Bright blue", day: 27},
         {mood: 'happy', color: "Lime green", day: 211},
         {mood: 'unhappy', color: "Navy blue", day: 122},
         {mood: 'content', color: "Brown", day: 132},
         {mood: 'tired', color: "Black", day: 215},
-        {mood: 'excited', color: "Neon green", day: 317},
+        {mood: 'excited', color: "Neon green", day: 365},
         // Add more mock data as needed
       ];
 

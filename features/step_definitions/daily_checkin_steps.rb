@@ -105,8 +105,6 @@ Then("he will only see his own flowers") do
 end
 
 
-
-
 After do
   # Clean up any created users to avoid test pollution
   User.delete_all
