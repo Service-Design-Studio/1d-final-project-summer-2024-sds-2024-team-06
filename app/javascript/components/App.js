@@ -106,6 +106,7 @@ const App = () => {
           <Route exact path="/check-in" element={<CheckIn />}></Route>
           <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
           <Route exact path="/gallery-walk/:id" element={<GalleryWalkSession />}></Route>
+          {/*<Moodtracker />*/}
         </Routes>
         
         {/*<Toaster id=".toaster"/>*/}

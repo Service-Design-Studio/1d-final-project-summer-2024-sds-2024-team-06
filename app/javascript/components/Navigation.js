@@ -52,6 +52,7 @@ const Navigation = () => { return(
         {/*Menu items*/}
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
+          <SetActiveLink href="/check-in">Mood Tracker</SetActiveLink>
             <SetActiveLink href="/">Activity</SetActiveLink>
             <SetActiveLink href="#">Journal</SetActiveLink>
             <SetActiveLink href="#">Profile</SetActiveLink>

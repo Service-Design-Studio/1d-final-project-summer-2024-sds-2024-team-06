@@ -96,7 +96,6 @@ export default function HorizontalScroll({checkedIn}) {
             if (checkedIn === false){
                 checkedIn = true;
                 //post to end-api
-                
                 createFlowerForUser({
                     mood: mood.name, //mood.name?.toLowerCase()
                     color: mood.color,
@@ -111,9 +110,6 @@ export default function HorizontalScroll({checkedIn}) {
         }}>
     {checkedIn === false ? "Submit" : "To activities"}
     </button>
-
-   
-    
     </>
   )
 }
