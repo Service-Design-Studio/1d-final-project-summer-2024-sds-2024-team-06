@@ -77,6 +77,33 @@ Given("I am not logged in") do
   logout(:user)
 end
 
+Given("there are two users with flowers in database") do
+  @user1 = User.create!(email: "activeuser1@example.com", password: "password", password_confirmation: "password")
+  login_as(@user1, scope: :user)
+  Flower.create!(
+    color: "Red", # Example value, adjust as needed
+    mood: "happy",
+    date_created: Date.today,
+    user: @user1
+  )
+  @user2 = User.create!(email: "activeuser2@example.com", password: "password", password_confirmation: "password")
+  login_as(@user2, scope: :user)
+  Flower.create!(
+    color: "Blue", # Example value, adjust as needed
+    mood: "sad",
+    date_created: Date.today,
+    user: @user2
+  )
+end
+
+When("user 1 visit api endpoint for flowers") do
+  visit '/api/flowers'
+end
+
+Then("he will only see his own flowers") do
+  expect(page).to have_css('img[src*="Red"]', count: 1)
+end
+
 
 
 

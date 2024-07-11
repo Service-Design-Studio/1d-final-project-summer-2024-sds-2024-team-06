@@ -37,3 +37,9 @@ Feature: Daily Check-in
     Given I am not logged in
     When I visit the check-in page
     Then I should be redirected to the log in page
+
+  Scenario: User 1 attempts to access User 2 flowers
+    Given there are two users with flowers in database
+    When user 1 visit api endpoint for flowers
+    Then he will only see his own flowers
+
