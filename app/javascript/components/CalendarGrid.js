@@ -9,7 +9,7 @@ const CalendarGrid = ({ checkinData }) => {
 
   const gridContainerStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(36, 1fr)', // Adjust the number of columns as needed
+    gridTemplateColumns: 'repeat(37, 1fr)', // Adjust the number of columns as needed
     //gap: '5px', // Adjust gap between grid items
     height: 'inherit', // Fixed height of 100% inherited from parent div
     width: 'w-full', // 100% of viewport width remains
@@ -17,8 +17,9 @@ const CalendarGrid = ({ checkinData }) => {
   };
 
   const gridItemStyle = {
-    maxHeight: '100px',
-    padding: '10px', // Adjust padding as needed
+    height: '52px',
+    width: '39px',
+    padding: '5px', // Adjust padding as needed
     border: 'none', // No border
     background: 'transparent', // Transparent background
     textAlign: 'center', // Center text horizontally
@@ -33,9 +34,9 @@ const CalendarGrid = ({ checkinData }) => {
           return (
             <div key={index} style={gridItemStyle}>
           {checkin && (
-                <div className="mt-2 text-sm">
+                <div lassName="flex flex-col justify-between mt-2 text-sm" style={{ height: '150px' }}>
                     <FlowerImage colorName={checkin.color} />
-                    <p><strong>{checkin.mood}</strong> </p>
+                    <p style={{ fontSize: '10px' }}>{checkin.mood} </p>
                 </div>
               )}
         </div>
