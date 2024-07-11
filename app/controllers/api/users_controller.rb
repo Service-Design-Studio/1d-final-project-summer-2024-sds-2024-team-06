@@ -7,8 +7,7 @@ class UsersController < ApplicationController
     end
     
     def show
-      @user = User.find(params[:id])
-      render json: @user
+      render json: current_user
     end
   
     def create
@@ -27,7 +26,11 @@ class UsersController < ApplicationController
     end
 
     def current
-      render json: current_user.as_json(only: [:id, :username, :email, :guest])
+      if user_signed_in?
+        render json: current_user.as_json(only: [:id, :username, :email, :guest])
+      else
+        render json: { error: 'Not authenticated' }, status: :unauthorized
+      end
     end
   
     private

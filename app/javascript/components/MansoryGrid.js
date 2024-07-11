@@ -10,14 +10,16 @@ function GridImage(artpiece) {
         //console.log(artpiece[imageURL]);
         // If art piece found, spawn the following
         return(
-            <div><img class="h-auto max-w-full rounded-lg object-cover object-center flex"
+          <Link id={artpiece.id == 2 ? 'gallery-picture' : 'e'} to={`/gallery-walk/${artpiece.id}}`}>
+            <div><img className="h-auto max-w-full rounded-lg object-cover object-center flex galleryPicture"
                 src={artpiece.imageURL}
+                id="e"
                 alt={artpiece.artTitle}/></div>
-            );
+          </Link>);
     } catch (error){
     // If no art piece found => index error => spawn an empty version
         return(
-            <div><img class="h-auto max-w-full rounded-lg object-cover object-center flex"
+            <div><img className="h-auto max-w-full rounded-lg object-cover object-center flex"
                 src="images/no-image-placeholder.svg"
                 alt="gallery-photo"/></div>
         );

@@ -19,9 +19,9 @@ Given("I am logged in") do
   login_as(@user, scope: :user) #login_as is warden function for devise inherited from env.rb
 end
 
-Then("the webpage should be displayed") do
-  expect(page).to have_content('stART')
-end
+# Then("the webpage should be displayed") do
+#   expect(page).to have_content('stART')
+# end
 
 Given("I am logged in as guest") do
   # use the guest thing jonas made

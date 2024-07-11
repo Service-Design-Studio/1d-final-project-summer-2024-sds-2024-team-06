@@ -1,12 +1,16 @@
 ##Scenario 1: Participant begins Gallery Walk activity
 
+
+
 Given('participant chosen to partake in the Gallery Walk') do
   visit '/gallery-walk' ##visit is a method that instructs the testing framework to
   #simulate a browser visit to that location
 end
 
 When('I choose a picture from the carousel') do
-  click_on 'Picture' #If "Picture" is a link or button in your application's UI
+  # click_on 'Picture' #If "Picture" is a link or button in your application's UI
+  binding.pry
+  click_on 'gallery-picture'
   # (e.g., a thumbnail of a picture in a carousel), Capybara will simulate clicking on that link or button.
   #check if page is on /gallery-walk/{pic_num}
 end

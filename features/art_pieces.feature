@@ -3,6 +3,10 @@ Feature: Gallery Walk
   I want to be guided through a process that allows me to notice my subconscious emotions
   So that I can practice emotional well-being and manage my mental state better
 
+  Background:
+    Given I am on the root page
+    Then the webpage should be displayed
+
   Scenario: Participant begins Gallery Walk activity
     Given participant chosen to partake in the Gallery Walk
     When I choose a picture from the carousel
