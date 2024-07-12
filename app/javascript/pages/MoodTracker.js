@@ -3,8 +3,6 @@ import { useState } from "react";
 
 import useFetch from '../api/useFetch'
 import mockUseFetch from '../components/mockUseFetch' // data to show flowers rendering
-import CarouselSwipe from '../components/CarouselSwipe'
-import HorizontalScroll from '../components/HorizontalScroll'
 import CalendarGrid from '../components/CalendarGrid'
 
 
@@ -19,13 +17,10 @@ const greenLand = {
 
 
 
-export default function Checkin() {
+export default function Moodtracker() {
 
   const {data: checkinData, error, isPending} = useFetch('http://127.0.0.1:3000/api/flowers')
   // const {data: checkinData, error, isPending} = mockUseFetch('http://127.0.0.1:3000/api/flowers')
-  //console.log(checkinData)
-  //const [checkedIn, setcheckedIn] = useState(checkinData.date_created === new Date().toISOString() ? false : true);
-  const checkedIn = false
 
   return (
     <>
@@ -38,22 +33,15 @@ export default function Checkin() {
           <div style={greenLand} className="grid grid-rows-8 no-scrollbar"> 
             <div className="row-span-1" id="instructions">
             {/*Instructions layer*/}
-              <h1 className='text-4xl font-bold'>Daily Check-in</h1>
-              <h1 className='text-lg font-sans-800 text-grey'>How would you describe your mood?</h1>
+              <h1 className='text-4xl font-bold'>Mood tracker</h1>
+              <h1 className='text-lg font-sans-800 text-grey'>Your mood over the days:</h1>
             </div>
             <div className="row-span-6">
             {/*Flower field layer*/}
               <CalendarGrid checkinData={checkinData} />
             </div>
-            <div className="row-span-1">
-            {/*Mood carousel layer*/}
-              {/*<HorizontalScroll  CarouselSwipe/>*/}
-              <HorizontalScroll checkedIn={checkedIn}/>
-            </div>
           </div>
         )}
     </>
-
-    
   );
 };
