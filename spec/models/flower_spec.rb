@@ -27,10 +27,4 @@ RSpec.describe Flower, type: :model do
     flower = Flower.new(color: "green", date_created: Date.new(2022, 7, 10), user: @user, created_at: "12/07/2024", updated_at: "12/07/2024", user_id: "1")
     expect(flower).to_not be_valid
   end
-
-  it "returns flower color corresponding to user's mood" do
-    flower = Flower.create(mood: "happy", color: "yellow")
-    expect(flower.mood).to eq @user.find_mood_by_name(flower.mood).name
-  end
-
 end

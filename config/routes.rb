@@ -15,7 +15,7 @@
 Rails.application.routes.draw do
 
   post 'select_mood', to: 'moods#select_mood', as: 'select_mood'
-  post 'same_mood_color', to: 'moods#same_mood_color', as: 'same_mood_color'
+  post 'generate_flower', to: 'moods#generate_flower', as: 'generate_flower'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -34,7 +34,16 @@ Rails.application.routes.draw do
     end
 
     resources :flowers do
-      post :same_mood_color, on: :collection
+      collection do
+        post :generate_flower
+      end
+    end
+
+    resources :users, only: [:index, :show, :create] do
+      collection do
+        get :guest_login
+        get :current
+      end
     end
 
     

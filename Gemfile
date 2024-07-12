@@ -16,7 +16,14 @@ gem "puma", ">= 5.0"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem 'rails-controller-testing'
+
 gem "dotenv"
+
+group :development, :test do
+  gem 'factory_bot_rails'
+end
+
 
 
 

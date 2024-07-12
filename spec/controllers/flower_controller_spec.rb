@@ -1,43 +1,68 @@
+# spec/controllers/flower_controller_spec.rb
 require 'rails_helper'
 
 RSpec.describe Api::FlowersController, type: :controller do
+  let!(:user) { create(:user, email: "jonas@example.com", password: "password") }
+  let!(:flower_params) { attributes_for(:flower, color: "blue", mood: "sad", date_created: Date.new(2022, 7, 10), user: @user, created_at: "12/07/2024", updated_at: "12/07/2024", user_id: "1")}
+
   before do
-    @user = User.create(email: "guest@example.com" , password: "password")
-    sign_in @user
-    mood = Mood.create(name: "happy", color: "yellow", hexcode: "#0000", user: @user)
-    
-    if mood.persisted?
-      Rails.logger.debug "Mood created successfully: #{mood.name}, #{mood.color}"
-    else
-      Rails.logger.debug "Mood creation failed: #{mood.errors.full_messages.join(', ')}"
-    end
-  
-    # Optionally log all moods after creation to ensure they exist
-    Rails.logger.debug "All moods: #{Mood.pluck(:name, :color)}"
+    sign_in user
   end
 
-  describe "#same_mood_color" do
-    context "when a valid mood is selected" do
-        it "returns a new flower with the same color as the mood selected" do
-            expect {
-            post :same_mood_color, params: { name: "happy" }
-            }.to change(Flower, :count).by(1)
-            
-            flower = Flower.last
-            expect(flower.color).to eq("yellow")
-            expect(response).to redirect_to(homepage_path(flower))
-        end
+  describe "GET #index" do
+    it "returns a success response" do
+      get :index
+      expect(response).to have_http_status(:ok)
     end
 
-    context "when an invalid mood is selected" do
-        it "does not create a new flower and redirects with an error message" do
-          expect {
-            post :same_mood_color, params: { name: "angry" }
-          }.to_not change(Flower, :count)
-          
-          expect(response).to redirect_to(api_moods_path)
-          expect(flash[:alert]).to eq('Invalid mood selected.')
-        end
+    it "returns flowers belonging to the current user" do
+      flower = create(:flower, user: user)
+      get :index
+      expect(response).to have_http_status(:ok)
+      expect(assigns(:flowers)).to include(flower)
+    end
+  end
+
+  describe "GET #show" do
+    let(:flower) { create(:flower, user: user) }
+
+    it "returns a success response" do
+      get :show, params: { id: flower.id }
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "returns the correct flower" do
+      get :show, params: { id: flower.id }
+      expect(response).to have_http_status(:ok)
+      expect(assigns(:flower)).to eq(flower)
+    end
+
+    it "returns 'Flower not found' error with status :not_found if flower does not exist" do
+      get :show, params: { id: 'invalid_id' }
+      expect(response).to have_http_status(:not_found)
+      expect(JSON.parse(response.body)['error']).to eq('Flower not found')
+    end
+  end
+
+  describe "POST #create" do
+    context "with valid params" do
+      it "creates a new flower" do
+        expect {
+          post :create, params: { flower: flower_params }
+        }.to change(Flower, :count).by(1)
+        expect(response).to have_http_status(:created)
       end
     end
+
+    context "with invalid params" do
+      let(:invalid_params) { { flower: { mood: '', color: '', user_id: user.id } } }
+
+      it "does not create a new flower" do
+        expect {
+          post :create, params: invalid_params
+        }.to_not change(Flower, :count)
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
 end
