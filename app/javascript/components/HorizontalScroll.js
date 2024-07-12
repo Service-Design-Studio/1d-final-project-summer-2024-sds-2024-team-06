@@ -1,6 +1,6 @@
-import { MoveDown } from 'lucide-react'
 import React from 'react'
 import { useState } from "react";
+import { useUser } from '../pages/User.js'; 
 
 //standard colors and emotions everyone starts off with
 //users cannot add/remove/change the mood name, but they can change the color and hexcode
@@ -26,65 +26,98 @@ const messages = {
     error: "Please choose a mood"
   }
 
-export default function HorizontalScroll() {
+export default function HorizontalScroll({checkedIn}) {
+
+  //console.log(checkedIn)
 
   // captures the current mood of the user
   const [mood, setMood] = useState(null);
   const [msg, setMessage] = useState(messages.update);
+  const [getMood, setGetMood] = useState(!checkedIn); // set to true if not checked in yet
+
+  //To get user id => currentUser.id
+  //To check if user is guest => currentUser.guest = true or false
+  const { currentUser } = useUser();
+  
+
+  //function to create a flower for a user
+  function createFlowerForUser(flowerData) {
+    // flowerData.user_id = userId;
+    fetch(`/api/flowers`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ flower: flowerData })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Flower created:', data);
+    })
+    .catch((error) => {
+      console.error('Error creating flower:', error);
+    });
+  }
 
   return (
     <>
     {/* Message layer */}
     <h1 className='text-lg font-sans-800 text-grey'>{msg}</h1>
 
-    {/* Mood carousel layer */}
-    <div className="relative border border-solid flex overflow-x-auto" id="moodcarousel">
-      {/* individually spawns the pre-defined emotions */}
-      {standard_moods.map((mood, idx) => {
-        return (
-        <>
-          <button className="min-w-100 h-200 mr-4" id={mood.id}
-            key={idx}
-            style={{
-              backgroundImage: `url(${mood.src})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              //height: "max-h",
-              //width: "auto"
-            }}
-            onClick={() => {setMood(mood.name);
-                            setMessage(messages.update + mood.name)
-                            //console.log(mood);
-                            }}>
-            <label for={mood.id}>{mood.name}</label>
+    {/* Mood carousel layer with submit button if user hasnt checked-in yet */}
+    {
+        getMood && <div className="relative border border-solid flex overflow-x-auto" id="moodcarousel">
+        {/* individually spawns the pre-defined emotions */}
+        {standard_moods.map((mood, idx) => {
+          return (
+            <button className="min-w-100 h-200 mr-4" id={mood.id}
+              key={idx}
+              style={{
+                backgroundImage: `url(${mood.src})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                //height: "max-h",
+                //width: "auto"
+              }}
+              onClick={() => {setMood(mood.name);
+                              setMessage(messages.update + mood.name)
+                              //console.log(mood);
+                              }}>
+              <label for={mood.id}>{mood.name}</label>
             </button>
-        </>
-        );
-      })}   
-    </div>
+          );
+        })}   
+      </div>
+    }
 
-    {/* Submit button layer */}
-    <button className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full p-4 w-48" 
-        onClick={() => {
-            console.log(checkedIn);
-            if (checkedIn === false){
-                checkedIn = true;
-                //post to end-api
-                createFlowerForUser({
-                    mood: mood.name, //mood.name?.toLowerCase()
-                    color: mood.color,
-                    user_id: currentUser.username,
-                    date_created: new Date().toISOString(),
-                })
-            }
-            else{
-                // redirect them to activities page
-                window.location.href="/activities";
-            }
-        }}>
-    {checkedIn === false ? "Submit" : "To activities"}
+    {/* Button layer */}  
+    { getMood && <button className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full p-4 w-48" 
+            onClick={() => {
+              setGetMood(false)
+              //console.log(checkedIn);
+              // post to end-api
+              createFlowerForUser({
+                  mood: mood.name, //mood.name?.toLowerCase()
+                  color: mood.color,
+                  user_id: currentUser.username,
+                  date_created: new Date().toISOString(),
+              })
+              // reload the page to see the new flower
+              //window.location.reload(false); // set to false if we want to reloud from the cache
 
-    </button>
+              // spawn a flower?
+            }}>
+      Submit
+    </button>}
+
+    { !getMood && <button className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full p-4 w-48" 
+          onClick={() => {
+                  // redirect them to activities page
+                  window.location.href="/activities";
+              }}>
+      To activities
+      </button>}
+    
     </>
   )
 }

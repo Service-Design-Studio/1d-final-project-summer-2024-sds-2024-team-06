@@ -1,5 +1,5 @@
 import React from 'react'
-import useFetch from '../components/useFetch'
+import useFetch from '../api/useFetch'
 
 
 import Navigation from '../components/Navigation'

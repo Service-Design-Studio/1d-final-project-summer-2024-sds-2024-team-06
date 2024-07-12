@@ -1,6 +1,6 @@
 import React from 'react'
 //import GalleryCarousel from '../components/GalleryCarousel'
-import useFetch from '../components/useFetch'
+import useFetch from '../api/useFetch'
 
 import MansoryGrid from '../components/MansoryGrid'
 import Navigation from '../components/Navigation'

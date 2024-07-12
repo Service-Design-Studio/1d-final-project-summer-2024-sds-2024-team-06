@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 
 // imports from components
-import useFetch from '../components/useFetch';
+import useFetch from '../api/useFetch';
 import Navigation from '../components/Navigation';
 import AudioPlayer from '../components/AudioPlayer';
 

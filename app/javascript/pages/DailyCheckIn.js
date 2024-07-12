@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 
-import useFetch from '../components/useFetch'
+import useFetch from '../api/useFetch'
 import mockUseFetch from '../components/mockUseFetch' // data to show flowers rendering\
 import CarouselSwipe from '../components/CarouselSwipe'
 import HorizontalScroll from '../components/HorizontalScroll'
