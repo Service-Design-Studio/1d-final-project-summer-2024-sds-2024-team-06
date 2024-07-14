@@ -6,9 +6,7 @@
 
 <% @flowers.each do |flower| %>
   <div class="flower" style="background-color: <%= flower.color %>;">
-    <!-- Additional content about the flower can be added here -->
-    <p>Mood: <%= flower.mood %></p>
-    <p>Date Created: <%= flower.date_created %></p>
+    <p><%= flower.mood %></p>
+    <p><%= flower.date_created %></p>
   </div>
 <% end %>
-

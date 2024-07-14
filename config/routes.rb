@@ -46,29 +46,17 @@ Rails.application.routes.draw do
       end
     end
 
-    
-    resources :journals, only: [:create, :index, :show]
-  end
-
-  root 'home#index', as: 'homepage'  # This sets the root path and names it `homepage_path`
-
-  # namespace :api do
-  #   resources :moods do
-  #     collection do
-  #       post 'select_mood', on: :collection
-  #       get 'same_mood_color'
-  #     end
-  #   end
-  # end
-  namespace :api do
     resources :moods do
       collection do
         post 'select_mood'
       end
     end
+
+    
+    resources :journals, only: [:create, :index, :show]
   end
 
-
+  root 'home#index', as: 'homepage'  # This sets the root path and names it `homepage_path`
 
   # Catch-all route for React Router
   get '*path', to: 'homepage#index', constraints: ->(request) { request.format.html? }
