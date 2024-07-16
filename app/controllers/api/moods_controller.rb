@@ -3,7 +3,7 @@ module Api
       before_action :authenticate_user!
       skip_before_action :verify_authenticity_token
       before_action :set_mood_by_name, only: [:update]
-      before_action :set_mood, only: [:show]
+      before_action :set_mood, only: [:show, :destroy]
       before_action :authorize_user!, only: [:show]
 
       def index
@@ -13,8 +13,6 @@ module Api
 
       def show
         render json: @mood, status: :ok
-      rescue ActiveRecord::RecordNotFound
-        render json: { error: 'Mood not found' }, status: :not_found
       end
 
       def create
@@ -25,6 +23,7 @@ module Api
         else
           render json: @mood.errors, status: :unprocessable_entity
         end
+        @mood
       end
 
 
@@ -42,21 +41,19 @@ module Api
         head :no_content
       end
 
-  
-
       def select_mood
         @mood = current_user.moods.find_by(name: params[:name])
         if @mood.present?
-          redirect_to homepage_path, notice: 'Mood selected successfully.'
+          redirect_to root_path, notice: 'Mood selected successfully.'
         else
           redirect_to api_moods_path, alert: 'Invalid mood selected.'
         end
-        
       end
 
       private
         def set_mood
-            @mood = Mood.find(params[:id])
+          @mood = Mood.find_by(id: params[:id])
+          render json: { error: 'Mood not found' }, status: :not_found unless @mood
         end
 
         def authorize_user!
@@ -72,4 +69,4 @@ module Api
           params.require(:mood).permit(:name, :color, :hexcode)
         end
     end
-  end
+end

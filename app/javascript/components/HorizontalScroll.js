@@ -1,118 +1,123 @@
-import React, { useEffect, useState } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import React from 'react'
+import { useState } from "react";
+import { useUser } from '../pages/User.js'; 
 
-const imgs = [
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-  "images/no-image-placeholder.svg",
-];
+//standard colors and emotions everyone starts off with
+//users cannot add/remove/change the mood name, but they can change the color and hexcode
+const standard_moods = [
+    { name: 'Excited', color: 'Neon green', hexcode: '#39FF14', src: "images/emotion-excited.svg", id:"moodblock_excited"},
+    { name: 'Very Happy', color: 'Yellow', hexcode: '#FFFF00', src: "images/emotion-placeholder.svg", id:"moodblock_veryhappy" }, // Need to change to very happy
+    { name: 'Meh', color: 'Bright blue', hexcode: '#007FFF', src: "images/emotion-meh.svg", id:"moodblock_meh" },
+    { name: 'Tired', color: 'Black', hexcode: '#000000', src: "images/emotion-tired.svg", id:"moodblock_tired" },
+    { name: 'Content', color: 'Brown', hexcode: '#964B00', src: "images/emotion-placeholder.svg", id:"moodblock_content" },
+    { name: 'Angry', color: 'Red', hexcode: '#FF0000', src: "images/emotion-angry.svg", id:"moodblock_angry" },
+    { name: 'Happy', color: 'Lime green', hexcode: '#32CD32', src: "images/emotion-happy.svg", id:"moodblock_happy" },
+    { name: 'In love', color: 'Pink', hexcode: '#FFC0CB', src: "images/emotion-inlove.svg", id:"moodblock_inlove" },
+    { name: 'Unhappy', color: 'Navy blue', hexcode: '#000080', src: "images/emotion-sad.svg", id:"moodblock_unhappy" },
+    { name: 'Teary', color: 'Light purple', hexcode: '#E6E6FA', src: "images/emotion-placeholder.svg", id:"moodblock_teary" },
+    { name: 'Upset', color: 'Dark blue', hexcode: '#00008B', src: "images/emotion-upset.svg", id:"moodblock_upset" },
+    { name: 'Confused', color: 'Gray', hexcode: '#808080', src: "images/emotion-confused.svg", id:"moodblock_confused" },
+]
 
-const ONE_SECOND = 1000;
-const AUTO_DELAY = ONE_SECOND * 10;
-const DRAG_BUFFER = 50;
 
+// messages that spawn in the messages layer
+const messages = {
+    update: "Mood chosen is: ",
+    error: "Please choose a mood"
+  }
 
-export const SwipeCarousel = () => {
-  const [imgIndex, setImgIndex] = useState(0);
+export default function HorizontalScroll({checkedIn}) {
 
-  const dragX = useMotionValue(0);
+  //console.log(checkedIn)
 
-  useEffect(() => {
-    const intervalRef = setInterval(() => {
-      const x = dragX.get();
+  // captures the current mood of the user
+  const [mood, setMood] = useState(null);
+  const [msg, setMessage] = useState(messages.update);
+  const [getMood, setGetMood] = useState(!checkedIn); // set to true if not checked in yet
 
-      if (x === 0) {
-        setImgIndex((pv) => {
-          if (pv === imgs.length - 1) {
-            return 0;
-          }
-          return pv + 1;
-        });
-      }
-    }, AUTO_DELAY);
+  //To get user id => currentUser.id
+  //To check if user is guest => currentUser.guest = true or false
+  const { currentUser } = useUser();
+  
 
-    return () => clearInterval(intervalRef);
-  }, []);
+  //function to create a flower for a user
+  function createFlowerForUser(flowerData) {
+    // flowerData.user_id = userId;
+    fetch(`/api/flowers`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ flower: flowerData })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Flower created:', data);
+    })
+    .catch((error) => {
+      console.error('Error creating flower:', error);
+    });
+  }
 
-  const onDragEnd = () => {
-    const x = dragX.get();
-
-    if (x <= -DRAG_BUFFER && imgIndex < imgs.length - 1) {
-      setImgIndex((pv) => pv + 1);
-    } else if (x >= DRAG_BUFFER && imgIndex > 0) {
-      setImgIndex((pv) => pv - 1);
-    }
-  };
-
-  return (
-    <div className="relative overflow-hidden bg-neutral-950 py-8">
-      <motion.div
-        drag="x"
-        dragConstraints={{
-          left: 0,
-          right: 0,
-        }}
-        style={{
-          x: dragX,
-        }}
-        animate={{
-          translateX: `-${imgIndex * 100}%`,
-        }}
-        onDragEnd={onDragEnd}
-        className="flex cursor-grab items-center active:cursor-grabbing"
-      >
-        <Images imgIndex={imgIndex} />
-      </motion.div>
-
-      <Dots imgIndex={imgIndex} setImgIndex={setImgIndex} />
-    </div>
-  );
-};
-
-const Images = ({ imgIndex }) => {
   return (
     <>
-      {imgs.map((imgSrc, idx) => {
-        return (
-          <motion.div
-            key={idx}
-            style={{
-              backgroundImage: `url(${imgSrc})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-            animate={{
-              scale: imgIndex === idx ? 0.95 : 0.85,
-            }}
-            className="aspect-video w-screen shrink-0 rounded-xl bg-neutral-800 object-cover"
-          />
-        );
-      })}
+    {/* Message layer */}
+    <h1 className='text-lg font-sans-800 text-grey'>{msg}</h1>
+
+    {/* Mood carousel layer with submit button if user hasnt checked-in yet */}
+    {
+        getMood && <div className="relative border border-solid flex overflow-x-auto" id="moodcarousel">
+        {/* individually spawns the pre-defined emotions */}
+        {standard_moods.map((mood, idx) => {
+          return (
+            <button className="min-w-100 h-200 mr-4" id={mood.id}
+              key={idx}
+              style={{
+                backgroundImage: `url(${mood.src})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                //height: "max-h",
+                //width: "auto"
+              }}
+              onClick={() => {setMood(mood);
+                              setMessage(messages.update + mood.name)
+                              //console.log(mood);
+                              }}>
+              <label for={mood.id}>{mood.name}</label>
+            </button>
+          );
+        })}   
+      </div>
+    }
+
+    {/* Button layer */}  
+    { getMood && <button className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full p-4 w-48" 
+            onClick={() => {
+              setGetMood(false)
+              //console.log(checkedIn);
+              // post to end-api
+              createFlowerForUser({
+                  mood: mood.name, // changed from mood.name?.toLowerCase() to mood.name
+                  color: mood.color,
+                  user_id: currentUser.id,
+                  date_created: new Date().toISOString(),
+              })
+              // reload the page to see the new flower
+              //window.location.reload(false); // set to false if we want to reloud from the cache
+
+              // spawn a flower?
+            }}>
+      Submit
+    </button>}
+
+    { !getMood && <button className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full p-4 w-48" 
+          onClick={() => {
+                  // redirect them to activities page
+                  window.location.href="/activities";
+              }}>
+      To activities
+      </button>}
+    
     </>
-  );
-};
-
-const Dots = ({ imgIndex, setImgIndex }) => {
-  return (
-    <div className="mt-4 flex w-full justify-center gap-2">
-      {imgs.map((_, idx) => {
-        return (
-          <button
-            key={idx}
-            onClick={() => setImgIndex(idx)}
-            className={`h-3 w-3 rounded-full transition-colors ${
-              idx === imgIndex ? "bg-neutral-50" : "bg-neutral-500"
-            }`}
-          />
-        );
-      })}
-    </div>
-  );
-};
-
-
-export default SwipeCarousel;
+  )
+}

@@ -100,4 +100,5 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.api_url = 'https://ngswebapp-67fxypa3ea-as.a.run.app/'
 end

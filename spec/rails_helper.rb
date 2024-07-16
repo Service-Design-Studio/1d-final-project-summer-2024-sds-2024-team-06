@@ -1,4 +1,8 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+
+# simplecov_path = File.expand_path('../../config/.simplecov', __FILE__)
+# load simplecov_path if File.exist?(simplecov_path)
+require_relative 'simplecov_setup'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'

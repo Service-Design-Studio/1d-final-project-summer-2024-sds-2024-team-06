@@ -7,8 +7,7 @@ class UsersController < ApplicationController
     end
     
     def show
-      @user = User.find(params[:id])
-      render json: @user
+      render json: current_user
     end
   
     def create
@@ -27,13 +26,15 @@ class UsersController < ApplicationController
     end
 
     def current
-      render json: current_user.as_json(only: [:id, :username, :email, :guest])
+      if user_signed_in?
+        render json: current_user.as_json(only: [:id, :email, :guest])
+      end
     end
   
     private
   
     def user_params
-      params.require(:user).permit(:username, :user_id)
+      params.require(:user).permit(:email, :password, :password_confirmation, :dateLastLoggedIn)
     end
   end
 end

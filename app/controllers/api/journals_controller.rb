@@ -13,8 +13,6 @@ module Api
 
     def show
       render json: @journal, status: :ok
-    rescue ActiveRecord::RecordNotFound
-      render json: { error: 'Journal not found' }, status: :not_found
     end
 
     def create
@@ -25,12 +23,15 @@ module Api
       else
         render json: @journal.errors, status: :unprocessable_entity
       end
+      @journal
     end
 
     private
 
     def set_journal
       @journal = Journal.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: 'Journal not found' }, status: :not_found
     end
 
     def authorize_user!

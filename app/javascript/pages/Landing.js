@@ -16,8 +16,9 @@ export default function Landing() {
       <div className="row-span-2">
         {/*Menu Items*/}
         <h1 className='text-lg font-sans-900 text-grey font-bold'>stART</h1>
-        <h1 className='text-lg font-sans-800 text-grey'>New Journey</h1>
-        <a href="/daily-check-in"><h1 className='text-lg font-sans-800 text-grey'>Continue</h1></a>
+        {/*New Journey & continue work at log-in*/}
+        {/*<h1 className='text-lg font-sans-800 text-grey'>New Journey</h1>*/}
+        <a href="/check-in"><h1 className='text-lg font-sans-800 text-grey'>Continue to check-in</h1></a>
         <a href="https://www.nationalgallery.sg/start"><h1 className='text-lg font-sans-800 text-grey'>About stART</h1></a>
       </div>
       <div className="row-span-1"></div>

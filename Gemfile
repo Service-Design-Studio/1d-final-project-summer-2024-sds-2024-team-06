@@ -20,11 +20,11 @@ gem 'rails-controller-testing'
 
 gem "dotenv"
 
+gem "gon"
+
 group :development, :test do
   gem 'factory_bot_rails'
 end
-
-
 
 
 

@@ -24,4 +24,3 @@ RSpec.describe "daily_checkin/home.html.erb", type: :view do
 
   
 end
-

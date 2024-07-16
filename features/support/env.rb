@@ -3,11 +3,25 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
-require 'simplecov'
-SimpleCov.start
+
+# simplecov_path = File.expand_path('../../config/.simplecov', __FILE__)
+# load simplecov_path if File.exist?(simplecov_path)
+require_relative '../../spec/simplecov_setup'
+require 'capybara/cucumber'
+require 'selenium/webdriver'
+require 'warden'
+require 'devise'
+
+World(Warden::Test::Helpers)
+Warden.test_mode!
+After { Warden.test_reset! } #devise inherits from warden, putting this here enables login_as methods in steps file
+
+# Previous content of test helper now starts here
 
 require 'cucumber/rails'
 Capybara.default_driver = :selenium_chrome
+Capybara.server_port = 3000
+Capybara.app_host = 'http://127.0.0.1:3000'
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how
@@ -38,13 +52,13 @@ end
 # See the DatabaseCleaner documentation for details. Example:
 #
 #   Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
-#     # { :except => [:widgets] } may not do what you expect here
+#     # { except: [:widgets] } may not do what you expect here
 #     # as Cucumber::Rails::Database.javascript_strategy overrides
 #     # this setting.
 #     DatabaseCleaner.strategy = :truncation
 #   end
 #
-#   Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
+#   Before('not @no-txn', 'not @selenium', 'not @culerity', 'not @celerity', 'not @javascript') do
 #     DatabaseCleaner.strategy = :transaction
 #   end
 #

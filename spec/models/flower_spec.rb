@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Flower, type: :model do
   before do
     Mood.destroy_all
-    @user = User.create(email: "guest@example.com" , password: "password")
+    @user = User.create(email: "guest1234@example.com" , password: "password", id: 1234)
     mood = Mood.create!(name: "happy", color: "yellow", hexcode: "#0000", user: @user)
     flower = Flower.create!(color: mood.color, mood: mood.name, date_created: Date.new(2022, 7, 10), user: @user, created_at: "12/07/2024", updated_at: "12/07/2024", user_id: "1")
     if flower.persisted?

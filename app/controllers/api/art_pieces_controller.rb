@@ -1,5 +1,6 @@
 module Api
   class ArtPiecesController < ApplicationController
+    before_action :set_art_piece, only: [:show]
     # GET /api/art_pieces
     def index
       @art_pieces = ArtPiece.all
@@ -13,35 +14,12 @@ module Api
       render json: @art_piece
     end
 
-    # Other actions like create, update, destroy, etc. could be defined here if needed.
+    private
+
+    def set_art_piece
+      @art_piece = ArtPiece.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: 'ArtPiece not found' }, status: :not_found
+    end
   end
 end
-
-
-
-# class ArtPiecesController < ApplicationController
-#   def new
-#     @art_piece = ArtPiece.new
-#   end
-
-#   def create
-#     @art_piece = ArtPiece.new(art_piece_params)
-#     if @art_piece.save
-#       redirect_to @art_piece
-#     else
-#       render 'new'
-#     end
-#   end
-
-#   def show
-#     @art_piece = ArtPiece.find(params[:id])
-#   end
-
-#   private
-
-#   def art_piece_params
-#     params.require(:art_piece).permit(:artID, :captions, :artTitle, :image_url)
-#   end
-
-
-# end

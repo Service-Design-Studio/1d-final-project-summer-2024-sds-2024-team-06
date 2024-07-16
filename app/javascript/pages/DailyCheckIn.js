@@ -1,91 +1,59 @@
-import React, { useEffect } from 'react';
+import React from 'react'
+import { useState } from "react";
+
+import useFetch from '../api/useFetch'
+import mockUseFetch from '../components/mockUseFetch' // data to show flowers rendering
+import CarouselSwipe from '../components/CarouselSwipe'
+import HorizontalScroll from '../components/HorizontalScroll'
+import CalendarGrid from '../components/CalendarGrid'
 
 
-// import from components
-import SwipeCarousel from '../components/HorizontalScroll';
-import UpdateMoodForm from '../components/UpdateMoodForm';
+
+// To use dotted paper background: <div style={dottedPaper}></div>
+const greenLand = {
+  height: '100vh',
+  width: '100vw',
+  background: 'url("https://t3.ftcdn.net/jpg/01/89/65/62/360_F_189656244_Z8CvqnmXU50rO0vwTLSPF5y3aUn1Pszp.jpg") no-repeat center center fixed',
+  backgroundSize: 'cover',
+};
 
 
-const CheckIn = () => {
-  //fake flower data
-  const flowerData = {
-    mood: 'happy',
-    color: 'yellow',
-    date_created: new Date().toISOString(),
-  };
 
-  //standard colors and emotions everyone starts off with
-  //users cannot add/remove/change the mood name, but they can change the color and hexcode
-  const standard_moods = [
-    { name: 'Excited', color: 'Neon green', hexcode: '#39FF14' },
-    { name: 'Very happy', color: 'Yellow', hexcode: '#FFFF00' },
-    { name: 'Meh', color: 'Bright blue', hexcode: '#007FFF' },
-    { name: 'Tired', color: 'Black', hexcode: '#000000' },
-    { name: 'Content', color: 'Brown', hexcode: '#964B00' },
-    { name: 'Angry', color: 'Red', hexcode: '#FF0000' },
-    { name: 'Happy', color: 'Lime green', hexcode: '#32CD32' },
-    { name: 'In love', color: 'Pink', hexcode: '#FFC0CB' },
-    { name: 'Unhappy', color: 'Navy blue', hexcode: '#000080' },
-    { name: 'Teary', color: 'Light purple', hexcode: '#E6E6FA' },
-    { name: 'Upset', color: 'Dark blue', hexcode: '#00008B' },
-    { name: 'Confused', color: 'Gray', hexcode: '#808080' },
-  ]
-  
-  //fake user id
-  // const currentUserId = 1;
-
-  //function to create a flower for a user
-  function createFlowerForUser(flowerData) {
-    // flowerData.user_id = userId;
-    fetch(`/api/flowers`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ flower: flowerData })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Flower created:', data);
-    })
-    .catch((error) => {
-      console.error('Error creating flower:', error);
-    });
-  }
-  
-
-  //function to create a standard mood for a user
-  function createMoods(moodData) {
-    fetch(`/api/moods`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ mood: moodData })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Mood created:', data);
-    })
-    .catch((error) => {
-      console.error('Error creating mood:', error);
-    });
-  }
-
-  //function to lop through all standard moods to add them to a user
-  function addAllMoodsToCurrentUser(moods) {
-    moods.forEach(mood => {
-      createMoods(mood);
-    });
-  }
+export default function Checkin() {
+  const apiUrl = gon.api_url;
+  const {data: checkinData, error, isPending} = useFetch(`${apiUrl}/api/flowers`)
+  // const {data: checkinData, error, isPending} = mockUseFetch('http://127.0.0.1:3000/api/flowers')
+  //console.log(checkinData)
+  //const [checkedIn, setcheckedIn] = useState(checkinData.date_created === new Date().toISOString() ? false : true);
+  const checkedIn = false
 
   return (
     <>
-        <button onClick={() => createFlowerForUser(flowerData)}>Create Flower</button>
-        <button onClick={() => addAllMoodsToCurrentUser(standard_moods)}>Add All Moods to Current User</button>
-        <UpdateMoodForm />
+    {isPending && 
+    <div className="h-full w-full flex justify-center items-center">
+        <h1 className='h-full w-full'>Loading...</h1>
+    </div>}
+    {error && <div>{error}</div>} 
+    {checkinData && (
+          <div style={greenLand} className="grid grid-rows-8 no-scrollbar"> 
+            <div className="row-span-1" id="instructions">
+            {/*Instructions layer*/}
+              <h1 className='text-4xl font-bold'>Daily Check-in</h1>
+              <h1 className='text-lg font-sans-800 text-grey'>How would you describe your mood?</h1>
+            </div>
+            <div className="row-span-6">
+            {/*Flower field layer*/}
+              <CalendarGrid checkinData={checkinData} />
+            </div>
+            <div className="row-span-1">
+            {/*Mood carousel layer*/}
+              {/*<HorizontalScroll  CarouselSwipe/>*/}
+              <HorizontalScroll checkedIn={checkedIn}/>
+            </div>
+          </div>
+        )}
     </>
 
+    
   );
-}
-export default CheckIn;
+};
