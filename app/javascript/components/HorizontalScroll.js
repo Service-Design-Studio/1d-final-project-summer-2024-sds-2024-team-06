@@ -79,7 +79,7 @@ export default function HorizontalScroll({checkedIn}) {
                 //height: "max-h",
                 //width: "auto"
               }}
-              onClick={() => {setMood(mood);
+              onClick={() => {setMood(mood.name);
                               setMessage(messages.update + mood.name)
                               //console.log(mood);
                               }}>
@@ -97,7 +97,7 @@ export default function HorizontalScroll({checkedIn}) {
               //console.log(checkedIn);
               // post to end-api
               createFlowerForUser({
-                  mood: mood.name, // changed from mood.name?.toLowerCase() to mood.name
+                  mood: mood.name?.toLowerCase(), // changed from mood.name
                   color: mood.color,
                   user_id: currentUser.id,
                   date_created: new Date().toISOString(),

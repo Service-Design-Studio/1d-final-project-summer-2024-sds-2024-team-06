@@ -19,8 +19,8 @@ const greenLand = {
 
 export default function Moodtracker() {
   const apiUrl = gon.api_url;
-  const {data: checkinData, error, isPending} = useFetch(`${apiUrl}/api/flowers`)
-  // const {data: checkinData, error, isPending} = mockUseFetch('http://127.0.0.1:3000/api/flowers')
+  // const {data: checkinData, error, isPending} = useFetch('https://ngswebapp-67fxypa3ea-as.a.run.app/api/flowers')
+  const {data: checkinData, error, isPending} = mockUseFetch(`${apiUrl}/api/flowers`)
 
   return (
     <>

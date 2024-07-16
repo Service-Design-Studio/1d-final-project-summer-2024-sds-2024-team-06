@@ -42,7 +42,6 @@ RSpec.describe Api::FlowersController, type: :controller do
         get :show, params: { id: 'nonexistent_id' }
 
         expect(response).to have_http_status(:not_found)
-        puts response
         expect(JSON.parse(response.body)['error']).to eq('Flower not found')
       end
     end
