@@ -1,0 +1,2 @@
+module GoalJournalsHelper
+end

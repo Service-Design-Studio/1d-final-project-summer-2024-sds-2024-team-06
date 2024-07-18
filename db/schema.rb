@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_10_070857) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_18_101438) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -64,12 +64,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_070857) do
     t.index ["user_id"], name: "index_flowers_on_user_id"
   end
 
+  create_table "goal_journals", force: :cascade do |t|
+    t.string "journal_title"
+    t.text "journal_start"
+    t.text "journal_end"
+    t.text "journal_third"
+    t.date "date_created"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
   create_table "journals", force: :cascade do |t|
     t.text "journalentry"
     t.integer "user_id"
-    t.date "date"
+    t.date "date_created"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tip_title"
+    t.text "tip_body"
+    t.string "journal_title"
   end
 
   create_table "moods", force: :cascade do |t|

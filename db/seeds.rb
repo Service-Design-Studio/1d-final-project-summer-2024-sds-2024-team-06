@@ -44,28 +44,28 @@
 #   end
 # end
 
-User.create!(
+User.create!(id: 1,
   dateLastLoggedIn: Date.today,
   email: "test_user@example.com",
   password: "password", # Devise will handle the encryption
   password_confirmation: "password"
 )
 
-User.create!(
+User.create!( id: 2,
   dateLastLoggedIn: Date.today,
   email: "bob@example.com",
   password: "password", # Devise will handle the encryption
   password_confirmation: "password"
 )
 
-User.create!(
+User.create!( id: 3,
   dateLastLoggedIn: Date.today,
   email: "alice@example.com",
   password: "password", # Devise will handle the encryption
   password_confirmation: "password"
 )
 
-ArtPiece.create([
+ArtPiece.create!([
   {artID: 00001,
   artTitle: "The Face of Mediation",
   artist: "Abdul Ghani Hamid",
@@ -127,3 +127,29 @@ ArtPiece.create([
   audio:"https://www.youtube.com/watch?v=LQ3AC6CzlBA",
   captions: ""},
 ])
+
+
+
+# Create 3 Journal entries
+3.times do |i|
+  Journal.create!(
+    user_id: 2,
+    journal_title: "Journal Title #{i + 1}",
+    journalentry: "This is the content of journal entry #{i + 1}.",
+    tip_title: "Tip Title #{i + 1}",
+    tip_body: "This is the body of tip #{i + 1}.",
+    date_created: Date.today - i.days
+  )
+end
+
+# Create 3 GoalJournal entries
+3.times do |i|
+  GoalJournal.create!(
+    user_id: 2,
+    journal_title: "Goal Journal Title #{i + 1}",
+    journal_start: "This is the start of goal journal entry #{i + 1}.",
+    journal_end: "This is the end of goal journal entry #{i + 1}.",
+    journal_third: "This is the third part of goal journal entry #{i + 1}.",
+    date_created: Date.today - i.days
+  )
+end
