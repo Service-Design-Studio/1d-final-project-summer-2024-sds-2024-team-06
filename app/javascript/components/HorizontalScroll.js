@@ -79,7 +79,7 @@ export default function HorizontalScroll({checkedIn}) {
                 //height: "max-h",
                 //width: "auto"
               }}
-              onClick={() => {setMood(mood.name);
+              onClick={() => {setMood(mood);
                               setMessage(messages.update + mood.name)
                               //console.log(mood);
                               }}>
