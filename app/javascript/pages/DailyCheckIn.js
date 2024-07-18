@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import useFetch from '../api/useFetch'
 import mockUseFetch from '../components/mockUseFetch' // data to show flowers rendering
@@ -22,10 +22,21 @@ const greenLand = {
 export default function Checkin() {
   const apiUrl = gon.api_url;
   // const {data: checkinData, error, isPending} = useFetch('https://ngswebapp-67fxypa3ea-as.a.run.app/api/flowers')
-  const {data: checkinData, error, isPending} = mockUseFetch(`${apiUrl}/api/flowers`)
+  const {data: checkinData, error, isPending} = useFetch(`${apiUrl}/api/flowers`)
   //console.log(checkinData)
   //const [checkedIn, setcheckedIn] = useState(checkinData.date_created === new Date().toISOString() ? false : true);
   const checkedIn = false
+  const [currData, setCurrData] = useState(null);
+
+  useEffect(() => {
+    if (checkinData) {
+      setCurrData(checkinData);
+    }
+  }, [checkinData]);
+
+  const addedFlower = (flowerData) => {
+    setCurrData([...currData, flowerData]);
+  };
 
   return (
     <>
@@ -34,7 +45,7 @@ export default function Checkin() {
         <h1 className='h-full w-full'>Loading...</h1>
     </div>}
     {error && <div>{error}</div>} 
-    {checkinData && (
+    {currData && (
           <div style={greenLand} className="grid grid-rows-8 no-scrollbar"> 
             <div className="row-span-1" id="instructions">
             {/*Instructions layer*/}
@@ -43,12 +54,12 @@ export default function Checkin() {
             </div>
             <div className="row-span-6">
             {/*Flower field layer*/}
-              <CalendarGrid checkinData={checkinData} />
+              <CalendarGrid checkinData={currData} />
             </div>
             <div className="row-span-1">
             {/*Mood carousel layer*/}
               {/*<HorizontalScroll  CarouselSwipe/>*/}
-              <HorizontalScroll checkedIn={checkedIn}/>
+              <HorizontalScroll checkedIn={checkedIn} onAddFlower={addedFlower} />
             </div>
           </div>
         )}

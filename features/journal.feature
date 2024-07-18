@@ -46,7 +46,7 @@ Feature: Journal
     Scenario: Submit open-ended journal entry
         Given I have completed writing my open-ended journal entry
         When I click submit
-        Then a pop-up self-care tip will be displayed 
+        Then a pop-up self-care tip will be displayed
         And I will be redirected to journal entries history
 
     Scenario: Submit goal-setting journal entry

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import { useUser } from '../pages/User.js'; 
+import { PROPS_ATTR } from 'react_ujs';
 
 //standard colors and emotions everyone starts off with
 //users cannot add/remove/change the mood name, but they can change the color and hexcode
@@ -26,7 +27,7 @@ const messages = {
     error: "Please choose a mood"
   }
 
-export default function HorizontalScroll({checkedIn}) {
+export default function HorizontalScroll({checkedIn, onAddFlower}) {
 
   //console.log(checkedIn)
 
@@ -53,6 +54,7 @@ export default function HorizontalScroll({checkedIn}) {
     .then(response => response.json())
     .then(data => {
       console.log('Flower created:', data);
+      onAddFlower(data);
     })
     .catch((error) => {
       console.error('Error creating flower:', error);
