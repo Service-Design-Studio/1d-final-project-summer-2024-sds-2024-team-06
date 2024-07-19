@@ -33,4 +33,5 @@ const callGeminiAPI = async (prompt) => {
   }
 };
 
+callGeminiAPI("give me a random mental wellness tip")
 

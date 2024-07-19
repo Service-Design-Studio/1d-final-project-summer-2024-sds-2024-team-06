@@ -44,7 +44,7 @@ module Api
 
 
   def generated
-    data = params[:response] 
+    data = params[:prompt] 
 
     render json: { message: 'Data processed successfully', data: data }, status: :ok
   end
