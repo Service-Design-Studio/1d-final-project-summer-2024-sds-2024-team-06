@@ -42,10 +42,5 @@ module Api
       params.require(:journal).permit(:journalentry, :date)
     end
 
-
-  def generated
-    data = params[:prompt] 
-
-    render json: { message: 'Data processed successfully', data: data }, status: :ok
   end
 end
