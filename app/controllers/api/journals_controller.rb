@@ -41,5 +41,11 @@ module Api
     def journal_params
       params.require(:journal).permit(:journalentry, :date)
     end
+
+
+  def generated
+    data = params[:response] 
+
+    render json: { message: 'Data processed successfully', data: data }, status: :ok
   end
 end
