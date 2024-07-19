@@ -16,7 +16,7 @@ export default function Activities() {
       <h1 className='text-4xl font-bold'>Choose an activity</h1>
       <h1 className='rounded-md px-3 py-2 text-sm font-sans-700 text-grey'>Doodle activity</h1>
       <h1 className='rounded-md px-3 py-2 text-sm font-sans-700 text-grey'>Secret garden</h1>
-      <a href="/gallery-walk" class="rounded-md px-3 py-2 text-sm font-sans-700 text-grey hover:text-orange">Callery Walk</a>
+      <a href="/gallery-walk" class="rounded-md px-3 py-2 text-sm font-sans-700 text-grey hover:text-orange">Gallery Walk</a>
     </div>
   )
 }

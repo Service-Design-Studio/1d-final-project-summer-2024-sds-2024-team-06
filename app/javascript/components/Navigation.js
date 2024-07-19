@@ -54,7 +54,7 @@ const Navigation = () => { return(
           <div class="flex space-x-4">
           <SetActiveLink href="/mood-tracker">Mood Tracker</SetActiveLink>
             <SetActiveLink href="/activities">Activity</SetActiveLink>
-            <SetActiveLink href="#">Journal</SetActiveLink>
+            <SetActiveLink href="/journal">Journal</SetActiveLink>
             <SetActiveLink href="#">Profile</SetActiveLink>
           </div>
         </div>
@@ -66,7 +66,7 @@ const Navigation = () => { return(
   <div class="sm:hidden" id="mobile-menu">
     <div class="space-y-1 px-2 pb-3 pt-2">
       <a href="/" class="block rounded-md px-3 py-2 text-base font-sans-700 text-grey" aria-current="page">Activity</a>
-      <a href="#" class="block rounded-md px-3 py-2 text-base font-sans-700 text-grey hover:text-orange">Journal</a>
+      <a href="journal" class="block rounded-md px-3 py-2 text-base font-sans-700 text-grey hover:text-orange">Journal</a>
       <a href="#" class="block rounded-md px-3 py-2 text-base font-sans-700 text-grey hover:text-orange">Profile</a>
     </div>
   </div>

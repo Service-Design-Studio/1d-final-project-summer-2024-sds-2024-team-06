@@ -10,6 +10,9 @@ import Moodtracker from '../pages/MoodTracker';
 import Activities from '../pages/Activities';
 import GalleryWalk from '../pages/GalleryWalk';
 import GalleryWalkSession from '../pages/GalleryWalkSession';
+import Journal from '../pages/JournalEntryHistory';
+import JournalEntry from '../pages/JournalEntry';
+import JournalEntryForm from '../pages/JournalEntryForm';
 import UpdateMoodForm from './UpdateMoodForm';
 import { useUser } from '../pages/User';
 
@@ -110,6 +113,10 @@ const App = () => {
           <Route exact path="/activities" element={<Activities />}></Route>
           <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
           <Route exact path="/gallery-walk/:id" element={<GalleryWalkSession />}></Route>
+          <Route exact path="/journal" element={<Journal />}></Route>
+          <Route exact path="/journal/:id" element={<JournalEntry />}></Route>
+          <Route exact path="/journal/create" element={<JournalEntryForm />}></Route>
+
         </Routes>
         
         {/*<Toaster id=".toaster"/>*/}
