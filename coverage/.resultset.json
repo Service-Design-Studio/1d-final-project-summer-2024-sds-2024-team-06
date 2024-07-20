@@ -20,9 +20,9 @@
           1,
           1,
           1,
-          1,
-          1,
-          1,
+          0,
+          0,
+          0,
           null,
           1,
           1,
@@ -60,7 +60,7 @@
           1,
           null,
           1,
-          87,
+          39,
           null,
           null,
           null
@@ -81,8 +81,8 @@
           1,
           null,
           1,
-          36,
-          11,
+          13,
+          5,
           null,
           null,
           null
@@ -118,8 +118,8 @@
           null,
           null,
           1,
-          22,
-          22,
+          11,
+          11,
           null,
           null,
           null,
@@ -127,43 +127,6 @@
           null,
           1,
           0,
-          null,
-          null,
-          null
-        ]
-      },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/art_pieces_controller.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          1,
-          3,
-          3,
-          null,
-          null,
-          1,
-          null,
-          1,
-          3,
-          null,
-          0,
-          null,
-          null,
-          null
-        ]
-      },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/art_piece.rb": {
-        "lines": [
-          1,
           null,
           null,
           null
@@ -233,6 +196,37 @@
           null,
           null
         ]
+      },
+      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/art_pieces_controller.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
       },
       "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/goal_journals_controller.rb": {
         "lines": [
@@ -381,19 +375,10 @@
           0,
           null,
           0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
           null,
-          0,
-          0,
-          0,
-          0,
-          0,
+          null,
+          null,
+          null,
           null,
           0,
           0,
@@ -457,6 +442,16 @@
           0,
           0,
           0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/art_piece.rb": {
+        "lines": [
+          0,
+          null,
+          null,
           0
         ],
         "branches": {
@@ -545,7 +540,7 @@
         }
       }
     },
-    "timestamp": 1721472759
+    "timestamp": 1721483616
   },
   "RSpec": {
     "coverage": {

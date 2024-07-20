@@ -16,20 +16,20 @@
 #   Mood.create!(mood)
 # end
 
-# standard_moods = [
-#   { name: 'Excited', color: 'Neon green', hexcode: '#39FF14' },
-#   { name: 'Very happy', color: 'Yellow', hexcode: '#FFFF00' },
-#   { name: 'Meh', color: 'Bright blue', hexcode: '#007FFF' },
-#   { name: 'Tired', color: 'Black', hexcode: '#000000' },
-#   { name: 'Content', color: 'Brown', hexcode: '#964B00' },
-#   { name: 'Angry', color: 'Red', hexcode: '#FF0000' },
-#   { name: 'Happy', color: 'Lime green', hexcode: '#32CD32' },
-#   { name: 'In love', color: 'Pink', hexcode: '#FFC0CB' },
-#   { name: 'Unhappy', color: 'Navy blue', hexcode: '#000080' },
-#   { name: 'Teary', color: 'Light purple', hexcode: '#E6E6FA' },
-#   { name: 'Upset', color: 'Dark blue', hexcode: '#00008B' },
-#   { name: 'Confused', color: 'Gray', hexcode: '#808080' },
-# ]
+standard_moods = [
+  { name: 'Excited', color: 'Neon green', hexcode: '#39FF14' },
+  { name: 'Very happy', color: 'Yellow', hexcode: '#FFFF00' },
+  { name: 'Meh', color: 'Bright blue', hexcode: '#007FFF' },
+  { name: 'Tired', color: 'Black', hexcode: '#000000' },
+  { name: 'Content', color: 'Brown', hexcode: '#964B00' },
+  { name: 'Angry', color: 'Red', hexcode: '#FF0000' },
+  { name: 'Happy', color: 'Lime green', hexcode: '#32CD32' },
+  { name: 'In love', color: 'Pink', hexcode: '#FFC0CB' },
+  { name: 'Unhappy', color: 'Navy blue', hexcode: '#000080' },
+  { name: 'Teary', color: 'Light purple', hexcode: '#E6E6FA' },
+  { name: 'Upset', color: 'Dark blue', hexcode: '#00008B' },
+  { name: 'Confused', color: 'Gray', hexcode: '#808080' },
+]
 
 # standard_moods.each do |mood_attributes|
 #   Mood.find_or_create_by!(mood_attributes)
@@ -171,4 +171,36 @@ end
     journal_end: "This is the end of goal journal entry #{i + 1}.",
     journal_third: "This is the third part of goal journal entry #{i + 1}."
   )
+end
+
+standard_moods.each do |mood_attributes|
+  mood = user.moods.find_or_initialize_by(name: mood_attributes[:name])
+  if mood.new_record?
+    mood.hexcode = mood_attributes[:hexcode]
+    mood.color = mood_attributes[:color]
+    if mood.save
+      puts "Mood created: #{mood.name}"
+    else
+      puts "Failed to create mood: #{mood.errors.full_messages.join(", ")}"
+    end
+  end
+end
+
+def random_datetime
+  start_date = Time.new(2024, 1, 1)
+  end_date = Time.new(2024, 12, 31, 23, 59, 59)
+  random_time = rand(start_date.to_f..end_date.to_f)
+  Time.at(random_time)
+end
+
+flowers = [
+  {color: "Blue", mood: "Sad", created_at: random_datetime()},
+  {color: "Red", mood: "Happy", created_at: random_datetime()},
+  {color: "Yellow", mood: "Excited", created_at: random_datetime()},
+  {color: "Green", mood: "Happy", created_at: random_datetime()},
+  {color: "Purple", mood: "Sad", created_at: random_datetime()},
+]
+
+flowers.each do |flower_attributes|
+  user.flowers.find_or_create_by!(flower_attributes)
 end

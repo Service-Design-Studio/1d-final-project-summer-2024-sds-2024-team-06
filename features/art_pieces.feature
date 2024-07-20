@@ -4,7 +4,7 @@ Feature: Gallery Walk
   So that I can practice emotional well-being and manage my mental state better
 
   Background:
-    Given I am on the root page
+    Given I have logged in
     Then the webpage should be displayed
 
   Scenario: Participant begins Gallery Walk activity

@@ -9,7 +9,7 @@ Feature: Daily Check-in
     Then I should be redirected to the log in page
 
   Scenario: User is logged in and visits landing page
-    Given I am logged in
+    Given I have logged in
     When I visit the landing page
     Then the webpage should be displayed
 
@@ -20,8 +20,8 @@ Feature: Daily Check-in
 
   Scenario: Mood Selection on check-in Page
     Given I am logged in on the check-in page
-    When I click on 'sad' mood block
-    Then I should see a flower with sad colour
+    When I click on 'Excited' mood block
+    Then I should see the mood chosen to be Excited
 
   Scenario: Correct number of flowers displayed
     Given I am logged into an account with flowers
