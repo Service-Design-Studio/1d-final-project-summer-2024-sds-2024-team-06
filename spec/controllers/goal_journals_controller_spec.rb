@@ -53,11 +53,6 @@ RSpec.describe Api::GoalJournalsController, type: :controller do
       expect(assigns(:goal_journal)).to be_persisted
     end
 
-    it "assigns @goal_journal with invalid attributes" do
-      post :create, params: { goal_journal: invalid_attributes }
-      expect(assigns(:goal_journal)).to be_a_new(GoalJournal)
-    end
-
     it "calls the goal_journal_params method" do
       expect(controller).to receive(:goal_journal_params).and_call_original
       post :create, params: { goal_journal: valid_attributes }

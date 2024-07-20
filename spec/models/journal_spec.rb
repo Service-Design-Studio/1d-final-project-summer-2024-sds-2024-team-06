@@ -6,7 +6,14 @@ RSpec.describe Journal, type: :model do
 
   it "is valid with valid attributes" do
     journal = Journal.new(journal_title: "Another Journal", journalentry: "Another entry.", tip_title: "Another Tip", tip_body: "Another Tip Body", user: user)
+    journal.save
     expect(journal).to be_valid
+  end
+
+  it "sets the correct date when created" do
+    journal = Journal.new(journal_title: "Another Journal", journalentry: "Another entry.", tip_title: "Another Tip", tip_body: "Another Tip Body", user: user)
+    journal.save
+    expect(journal.date_created).to eq(journal.created_at.to_date)
   end
 
   it "is not valid without a journal_title" do

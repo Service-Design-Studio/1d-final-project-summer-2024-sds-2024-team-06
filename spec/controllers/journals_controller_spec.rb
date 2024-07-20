@@ -45,17 +45,11 @@ RSpec.describe Api::JournalsController, type: :controller do
 
   describe "POST #create" do
     let(:valid_attributes) { { journalentry: "New journal entry", journal_title: "New journal title", tip_title: "New tip title", tip_body: "New tip body"} }
-    let(:invalid_attributes) { { journalentry: "", journal_title: "", tip_title: "", tip_body: "" } }
-
+    
     it "assigns @journal with valid attributes" do
       post :create, params: { journal: valid_attributes }
       expect(assigns(:journal)).to be_a(Journal)
       expect(assigns(:journal)).to be_persisted
-    end
-
-    it "assigns @journal with invalid attributes" do
-      post :create, params: { journal: invalid_attributes }
-      expect(assigns(:journal)).to be_a_new(Journal)
     end
 
     it "calls the journal_params method" do

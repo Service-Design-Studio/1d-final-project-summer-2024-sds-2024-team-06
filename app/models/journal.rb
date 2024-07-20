@@ -6,11 +6,11 @@ class Journal < ApplicationRecord
   validates :tip_title, presence: true
   validates :tip_body, presence: true
 
-  before_create :set_date_created
+  after_create :set_date_created
 
   private
 
   def set_date_created
-      self.date_created = self.created_at.to_date
+    update_columns(date_created: created_at.to_date) if created_at.present?
   end
 end
