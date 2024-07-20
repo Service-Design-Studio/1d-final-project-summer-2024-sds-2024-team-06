@@ -23,6 +23,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@types/babel__core": "^7.20.5",
     "@types/webpack": "^5.28.5",
+    "ajv": "^8.17.1",
     "axios": "^1.7.2",
     "babel-loader": "^8.3.0",
     "bootstrap": "^5.3.3",
