@@ -32,14 +32,14 @@ const ExpandableButton = () => {
             <button
               className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
-              onClick={() => handleNavigation('/create/open')}
+              onClick={() => handleNavigation('/journal/open-ended')}
             >
               open ended
             </button>
             <button
               className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
-              onClick={() => handleNavigation('/create/goal')}
+              onClick={() => handleNavigation('/journal/goal-setting')}
             >
               goal setting
             </button>
