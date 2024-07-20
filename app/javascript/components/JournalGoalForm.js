@@ -63,13 +63,13 @@ export default function JournalGoalForm() {
         <div>&nbsp;</div>
         <div>&nbsp;</div>
             <div className="grid grid-cols-5">
-                <div className='col-span-1'></div>
+                <div className='col-span-1' onClick={()=> hidePopup()}></div>
                 {/*Title*/}
                 <div className='col-span-3'>
                         <div className="flex justify-between">
                             <span class="font-sans-900 font-bold">Goal-setting Journal Entry</span>
-                            <span><button id="close" class="text-5xl text-[#2F4858] border-none bg-transparent hover:text-[#1F2F3A] focus:outline-none"
-                                          onClick={()=> showPopup()}>&times;</button></span>
+                            <button id="close" class="text-5xl text-[#2F4858] border-none bg-transparent hover:text-[#1F2F3A] focus:outline-none"
+                                    onClick={()=> showPopup()}>&times;</button>
                         </div>
                     <div>&nbsp;</div>
                     {/*Main journal entry space*/}
@@ -98,17 +98,13 @@ export default function JournalGoalForm() {
                         </div>
                     </div>
                 </div>
-                <div className='col-span-1'></div>
+                <div className='col-span-1' onClick={()=> hidePopup()}></div>
             </div>
         </div>
 
         {/*Pop-up on exit*/}
         <div id="popupOnExit" className='hidden opacity-0 bg-[#FFF8EA] shadow-xl rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 p-4'>
-          <div className="flex justify-between">
-              <span class="font-sans-900 font-bold">Leaving would not save any changes.</span>
-              {/* <button id="close" class="text-2xl text-[#2F4858] border-none bg-transparent hover:text-[#1F2F3A] focus:outline-none"
-                                          >&times;</button> */}
-          </div>
+          <span class="font-sans-900 font-bold">Leaving would not save any changes.</span>
           <div>&nbsp;</div>
           <div className="flex justify-between">
             <button id="home" className="bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
