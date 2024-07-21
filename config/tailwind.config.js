@@ -62,6 +62,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["brevia"],
+        sriracha: ["sriracha"]
         //sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
       },
       keyframes: {
