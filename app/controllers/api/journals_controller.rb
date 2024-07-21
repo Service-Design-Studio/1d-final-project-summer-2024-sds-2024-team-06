@@ -41,5 +41,6 @@ module Api
     def journal_params
       params.require(:journal).permit(:journalentry, :date)
     end
+
   end
 end
