@@ -96,12 +96,11 @@ export default function HorizontalScroll({checkedIn, onAddFlower}) {
     { getMood && <button className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full p-4 w-48" 
             onClick={() => {
               setGetMood(false)
-              //console.log(checkedIn);
               // post to end-api
               createFlowerForUser({
                   mood: mood.name?.toLowerCase(), // changed from mood.name
                   color: mood.color,
-                  user_id: currentUser.id,
+                  //user_id: currentUser.id,
                   date_created: new Date().toISOString(),
               })
               // reload the page to see the new flower

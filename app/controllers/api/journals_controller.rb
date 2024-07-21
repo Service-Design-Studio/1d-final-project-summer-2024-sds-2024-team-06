@@ -39,7 +39,10 @@ module Api
     end
 
     def journal_params
-      params.require(:journal).permit(:journalentry, :date)
+      params.require(:journal).permit(:journal_title, :journalentry, :tip_title, :tip_body, :date_created)
+
+
+
     end
 
   end

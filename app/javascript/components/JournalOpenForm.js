@@ -17,17 +17,16 @@ function get_date(){
 // function to create a goal journal entry for a user
 function createJournalForUser(journalEntry) {
   console.log(journalEntry)
-  fetch(`/api/journal`, {
+  fetch(`/api/journals`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ Journal: journalEntry })
+    body: JSON.stringify({ journal: journalEntry })
   })
   .then(response => response.json())
   .then(data => {
     console.log('Journal created:', data);
-    onAddFlower(data);
   })
   .catch((error) => {
     console.error('Error in submiting journal entry:', error);
@@ -115,7 +114,7 @@ export default function JournalOpenForm() {
                                             onClick={() =>{
                                               // post to end-api
                                               createJournalForUser({
-                                                user_id: currentUser.id,
+                                                //user_id: currentUser.id,
                                                 journal_title: title,
                                                 journalentry: journalEntry,
                                                 tip_title: '',
@@ -126,6 +125,8 @@ export default function JournalOpenForm() {
                                               // go to the preview page
                                               //window.location.href="/journal"
                                             }}>Submit</button>
+
+                                      <p>{title+journalEntry} </p>
                                 </div>
                             </div>
                         {/*Prompt space*/}
@@ -133,7 +134,7 @@ export default function JournalOpenForm() {
                                     <label for="prompt" className="text-lg md:text-2xl font-sriracha font-bold">Prompt</label>
                                     <div>&nbsp;</div>
                                     <div className='flex flex-col flex-grow justify-between'>
-                                        <div id="prompt" className="text-sm md:text-base border border-black rounded-lg p-4 h-80">{value}</div>
+                                        <div id="prompt" className="text-sm md:text-base border border-black rounded-lg p-4 h-80">{tipBody}</div>
                                         <div>&nbsp;</div>
                                         <div className="flex justify-center">
                                         <button className="text-base md:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4">Guide Me</button>

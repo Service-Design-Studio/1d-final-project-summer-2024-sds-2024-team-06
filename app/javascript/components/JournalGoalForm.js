@@ -6,18 +6,16 @@ import Navigation from "../components/Navigation";
 
 // function to create a goal journal entry for a user
 function createGoalJournalForUser(journalEntry) {
-  console.log(journalEntry)
-  fetch(`/api/goal_journal`, {
+  fetch(`/api/goal_journals`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ goalJournal: journalEntry })
+    body: JSON.stringify({ goal_journal: journalEntry })
   })
   .then(response => response.json())
   .then(data => {
     console.log('Journal created:', data);
-    onAddFlower(data);
   })
   .catch((error) => {
     console.error('Error in submiting journal entry:', error);
@@ -111,7 +109,7 @@ export default function JournalGoalForm() {
                                     onClick={() =>{
                                       // post to end-api
                                       createGoalJournalForUser({
-                                        user_id: currentUser.id,
+                                        //user_id: currentUser.id,
                                         journal_title: title,
                                         journal_start: start,
                                         journal_end: stop,

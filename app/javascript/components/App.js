@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Toaster } from './sonner';
-import {callGeminiAPI} from '../api/geminiClient'
+//import {callGeminiAPI} from '../api/geminiClient'
 
 
 // import from pages
@@ -16,17 +16,6 @@ import JournalEntry from '../pages/JournalEntry';
 import JournalGoalForm from './JournalGoalForm';
 import JournalOpenForm from './JournalOpenForm';
 
-
-
-// To use dotted paper background: <div style={dottedPaper}></div>
-
-
-const dottedPaper = {
-  height: '100vh',
-  width: '100vw',
-  background: 'url(/images/background-dottedpaper.svg) no-repeat center center fixed',
-  backgroundSize: 'cover',
-};
 
 // Routing
 const App = () => {
