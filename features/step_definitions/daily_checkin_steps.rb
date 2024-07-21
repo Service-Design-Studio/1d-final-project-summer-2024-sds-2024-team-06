@@ -1,8 +1,8 @@
 
 
 Given("I am on a new browser") do
-  logout(:user) # Ensure any user session is ended
-  Capybara.reset_sessions! # Reset browser session
+  logout(:user)
+  Capybara.reset_sessions! 
 end
 
 When("I visit the landing page") do
@@ -82,7 +82,6 @@ end
 
 
 After do
-  # Clean up any created users to avoid test pollution
   User.delete_all
 end
 

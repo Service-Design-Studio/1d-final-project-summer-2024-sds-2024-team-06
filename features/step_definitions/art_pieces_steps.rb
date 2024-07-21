@@ -3,28 +3,17 @@
 
 
 Given('participant chosen to partake in the Gallery Walk') do
-  visit '/gallery-walk' ##visit is a method that instructs the testing framework to
-  #simulate a browser visit to that location
+  visit '/gallery-walk'
 end
 
 When('I choose a picture from the carousel') do
-  # click_on 'Picture' #If "Picture" is a link or button in your application's UI
-  # binding.pry
-  # click_on 'gallery-picture'
-  # first('a[href="/gallery-walk/1"]').click
   visit '/gallery-walk/2'
-  # (e.g., a thumbnail of a picture in a carousel), Capybara will simulate clicking on that link or button.
-  #check if page is on /gallery-walk/{pic_num}
 end
 
 Then('a mp3 audio player and text box will be displayed alongside picture') do
-  expect(page).to have_selector('#audio-player') # Assuming there's a CSS selector for the audio player
-  expect(page).to have_selector('#text-box') # Assuming there's a CSS selector for the text box
-  expect(page).to have_selector('#picture') # Assuming the other pictures are hidden
-  #expect() set up expectation that something should be true
-  #page is a special object provided by capybara, current page being tested
-  #.to is an rspec matcher
-  #have_XXX is a method
+  expect(page).to have_selector('#audio-player')
+  expect(page).to have_selector('#text-box')
+  expect(page).to have_selector('#picture')
 end
 
 ##Scenario 2: During the Activity, play voiceover to start
@@ -34,14 +23,12 @@ Given('I want to begin listening to voiceover') do
 end
 
 When('I click the play button') do
-  # binding.pry
-  click_on 'play' # Assuming 'Play' is the text or identifier for the play button
-  # find_button('play').click
+  click_on 'play'
 end
 
 Then('audio will play') do
-  expect(page).to have_selector('#audio-player') # Assuming there's an audio player element
-  expect(page).to have_selector('#audio-playing') # Assuming the audio player indicates that it's playing
+  expect(page).to have_selector('#audio-player')
+  expect(page).to have_selector('#audio-playing')
 end
 
 ##Scenario 3: During the Activity, write text
@@ -51,11 +38,11 @@ Given('I am listening to the voice-over') do
 end
 
 When('I want to express my emotions in writing') do
-  fill_in 'Write down your thoughts...', with: 'I feel excited' # Assuming 'Emotion' is the name or placeholder of the text input field
+  fill_in 'Write down your thoughts...', with: 'I feel excited'
 end
 
 Then('text will be shown in the text box as accordance to user input') do
-  expect(page).to have_field('Write down your thoughts...', with: 'I feel excited') # Assuming 'Emotion' is the name or placeholder of the text input field
+  expect(page).to have_field('Write down your thoughts...', with: 'I feel excited')
 end
 
 ##Scenario 4: User has completed the Gallery Walk Activity
@@ -65,13 +52,10 @@ Given('User is done with the gallery walk') do
 end
 
 When('they click the end activity button') do
-  click_on 'end-activity' # Assuming 'End Activity' is the text or identifier for the end activity button
+  click_on 'end-activity'
 end
 
 Then('the journal entry is automatically saved to their journal tab, browser redirect to journal') do
-  # expect(page).to have_text('Journal entry saved') # Assuming there's a confirmation message indicating successful saving
-  # expect(page).to have_selector('section[aria-label="Notifications alt+T"]', visible: true)
-  # expect(page).to have_current_path('/gallery-walk') # Assuming `/journal` is the path to the journal page
 end
 
 ##Scenario 5: Viewing the list of art gallery
@@ -93,10 +77,3 @@ Then('I should see a list of art pieces') do
   #   expect(page).to have_selector("img[src='#{art_piece.imageURL}']")
   end
 end
-
-
-#  Scenario: User has completed the Gallery Walk activity
-# Given User is done with the gallery walk
-# When they click the end activity button
-# Then the journal entry is automatically saved to their journal tab, browser redirect to journal
-## deleted above for now
