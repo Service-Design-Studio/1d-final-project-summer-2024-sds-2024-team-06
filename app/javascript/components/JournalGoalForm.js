@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { useUser } from '../pages/User.js'; 
+//import { useUser } from '../pages/User.js'; 
 
 import Navigation from "../components/Navigation";
 
@@ -61,7 +61,7 @@ export default function JournalGoalForm() {
     const [start, setStart] = useState("");
     const [stop, setStop] = useState("");
     const [continueUser, setContinueUser] = useState("");
-    const { currentUser } = useUser();
+    //const { currentUser } = useUser();
 
     return (
     <div className="flex flex-col h-screen">

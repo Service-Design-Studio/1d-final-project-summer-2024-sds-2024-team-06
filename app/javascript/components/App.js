@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Toaster } from './sonner';
-//import {callGeminiAPI} from '../api/geminiClient'
 
 
 // import from pages

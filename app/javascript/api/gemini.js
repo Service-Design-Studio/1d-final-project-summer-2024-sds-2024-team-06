@@ -30,6 +30,7 @@ async function generateTip(input_text) {
     // Generate content
     let result = await model.generateContent(input_text, generationConfig);
     console.log(result.response.text());
+    return result.response.text();
 
   } catch (error) {
     console.error('Error generating content:', error);
@@ -66,6 +67,8 @@ async function guideMe(input_text) {
       // Generate content
       let result = await model.generateContent(input_text, generationConfig);
       console.log(result.response.text());
+      return result.response.text();
+      //return JSON.parse(result.response)
   
     } catch (error) {
       console.error('Error generating content:', error);
@@ -73,7 +76,13 @@ async function guideMe(input_text) {
   }
   
 
+// Export both functions
+module.exports = {
+    generateTip,
+    guideMe,
+  };
 
-  // Call the function
+
+// Call the function
 //generateTip("I have done my homework today!");
 //guideMe("i went to school today")

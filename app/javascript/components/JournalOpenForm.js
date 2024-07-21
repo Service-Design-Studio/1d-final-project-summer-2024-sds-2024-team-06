@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { useUser } from '../pages/User.js'; 
+//import { useUser } from '../pages/User.js'; 
+import { guideMe } from '../api/gemini.js'
+//import {callGeminiAPI} from '../api/geminiClient' 
 
 import Navigation from "../components/Navigation";
 
@@ -72,7 +74,7 @@ export default function JournalOpenForm() {
     const [journalEntry, setJournalEntry] = useState("");
     //const [tipTitle, setTipTitle] = useState("");
     const [tipBody, setTipBody] = useState("");
-    const { currentUser } = useUser();
+    //const { currentUser } = useUser();
 
     return (
     <div className="flex flex-col h-screen">
@@ -126,7 +128,7 @@ export default function JournalOpenForm() {
                                               //window.location.href="/journal"
                                             }}>Submit</button>
 
-                                      <p>{title+journalEntry} </p>
+
                                 </div>
                             </div>
                         {/*Prompt space*/}
@@ -137,7 +139,12 @@ export default function JournalOpenForm() {
                                         <div id="prompt" className="text-sm md:text-base border border-black rounded-lg p-4 h-80">{tipBody}</div>
                                         <div>&nbsp;</div>
                                         <div className="flex justify-center">
-                                        <button className="text-base md:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4">Guide Me</button>
+                                        <button className="text-base md:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
+                                                onClick={async function generatePrompt() {
+                                                  const generatedGuide = await guideMe(journalEntry);
+                                                  console.log(generatedGuide);
+                                                  setTipBody(generatedGuide);
+                                                }}>Guide Me</button>
                                         </div>
                                     </div>
                             </div>
