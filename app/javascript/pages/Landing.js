@@ -11,18 +11,10 @@ const NGSLanding = {
 
 export default function Landing() {
   return (
-    <div style={NGSLanding} class="grid grid-rows-4 no-scrollbar">
-      <div className="row-span-1"></div>
-      <div className="row-span-2">
-        {/*Menu Items*/}
-        <h1 className='text-lg font-sans-900 text-grey font-bold'>stART</h1>
-        {/*New Journey & continue work at log-in*/}
-        {/*<h1 className='text-lg font-sans-800 text-grey'>New Journey</h1>*/}
-        <a href="/check-in"><h1 className='text-lg font-sans-800 text-grey'>Continue to check-in</h1></a>
-        <a href="https://www.nationalgallery.sg/start"><h1 className='text-lg font-sans-800 text-grey'>About stART</h1></a>
-      </div>
-      <div className="row-span-1"></div>
-      
+    <div style={NGSLanding} class="flex justify-center no-scrollbar"
+        onClick={() => {window.location.href="/check-in"}}>
+      {/*Continue button*/}
+      <button id="continue" className="text-sm md:text-base fixed bottom-2 rounded-full bg-white hover:bg-gray-200 text-black py-2 px-4">Click anywhere to continue</button>
     </div>
   )
 }
