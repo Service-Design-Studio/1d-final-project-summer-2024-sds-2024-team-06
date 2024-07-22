@@ -17,7 +17,7 @@ function get_date(){
 }
 
 // function to create a goal journal entry for a user
-function createJournalForUser(journalEntry) {
+async function createJournalForUser(journalEntry) {
   console.log(journalEntry)
   fetch(`/api/journals`, {
     method: 'POST',
@@ -29,6 +29,10 @@ function createJournalForUser(journalEntry) {
   .then(response => response.json())
   .then(data => {
     console.log('Journal created:', data);
+    console.log(data.journal_title);
+    console.log(data.id);
+    window.location.href=`/journals/${data.id}?type=open/goal`
+    //return data.id;
   })
   .catch((error) => {
     console.error('Error in submiting journal entry:', error);
@@ -119,7 +123,7 @@ export default function JournalOpenForm() {
                                               // llm to generate a tip with tip title
                                               const generatedTip = await generateTip(journalEntry);
                                               // post to end-api
-                                              createJournalForUser({
+                                              let data_id = await createJournalForUser({
                                                 //user_id: currentUser.id,
                                                 journal_title: title,
                                                 journalentry: journalEntry,
@@ -127,8 +131,10 @@ export default function JournalOpenForm() {
                                                 tip_body: generatedTip.description,
                                                 date_created: new Date().toISOString(),
                                               });
+                                              //const data_id = data.id
+                                              //data_id.then((data_id) => {console.log(data_id)})
                                               // go to the preview page
-                                              //window.location.href="/journal"
+                                              //window.location.href="/journals/{id}?type=open/goal"
                                             }}>Submit</button>
 
 

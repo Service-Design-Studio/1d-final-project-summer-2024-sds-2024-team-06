@@ -30,10 +30,6 @@ async function generateTip(input_text) {
     // Generate content
     let result = await model.generateContent(input_text, generationConfig);
     result = result.response.text().replace("```json\n", "").replace("\n```", "");
-    //console.log(result);
-    //console.log(typeof result)
-    //result = JSON.parse(result)
-    //console.log(typeof result)
     return JSON.parse(result);
 
   } catch (error) { 
