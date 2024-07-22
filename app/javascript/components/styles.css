@@ -1,0 +1,7 @@
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Change the number to the number of lines you want to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
