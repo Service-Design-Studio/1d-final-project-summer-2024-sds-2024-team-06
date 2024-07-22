@@ -18,7 +18,7 @@ const Journal = ({ entries }) => {
     <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', position: 'relative', overflowY: 'auto', height: '100vh' }}>
       {/* Container for the ExpandableButton */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
-        <span className="text-3xl text-left font-bold mb-10">The goal I am committed to practicing...</span>
+        <span className="text-5xl text-left font-bold mb-10">The goal I am committed to practicing...</span>
         <ExpandableButton />
       </div>
       {/* Content below the button */}
@@ -28,8 +28,8 @@ const Journal = ({ entries }) => {
             <div style={{ marginBottom: '16px', width: '100%' }}>
               <PinnedGoal data={mostRecentGoalEntry} className="h-32" />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '16px' }}>
-              <span className="text-3xl text-left font-bold mb-10">My past journals</span>
+            <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '16px', width: '100%' }}>
+              <span className="text-5xl text-left font-bold mb-10">My past journals</span>
             </div>
             <div style={{ width: '100%' }}>
               <JournalCardGrid data={entries} />
