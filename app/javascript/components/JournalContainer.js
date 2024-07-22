@@ -28,7 +28,9 @@ const Journal = ({ entries }) => {
             <div style={{ marginBottom: '16px', width: '100%' }}>
               <PinnedGoal data={mostRecentGoalEntry} className="h-32" />
             </div>
-            <span className="text-3xl text-left font-bold mb-10" style={{ display: 'flex', justifyContent: 'flex-start'}}>My past journals</span>
+            <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '16px' }}>
+              <span className="text-3xl text-left font-bold mb-10">My past journals</span>
+            </div>
             <div style={{ width: '100%' }}>
               <JournalCardGrid data={entries} />
             </div>
