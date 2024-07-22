@@ -53,6 +53,7 @@ const FlowerImage = ({ colorName }) => {
     <div>
       <div style={containerStyle}>
         <img
+          className='flower-image'
           src={baseImageUrl}
           alt="Flower"
           style={flowerImageStyle}

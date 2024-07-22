@@ -14,8 +14,6 @@ import Journal from '../pages/JournalEntryHistory';
 import JournalGoalForm from './JournalGoalForm';
 import JournalOpenForm from './JournalOpenForm';
 import JournalDetail from '../pages/JournalDetail';
-import JournalGoalForm from './JournalGoalForm';
-import JournalOpenForm from './JournalOpenForm';
 import { useUser } from '../pages/User';
 
 

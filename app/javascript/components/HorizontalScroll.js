@@ -64,7 +64,7 @@ export default function HorizontalScroll({checkedIn, onAddFlower}) {
   return (
     <>
     {/* Message layer */}
-    <h1 className='text-lg font-sans-800 text-grey'>{msg}</h1>
+    <h1 id="mood-chosen" className='text-lg font-sans-800 text-grey'>{msg}</h1>
 
     {/* Mood carousel layer with submit button if user hasnt checked-in yet */}
     {
@@ -72,7 +72,7 @@ export default function HorizontalScroll({checkedIn, onAddFlower}) {
         {/* individually spawns the pre-defined emotions */}
         {standard_moods.map((mood, idx) => {
           return (
-            <button className="min-w-100 h-200 mr-4" id={mood.id}
+            <button className="min-w-100 h-200 mr-4" id={mood.name}
               key={idx}
               style={{
                 backgroundImage: `url(${mood.src})`,
@@ -85,7 +85,7 @@ export default function HorizontalScroll({checkedIn, onAddFlower}) {
                               setMessage(messages.update + mood.name)
                               //console.log(mood);
                               }}>
-              <label for={mood.id}>{mood.name}</label>
+              <label for={mood.name}>{mood.name}</label>
             </button>
           );
         })}   

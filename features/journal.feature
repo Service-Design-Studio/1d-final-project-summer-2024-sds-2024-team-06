@@ -3,8 +3,12 @@ Feature: Journal
     I want to externalise my emotions and have a way to reflect upon my mental state
     so that I may learn to reflect on my emotions and control them better
 
+    Background:
+        Given I have logged in
+        Then the webpage should be displayed
+
     Scenario: Visit Journal Page
-        Given I am logged in
+        Given I am on the activities page
         When I click the navbar journal button
         Then I should be redirected to journal splashscreen
 

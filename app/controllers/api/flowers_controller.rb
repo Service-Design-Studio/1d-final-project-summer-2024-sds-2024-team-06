@@ -11,7 +11,6 @@ module Api
       end
 
     def show
-      # @flower = Flower.find_by(id: params[:id])
       render json: @flower, status: :ok
     end
 

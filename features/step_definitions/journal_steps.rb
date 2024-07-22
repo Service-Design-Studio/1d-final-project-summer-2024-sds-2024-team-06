@@ -1,12 +1,17 @@
 # journal_steps.rb
 
 ##
+
+Given("I am on the activities page") do
+  visit '/activities'
+end
+
 When('I click the navbar journal button') do
-  find('.navbar-journal-button').click
+  find('a[href="/journal"]', text: 'Journal').click
 end
 
 Then('I should be redirected to journal splashscreen') do
-  expect(page).to have_current_path('/journal/splashscreen')
+  expect(page).to have_current_path('/journal')
 end
 
 ##
