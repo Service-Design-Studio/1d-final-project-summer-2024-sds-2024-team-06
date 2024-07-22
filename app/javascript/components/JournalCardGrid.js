@@ -8,10 +8,10 @@ const JournalCardGrid = ({ data }) => {
         console.log(item),
 
         <JournalEntryCard
-          key={item.id}
-          tag={item.source || 'Goal'}  // Default tag value if source is not provided
+          id={item.id}
+          tag={item.source || 'open'}  // Default tag value if source is not provided
           title={item.journal_title}
-          body={item.journal_start}  // Adjust as needed
+          body={item.journal_start || item.journalentry}  // Adjust as needed
           date={item.date_created}
           tipTitle={item.tip_title}
           tipBody={item.tip_body}

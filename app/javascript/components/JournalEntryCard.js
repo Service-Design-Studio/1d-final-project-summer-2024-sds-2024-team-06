@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Link } from "react-router-dom";
 
-const JournalEntryCard = ({ key, tag, title, body, date, tipTitle }) => {
+const JournalEntryCard = ({ id, tag, title, body, date, tipTitle, tipBody }) => {
+
   return (
-    <Link id="journalDetail" to={`/journal/${key}}`}>
+    <Link id="Picture" to={`/journal/${id}?type=${tag}`}>
         <div className="relative bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md flex flex-col p-4" style={{ height: '15vh' }}>
       {/* Tag */}
       {tipTitle && (
