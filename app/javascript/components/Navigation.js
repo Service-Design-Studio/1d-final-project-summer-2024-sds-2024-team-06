@@ -54,7 +54,7 @@ const Navigation = () => { return(
           <div class="flex space-x-4">
           <SetActiveLink href="/mood-tracker">Mood Tracker</SetActiveLink>
             <SetActiveLink href="/activities">Activity</SetActiveLink>
-            <SetActiveLink href="/journal">Journal</SetActiveLink>
+            <SetActiveLink href="/journal-quote">Journal</SetActiveLink>
             <SetActiveLink href="#">Profile</SetActiveLink>
           </div>
         </div>
