@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 //import { useUser } from '../pages/User.js'; 
-import { guideMe } from '../api/gemini.js'
+import { guideMe, generateTip } from '../api/gemini.js'
 //import {callGeminiAPI} from '../api/geminiClient' 
 
 import Navigation from "../components/Navigation";
@@ -113,17 +113,20 @@ export default function JournalOpenForm() {
                                 <div>&nbsp;</div>
                                 <div className="flex justify-center">
                                     <button className="text-base md:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
-                                            onClick={() =>{
+                                            onClick={async function submit() {
+                                              // change button to "Submitting"
+
+                                              // llm to generate a tip with tip title
+                                              const generatedTip = await generateTip(journalEntry);
                                               // post to end-api
                                               createJournalForUser({
                                                 //user_id: currentUser.id,
                                                 journal_title: title,
                                                 journalentry: journalEntry,
-                                                tip_title: '',
-                                                tip_body: '',
+                                                tip_title: generatedTip.title,
+                                                tip_body: generatedTip.description,
                                                 date_created: new Date().toISOString(),
                                               });
-
                                               // go to the preview page
                                               //window.location.href="/journal"
                                             }}>Submit</button>
@@ -141,9 +144,14 @@ export default function JournalOpenForm() {
                                         <div className="flex justify-center">
                                         <button className="text-base md:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
                                                 onClick={async function generatePrompt() {
+                                                  // change button to "Generating..."
+
+                                                  // llm to generate a prompt
                                                   const generatedGuide = await guideMe(journalEntry);
-                                                  console.log(generatedGuide);
-                                                  setTipBody(generatedGuide);
+                                                  //console.log(generatedGuide);
+                                                  //update the prompt-space
+                                                  setTipBody(generatedGuide.response);
+                                                  // change button back to "Guide Me"
                                                 }}>Guide Me</button>
                                         </div>
                                     </div>
