@@ -31,7 +31,7 @@ async function createJournalForUser(journalEntry) {
     console.log('Journal created:', data);
     console.log(data.journal_title);
     console.log(data.id);
-    window.location.href=`/journals/${data.id}?type=open/goal`
+    window.location.href=`/journals/${data.id}?type=open`
     //return data.id;
   })
   .catch((error) => {
