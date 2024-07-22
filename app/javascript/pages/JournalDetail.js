@@ -1,99 +1,92 @@
 import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Navigation from "../components/Navigation";
-import TipCard from "../components/TipCard"
+import TipCard from "../components/TipCard";
 import useFetch from '../api/useFetch';
 
-
 const bg = {
-    height: '100vh',
-    width: '100vw',
-    background: 'url(/images/paperbg.jpg) no-repeat center center fixed',
-    backgroundSize: 'cover',
-  };
-
+  height: '100vh',
+  width: '100vw',
+  background: 'url(/images/paperbg.jpg) no-repeat center center fixed',
+  backgroundSize: 'cover',
+};
 
 const JournalDetail = () => {
+  const { id } = useParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const type = queryParams.get('type'); // Get the type from the query params
+  const apiUrl = gon.api_url;
 
-    const { id } = useParams();
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const type = queryParams.get('type'); // Get the type from the query params
-    const apiUrl = gon.api_url;
-  
-    // Determine which endpoint to use based on type
-    const endpoint = type === 'open' ? `/api/journals/${id}` : `/api/goal_journals/${id}`;
-  
-    // Fetch data
-    const { data: journalEntry, error, isPending } = useFetch(`${apiUrl}${endpoint}`);
+  // Determine which endpoint to use based on type
+  const endpoint = type === 'open' ? `/api/journals/${id}` : `/api/goal_journals/${id}`;
 
-    console.log(journalEntry)
-    
-    if (isPending) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
+  // Fetch data
+  const { data: journalEntry, error, isPending } = useFetch(`${apiUrl}${endpoint}`);
 
-    return (
-        <div style={bg} className="flex flex-col h-screen">
-          <Navigation />
-          <div className="mx-auto p-4 flex space-y-4" style={{ width: '80%' }}>
-            {type === 'open' ? (
-              <>
-                <div className="mx-auto flex space-x-4" style={{ width: '100%', height: '80vh' }}>
-  <div className="flex-1 flex flex-col">
-    <div className="bg-white rounded-md p-10 mt-4 flex-1">
-      <div className="flex justify-between mt-4">
-        <span className="text-4xl text-left font-bold mb-10">{journalEntry.journal_title}</span>
-        <span className="text-m text-right text-gray-500 mt-10">{journalEntry.date_created}</span>
-      </div>
-      <p>{journalEntry.journalentry}</p>
-    </div>
-  </div>
-  <div className="w-1/4 flex flex-col ">
-      <TipCard
-        tipTitle={journalEntry.tip_title}
-        tipBody={journalEntry.tip_body}
-      />
-  </div>
-</div>
+  console.log(journalEntry);
 
+  if (isPending) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
-              </>
-            ) : (
-              <>
-              <span className="text-4xl text-left font-bold mb-10">{journalEntry.journal_title}</span>
-              {/* start */}
-                <div className="bg-white rounded-md p-10 mt-4">
-                  <div className="flex justify-between mt-4">
-                    <span className="text-4xl text-left font-bold mb-10">One thing I will start...</span>
-                    <span className="text-m text-right text-gray-500 mt-10">{journalEntry.date_created}</span>
-                  </div>
-                  <p>{journalEntry.journal_start}</p>
+  return (
+    <div style={bg} className="flex flex-col h-screen">
+      <Navigation />
+
+      {type === 'open' ? (
+        <div className="mx-auto p-4" style={{ width: '80%' }}>
+          <div className="flex space-x-4" style={{ width: '100%', height: '80vh' }}>
+            <div className="flex-1 flex flex-col">
+              <div className="bg-white rounded-md p-10 mt-4 flex-1">
+                <div className="flex justify-between mt-4">
+                  <span className="text-4xl text-left font-bold mb-10">{journalEntry.journal_title}</span>
+                  <span className="text-m text-right text-gray-500 mt-10">{journalEntry.date_created}</span>
                 </div>
-                {/* end */}
-                <div className="bg-white rounded-md p-10 mt-4">
-                  <div className="flex justify-between mt-4">
-                    <span className="text-4xl text-left font-bold mb-10">One thing I will end...</span>
-                    <span className="text-m text-right text-gray-500 mt-10">{journalEntry.date_created}</span>
-                  </div>
-                  <p>{journalEntry.journal_end}</p>
-                </div>
-                {/* continue */}
-                <div className="bg-white rounded-md p-10 mt-4">
-                  <div className="flex justify-between mt-4">
-                    <span className="text-4xl text-left font-bold mb-10">One thing I will continue...</span>
-                    <span className="text-m text-right text-gray-500 mt-10">{journalEntry.date_created}</span>
-                  </div>
-                  <p>{journalEntry.journal_third}</p>
-                </div>
-              </>
-            )}
+                <p>{journalEntry.journalentry}</p>
+              </div>
+            </div>
+            <div className="w-1/4 flex flex-col">
+              <TipCard
+                tipTitle={journalEntry.tip_title}
+                tipBody={journalEntry.tip_body}
+              />
+            </div>
           </div>
         </div>
-      );
-    };
-    
-    export default JournalDetail;
+      ) : (
+        <div className="mx-auto p-4 flex flex-col space-y-4" style={{ width: '80%', justifyContent: 'flex-start' }}>
+          <span className="text-4xl text-left font-bold mb-10">{journalEntry.journal_title}</span>
+          {/* Start */}
+          <div className="bg-white rounded-md p-10 mt-4">
+            <div className="flex justify-between mt-4">
+              <span className="text-4xl text-left font-bold mb-10">One thing I will start...</span>
+              <span className="text-m text-right text-gray-500 mt-10">{journalEntry.date_created}</span>
+            </div>
+            <p>{journalEntry.journal_start}</p>
+          </div>
+          {/* End */}
+          <div className="bg-white rounded-md p-10 mt-4">
+            <div className="flex justify-between mt-4">
+              <span className="text-4xl text-left font-bold mb-10">One thing I will end...</span>
+              <span className="text-m text-right text-gray-500 mt-10">{journalEntry.date_created}</span>
+            </div>
+            <p>{journalEntry.journal_end}</p>
+          </div>
+          {/* Continue */}
+          <div className="bg-white rounded-md p-10 mt-4">
+            <div className="flex justify-between mt-4">
+              <span className="text-4xl text-left font-bold mb-10">One thing I will continue...</span>
+              <span className="text-m text-right text-gray-500 mt-10">{journalEntry.date_created}</span>
+            </div>
+            <p>{journalEntry.journal_third}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
+export default JournalDetail;
 
 // export default function JournalGoalForm() {
 //     return (
