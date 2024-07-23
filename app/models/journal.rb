@@ -3,8 +3,8 @@ class Journal < ApplicationRecord
 
   validates :journal_title, presence: true
   validates :journalentry, presence: true
-  # validates :tip_title, presence: true
-  # validates :tip_body, presence: true
+  validates :tip_title, presence: true
+  validates :tip_body, presence: true
 
   after_create :set_date_created
 

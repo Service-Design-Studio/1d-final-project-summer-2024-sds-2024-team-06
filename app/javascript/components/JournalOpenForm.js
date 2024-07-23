@@ -17,6 +17,12 @@ function get_date(){
   return formattedDate
 }
 
+
+// function to check if a string consists of only white strings
+function isWhitespace(str) {
+  return /^\s*$/.test(str);
+}
+
 // function to create a goal journal entry for a user
 async function createJournalForUser(journalEntry) {
   console.log(journalEntry)
@@ -53,8 +59,8 @@ const brownPaper = {
 
 
 //function to create a pop-up when the user exits
-function showPopup() {
-  const popup = document.getElementById('popupOnExit');
+function showPopup(popupID) {
+  const popup = document.getElementById(popupID);
   popup.classList.remove('hidden');
   popup.classList.add('visible');
   popup.classList.remove('opacity-0');
@@ -62,8 +68,8 @@ function showPopup() {
 }
 
 //function to hide pop-up
-function hidePopup() {
-  const popup = document.getElementById('popupOnExit');
+function hidePopup(popupID) {
+  const popup = document.getElementById(popupID);
   popup.classList.add('hidden');
   popup.classList.remove('visible');
   popup.classList.add('opacity-0');
@@ -115,7 +121,9 @@ export default function JournalOpenForm() {
         <div>&nbsp;</div>
         <div>&nbsp;</div>
             <div className="grid grid-cols-1 sm:grid-cols-7">
-                <div className='col-span-1' onClick={() => hidePopup()}></div>
+                <div className='col-span-1' onClick={() => {
+                                                    hidePopup("popup-exit");
+                                                    hidePopup("popup-empty");}}></div>
                 <div className='col-span-1 sm:col-span-5'>
                         {/*Title*/}
                         <div className="flex justify-between">
@@ -124,7 +132,7 @@ export default function JournalOpenForm() {
                                 <span className="text-[#382C0D] text-bold text-sm lg:text-base block text-left">{get_date()}</span>
                               </div>
                               <button id="close" className="text-3xl lg:text-5xl text-[#382C0D] border-none bg-transparent hover:text-[#1F2F3A] focus:outline-none"
-                                    onClick={()=> showPopup()}>&times;</button>
+                                    onClick={()=> showPopup("popup-exit")}>&times;</button>
                         </div>
                         <div>&nbsp;</div>
                         <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
@@ -150,12 +158,17 @@ export default function JournalOpenForm() {
                                               // change button to "Submitting"
                                               setSubmitButton("Submitting...");
                                               disableButton("button-submit");
+                                              // do a check for empty fields
+                                              if (isWhitespace(journalEntry)){
+                                                showPopup("popup-empty");
+                                                return;
+                                              };
                                               // llm to generate a tip with tip title
                                               const generatedTip = await generateTip(journalEntry);
                                               // post to end-api
                                               let data_id = await createJournalForUser({
                                                 //user_id: currentUser.id,
-                                                journal_title: title,
+                                                journal_title: title || "Untitled",
                                                 journalentry: journalEntry,
                                                 tip_title: generatedTip.title,
                                                 tip_body: generatedTip.description.replace(/([.!?])/g, '$1\n'),
@@ -199,20 +212,38 @@ export default function JournalOpenForm() {
 
                 </div>
                 
-                <div className='col-span-1' onClick={() => hidePopup()}></div>
+                <div className='col-span-1' onClick={() => {
+                                                    hidePopup("popup-exit");
+                                                    hidePopup("popup-empty");}}></div>
             </div>
             {/*Pop-up on exit*/}
-            <div id="popupOnExit" className='flex flex-col flex-grow hidden opacity-0 bg-[#FFF8EA] shadow-xl rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/4 p-4'>
-              <span className="block text-lg lg:text-xl font-bold text-[#C0564B]">Are you leaving?</span>
-              <span className="block text-xs lg:text-base text-bold">Leaving would not save any changes on your journal.</span>
-              <div>&nbsp;</div>
-              <div className="block flex justify-between gap-4">
-                <button id="home" className="text-xs lg:text-base bg-[#C0564B] hover:bg-[#A0453A] text-white font-bold py-2 px-4"
-                    onClick={() => {window.location.href="/journal"}}>Okay, I'll leave</button>
-                <button id="return" className="text-xs lg:text-base bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
-                    onClick={() => hidePopup()}>No, I'll continue journalling</button>
-              </div>
-        </div>
+            <div id="popup-exit" className='flex flex-col flex-grow hidden opacity-0 bg-[#FFF8EA] shadow-xl rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[250px] lg:w-1/4 p-4'>
+                  <span className="block text-lg lg:text-xl font-bold text-[#C0564B]">Are you leaving?</span>
+                  <span className="block text-xs lg:text-base text-bold">Leaving would not save any changes on your journal.</span>
+                  <div>&nbsp;</div>
+                  <div className="block flex justify-between gap-4">
+                    <button id="home" className="text-xs lg:text-base bg-[#C0564B] hover:bg-[#A0453A] text-white font-bold py-2 px-4"
+                        onClick={() => {window.location.href="/journal"}}>Okay, I'll leave</button>
+                    <button id="return" className="text-xs lg:text-base bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
+                        onClick={() => hidePopup("popup-exit")}>No, I'll continue writing</button> 
+                  </div>
+            </div>
+
+            {/*Pop-up on empty fields*/}
+            <div id="popup-empty" className='flex flex-col flex-grow hidden opacity-0 bg-[#FFF8EA] shadow-xl rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[250px] lg:w-1/4 p-4'>
+                  <span className="block text-lg lg:text-xl font-bold text-[#C0564B]">Error, missing field!</span>
+                  <span className="block text-xs lg:text-base text-bold">Main journal entry should be filled.</span>
+                  <div>&nbsp;</div>
+                  <div className="block flex justify-between gap-4">
+                  <button id="home" className="text-xs lg:text-base bg-[#C0564B] hover:bg-[#A0453A] text-white font-bold py-2 px-4"
+                        onClick={() => {window.location.href="/journal"}}>Discard, let me leave</button>
+                    <button id="return" className="text-xs lg:text-base bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
+                        onClick={() => {
+                          hidePopup("popup-empty");
+                          setSubmitButton("Submit");
+                          enableButton("button-submit");}}>Okay, I'll continue writing</button> 
+                  </div>
+            </div>
         </div>
     </div>)
 }

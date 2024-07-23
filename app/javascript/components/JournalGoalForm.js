@@ -3,6 +3,13 @@ import { useState } from 'react';
 //import { useUser } from '../pages/User.js'; 
 
 import Navigation from "../components/Navigation";
+import MissingFieldModal from './MissingFieldModal';
+
+
+// function to check if a string consists of only white strings
+function isWhitespace(str) {
+  return /^\s*$/.test(str);
+}
 
 // function to create a goal journal entry for a user
 function createGoalJournalForUser(journalEntry) {
@@ -38,8 +45,8 @@ const brownPaper = {
 };
 
 // function to create a pop-up
-function showPopup() {
-  const popup = document.getElementById('popupOnExit');
+function showPopup(popupID) {
+  const popup = document.getElementById(popupID);
   popup.classList.remove('hidden');
   popup.classList.add('visible');
   popup.classList.remove('opacity-0');
@@ -47,8 +54,8 @@ function showPopup() {
 }
 
 // function to hide pop-up
-function hidePopup() {
-  const popup = document.getElementById('popupOnExit');
+function hidePopup(popupID) {
+  const popup = document.getElementById(popupID);
   popup.classList.add('hidden');
   popup.classList.remove('visible');
   popup.classList.add('opacity-0');
@@ -80,6 +87,13 @@ export default function JournalGoalForm() {
     const [submitButton, setSubmitButton] = useState("Submit");
     //const { currentUser } = useUser();
 
+    //function for checking if the user has empty fields or not
+    function checkPresence(title, start, stop, continueUser){
+      if (start === "" || stop === "" || continueUser === ""){
+        <MissingFieldModal description={"At least enter one of the fields: start, stop and continue."}/>
+      }
+    }
+
     return (
     <div className="flex flex-col h-screen">
         <Navigation />
@@ -87,13 +101,15 @@ export default function JournalGoalForm() {
         <div>&nbsp;</div>
         <div>&nbsp;</div>
             <div className="grid sm:grid-cols-5">
-                <div className='col-span-1' onClick={()=> hidePopup()}></div>
+            <div className='col-span-1' onClick={()=> {
+                                                      hidePopup("popup-exit");
+                                                      hidePopup("popup-empty")}}></div>
                 {/*Title*/}
                 <div className='col-span-3'>
                         <div className="flex justify-between">
                             <span className="text-[#382C0D] text-2xl md:text-4xl font-sriracha font-bold">Goal-setting Entry</span>
                             <button id="close" className="text-3xl md:text-5xl text-[#382C0D] border-none bg-transparent hover:text-[#1F2F3A] focus:outline-none"
-                                    onClick={()=> showPopup()}>&times;</button>
+                                    onClick={()=> showPopup("popup-exit")}>&times;</button>
                         </div>
                     <div>&nbsp;</div>
                     {/*Main journal entry space*/}
@@ -127,10 +143,15 @@ export default function JournalGoalForm() {
                                       //change button to "Submitting..."
                                       setSubmitButton("Submitting...");
                                       disableButton("button-submit");
+                                      // do a check for empty fields
+                                      if (isWhitespace(start) && isWhitespace(stop) && isWhitespace(continueUser)){
+                                        showPopup("popup-empty");
+                                        return;
+                                      };
                                       // post to end-api
                                       createGoalJournalForUser({
                                         //user_id: currentUser.id,
-                                        journal_title: title,
+                                        journal_title: title || "Untitled",
                                         journal_start: start,
                                         journal_end: stop,
                                         journal_third: continueUser,
@@ -140,12 +161,14 @@ export default function JournalGoalForm() {
                         </div>
                     </div>
                 </div>
-                <div className='col-span-1' onClick={()=> hidePopup()}></div>
+                <div className='col-span-1' onClick={()=> {
+                                                      hidePopup("popup-exit");
+                                                      hidePopup("popup-empty")}}></div>
             </div>
         </div>
 
         {/*Pop-up on exit*/}
-        <div id="popupOnExit" className='flex flex-col flex-grow hidden opacity-0 bg-[#FFF8EA] shadow-xl rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/4 p-4'>
+        <div id="popup-exit" className='flex flex-col flex-grow hidden opacity-0 bg-[#FFF8EA] shadow-xl rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[250px] lg:w-1/4 p-4'>
               <span className="block text-lg lg:text-xl font-bold text-[#C0564B]">Are you leaving?</span>
               <span className="block text-xs lg:text-base text-bold">Leaving would not save any changes on your journal.</span>
               <div>&nbsp;</div>
@@ -153,7 +176,23 @@ export default function JournalGoalForm() {
                 <button id="home" className="text-xs lg:text-base bg-[#C0564B] hover:bg-[#A0453A] text-white font-bold py-2 px-4"
                     onClick={() => {window.location.href="/journal"}}>Okay, I'll leave</button>
                 <button id="return" className="text-xs lg:text-base bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
-                    onClick={() => hidePopup()}>No, I'll continue journalling</button>
+                    onClick={() => hidePopup("popup-exit")}>No, I'll continue writing</button> 
+              </div>
+        </div>
+
+        {/*Pop-up on empty fields*/}
+        <div id="popup-empty" className='flex flex-col flex-grow hidden opacity-0 bg-[#FFF8EA] shadow-xl rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[250px] lg:w-1/4 p-4'>
+              <span className="block text-lg lg:text-xl font-bold text-[#C0564B]">Error, missing field(s)!</span>
+              <span className="block text-xs lg:text-base text-bold">At least enter one of the following fields: start, stop and continue.</span>
+              <div>&nbsp;</div>
+              <div className="block flex justify-between gap-4">
+              <button id="home" className="text-xs lg:text-base bg-[#C0564B] hover:bg-[#A0453A] text-white font-bold py-2 px-4"
+                    onClick={() => {window.location.href="/journal"}}>Discard, let me leave</button>
+                <button id="return" className="text-xs lg:text-base bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
+                    onClick={() => {
+                      hidePopup("popup-empty");
+                      setSubmitButton("Submit");
+                      enableButton("button-submit");}}>Okay, I'll continue writing</button> 
               </div>
         </div>
     </div>)
