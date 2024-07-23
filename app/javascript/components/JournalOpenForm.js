@@ -2,10 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 //import { useUser } from '../pages/User.js'; 
 import { guideMe, generateTip } from '../api/gemini.js'
-//import {callGeminiAPI} from '../api/geminiClient' 
 
 import Navigation from "../components/Navigation";
 
+
+// function to dynamically get today's date
 function get_date(){
   const currentDate = new Date();
   const formattedDate = currentDate.toLocaleDateString('en-US', {
@@ -29,9 +30,7 @@ async function createJournalForUser(journalEntry) {
   .then(response => response.json())
   .then(data => {
     console.log('Journal created:', data);
-    console.log(data.journal_title);
-    console.log(data.id);
-    window.location.href=`/journals/${data.id}?type=open`
+    window.location.href=`/journal/${data.id}?type=open`
     //return data.id;
   })
   .catch((error) => {
@@ -71,55 +70,86 @@ function hidePopup() {
   popup.classList.remove('opacity-1');
 }
 
+//function to disable buttons
+function disableButton(buttonID){
+  const button = document.getElementById(buttonID);
+  button.disabled = true;
+  button.style.backgroundColor = "#2B44C1";
+};
+
+//function to enable buttons
+function enableButton(buttonID){
+  const button = document.getElementById(buttonID);
+  button.textContent = "Guide me";
+  button.disabled = false;
+  button.style.backgroundColor = "#3655F4";
+};
+
+
+//function to add newline to the prompt for proper formatting
+function formatPrompt(generated){
+  generated = generated.replace(/([.!?])/g, '$1\n')
+  return generated.split('\n').map((line, index) => (
+    <React.Fragment key={index}>
+      {line}
+      <br />
+      <br />
+    </React.Fragment>
+))}
+
+
 
 export default function JournalOpenForm() {
 
     const [title, setTitle] = useState("");
     const [journalEntry, setJournalEntry] = useState("");
-    //const [tipTitle, setTipTitle] = useState("");
-    const [tipBody, setTipBody] = useState("");
+    const [generateButton, setGenerateButton] = useState("Guide Me");
+    const [submitButton, setSubmitButton] = useState("Submit");
+    const [tipBody, setTipBody] = useState("   ");
     //const { currentUser } = useUser();
 
     return (
     <div className="flex flex-col h-screen">
         <Navigation />
-        <div style={brownPaper} className="flex-1 grow pb-4">
+        <div style={brownPaper} className="flex-1 grow p-4">
         <div>&nbsp;</div>
         <div>&nbsp;</div>
-            <div className="grid grid-cols-7">
+            <div className="grid grid-cols-1 sm:grid-cols-7">
                 <div className='col-span-1' onClick={() => hidePopup()}></div>
-                <div className='col-span-5'>
+                <div className='col-span-1 sm:col-span-5'>
                         {/*Title*/}
                         <div className="flex justify-between">
                               <div>
-                                <span className="text-[#382C0D] text-2xl md:text-4xl font-sriracha block text-left font-bold">Open-ended Journal Entry</span>
-                                <span className="text-[#382C0D] text-bold text-sm md:text-base block text-left">{get_date()}</span>
+                                <span className="text-[#382C0D] text-2xl lg:text-4xl font-sriracha block text-left font-bold">Open-ended Journal Entry</span>
+                                <span className="text-[#382C0D] text-bold text-sm lg:text-base block text-left">{get_date()}</span>
                               </div>
-                              <button id="close" className="text-3xl md:text-5xl text-[#382C0D] border-none bg-transparent hover:text-[#1F2F3A] focus:outline-none"
+                              <button id="close" className="text-3xl lg:text-5xl text-[#382C0D] border-none bg-transparent hover:text-[#1F2F3A] focus:outline-none"
                                     onClick={()=> showPopup()}>&times;</button>
                         </div>
                         <div>&nbsp;</div>
-                        <div className='grid grid-cols-3 gap-4'>
+                        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
                         {/*Main journal entry space*/}
-                            <div style={dottedPaper} className="flex-grow col-span-2 rounded-md p-10">
+                            <div style={dottedPaper} className="flex-grow sm:col-span-2 rounded-md p-4 lg:p-10">
                                 <div className="flex justify-between">
-                                    <span className="text-lg md:text-2xl font-sriracha text-left font-bold">Title</span>
-                                    <span className="text-sm md:text-base text-grey text-left">Summarise what the entry is about.</span>
+                                    <span className="text-lg lg:text-2xl font-sriracha text-left font-bold">Title</span>
+                                    <span className="text-xs lg:text-base text-grey text-left">Summarise what the entry is about.</span>
                                 </div>
                                 <div>&nbsp;</div>
-                                <input id="openended-title" className="text-sm md:text-base shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="text"
+                                <input id="openended-title" className="text-xs lg:text-base shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="text"
                                        value={title} onChange={(e) => setTitle(e.target.value)}></input>
                                 <div>&nbsp;</div>
-                                <label for="openended-entry" className="text-lg md:text-2xl font-sriracha font-bold">Think and jot down something that happened or a feeling you felt today</label>
+                                <label htmlFor="openended-entry" className="text-lg lg:text-2xl font-sriracha font-bold">Think and jot down something that happened or a feeling you felt today</label>
                                 <div>&nbsp;</div>
-                                <textarea id="openended-entry" rows="20" className="text-sm md:text-base shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                                <textarea id="openended-entry" rows="20" className="text-xs lg:text-base shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                                           value={journalEntry} onChange={(e) => setJournalEntry(e.target.value)}></textarea>
                                 <div>&nbsp;</div>
                                 <div className="flex justify-center">
-                                    <button className="text-base md:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
+                                    <button className="text-base lg:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
+                                            id="button-submit"
                                             onClick={async function submit() {
                                               // change button to "Submitting"
-
+                                              setSubmitButton("Submitting...");
+                                              disableButton("button-submit");
                                               // llm to generate a tip with tip title
                                               const generatedTip = await generateTip(journalEntry);
                                               // post to end-api
@@ -128,37 +158,40 @@ export default function JournalOpenForm() {
                                                 journal_title: title,
                                                 journalentry: journalEntry,
                                                 tip_title: generatedTip.title,
-                                                tip_body: generatedTip.description,
+                                                tip_body: generatedTip.description.replace(/([.!?])/g, '$1\n'),
                                                 date_created: new Date().toISOString(),
                                               });
-                                              //const data_id = data.id
-                                              //data_id.then((data_id) => {console.log(data_id)})
-                                              // go to the preview page
-                                              //window.location.href="/journals/{id}?type=open/goal"
-                                            }}>Submit</button>
+                                            }}>{submitButton}</button>
 
 
                                 </div>
                             </div>
                         {/*Prompt space*/}
-                            <div style={dottedPaper} className='col-span-1 rounded-md p-10'>
-                                    <label for="prompt" className="text-lg md:text-2xl font-sriracha font-bold">Prompt</label>
+                            <div style={dottedPaper} className='sm:col-span-1 rounded-md p-4 lg:p-10'>
+                                    <label htmlFor="prompt" className="text-lg lg:text-2xl font-sriracha font-bold">Prompt</label>
                                     <div>&nbsp;</div>
                                     <div className='flex flex-col flex-grow justify-between'>
-                                        <div id="prompt" className="text-sm md:text-base border border-black rounded-lg p-4 h-80">{tipBody}</div>
+                                        <div id="prompt" className="flex-wrap border border-black rounded-md p-2">
+                                            {/* {tipBody}</div> */}
+                                          <p id="prompt-content" className='text-xs lg:text-base'>{tipBody}</p></div>
                                         <div>&nbsp;</div>
                                         <div className="flex justify-center">
-                                        <button className="text-base md:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
+                                        <button className="text-base lg:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
+                                                id="button-prompt"
                                                 onClick={async function generatePrompt() {
+                                                  // clear any previous prompts
+                                                  setTipBody("");
                                                   // change button to "Generating..."
-
+                                                  setGenerateButton("Generating...");
+                                                  disableButton("button-prompt");
                                                   // llm to generate a prompt
                                                   const generatedGuide = await guideMe(journalEntry);
-                                                  //console.log(generatedGuide);
-                                                  //update the prompt-space
-                                                  setTipBody(generatedGuide.response);
+                                                  //update the prompt-space with new lines/ break lines
+                                                  setTipBody(formatPrompt(generatedGuide.response))
                                                   // change button back to "Guide Me"
-                                                }}>Guide Me</button>
+                                                  setGenerateButton("Guide Me")
+                                                  enableButton("button-prompt");
+                                                }}>{generateButton}</button>
                                         </div>
                                     </div>
                             </div>
@@ -169,16 +202,17 @@ export default function JournalOpenForm() {
                 <div className='col-span-1' onClick={() => hidePopup()}></div>
             </div>
             {/*Pop-up on exit*/}
-            <div id="popupOnExit" className='hidden opacity-0 bg-[#FFF8EA] shadow-xl rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 p-4'>
-              <span className="text-sm md:text-base text-bold">Leaving would not save any changes.</span>
+            <div id="popupOnExit" className='flex flex-col flex-grow hidden opacity-0 bg-[#FFF8EA] shadow-xl rounded-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/4 p-4'>
+              <span className="block text-lg lg:text-xl font-bold text-[#C0564B]">Are you leaving?</span>
+              <span className="block text-xs lg:text-base text-bold">Leaving would not save any changes on your journal.</span>
               <div>&nbsp;</div>
-              <div className="flex justify-between gap-4">
-                <button id="home" className="text-sm md:text-base bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
+              <div className="block flex justify-between gap-4">
+                <button id="home" className="text-xs lg:text-base bg-[#C0564B] hover:bg-[#A0453A] text-white font-bold py-2 px-4"
                     onClick={() => {window.location.href="/journal"}}>Okay, I'll leave</button>
-                <button id="return" className="text-sm md:text-base bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
-                    onClick={() => hidePopup()}>Aight, I'll continue journalling</button>
+                <button id="return" className="text-xs lg:text-base bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
+                    onClick={() => hidePopup()}>No, I'll continue journalling</button>
               </div>
-            </div>
+        </div>
         </div>
     </div>)
 }
