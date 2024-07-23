@@ -46,9 +46,9 @@ const Navigation = () => { return(
       </div>
       <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         {/*Logo*/}
-        {/* <div class="flex flex-shrink-0 items-center">
-          <img class="h-10 w-auto" src="images/START.svg" alt="stART"/>  {/* deleted href to natgal*/}
-        {/* </div> */}
+        <div className="flex flex-shrink-0 items-center">
+          <img className="h-10 w-auto" src="/images/logo-start.svg" alt="stART"/>
+        </div>
         {/*Menu items*/}
         <div className="hidden sm:ml-6 sm:block">
           <div className="flex space-x-4">
@@ -56,6 +56,7 @@ const Navigation = () => { return(
             <SetActiveLink href="/activities">Activity</SetActiveLink>
             <SetActiveLink href="/journal-quote">Journal</SetActiveLink>
             <SetActiveLink href="#">Profile</SetActiveLink>
+            <SetActiveLink href="https://www.nationalgallery.sg/start">About stART</SetActiveLink>
           </div>
         </div>
       </div>
@@ -69,6 +70,7 @@ const Navigation = () => { return(
       <a href="/activities" className="block rounded-md px-3 py-2 text-sm font-sans-700 text-grey hover:text-orange">Activity</a>
       <a href="/journal-quote" className="block rounded-md px-3 py-2 text-sm font-sans-700 text-grey hover:text-orange">Journal</a>
       <a href="#" className="block rounded-md px-3 py-2 text-sm font-sans-700 text-grey hover:text-orange">Profile</a>
+      <a href="https://www.nationalgallery.sg/start" className="block rounded-md px-3 py-2 text-sm font-sans-700 text-grey hover:text-orange">About stART</a>
     </div>
   </div>
 </nav>

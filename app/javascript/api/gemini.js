@@ -80,7 +80,7 @@ async function guideMe(input_text) {
   }
   
 
-// Export both functions
+// Export functions
 module.exports = {
     generateTip,
     guideMe,

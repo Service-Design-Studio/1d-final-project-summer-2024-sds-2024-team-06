@@ -200,7 +200,8 @@ export default function JournalOpenForm() {
                                                   // llm to generate a prompt
                                                   const generatedGuide = await enqueueGuideMe(journalEntry);
                                                   //update the prompt-space with new lines/ break lines
-                                                  setTipBody(formatPrompt(generatedGuide.response))
+                                                  //setTipBody(formatPrompt(generatedGuide.response))
+                                                  setTipBody(generatedGuide)
                                                   // change button back to "Guide Me"
                                                   setGenerateButton("Guide Me")
                                                   enableButton("button-prompt");

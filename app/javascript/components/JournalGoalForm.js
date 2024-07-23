@@ -3,7 +3,6 @@ import { useState } from 'react';
 //import { useUser } from '../pages/User.js'; 
 
 import Navigation from "../components/Navigation";
-import MissingFieldModal from './MissingFieldModal';
 
 
 // function to check if a string consists of only white strings
