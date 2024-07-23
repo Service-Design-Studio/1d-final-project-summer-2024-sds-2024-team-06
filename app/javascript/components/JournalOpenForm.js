@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 //import { useUser } from '../pages/User.js'; 
-//import { guideMe, generateTip } from '../api/gemini.js'
+import { guideMe, generateTip } from '../api/gemini.js'
+
 import Navigation from "../components/Navigation";
-import { enqueueGenerateTip, enqueueGuideMe } from '../api/queueManager';
 
 
 // function to dynamically get today's date
@@ -164,7 +164,7 @@ export default function JournalOpenForm() {
                                                 return;
                                               };
                                               // llm to generate a tip with tip title
-                                              const generatedTip = await enqueueGenerateTip(journalEntry);
+                                              const generatedTip = await generateTip(journalEntry);
                                               // post to end-api
                                               let data_id = await createJournalForUser({
                                                 //user_id: currentUser.id,
@@ -198,7 +198,7 @@ export default function JournalOpenForm() {
                                                   setGenerateButton("Generating...");
                                                   disableButton("button-prompt");
                                                   // llm to generate a prompt
-                                                  const generatedGuide = await enqueueGuideMe(journalEntry);
+                                                  const generatedGuide = await guideMe(journalEntry);
                                                   //update the prompt-space with new lines/ break lines
                                                   //setTipBody(formatPrompt(generatedGuide.response))
                                                   setTipBody(generatedGuide)
