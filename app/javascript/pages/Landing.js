@@ -5,7 +5,7 @@ import React from 'react'
 const NGSLanding = {
   height: '100vh',
   width: '100vw',
-  background: 'url(/images/background-ngs.svg) no-repeat center bottom fixed',
+  background: 'url(/images/background-ngs.png) no-repeat center bottom fixed',
   backgroundSize: 'cover',
 };
 

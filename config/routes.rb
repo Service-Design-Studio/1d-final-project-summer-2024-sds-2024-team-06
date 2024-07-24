@@ -32,8 +32,8 @@ Rails.application.routes.draw do
     get 'current_user', to: 'users#current'
     resources :art_pieces, only: [:index, :show] do #api/art_pieces/
     end
-    
-    resources :flowers 
+
+    resources :flowers
     resources :moods
     resources :goal_journals
 
@@ -56,17 +56,18 @@ Rails.application.routes.draw do
       end
     end
 
-    
+
     resources :journals, only: [:create, :index, :show]
   end
 
-  get 'homepage', to: 'home#index'
+  get 'homepage', to: 'homepage#index'
 
-  root 'homepage#index'
+
+
+  root 'pages#home'
 
   # root 'home#index', as: 'homepage'  # This sets the root path and names it `homepage_path`
 
   # Catch-all route for React Router
   get '*path', to: 'homepage#index', constraints: ->(request) { request.format.html? }
-
 end

@@ -27,7 +27,7 @@ const App = () => {
       <button onClick={addAllMoodsToCurrentUser(standard_moods)}>mood</button> */}
       <Router>
         <Routes>
-          <Route exact path="/" element={<Landing />}></Route>
+          <Route exact path="/landing" element={<Landing />}></Route>
           {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
           <Route exact path="/check-in" element={<CheckIn />}></Route>
           <Route exact path="/mood-tracker" element={<Moodtracker />}></Route>
