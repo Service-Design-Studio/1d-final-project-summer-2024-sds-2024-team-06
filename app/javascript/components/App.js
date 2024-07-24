@@ -16,6 +16,8 @@ import JournalGoalForm from './JournalGoalForm';
 import JournalOpenForm from './JournalOpenForm';
 import JournalDetail from '../pages/JournalDetail';
 import { useUser } from '../pages/User';
+import TestCheckIn from '../pages/TestCheckIn';
+import TestCheckInFlower from '../pages/TestCheckInFlower';
 
 
 // Routing
@@ -29,7 +31,8 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Landing />}></Route>
           {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
-          <Route exact path="/check-in" element={<CheckIn />}></Route>
+          {/* <Route exact path="/check-in" element={<CheckIn />}></Route> */}
+          <Route exact path="/check-in" element={<TestCheckInFlower />}></Route>
           <Route exact path="/mood-tracker" element={<Moodtracker />}></Route>
           <Route exact path="/activities" element={<Activities />}></Route>
           <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
