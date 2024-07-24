@@ -10,7 +10,7 @@ import Moodtracker from '../pages/MoodTracker';
 import Activities from '../pages/Activities';
 import GalleryWalk from '../pages/GalleryWalk';
 import GalleryWalkSession from '../pages/GalleryWalkSession';
-import SplashArt from '../pages/SplashArt';
+import JournalSplashArt from '../pages/JournalSplashArt';
 import Journal from '../pages/JournalEntryHistory';
 import JournalGoalForm from './JournalGoalForm';
 import JournalOpenForm from './JournalOpenForm';
@@ -34,7 +34,7 @@ const App = () => {
           <Route exact path="/activities" element={<Activities />}></Route>
           <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
           <Route exact path="/gallery-walk/:id" element={<GalleryWalkSession />}></Route>
-          <Route exact path="/journal-quote" element={<SplashArt />}></Route>
+          <Route exact path="/journal-quote" element={<JournalSplashArt />}></Route>
           <Route exact path="/journal" element={<Journal />}></Route>
           <Route exact path="/journal/:id" element={<JournalDetail />}></Route>
           {/* <Route exact path="/journal/create" element={<JournalEntryForm />}></Route> */}
