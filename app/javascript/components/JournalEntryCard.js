@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import './styles.css'; // Make sure to import your CSS file
 
-const JournalEntryCard = ({ id, tag, title, body, date, tipTitle, tipBody }) => {
+export default function JournalEntryCard({ id, tag, title, body, date, tipTitle, tipBody }) {
 
   // Determine the header text based on the tag
   const headerText = tag === "open" ? "Open Journal" : "Goal Journal";
@@ -57,4 +57,3 @@ const JournalEntryCard = ({ id, tag, title, body, date, tipTitle, tipBody }) => 
   );
 };
 
-export default JournalEntryCard;

@@ -161,9 +161,9 @@ end
 
 And('I will see three template fields') do
   first_journal = user.goal_journals.first
-  expect(page).to have_selector('span#journal-start', text: first_journal.journal_start)
-  expect(page).to have_selector('span#journal-end', text: first_journal.journal_end)
-  expect(page).to have_selector('span#journal-continue', text: first_journal.journal_third)
+  expect(page).to have_selector('p#journal-start', text: first_journal.journal_start)
+  expect(page).to have_selector('p#journal-end', text: first_journal.journal_end)
+  expect(page).to have_selector('p#journal-continue', text: first_journal.journal_third)
 end
 
 ##

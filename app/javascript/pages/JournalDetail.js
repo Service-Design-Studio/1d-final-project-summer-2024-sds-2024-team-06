@@ -89,8 +89,8 @@ export default function JournalDetail() {
                         {/*Title & date*/}
                         <div className="flex justify-between">
                               <div>
-                                <span className="text-[#382C0D] text-2xl lg:text-4xl font-sriracha block text-left font-bold">Open-ended Entry</span>
-                                <span className="text-[#382C0D] text-bold text-sm lg:text-base block text-left">{journalEntry.date_created}</span>
+                                <title className="text-[#382C0D] text-2xl lg:text-4xl font-sriracha block text-left font-bold">Open-ended Entry</title>
+                                <h1 className="text-[#382C0D] text-bold text-sm lg:text-base block text-left">{journalEntry.date_created}</h1>
                               </div>
                               {/*Exit button*/}
                               <button id="close" className="text-3xl lg:text-5xl text-[#382C0D] border-none bg-transparent hover:text-[#1F2F3A] focus:outline-none"
@@ -102,7 +102,7 @@ export default function JournalDetail() {
                             <div style={dottedPaper} className="flex-grow sm:col-span-2 rounded-md p-4 lg:p-10">
                               <h1 className="text-lg lg:text-2xl font-sriracha font-bold">{journalEntry.journal_title}</h1>
                               <div>&nbsp;</div>
-                              <p className="text-xs lg:text-base">{journalEntry.journalentry}</p>
+                              <p className="text-xs lg:text-base" style={{ overflowWrap: 'break-word' }}>{journalEntry.journalentry}</p>
                             </div>
                             {/*Tip space if it exists*/}
                             {journalEntry.tip_title !== undefined && (
@@ -125,8 +125,8 @@ export default function JournalDetail() {
                 <div className='col-span-3'>
                         <div className="flex justify-between">
                               <div>
-                                <span className="text-[#382C0D] text-2xl lg:text-4xl font-sriracha block text-left font-bold">Goal: {journalEntry.journal_title}</span>
-                                <span className="text-[#382C0D] text-bold text-sm lg:text-base block text-left">{journalEntry.date_created}</span>
+                                <title className="text-[#382C0D] text-2xl lg:text-4xl font-sriracha block text-left font-bold">Goal: {journalEntry.journal_title}</title>
+                                <h1 className="text-[#382C0D] text-bold text-sm lg:text-base block text-left">{journalEntry.date_created}</h1>
                               </div>
                               {/*Exit button*/}
                             <button id="close" className="text-3xl md:text-5xl text-[#382C0D] border-none bg-transparent hover:text-[#1F2F3A] focus:outline-none"
@@ -137,9 +137,9 @@ export default function JournalDetail() {
                     <div style={dottedPaper} className="flex-grow rounded-md p-4 lg:p-10">
                         <div className="flex justify-between">
                             <div>
-                            <span className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will start...</span>
+                            <h1 className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will start...</h1>
                             <div>&nbsp;</div>
-                            <span id="journal-start" className="block text-xs lg:text-base">{journalEntry.journal_start}</span>
+                            <p id = "journal-start" className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word' }}>{journalEntry.journal_start}</p>
                             </div>
                         </div>
                     </div>
@@ -147,9 +147,9 @@ export default function JournalDetail() {
                     <div style={dottedPaper} className="flex-grow rounded-md p-4 lg:p-10">
                         <div className="flex justify-between">
                             <div>
-                            <span className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will end...</span>
+                            <h1 className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will end...</h1>
                             <div>&nbsp;</div>
-                            <span id="journal-end" className="block text-xs lg:text-base">{journalEntry.journal_end}</span>
+                            <p id = "journal-end" className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word' }}>{journalEntry.journal_end}</p>
                             </div>
                         </div>
                     </div>
@@ -157,9 +157,9 @@ export default function JournalDetail() {
                     <div style={dottedPaper} className="flex-grow rounded-md p-4 lg:p-10">
                         <div className="flex justify-between">
                             <div>
-                            <span className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will continue...</span>
+                            <h1 className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will continue...</h1>
                             <div>&nbsp;</div>
-                            <span id="journal-continue" className="block text-xs lg:text-base">{journalEntry.journal_third}</span>
+                            <p id = "journal-continue" className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word' }}>{journalEntry.journal_third}</p>
                             </div>
                         </div>
                     </div>

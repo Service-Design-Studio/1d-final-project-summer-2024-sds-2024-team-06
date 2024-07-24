@@ -112,7 +112,7 @@ export default function JournalOpenForm() {
     const [journalEntry, setJournalEntry] = useState("");
     const [generateButton, setGenerateButton] = useState("Guide Me");
     const [submitButton, setSubmitButton] = useState("Submit");
-    const [tipBody, setTipBody] = useState("   ");
+    const [tipBody, setTipBody] = useState("Click 'Guide Me' to generate self-help prompts :D");
     //const { currentUser } = useUser();
 
     return (
