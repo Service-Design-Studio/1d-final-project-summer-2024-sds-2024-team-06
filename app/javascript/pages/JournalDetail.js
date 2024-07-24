@@ -139,7 +139,7 @@ export default function JournalDetail() {
                             <div>
                             <span className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will start...</span>
                             <div>&nbsp;</div>
-                            <span className="block text-xs lg:text-base">{journalEntry.journal_start}</span>
+                            <span id="journal-start" className="block text-xs lg:text-base">{journalEntry.journal_start}</span>
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@ export default function JournalDetail() {
                             <div>
                             <span className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will end...</span>
                             <div>&nbsp;</div>
-                            <span className="block text-xs lg:text-base">{journalEntry.journal_end}</span>
+                            <span id="journal-end" className="block text-xs lg:text-base">{journalEntry.journal_end}</span>
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,7 @@ export default function JournalDetail() {
                             <div>
                             <span className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will continue...</span>
                             <div>&nbsp;</div>
-                            <span className="block text-xs lg:text-base">{journalEntry.journal_third}</span>
+                            <span id="journal-continue" className="block text-xs lg:text-base">{journalEntry.journal_third}</span>
                             </div>
                         </div>
                     </div>

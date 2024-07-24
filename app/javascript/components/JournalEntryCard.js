@@ -12,7 +12,7 @@ const JournalEntryCard = ({ id, tag, title, body, date, tipTitle, tipBody }) => 
  
 
   return (
-    <Link id="Picture" to={`/journal/${id}?type=${tag}`}>
+    <Link id={`${tag}-${id}`} to={`/journal/${id}?type=${tag}`}>
       <div className="relative bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md flex flex-col p-4" style={{ height: '20vh' }}>
         {/* Header */}
         <div style={headerStyle}>

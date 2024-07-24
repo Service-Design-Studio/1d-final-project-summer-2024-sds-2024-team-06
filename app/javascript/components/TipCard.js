@@ -19,7 +19,7 @@ export default function TipCard({ tipTitle, tipBody }) {
       <div>
         <h1 className="text-lg lg:text-2xl font-sriracha font-bold">{tipTitle}</h1>
         <div>&nbsp;</div>
-        <p className="text-xs lg:text-base">{formatPrompt(tipBody)}</p>
+        <p id="tip-body" className="text-xs lg:text-base">{formatPrompt(tipBody)}</p>
       </div>
     );
 };

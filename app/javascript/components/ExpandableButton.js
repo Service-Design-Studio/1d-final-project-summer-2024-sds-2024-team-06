@@ -18,10 +18,11 @@ export default function ExpandableButton() {
     <div className="relative inline-block text-left">
       {/* Main button */}
       <button
+        id="newJournalButton"
         type="button"
         className="inline-flex justify-center w-full rounded-md shadow-sm text-xs md:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
         onClick={toggleMenu}
-        onMouseEnter={toggleMenu} onMouseLeave={toggleMenu}
+        // onMouseEnter={toggleMenu} onMouseLeave={toggleMenu}
       >
         Create New Entry
           <svg className="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -32,14 +33,16 @@ export default function ExpandableButton() {
         <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             <button
-              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              id = "open-ended-journal-item"
+              className="menu-item w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               onClick={() => handleNavigation('/journal/open-ended')}
             >
               Open-ended
             </button>
             <button
-              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              id = "goal-setting-journal-item"
+              className="menu-item w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               onClick={() => handleNavigation('/journal/goal-setting')}
             >

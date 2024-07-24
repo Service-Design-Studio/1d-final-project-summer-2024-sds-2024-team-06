@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 //import { useUser } from '../pages/User.js'; 
 import { guideMe, generateTip } from '../api/gemini.js'
-import {enqueueGuideMe, enqueueGenerateTip } from '../api/queueManager.js'
+
 
 import Navigation from "../components/Navigation";
 
@@ -191,13 +191,13 @@ export default function JournalOpenForm() {
                                         <div>&nbsp;</div>
                                         <div className="flex justify-center">
                                         <button className="text-base lg:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
-                                                id="button-prompt"
+                                                id="guideMe"
                                                 onClick={async function generatePrompt() {
                                                   // clear any previous prompts
                                                   setTipBody("");
                                                   // change button to "Generating..."
                                                   setGenerateButton("Generating...");
-                                                  disableButton("button-prompt");
+                                                  disableButton("guideMe");
                                                   // llm to generate a prompt
                                                   const generatedGuide = await guideMe(journalEntry);
                                                   //update the prompt-space with new lines/ break lines
@@ -205,7 +205,7 @@ export default function JournalOpenForm() {
                                                   setTipBody(formatPrompt(generatedGuide.response))
                                                   // change button back to "Guide Me"
                                                   setGenerateButton("Guide Me")
-                                                  enableButton("button-prompt");
+                                                  enableButton("guideMe");
                                                 }}>{generateButton}</button>
                                         </div>
                                     </div>

@@ -3,7 +3,7 @@ import JournalEntryCard from './JournalEntryCard';
 
 const JournalCardGrid = ({ data }) => {
   return (
-    <div className="grid grid-cols-4 gap-4 p-4">
+    <div id="journal-grid" className="grid grid-cols-4 gap-4 p-4">
       {data.map((item) => (
         console.log(item),
 
