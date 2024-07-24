@@ -2,11 +2,11 @@
 
 Given("I am on a new browser") do
   logout(:user)
-  Capybara.reset_sessions! 
+  Capybara.reset_sessions!
 end
 
 When("I visit the landing page") do
-  visit root_path #brings to base url home#index in routes.rb
+  visit '/landing' #brings to base url home#index in routes.rb
 end
 
 Then("I should be redirected to the log in page") do
@@ -14,7 +14,7 @@ Then("I should be redirected to the log in page") do
 end
 
 Given("I am logged in as guest") do
-  visit root_path
+  visit '/landing'
   click_on('Continue as Guest')
 end
 
@@ -73,7 +73,7 @@ end
 Then("he will only see his own flowers") do
   json_string = page.body.match(/<pre>(.*?)<\/pre>/m)[1]
   json_response = JSON.parse(json_string)
-  
+
   user = User.find_by(email: "bob@example.com")
   user_flower_ids = user.flowers.pluck(:id)
   json_response_ids = json_response.map { |flower| flower['id'] }.sort
