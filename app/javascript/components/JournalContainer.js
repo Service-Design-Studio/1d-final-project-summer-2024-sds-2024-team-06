@@ -33,6 +33,7 @@ export default function Journal({ entries }) {
       <div className="flex">
          <span className="text-[#382C0D] text-2xl lg:text-4xl font-sriracha block text-left font-bold">My past journals</span>
       </div>
+      <div>&nbsp;</div>
       <JournalCardGrid data={entries} />
     </>
   );

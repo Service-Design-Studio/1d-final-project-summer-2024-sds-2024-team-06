@@ -21,7 +21,7 @@ export default function ExpandableButton() {
         type="button"
         className="inline-flex justify-center w-full rounded-md shadow-sm text-xs md:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
         onClick={toggleMenu}
-        onMouseEnter={toggleMenu} onMouseLeave={toggleMenu}
+        // onMouseEnter={toggleMenu} onMouseLeave={toggleMenu}
       >
         Create New Entry
           <svg className="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
