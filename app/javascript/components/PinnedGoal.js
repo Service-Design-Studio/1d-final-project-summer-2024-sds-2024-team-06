@@ -29,7 +29,7 @@ export default function PinnedGoal({data}) {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <GoalCard 
             title="I will start" 
-            text={data.journal_start} 
+            text={data.journal_start + data.journal_start + data.journal_start + data.journal_start} 
             imageUrl="/images/journal-seed.svg"
           />
         <GoalCard 

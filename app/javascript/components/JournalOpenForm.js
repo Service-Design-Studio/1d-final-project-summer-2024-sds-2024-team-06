@@ -112,7 +112,7 @@ export default function JournalOpenForm() {
     const [journalEntry, setJournalEntry] = useState("");
     const [generateButton, setGenerateButton] = useState("Guide Me");
     const [submitButton, setSubmitButton] = useState("Submit");
-    const [tipBody, setTipBody] = useState("   ");
+    const [tipBody, setTipBody] = useState("Click 'Guide Me' to generate self-help prompts :D");
     //const { currentUser } = useUser();
 
     return (
@@ -165,7 +165,7 @@ export default function JournalOpenForm() {
                                                 return;
                                               };
                                               // llm to generate a tip with tip title
-                                              const generatedTip = await generateTip(journalEntry);
+                                              const generatedTip = await generateTip(title + journalEntry);
                                               // post to end-api
                                               let data_id = await createJournalForUser({
                                                 //user_id: currentUser.id,
@@ -186,26 +186,25 @@ export default function JournalOpenForm() {
                                     <div>&nbsp;</div>
                                     <div className='flex flex-col flex-grow justify-between'>
                                         <div id="prompt" className="flex-wrap border border-black rounded-md p-2">
-                                            {/* {tipBody}</div> */}
                                           <p id="prompt-content" className='text-xs lg:text-base'>{tipBody}</p></div>
                                         <div>&nbsp;</div>
                                         <div className="flex justify-center">
                                         <button className="text-base lg:text-lg flex-1 bg-[#3655F4] hover:bg-[#2B44C1] text-white font-bold py-2 px-4"
-                                                id="button-prompt"
+                                                id="guideMe"
                                                 onClick={async function generatePrompt() {
                                                   // clear any previous prompts
                                                   setTipBody("");
                                                   // change button to "Generating..."
                                                   setGenerateButton("Generating...");
-                                                  disableButton("button-prompt");
+                                                  disableButton("guideMe");
                                                   // llm to generate a prompt
-                                                  const generatedGuide = await guideMe(journalEntry);
+                                                  const generatedGuide = await guideMe(title + journalEntry);
                                                   //update the prompt-space with new lines/ break lines
                                                   //setTipBody(formatPrompt(generatedGuide.response))
                                                   setTipBody(formatPrompt(generatedGuide.response))
                                                   // change button back to "Guide Me"
                                                   setGenerateButton("Guide Me")
-                                                  enableButton("button-prompt");
+                                                  enableButton("guideMe");
                                                 }}>{generateButton}</button>
                                         </div>
                                     </div>
