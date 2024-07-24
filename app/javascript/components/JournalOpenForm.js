@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 //import { useUser } from '../pages/User.js'; 
 import { guideMe, generateTip } from '../api/gemini.js'
-import {enqueueGuideMe, enqueueGenerateTip } from '../api/queueManager.js'
+
 
 import Navigation from "../components/Navigation";
 
@@ -76,7 +76,7 @@ function hidePopup(popupID) {
   popup.classList.add('opacity-0');
   popup.classList.remove('opacity-1');
 }
-
+ 
 //function to disable buttons
 function disableButton(buttonID){
   const button = document.getElementById(buttonID);
@@ -198,7 +198,7 @@ export default function JournalOpenForm() {
                                                   setGenerateButton("Generating...");
                                                   disableButton("guideMe");
                                                   // llm to generate a prompt
-                                                  const generatedGuide = await guideMe(title + journalEntry);
+                                                  const generatedGuide = await guideMe(journalEntry);
                                                   //update the prompt-space with new lines/ break lines
                                                   //setTipBody(formatPrompt(generatedGuide.response))
                                                   setTipBody(formatPrompt(generatedGuide.response))
