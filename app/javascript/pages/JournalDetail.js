@@ -139,7 +139,7 @@ export default function JournalDetail() {
                             <div>
                             <h1 className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will start...</h1>
                             <div>&nbsp;</div>
-                            <p className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word' }}>{journalEntry.journal_start}</p>
+                            <span className="block text-xs lg:text-base">{journalEntry.journal_start}</span>
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@ export default function JournalDetail() {
                             <div>
                             <h1 className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will end...</h1>
                             <div>&nbsp;</div>
-                            <p className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word' }}>{journalEntry.journal_end}</p>
+                            <span className="block text-xs lg:text-base">{journalEntry.journal_end}</span>
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,7 @@ export default function JournalDetail() {
                             <div>
                             <h1 className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will continue...</h1>
                             <div>&nbsp;</div>
-                            <p className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word' }}>{journalEntry.journal_third}</p>
+                            <span className="block text-xs lg:text-base">{journalEntry.journal_third}</span>
                             </div>
                         </div>
                     </div>

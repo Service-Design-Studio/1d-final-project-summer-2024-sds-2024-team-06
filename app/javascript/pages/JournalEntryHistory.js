@@ -42,7 +42,9 @@ export default function JournalEntryHistory() {
           ...entry,
           source: 'goal'
         }));
-        setEntries([...openJournalsWithSource, ...goalJournalsWithSource]);
+        const combinedEntries = [...openJournalsWithSource, ...goalJournalsWithSource];
+        combinedEntries.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        setEntries(combinedEntries);
       }
     }
   }, [openIsPending, goalIsPending, openError, goalError, openJournals, goalJournals]);
