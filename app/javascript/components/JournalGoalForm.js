@@ -86,12 +86,6 @@ export default function JournalGoalForm() {
     const [submitButton, setSubmitButton] = useState("Submit");
     //const { currentUser } = useUser();
 
-    //function for checking if the user has empty fields or not
-    function checkPresence(title, start, stop, continueUser){
-      if (start === "" || stop === "" || continueUser === ""){
-        <MissingFieldModal description={"At least enter one of the fields: start, stop and continue."}/>
-      }
-    }
 
     return (
     <div className="flex flex-col h-screen">
@@ -112,7 +106,7 @@ export default function JournalGoalForm() {
                         </div>
                     <div>&nbsp;</div>
                     {/*Main journal entry space*/}
-                    <div style={dottedPaper} className="flex-grow rounded-md p-10">
+                    <div style={dottedPaper} className="flex-grow rounded-md p-4 lg:p-10">
                         <div className="flex justify-between">
                             <span className="text-lg md:text-2xl font-sriracha text-left font-bold">Title</span>
                             <span className="text-xs md:text-base text-right text-grey">Summarise what this entry is about.</span>

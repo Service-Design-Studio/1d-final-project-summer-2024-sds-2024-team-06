@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 //import { useUser } from '../pages/User.js'; 
 import { guideMe, generateTip } from '../api/gemini.js'
+import {enqueueGuideMe, enqueueGenerateTip } from '../api/queueManager.js'
 
 import Navigation from "../components/Navigation";
 
@@ -201,7 +202,7 @@ export default function JournalOpenForm() {
                                                   const generatedGuide = await guideMe(journalEntry);
                                                   //update the prompt-space with new lines/ break lines
                                                   //setTipBody(formatPrompt(generatedGuide.response))
-                                                  setTipBody(generatedGuide)
+                                                  setTipBody(formatPrompt(generatedGuide.response))
                                                   // change button back to "Guide Me"
                                                   setGenerateButton("Guide Me")
                                                   enableButton("button-prompt");

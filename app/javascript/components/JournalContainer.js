@@ -15,7 +15,7 @@ const Journal = ({ entries }) => {
   const mostRecentGoalEntry = sortedGoalEntries[0];
 
   return (
-    <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', position: 'relative', overflowY: 'auto', height: '100vh' }}>
+    <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', position: 'relative', overflowY: 'auto', overflowX: 'hidden', height: '100vh' }}>
       {/* Container for the ExpandableButton */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
         <span className="text-5xl text-left font-bold mb-10">The goal I am committed to practicing...</span>
