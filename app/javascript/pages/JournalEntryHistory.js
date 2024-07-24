@@ -2,15 +2,8 @@ import React, { useState, useEffect } from 'react';
 import useFetch from '../api/useFetch'
 import Navigation from '../components/Navigation'
 import Journal from '../components/JournalContainer'
-import ExpandableButton from '../components/ExpandableButton'
 
-// to use dotted paper background: <div style={dottedPaper}></div>
-const dottedPaper = {
-  height: 'relative',
-  background: 'url(/images/background-dottedpaper.svg) no-repeat center center fixed',
-  backgroundSize: 'cover',
-};
-
+// to use brown paper paper background: <div style={dottedPaper}></div>
 const brownPaper = {
   height: 'relative',
   background: 'url(/images/background-brown.svg) no-repeat center center fixed',
@@ -65,10 +58,8 @@ export default function JournalEntryHistory() {
   return (
     <div className="flex flex-col h-screen">
       <Navigation />
-      <div style={brownPaper} className="grid grid-rows-8 no-scrollbar">
-        <div className="w-4/5 mx-auto px-4">
-          <Journal entries={entries}></Journal>
-        </div>
+      <div style={brownPaper} className="flex-1 flex-grow p-4 lg:p-10">
+        <Journal entries={entries}></Journal>
       </div>
     </div>
   );
