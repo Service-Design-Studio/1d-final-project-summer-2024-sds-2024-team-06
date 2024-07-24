@@ -68,4 +68,5 @@ Rails.application.routes.draw do
 
   # Catch-all route for React Router
   get '*path', to: 'homepage#index', constraints: ->(request) { request.format.html? }
+
 end

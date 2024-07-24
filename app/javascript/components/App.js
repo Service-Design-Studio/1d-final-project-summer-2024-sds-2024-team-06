@@ -11,18 +11,11 @@ import Activities from '../pages/Activities';
 import GalleryWalk from '../pages/GalleryWalk';
 import GalleryWalkSession from '../pages/GalleryWalkSession';
 import Journal from '../pages/JournalEntryHistory';
-import JournalEntry from '../pages/JournalEntry';
 import JournalGoalForm from './JournalGoalForm';
 import JournalOpenForm from './JournalOpenForm';
+import JournalDetail from '../pages/JournalDetail';
+import { useUser } from '../pages/User';
 
-
-// To use dotted paper background: <div style={dottedPaper}></div>
-const dottedPaper = {
-  height: '100vh',
-  width: '100vw',
-  background: 'url(/images/background-dottedpaper.svg) no-repeat center center fixed',
-  backgroundSize: 'cover',
-};
 
 // Routing
 const App = () => {
@@ -41,7 +34,7 @@ const App = () => {
           <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
           <Route exact path="/gallery-walk/:id" element={<GalleryWalkSession />}></Route>
           <Route exact path="/journal" element={<Journal />}></Route>
-          <Route exact path="/journal/:id" element={<JournalEntry />}></Route>
+          <Route exact path="/journal/:id" element={<JournalDetail />}></Route>
           {/* <Route exact path="/journal/create" element={<JournalEntryForm />}></Route> */}
           <Route exact path="/journal/goal-setting" element={<JournalGoalForm />}></Route>
           <Route exact path="/journal/open-ended" element={<JournalOpenForm />}></Route>

@@ -64,7 +64,7 @@ export default function HorizontalScroll({checkedIn, onAddFlower}) {
   return (
     <>
     {/* Message layer */}
-    <h1 className='text-lg font-sans-800 text-grey'>{msg}</h1>
+    <h1 id="mood-chosen" className='text-lg font-sans-800 text-grey'>{msg}</h1>
 
     {/* Mood carousel layer with submit button if user hasnt checked-in yet */}
     {
@@ -72,7 +72,7 @@ export default function HorizontalScroll({checkedIn, onAddFlower}) {
         {/* individually spawns the pre-defined emotions */}
         {standard_moods.map((mood, idx) => {
           return (
-            <button className="min-w-100 h-200 mr-4" id={mood.id}
+            <button className="min-w-100 h-200 mr-4" id={mood.name}
               key={idx}
               style={{
                 backgroundImage: `url(${mood.src})`,
@@ -85,7 +85,7 @@ export default function HorizontalScroll({checkedIn, onAddFlower}) {
                               setMessage(messages.update + mood.name)
                               //console.log(mood);
                               }}>
-              <label for={mood.id}>{mood.name}</label>
+              <label for={mood.name}>{mood.name}</label>
             </button>
           );
         })}   
@@ -96,12 +96,11 @@ export default function HorizontalScroll({checkedIn, onAddFlower}) {
     { getMood && <button className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full p-4 w-48" 
             onClick={() => {
               setGetMood(false)
-              //console.log(checkedIn);
               // post to end-api
               createFlowerForUser({
                   mood: mood.name?.toLowerCase(), // changed from mood.name
                   color: mood.color,
-                  user_id: currentUser.id,
+                  //user_id: currentUser.id,
                   date_created: new Date().toISOString(),
               })
               // reload the page to see the new flower

@@ -1,69 +1,38 @@
+standard_moods = [
+  { name: 'Excited', color: 'Neon green', hexcode: '#39FF14' },
+  { name: 'Very happy', color: 'Yellow', hexcode: '#FFFF00' },
+  { name: 'Meh', color: 'Bright blue', hexcode: '#007FFF' },
+  { name: 'Tired', color: 'Black', hexcode: '#000000' },
+  { name: 'Content', color: 'Brown', hexcode: '#964B00' },
+  { name: 'Angry', color: 'Red', hexcode: '#FF0000' },
+  { name: 'Happy', color: 'Lime green', hexcode: '#32CD32' },
+  { name: 'In love', color: 'Pink', hexcode: '#FFC0CB' },
+  { name: 'Unhappy', color: 'Navy blue', hexcode: '#000080' },
+  { name: 'Teary', color: 'Light purple', hexcode: '#E6E6FA' },
+  { name: 'Upset', color: 'Dark blue', hexcode: '#00008B' },
+  { name: 'Confused', color: 'Gray', hexcode: '#808080' },
+]
 
-# daily_login = [{:name => 'Angry', :color => 'G', :updated_at => '25-June-2024'},
-#         {:name => 'Happy', :color => 'Yellow', :updated_at => '26-June-2024'},
-#         {:name => 'Sad', :color => 'Blue', :updated_at => '27-June-2024'},
-#           {:name => 'Bored', :color => 'Grey', :updated_at => '29-June-2024'},
-#           {:name => 'Sad', :color => 'Blue', :updated_at => '30-June-2024'},
-#           {:name => 'Excited', :color => 'Orange', :updated_at => '31-June-2024'},
-#           {:name => 'Meh', :color => 'Light_Gray', :updated_at => '01-July-2024'},
-#           {:name => 'Happy', :color => 'Yellow', :updated_at => '03-July-2024'},
+User.find_or_create_by(id: 1) do |user|
+  user.dateLastLoggedIn = Date.today
+  user.email = "test_user@example.com"
+  user.password = "password" # Assuming Devise will handle the encryption
+  user.password_confirmation = "password"
+end
 
-# #ABOVE NEEDS TO HAVE MORE ATTRIBUTES, HEXCODE, USERID, ETC.
+user = User.find_or_create_by(id: 2) do |user|
+  user.dateLastLoggedIn = Date.today
+  user.email = "bob@example.com"
+  user.password = "password" # Assuming Devise will handle the encryption
+  user.password_confirmation = "password"
+end
 
-#      ]
-
-# daily_login.each do |mood|
-#   Mood.create!(mood)
-# end
-
-# standard_moods = [
-#   { name: 'Excited', color: 'Neon green', hexcode: '#39FF14' },
-#   { name: 'Very happy', color: 'Yellow', hexcode: '#FFFF00' },
-#   { name: 'Meh', color: 'Bright blue', hexcode: '#007FFF' },
-#   { name: 'Tired', color: 'Black', hexcode: '#000000' },
-#   { name: 'Content', color: 'Brown', hexcode: '#964B00' },
-#   { name: 'Angry', color: 'Red', hexcode: '#FF0000' },
-#   { name: 'Happy', color: 'Lime green', hexcode: '#32CD32' },
-#   { name: 'In love', color: 'Pink', hexcode: '#FFC0CB' },
-#   { name: 'Unhappy', color: 'Navy blue', hexcode: '#000080' },
-#   { name: 'Teary', color: 'Light purple', hexcode: '#E6E6FA' },
-#   { name: 'Upset', color: 'Dark blue', hexcode: '#00008B' },
-#   { name: 'Confused', color: 'Gray', hexcode: '#808080' },
-# ]
-
-# standard_moods.each do |mood_attributes|
-#   Mood.find_or_create_by!(mood_attributes)
-# end
-
-# seed users every fresh pull
-
-# User.find_each do |user|
-#   Mood.all.each do |mood|
-#     mood.user_id = user.id
-#     user.moods << mood unless user.moods.include?(mood)
-#   end
-# end
-
-User.create!(id: 1,
-  dateLastLoggedIn: Date.today,
-  email: "test_user@example.com",
-  password: "password", # Devise will handle the encryption
-  password_confirmation: "password"
-)
-
-User.create!( id: 2,
-  dateLastLoggedIn: Date.today,
-  email: "bob@example.com",
-  password: "password", # Devise will handle the encryption
-  password_confirmation: "password"
-)
-
-User.create!( id: 3,
-  dateLastLoggedIn: Date.today,
-  email: "alice@example.com",
-  password: "password", # Devise will handle the encryption
-  password_confirmation: "password"
-)
+User.find_or_create_by(id: 3) do |user|
+  user.dateLastLoggedIn = Date.today
+  user.email = "alice@example.com"
+  user.password = "password" # Assuming Devise will handle the encryption
+  user.password_confirmation = "password"
+end
 
 ArtPiece.create!([
   {artID: 00001,
@@ -128,28 +97,109 @@ ArtPiece.create!([
   captions: ""},
 ])
 
+Journal.create!(
+    user_id: user.id,
+    journal_title: "Today my dog died",
+    journalentry: "I am so depressed.",
+    tip_title: "Process your emotions",
+    tip_body: "Take the time to grieve the passing of your dog. It can be beneficial to process together with your loved ones that share good memories with your dog."
+  )
 
+Journal.create!(
+  user_id: user.id,
+  journal_title: "Today I got engaged!",
+  journalentry: "I am so happy.",
+  tip_title: "Congratulations!",
+  tip_body: "Celebrate your engagement with your loved ones. It's a special moment that you'll remember for the rest of your life."
+)
+
+Journal.create!(
+  user_id: user.id,
+  journal_title: "Today I got fired!",
+  journalentry: "I am so angry.",
+  tip_title: "Sometimes things are out of our control!",
+  tip_body: "Remember that you are more than just your job! Spend time with loved ones and friends, before resuming your job hunt."
+)
+
+GoalJournal.create!(
+    user_id: user.id,
+    journal_title: "Get better at guitar",
+    journal_start: "I will start getting better at guitar by practicing 30 minutes a day.",
+    journal_end: "I will stop doomscrolling tiktok",
+    journal_third: "I will continue prioritising my tasks."
+  )
+
+GoalJournal.create!(
+  user_id: user.id,
+  journal_title: "Do better in school",
+  journal_start: "I will start studying harder.",
+  journal_end: "I will stop playing video games.",
+  journal_third: "I will continue exercising."
+)
+
+GoalJournal.create!(
+    user_id: user.id,
+    journal_title: "Exercise more",
+    journal_start: "I will start hitting the gym regularly",
+    journal_end: "I will stop smoking cigarettes",
+    journal_third: "I will continue eating well."
+  )
 
 # Create 3 Journal entries
-3.times do |i|
-  Journal.create!(
-    user_id: 2,
-    journal_title: "Journal Title #{i + 1}",
-    journalentry: "This is the content of journal entry #{i + 1}.",
-    tip_title: "Tip Title #{i + 1}",
-    tip_body: "This is the body of tip #{i + 1}.",
-    date_created: Date.today - i.days
-  )
+# 3.times do |i|
+#   Journal.create!(
+#     user_id: user.id,
+#     journal_title: "Journal Title #{i + 1}",
+#     journalentry: "This is the content of journal entry #{i + 1}.",
+#     tip_title: "Tip Title #{i + 1}",
+#     tip_body: "This is the body of tip #{i + 1}."
+#   )
+# end
+
+# # Create 3 GoalJournal entries
+# 3.times do |i|
+#   GoalJournal.create!(
+#     user_id: user.id,
+#     journal_title: "Goal Journal Title #{i + 1}",
+#     journal_start: "This is the start of goal journal entry #{i + 1}.",
+#     journal_end: "This is the end of goal journal entry #{i + 1}.",
+#     journal_third: "This is the third part of goal journal entry #{i + 1}."
+#   )
+# end
+
+standard_moods.each do |mood_attributes|
+  mood = user.moods.find_or_initialize_by(name: mood_attributes[:name])
+  if mood.new_record?
+    mood.hexcode = mood_attributes[:hexcode]
+    mood.color = mood_attributes[:color]
+    if mood.save
+      puts "Mood created: #{mood.name}"
+    else
+      puts "Failed to create mood: #{mood.errors.full_messages.join(", ")}"
+    end
+  end
 end
 
-# Create 3 GoalJournal entries
-3.times do |i|
-  GoalJournal.create!(
-    user_id: 2,
-    journal_title: "Goal Journal Title #{i + 1}",
-    journal_start: "This is the start of goal journal entry #{i + 1}.",
-    journal_end: "This is the end of goal journal entry #{i + 1}.",
-    journal_third: "This is the third part of goal journal entry #{i + 1}.",
-    date_created: Date.today - i.days
-  )
+def random_datetime
+  start_date = Time.new(2024, 1, 1)
+  end_date = Time.new(2024, 12, 31, 23, 59, 59)
+  random_time = rand(start_date.to_f..end_date.to_f)
+  Time.at(random_time)
+end
+
+flowers = [
+  {color: "Blue", mood: "Sad", created_at: random_datetime()},
+  {color: "Red", mood: "Happy", created_at: random_datetime()},
+  {color: "Yellow", mood: "Excited", created_at: random_datetime()},
+  {color: "Green", mood: "Happy", created_at: random_datetime()},
+  {color: "Purple", mood: "Sad", created_at: random_datetime()},
+  {color: "Orange", mood: "Excited", created_at: random_datetime()},
+  {color: "Pink", mood: "Happy", created_at: random_datetime()},
+  {color: "White", mood: "Happy", created_at: random_datetime()},
+  {color: "Black", mood: "Sad", created_at: random_datetime()},
+  {color: "Brown", mood: "Meh", created_at: random_datetime()}
+]
+
+flowers.each do |flower_attributes|
+  user.flowers.find_or_create_by!(flower_attributes)
 end

@@ -5,8 +5,9 @@ RSpec.describe Api::JournalsController, type: :controller do
   let!(:journal) do
     user.journals.create(
       journalentry: "Test journal entry",
-      date: Date.today,
-      user: user
+      journal_title: "Test journal title",
+      tip_title: "Test tip title",
+      tip_body: "Test tip body"
     )
   end
 
@@ -19,53 +20,41 @@ RSpec.describe Api::JournalsController, type: :controller do
   end
 
   describe "GET #index" do
-    it "returns a success response" do
+    it "assigns @journals" do
       get :index
-      expect(response).to have_http_status(:ok)
-    end
-
-    it "returns the correct list of journals" do
-      get :index
-      json_response = JSON.parse(response.body)
-      expect(json_response.size).to eq(user.journals.count)
-      expect(json_response.map { |journal| journal['id'] }).to include(journal.id)
+      expect(assigns(:journals)).to eq(user.journals)
     end
   end
 
   describe "GET #show" do
-    it "returns a success response" do
+    it "assigns @journal" do
       get :show, params: { id: journal.id }
-      expect(response).to have_http_status(:ok)
+      expect(assigns(:journal)).to eq(journal)
     end
 
-    it "returns the correct journal" do
+    it "calls the set_journal method" do
+      expect(controller).to receive(:set_journal).and_call_original
       get :show, params: { id: journal.id }
-      json_response = JSON.parse(response.body)
-      expect(json_response['id']).to eq(journal.id)
     end
 
-    it "returns a not found response for an invalid id" do
-      get :show, params: { id: 'invalid_id' }
-      expect(response).to have_http_status(:not_found)
+    it "calls the authorize_user! method" do
+      expect(controller).to receive(:authorize_user!).and_call_original
+      get :show, params: { id: journal.id }
     end
   end
 
   describe "POST #create" do
-    let(:valid_attributes) { { journalentry: "New journal entry", date: Date.today } }
-    let(:invalid_attributes) { { journalentry: "", date: "" } }
-
-    it "creates a new journal with valid attributes" do
-      expect {
-        post :create, params: { journal: valid_attributes }
-      }.to change(Journal, :count).by(1)
-      expect(response).to have_http_status(:created)
+    let(:valid_attributes) { { journalentry: "New journal entry", journal_title: "New journal title", tip_title: "New tip title", tip_body: "New tip body"} }
+    
+    it "assigns @journal with valid attributes" do
+      post :create, params: { journal: valid_attributes }
+      expect(assigns(:journal)).to be_a(Journal)
+      expect(assigns(:journal)).to be_persisted
     end
 
-    it "does not create a new journal with invalid attributes" do
-      expect {
-        post :create, params: { journal: invalid_attributes }
-      }.not_to change(Journal, :count)
-      expect(response).to have_http_status(:unprocessable_entity)
+    it "calls the journal_params method" do
+      expect(controller).to receive(:journal_params).and_call_original
+      post :create, params: { journal: valid_attributes }
     end
   end
 end

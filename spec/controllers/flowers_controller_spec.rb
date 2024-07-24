@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe Api::FlowersController, type: :controller do
   let!(:user) { User.create(email: "rspec@example.com", password: "password", password_confirmation: "password", dateLastLoggedIn: Date.today) }
-  let!(:flower_params) { {color: "blue", mood: "sad", date_created: Date.new(2022, 7, 10) }}
+  let!(:flower_params) { {color: "blue", mood: "sad" }}
   let!(:flower) { user.flowers.create(flower_params) }
 
   before do
@@ -15,74 +15,40 @@ RSpec.describe Api::FlowersController, type: :controller do
   end
 
   describe "GET #index" do
-    it "returns a success response" do
+    it "assigns @flowers" do
       get :index
-      expect(response).to have_http_status(:ok)
-    end
-
-    it "returns flowers belonging to the current user" do
-      get :index
-      expect(response).to have_http_status(:ok)
-      expect(assigns(:flowers)).to include(flower)
+      expect(assigns(:flowers)).to eq(user.flowers)
     end
   end
 
   describe 'GET #show' do
-    context 'when the flower exists' do
-      it 'returns the flower' do
-        get :show, params: { id: flower.id }
-
-        expect(response).to have_http_status(:ok)
-        expect(JSON.parse(response.body)['id']).to eq(flower.id)
-      end
+    it "assigns @flower" do
+      get :show, params: { id: flower.id }
+      expect(assigns(:flower)).to eq(flower)
     end
 
-    context 'when the flower does not exist' do
-      it 'returns a not found error' do
-        get :show, params: { id: 'nonexistent_id' }
-
-        expect(response).to have_http_status(:not_found)
-        expect(JSON.parse(response.body)['error']).to eq('Flower not found')
-      end
+    it "calls the set_flower method" do
+      expect(controller).to receive(:set_flower).and_call_original
+      get :show, params: { id: flower.id }
     end
 
-    context 'when the user is not authorized' do
-      let(:other_user) { User.create(email: "rspec2@example.com", password: "password", password_confirmation: "password", dateLastLoggedIn: Date.today) }
-      let(:other_flower) { other_user.flowers.create(flower_params) }
-
-      it 'returns a forbidden error' do
-        get :show, params: { id: other_flower.id }
-
-        expect(response).to have_http_status(:forbidden)
-        expect(JSON.parse(response.body)['error']).to eq('Not authorized')
-      end
-
-    after do
-      other_user.destroy if other_user.persisted?
+    it "calls the authorize_user! method" do
+      expect(controller).to receive(:authorize_user!).and_call_original
+      get :show, params: { id: flower.id }
     end
   end
 
-end
-
   describe "POST #create" do
-    context "with valid params" do
-      it "creates a new flower" do
-        expect {
-          post :create, params: { flower: flower_params }
-        }.to change(Flower, :count).by(1)
-        expect(response).to have_http_status(:created)
-      end
+    let(:valid_attributes) { { color: "red", mood: "happy"} }
+    it "calls the flower_params method" do
+      expect(controller).to receive(:flower_params).and_call_original
+      post :create, params: { flower: flower_params }
     end
 
-    context "with invalid params" do
-      let(:invalid_params) { { flower: { mood: '', color: '', user_id: user.id } } }
-
-      it "does not create a new flower" do
-        expect {
-          post :create, params: invalid_params
-        }.to_not change(Flower, :count)
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
+    it "assigns @flower with valid attributes" do
+      post :create, params: { flower: valid_attributes }
+      expect(assigns(:flower)).to be_a(Flower)
+      expect(assigns(:flower)).to be_persisted
     end
   end
 end

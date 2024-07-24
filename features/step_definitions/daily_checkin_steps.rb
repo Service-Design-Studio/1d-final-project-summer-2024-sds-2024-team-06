@@ -1,8 +1,8 @@
 
 
 Given("I am on a new browser") do
-  logout(:user) # Ensure any user session is ended
-  Capybara.reset_sessions! # Reset browser session
+  logout(:user)
+  Capybara.reset_sessions! 
 end
 
 When("I visit the landing page") do
@@ -13,55 +13,26 @@ Then("I should be redirected to the log in page") do
   expect(page).to have_current_path('/users/sign_in')
 end
 
-Given("I am logged in") do
-  # # Directly create a user in the database
-  # @user = User.create!(email: "user@example.com", password: "password", password_confirmation: "password")
-  # login_as(@user, scope: :user) #login_as is warden function for devise inherited from env.rb
-  visit root_path
-  fill_in 'Email', with: "bob@example.com"
-  fill_in 'Password', with: "password"
-  click_button 'Log in'
-end
-
-# Then("the webpage should be displayed") do
-#   expect(page).to have_content('stART')
-# end
-##commented out because login feature step alr has
-
 Given("I am logged in as guest") do
-  # use the guest thing jonas made
-  # @guest_user = User.guest
-  # login_as(@guest_user, scope: :user)
   visit root_path
   click_on('Continue as Guest')
 end
 
 Given("I am logged in on the check-in page") do
-  step "I am logged in" #uses the given step above
+  step "I have logged in" #uses the given step above
   visit '/check-in'
 end
 
-When("I click on 'sad' mood block") do
-  click_on('sad')
+When("I click on 'Excited' mood block") do
+  click_on('Excited')
 end
 
-Then("I should see a flower with sad colour") do
-  expect(page).to have_css('img[src*="sad"]')
+Then("I should see the mood chosen to be Excited") do
+  expect(page).to have_css('h1#mood-chosen', text: 'Excited')
 end
 
 Given("I am logged into an account with flowers") do
-  # @user = User.create!(email: "activeuser@example.com", password: "password", password_confirmation: "password")
-  # login_as(@user, scope: :user)
-  visit root_path
-  fill_in 'Email', with: "bob@example.com"
-  fill_in 'Password', with: "password"
-  click_button 'Log in'
-  # Flower.create!(
-  #   color: "Red", # Example value, adjust as needed
-  #   mood: "happy",
-  #   date_created: Date.today,
-  #   user: @user
-  # )
+  step "I have logged in"
 end
 
 When("I visit the check-in page") do
@@ -69,7 +40,10 @@ When("I visit the check-in page") do
 end
 
 Then("I should see the correct number of flowers shown in the grids") do
-  expect(page).to have_css('img[src*="Red"]', count: 1)
+  user = User.find_by(email: "bob@example.com")
+  expected_flower_count = user.flowers.count
+  actual_flower_count = page.all('img.flower-image').size
+  expect(actual_flower_count).to eq(expected_flower_count)
 end
 
 Given("I have already submitted the mood for today") do
@@ -89,25 +63,7 @@ Given("I am not logged in") do
 end
 
 Given("there are two users with flowers in database") do
-  # @user1 = User.create!(email: "activeuser1@example.com", password: "password", password_confirmation: "password")
-  visit root_path
-  fill_in 'Email', with: "bob@example.com"
-  fill_in 'Password', with: "password"
-  click_button 'Log in'
-  # Flower.create!(
-  #   color: "Red", # Example value, adjust as needed
-  #   mood: "happy",
-  #   date_created: Date.today,
-  #   user: @user1
-  # )
-  # @user2 = User.create!(email: "activeuser2@example.com", password: "password", password_confirmation: "password")
-  # Flower.create!(
-  #   color: "Blue", # Example value, adjust as needed
-  #   mood: "sad",
-  #   date_created: Date.today,
-  #   user: @user2
-  # )
-
+  step "I have logged in"
 end
 
 When("user 1 visit api endpoint for flowers") do
@@ -115,12 +71,17 @@ When("user 1 visit api endpoint for flowers") do
 end
 
 Then("he will only see his own flowers") do
+  json_string = page.body.match(/<pre>(.*?)<\/pre>/m)[1]
+  json_response = JSON.parse(json_string)
   
+  user = User.find_by(email: "bob@example.com")
+  user_flower_ids = user.flowers.pluck(:id)
+  json_response_ids = json_response.map { |flower| flower['id'] }.sort
+  expect(json_response_ids).to eq(user_flower_ids.sort)
 end
 
 
 After do
-  # Clean up any created users to avoid test pollution
   User.delete_all
 end
 
