@@ -100,9 +100,9 @@ export default function JournalDetail() {
                         <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
                             {/*Main journal entry space*/}
                             <div style={dottedPaper} className="flex-grow sm:col-span-2 rounded-md p-4 lg:p-10">
-                              <h1 className="text-lg lg:text-2xl font-sriracha font-bold">{journalEntry.journal_title}</h1>
+                              <h1 className="text-lg lg:text-2xl font-sriracha font-bold" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{journalEntry.journal_title}</h1>
                               <div>&nbsp;</div>
-                              <p className="text-xs lg:text-base" style={{ overflowWrap: 'break-word' }}>{journalEntry.journalentry}</p>
+                              <p className="text-xs lg:text-base" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{journalEntry.journalentry}</p>
                             </div>
                             {/*Tip space if it exists*/}
                             {journalEntry.tip_title !== undefined && (
@@ -125,7 +125,7 @@ export default function JournalDetail() {
                 <div className='col-span-3'>
                         <div className="flex justify-between">
                               <div>
-                                <title className="text-[#382C0D] text-2xl lg:text-4xl font-sriracha block text-left font-bold">Goal: {journalEntry.journal_title}</title>
+                                <title className="text-[#382C0D] text-2xl lg:text-4xl font-sriracha block text-left font-bold" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>Goal: {journalEntry.journal_title}</title>
                                 <h1 className="text-[#382C0D] text-bold text-sm lg:text-base block text-left">{journalEntry.date_created}</h1>
                               </div>
                               {/*Exit button*/}
@@ -149,7 +149,7 @@ export default function JournalDetail() {
                             <div>
                             <h1 className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will end...</h1>
                             <div>&nbsp;</div>
-                            <p id = "journal-end" className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word' }}>{journalEntry.journal_end}</p>
+                            <p id = "journal-end" className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{journalEntry.journal_end}</p>
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,7 @@ export default function JournalDetail() {
                             <div>
                             <h1 className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will continue...</h1>
                             <div>&nbsp;</div>
-                            <p id = "journal-continue" className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word' }}>{journalEntry.journal_third}</p>
+                            <p id = "journal-continue" className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{journalEntry.journal_third}</p>
                             </div>
                         </div>
                     </div>
