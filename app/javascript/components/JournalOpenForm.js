@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 //import { useUser } from '../pages/User.js'; 
 import { guideMe, generateTip } from '../api/gemini.js'
-import {enqueueGuideMe, enqueueGenerateTip } from '../api/queueManager.js'
+
 
 import Navigation from "../components/Navigation";
 
@@ -165,7 +165,7 @@ export default function JournalOpenForm() {
                                                 return;
                                               };
                                               // llm to generate a tip with tip title
-                                              const generatedTip = await generateTip(journalEntry);
+                                                const generatedTip = await generateTip(title+journalEntry);
                                               // post to end-api
                                               let data_id = await createJournalForUser({
                                                 //user_id: currentUser.id,
@@ -199,7 +199,8 @@ export default function JournalOpenForm() {
                                                   setGenerateButton("Generating...");
                                                   disableButton("button-prompt");
                                                   // llm to generate a prompt
-                                                  const generatedGuide = await guideMe(journalEntry);
+                        
+                                                  const generatedGuide = await guideMe(title+journalEntry);
                                                   //update the prompt-space with new lines/ break lines
                                                   //setTipBody(formatPrompt(generatedGuide.response))
                                                   setTipBody(formatPrompt(generatedGuide.response))
