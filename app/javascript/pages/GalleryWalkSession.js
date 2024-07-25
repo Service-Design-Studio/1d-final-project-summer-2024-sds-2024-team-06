@@ -15,7 +15,7 @@ export default function GalleryWalkSession() {
   console.log(artPiece);
 
   return (
-    <>
+    <div className='flex flex-col h-screen'>
     <Navigation />
     <div className='h-full'>
     {isPending && 
@@ -23,8 +23,8 @@ export default function GalleryWalkSession() {
         <h1 className='h-full w-full'>Loading...</h1>
     </div>}
     {error && <div>{error}</div>}
-    {artPiece && <AudioPlayer imageUrl={artPiece.imageURL} id={artPiece.artID} mp3={artPiece.audio} title={artPiece.artTitle} captions={artPiece.captions}/>}
+    {artPiece && <AudioPlayer imageUrl={artPiece.imageURL} id={artPiece.artID} mp3={artPiece.audio} title={artPiece.artTitle} artist={artPiece.artist} captions={artPiece.captions}/>}
     </div>
-    </>
+    </div>
   )
 }

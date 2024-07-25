@@ -70,7 +70,7 @@ export default function JournalDetail() {
 
   console.log(journalEntry);
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) return (<div>Loading...</div>);
   if (error) return <div>Error: {error}</div>;
 
 

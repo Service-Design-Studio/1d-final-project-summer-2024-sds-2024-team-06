@@ -11,7 +11,7 @@ const NGSLanding = {
 
 export default function Landing() {
   return (
-    <div style={NGSLanding} class="flex justify-center no-scrollbar"
+    <div style={NGSLanding} className="flex justify-center no-scrollbar"
         onClick={() => {window.location.href="/check-in"}}>
       {/*Continue button*/}
       <button id="continue" className="text-sm md:text-base fixed bottom-2 rounded-full bg-white hover:bg-gray-200 text-black py-2 px-4">Click anywhere to continue</button>
