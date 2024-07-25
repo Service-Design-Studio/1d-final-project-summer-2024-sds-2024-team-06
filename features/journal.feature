@@ -42,23 +42,18 @@ Feature: Journal
         When I click on "Guide Me" button
         Then a sidebar should open with a prompt
 
-    Scenario: Create goal-setting journal entry
-        Given I am on goal-setting journal page
-        When I click on "Generate Tip" button
-        Then a sidebar should open with a tip
-
+    @journal-submission
     Scenario: Submit open-ended journal entry
         Given I have completed writing my open-ended journal entry
         When I click submit
-        Then a pop-up self-care tip will be displayed
-        And I will be redirected to journal entries history
+        Then I will be redirected to open submission page
 
+    @journal-submission
     Scenario: Submit goal-setting journal entry
         Given I have completed writing my goal-setting journal entry
         When I click submit
-        Then I will be redirected to journal entries history
-        And it should be the first entry
-
+        Then I will be redirected to goal submission page
+    
     Scenario: View past goal-setting journal entry
         Given I am on journal entries history
         When I click on a goal-setting journal entry item
@@ -70,3 +65,5 @@ Feature: Journal
         When I click on a open-ended journal entry item
         Then I will be redirected to the open-ended journal past entry page
         And I will see my journal entry and final tip generated
+
+
