@@ -3,15 +3,15 @@ import React from 'react'
 export default function TestCheckIn() {
   return (
     <div className='bg-[#77CDC0] w-screen h-screen flex justify-center items-center' onClick={() => {window.location.href="/check-in"}}>
-      <div className='flex flex-row justify-between w-3/4 text-center'>
-        <div className='w-3/4'>
+      <div className='flex flex-row justify-between w-5/6 text-center'>
+        <div className='w-3/4 flex flex-col justify-center'>
           <h1 
-            style={{ fontSize: "3.75rem" , fontWeight: 800, marginRight: '7vw' }} 
+            style={{ fontSize: '3.75vw', fontWeight: 800, marginRight: '7vw' }} 
             className='italic text-black text-right'>
             First of all...
           </h1>
           <h1 
-            style={{ fontSize: "3.75rem", marginTop: '5px', fontWeight: 800, marginLeft: '5vw' }} 
+            style={{ fontSize: '3.75vw', marginTop: '5px', fontWeight: 800, marginLeft: '5vw' }} 
             className='italic text-[#F2FEDC] text-right'>
             Breathe
           </h1>
