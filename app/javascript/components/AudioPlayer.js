@@ -16,6 +16,8 @@ export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}
     <div className="flex-1 grow bg-black pt-4">
       <div className='flex justify-center items-center'>
         <img id="picture" src={imageUrl} alt={id} className="w-400 max-h-1/2 object-cover" />
+        {/* Journal page */}
+        <JournalArea />
       </div>
     </div>
     {/* Descriptions */}
@@ -24,7 +26,7 @@ export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}
         <h1 className="text-white text-xs md:text-base block font-sans text-left">{artist}</h1>
     </div>
     {/* Audio control */}
-    <div className='fixed bottom-3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 justify-center w-1/2'>
+    <div id="audio-player" className='fixed bottom-3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 justify-center w-1/2'>
         <Controls mp3={mp3}/>
     </div>
     </>

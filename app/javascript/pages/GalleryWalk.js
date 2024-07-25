@@ -69,6 +69,8 @@ export default function GalleryWalk() {
       {error && <div>{error}</div>}
       {artPieces && 
       <div className="flex-1 grow bg-black pt-4">
+        <title className="text-white text-2xl lg:text-4xl font-sriracha block text-left font-bold">Click on the following art works to analyse further</title>
+        <div>&nbsp;</div>
         <MansoryGrid artPieces={artPieces}/>
       </div>}
     </div>
