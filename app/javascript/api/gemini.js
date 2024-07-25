@@ -42,6 +42,52 @@ async function generateTip(input_text) {
   }
 }
 
+// async function generateTip(input_text) {
+//   try {
+//     // Initialize the model
+//     let model = genAI.getGenerativeModel({
+//       model: "gemini-1.5-pro",
+//       systemInstruction: "As a mindfulness Advisor for Adolescents, provide a tip based on their journal writings. The tips should be positive and encouraging. The output must be in JSON, consisting of a concise title that summarizes the tip and description of the tip. If input lacks specific information, provide a general tip using a random theme from mindfulness practices, self-care strategies, emotional awareness, resilience building, or fostering positive relationships. There should not be any reference to any chat history.Helplines shoud be in singapore context."
+//     });
+
+//     // Define the generation configuration
+//     const generationConfig = {
+//       temperature: 0.9,
+//       topP: 0.95,
+//       topK: 64,
+//       maxOutputTokens: 8192,
+//       responseMimeType: "application/json",
+//       responseSchema: {
+//         type: "object",
+//         properties: {
+//           title: { type: "string" },
+//           description: { type: "string" },
+//         },
+//         required: ["title", "description"],
+//       }
+//     };
+
+//     // Generate content
+//     const result = await model.generateContentStream(input_text, generationConfig);
+
+//     for await (const chunk of result.stream) {
+//       const chunkText = chunk.text();
+//       return process.stdout.write(chunkText);
+//     }
+//     // result = result.response.text().replace("```json\n", "").replace("\n```", "");
+//     // result = JSON.parse(result)
+//     // // Adds new line & parses it as json
+//     // //result = JSON.parse(result).description.replace(/([.!?])/g, '$1\n')
+//     // console.log(result)
+//     // return result;
+
+//   } catch (error) { 
+//     console.error('Error generating content:', error);
+//     return error;
+//   }
+// }
+
+
 
 
 

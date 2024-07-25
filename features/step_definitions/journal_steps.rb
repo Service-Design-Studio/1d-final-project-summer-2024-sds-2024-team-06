@@ -143,7 +143,7 @@ Then('I will be redirected to open submission page') do
 end
 
 Then('I will be redirected to goal submission page') do
-  latest_journal_id = user.journals.last.id
+  latest_journal_id = user.goal_journals.last.id
   latest_journal_id += 1
   expect(page).to have_current_path("/journal/#{latest_journal_id}?type=goal")
 end
