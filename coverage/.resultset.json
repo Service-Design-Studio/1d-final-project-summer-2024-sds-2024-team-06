@@ -60,7 +60,7 @@
           1,
           null,
           1,
-          166,
+          178,
           null,
           null,
           null
@@ -83,10 +83,10 @@
           1,
           null,
           1,
-          43,
+          47,
           null,
           null,
-          20,
+          22,
           null,
           null,
           null
@@ -122,8 +122,8 @@
           null,
           null,
           1,
-          49,
-          49,
+          53,
+          53,
           null,
           null,
           null,
@@ -336,16 +336,15 @@
           null
         ]
       },
-      "C:/Users/kiany/Desktop/term6/SDS/ungatekeeptest/1d-final-project-summer-2024-sds-2024-team-06/app/models/goal_journal.rb": {
+      "C:/Users/kiany/Desktop/term6/SDS/ungatekeeptest/1d-final-project-summer-2024-sds-2024-team-06/app/models/journal.rb": {
         "lines": [
           1,
           1,
           null,
-          null,
           1,
-          null,
-          null,
-          null,
+          1,
+          1,
+          1,
           null,
           1,
           null,
@@ -357,15 +356,16 @@
           null
         ]
       },
-      "C:/Users/kiany/Desktop/term6/SDS/ungatekeeptest/1d-final-project-summer-2024-sds-2024-team-06/app/models/journal.rb": {
+      "C:/Users/kiany/Desktop/term6/SDS/ungatekeeptest/1d-final-project-summer-2024-sds-2024-team-06/app/models/goal_journal.rb": {
         "lines": [
           1,
           1,
           null,
+          null,
           1,
-          1,
-          1,
-          1,
+          null,
+          null,
+          null,
           null,
           1,
           null,
@@ -451,7 +451,9 @@
           0,
           0,
           0,
-          null,
+          0,
+          0,
+          0,
           0,
           0
         ],
@@ -546,7 +548,7 @@
         }
       }
     },
-    "timestamp": 1721842607
+    "timestamp": 1721870054
   },
   "RSpec": {
     "coverage": {
@@ -630,7 +632,7 @@
           1,
           null,
           1,
-          70,
+          71,
           null,
           null,
           null
@@ -844,6 +846,18 @@
           null,
           1,
           6,
+          null,
+          null,
+          null
+        ]
+      },
+      "C:/Users/kiany/Desktop/term6/SDS/ungatekeeptest/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/pages_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
           null,
           null
@@ -1042,16 +1056,6 @@
           null
         ]
       },
-      "C:/Users/kiany/Desktop/term6/SDS/ungatekeeptest/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/pages_controller.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
       "C:/Users/kiany/Desktop/term6/SDS/ungatekeeptest/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/homepage_controller.rb": {
         "lines": [
           0,
@@ -1091,6 +1095,6 @@
         }
       }
     },
-    "timestamp": 1721842503
+    "timestamp": 1721869940
   }
 }
