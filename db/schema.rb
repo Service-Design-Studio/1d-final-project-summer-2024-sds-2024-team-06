@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_18_101438) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_25_101015) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -53,6 +53,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_101438) do
     t.string "image_url"
   end
 
+  create_table "echoes_journals", force: :cascade do |t|
+    t.string "journal_title"
+    t.text "journal_entry"
+    t.string "tip_title"
+    t.text "tip_body"
+    t.string "imageURL"
+    t.date "date_created"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
   create_table "flowers", force: :cascade do |t|
     t.string "color"
     t.string "mood"
@@ -61,7 +73,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_101438) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "day"
+    t.integer "day_month"
+    t.integer "month"
     t.index ["user_id"], name: "index_flowers_on_user_id"
+  end
+
+  create_table "gallery_journals", force: :cascade do |t|
+    t.string "journal_title"
+    t.text "journal_entry"
+    t.string "tip_title"
+    t.text "tip_body"
+    t.string "imageURL"
+    t.date "date_created"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "goal_journals", force: :cascade do |t|

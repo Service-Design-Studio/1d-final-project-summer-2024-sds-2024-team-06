@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     resources :flowers
     resources :moods
     resources :goal_journals
+    resources :echoes_journals
+    resources :gallery_journals
 
     resources :flowers do
       collection do
