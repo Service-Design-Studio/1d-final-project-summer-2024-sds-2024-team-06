@@ -190,7 +190,7 @@ export default function TestCheckInFlower() {
         >
           How are you feeling today?
         </h1>
-        <div className='grid grid-cols-3 w-5/6 mx-auto items-center'  
+        <div className='grid grid-cols-3 w-5/6 md:w-11/12 mx-auto items-center'  
         style={{ height: '75vh',
           paddingRight: '10vw',
           paddingLeft: '10vw',
@@ -200,7 +200,7 @@ export default function TestCheckInFlower() {
           style={{
             ...moodButtonStyle
           }}>
-            <div className="flex flex-col w-1/2 h-full md:w-3/4">
+            <div className="flex flex-col w-full h-full items-end">
             <button onClick={toggleMoodDropdown} type="button" style={{
               fontSize: "1.125rem",
               width: 'fit-content'
@@ -215,13 +215,14 @@ export default function TestCheckInFlower() {
                 transition: 'max-height 0.35s ease-in-out',
                 overflow: 'hidden',
                 maxHeight: isMoodDropDownVisible ? moodMaxHeight : '0',
-              }}>
+              }}
+              className="w-3/5">
                 <Card>
                   <CardHeader>
-                    <CardDescription>What are you feeling?</CardDescription>
+                    <CardDescription>How are you feeling today?</CardDescription>
                   </CardHeader>
-                  <CardContent className="grid grid-cols-2">
-                    <div className="flex flex-col space-y-4 me-5">
+                  <CardContent className="grid grid-cols-2 gap-5">
+                    <div className="flex flex-col space-y-4">
                     {moods.filter((_, index) => index % 2 === 0).map((mood) => (
                       <p className="hover:cursor-pointer hover:font-bold" onClick={() => changeMood(mood)} key={mood.name}>{mood.name}</p>
                     ))}
@@ -247,7 +248,7 @@ export default function TestCheckInFlower() {
           style={{
             ...colorButtonStyle
           }}>
-            <div className="flex flex-col w-1/2 h-full mx-auto">
+            <div className="flex flex-col h-full w-full items-start">
             <button type="button" onClick={toggleColorDropdown} style={{
               fontSize: "1.125rem",
               width: 'fit-content' 
@@ -262,7 +263,8 @@ export default function TestCheckInFlower() {
                 transition: 'max-height 0.35s ease-in-out',
                 overflow: 'hidden',
                 maxHeight: isColorDropDownVisible ? colorMaxHeight : '0',
-              }}>
+              }}
+              className="w-3/5">
                 <Card>
                   <CardHeader>
                     <CardDescription>Which color represents your emotions?</CardDescription>

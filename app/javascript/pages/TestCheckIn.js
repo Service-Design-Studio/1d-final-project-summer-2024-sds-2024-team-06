@@ -7,6 +7,11 @@ export default function TestCheckIn() {
   const [chooseFlower, setChooseFlower] = useState(false);
   const [exit, setExit] = useState(false);
 
+  const [backgroundStyle, setBackgroundStyle] = useState({
+    opacity: 0,
+    transition: "opacity 0.9s ease-in",
+  });
+
   const [firstLineStyle, setFirstLineStyle] = useState({
     opacity: 0,
     transform: "translateX(-100%)",
@@ -32,35 +37,42 @@ export default function TestCheckIn() {
 
   useEffect(() => {
     setTimeout(() => {
+      setBackgroundStyle({
+        opacity: 1,
+        transition: "opacity 0.8s ease-in",
+      });
+    }, 100);
+
+    setTimeout(() => {
       setFirstLineStyle({
         opacity: 1,
         transform: "translateX(0)",
-        transition: "opacity 0.5s, transform 0.8s",
+        transition: "opacity 0.5s, transform 0.9s",
       });
-    }, 100);
+    }, 1000);
 
     setTimeout(() => {
       setSecondLineStyle({
         opacity: 1,
         transform: "translateX(0)",
-        transition: "opacity 0.5s, transform 0.8s",
+        transition: "opacity 0.5s, transform 0.9s",
       });
-    }, 200);
+    }, 1100);
 
     setTimeout(() => {
       setImagesStyle({
         opacity: 1,
         transform: "translateX(0)",
-        transition: "opacity 0.5s, transform 0.8s",
+        transition: "opacity 0.5s, transform 0.9s",
       });
-    }, 300);
+    }, 1200);
 
     setTimeout(() => {
       setSubmitButtonStyle({
         opacity: 1,
         transition: "opacity 0.5s ease-in",
       });
-    }, 1000);
+    }, 1800);
   }, []);
 
   const handleExit = () => {
@@ -87,12 +99,18 @@ export default function TestCheckIn() {
         transform: "translateX(100%)",
         transition: "opacity 0.5s, transform 0.8s",
       });
+      setSubmitButtonStyle({
+        opacity: 0,
+        transition: "opacity 0.4s ease-in",
+      });
     }
   }, [exit]);
 
 
   return (
-    <div className="bg-[#77CDC0] w-screen h-screen">
+    <div style={{
+      ...backgroundStyle
+    }} className="bg-[#77CDC0] w-screen h-screen">
     {chooseFlower ? <TestCheckInFlower /> : <div className='w-screen h-screen flex justify-center items-center' onClick={handleExit}>
       <div className='flex flex-row justify-between w-5/6'>
         <div className='w-3/4 flex flex-col justify-center'>
