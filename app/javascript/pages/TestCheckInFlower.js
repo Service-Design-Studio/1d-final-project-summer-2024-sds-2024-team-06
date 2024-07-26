@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect, useLayoutEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import React from 'react'
+import '../../assets/stylesheets/application.css';
 import {
   Card,
   CardContent,
@@ -67,6 +68,67 @@ export default function TestCheckInFlower() {
   const moodDropDownRef = useRef(null);
   const colorDropDownRef = useRef(null);
 
+  const [moodMaxHeight, setMoodMaxHeight] = useState("0px");
+  const [colorMaxHeight, setColorMaxHeight] = useState("0px");
+
+  const [h1Style, setH1Style] = useState({
+    opacity: 0,
+    transform: "translateY(-100%)",
+    transition: "opacity 0.5s, transform 0.5s",
+  });
+  const [moodButtonStyle, setmoodButtonStyle] = useState({
+    opacity: 0,
+    transform: "translateX(-100%)",
+    transition: "opacity 0.5s, transform 0.6s",
+  });
+  const [colorButtonStyle, setcolorButtonStyle] = useState({
+    opacity: 0,
+    transform: "translateX(100%)",
+    transition: "opacity 0.5s, transform 0.6s",
+  });
+  const [flowerStyle, setFlowerStyle] = useState({
+    opacity: 0,
+    transform: "translateY(100%)",
+    transition: "opacity 0.5s, transform 0.6s",
+  });
+  const [submitButtonStyle, setSubmitButtonStyle] = useState({
+    opacity: 0,
+    transition: "opacity 0.5s ease-in",
+  });
+
+  useEffect(() => {
+    setTimeout(() => {
+      setH1Style({
+        opacity: 1,
+        transform: "translateY(0)",
+        transition: "opacity 0.5s, transform 0.5s",
+      });
+      setmoodButtonStyle({
+        opacity: 1,
+        transform: "translateX(0)",
+        transition: "opacity 0.5s, transform 0.6s",
+      });
+      setcolorButtonStyle({
+        opacity: 1,
+        transform: "translateX(0)",
+        transition: "opacity 0.5s, transform 0.6s",
+      });
+      setFlowerStyle({
+        opacity: 1,
+        transform: "translateY(0)",
+        transition: "opacity 0.5s, transform 0.6s",
+      });
+    }, 100);
+    
+    setTimeout(() => {
+      setSubmitButtonStyle({
+        opacity: 1,
+        transition: "opacity 0.5s ease-in",
+      });
+    }, 1000); 
+  }, []);
+
+
   const toggleMoodDropdown = () => {
     setMoodDropDownVisible(!isMoodDropDownVisible);
   };
@@ -77,19 +139,17 @@ export default function TestCheckInFlower() {
 
   useEffect(() => {
     if (moodDropDownRef.current) {
-      setMoodDropDownWidth(`${moodDropDownRef.current.offsetWidth}px`);
-      console.log(moodDropDownRef.current.offsetWidth);
+      setMoodMaxHeight(`${moodDropDownRef.current.scrollHeight}px`);
     }
     if (colorDropDownRef.current) {
-      setColorDropDownWidth(`${colorDropDownRef.current.offsetWidth}px`);
-      console.log(colorDropDownRef.current.offsetWidth);
+      setColorMaxHeight(`${colorDropDownRef.current.scrollHeight}px`);
     }
-  }, []);
+  }, [isMoodDropDownVisible, isColorDropDownVisible]);
 
   const changeMood = (newMood) => {
     console.log(newMood);
     setCurrMood(newMood);
-    setMoodDropDownVisible(false);
+    // setMoodDropDownVisible(false);
   }
 
   const changeColor = (newColor) => {
@@ -99,7 +159,7 @@ export default function TestCheckInFlower() {
     const flowerNumber = Math.floor(Math.random() * 6) + 1;
     const flowerName = `images/flowers/${flowerColor}/${flowerColor}_flower_${flowerNumber}.svg`;
     setCurrFlower(flowerName);
-    setColorDropDownVisible(false);
+    // setColorDropDownVisible(false);
   }
 
 
@@ -124,18 +184,23 @@ export default function TestCheckInFlower() {
 
   return (
     <div className='bg-[#77CDC0] w-screen h-screen flex flex-col items-center'>
-        <h1 style={{
-            fontSize: "3.75rem" ,
-            paddingTop: '10vh',
-        }} className='italic bold text-black text-center'>How are you feeling today?</h1>
+        <h1
+          style={{ ...h1Style, fontSize: "3.75rem", paddingTop: "10vh" }}
+          className="italic bold text-black text-center"
+        >
+          How are you feeling today?
+        </h1>
         <div className='grid grid-cols-3 w-5/6 mx-auto items-center'  
         style={{ height: '75vh',
           paddingRight: '10vw',
           paddingLeft: '10vw',
           paddingBottom: '5vh',
          }}>
-          <div className="flex flex-col justify-center items-end">
-            <div className="flex flex-col w-1/2 h-full max-auto">
+          <div className="flex flex-col justify-center items-end"
+          style={{
+            ...moodButtonStyle
+          }}>
+            <div className="flex flex-col w-1/2 h-full">
             <button onClick={toggleMoodDropdown} type="button" style={{
               fontSize: "1.125rem",
               width: 'fit-content'
@@ -145,7 +210,12 @@ export default function TestCheckInFlower() {
               <path d="M14.6401 2.7986e-05L7.50011 7.61603L0.360107 2.86102e-05L14.6401 2.7986e-05Z" fill="#222222"/>
               </svg>
             </button>
-            {isMoodDropDownVisible && <div ref={moodDropDownRef}>
+            <div id="moodDropDown" ref={moodDropDownRef} 
+              style={{
+                transition: 'max-height 0.35s ease-in-out',
+                overflow: 'hidden',
+                maxHeight: isMoodDropDownVisible ? moodMaxHeight : '0',
+              }}>
                 <Card>
                   <CardHeader>
                     <CardDescription>What are you feeling?</CardDescription>
@@ -163,15 +233,20 @@ export default function TestCheckInFlower() {
                     </div>
                   </CardContent>
               </Card>
-            </div>}
+            </div>
             </div>
           </div>
-          <div className='flex flex-col justify-center items-center h-3/4'>
-            <div className="h-full w-full flex justify-center items-center overflow-hidden">
-              <img src={currFlower} className="object-contain max-h-full max-w-full h-auto"></img>
-            </div>
+          <div className='flex flex-col justify-center items-end'
+          style={{
+            ...flowerStyle,
+            height: '56.25vh'
+          }}>
+            <img src={currFlower} className="object-contain h-full w-full"></img>
           </div>
-          <div className="flex flex-col justify-center items-start">
+          <div className="flex flex-col justify-center items-start"
+          style={{
+            ...colorButtonStyle
+          }}>
             <div className="flex flex-col w-1/2 h-full mx-auto">
             <button type="button" onClick={toggleColorDropdown} style={{
               fontSize: "1.125rem",
@@ -182,13 +257,18 @@ export default function TestCheckInFlower() {
               <path d="M14.6401 2.7986e-05L7.50011 7.61603L0.360107 2.86102e-05L14.6401 2.7986e-05Z" fill="#222222"/>
               </svg>
             </button>
-           {isColorDropDownVisible && <div ref={ colorDropDownRef }>
+           <div ref={ colorDropDownRef } 
+            style={{
+                transition: 'max-height 0.35s ease-in-out',
+                overflow: 'hidden',
+                maxHeight: isColorDropDownVisible ? colorMaxHeight : '0',
+              }}>
                 <Card>
                   <CardHeader>
                     <CardDescription>Which color represents your emotions?</CardDescription>
                   </CardHeader>
-                  <CardContent className="grid grid-cols-2">
-                    <div className="flex flex-col space-y-4 me-5">
+                  <CardContent className="grid grid-cols-2 gap-5">
+                    <div className="flex flex-col space-y-4">
                     {colors.filter((_, index) => index % 2 === 0).map((color) => (
                       <p className="hover:cursor-pointer hover:font-bold" onClick={() => changeColor(color)} key={color.name}>{color.name}</p>
                     ))}
@@ -200,7 +280,7 @@ export default function TestCheckInFlower() {
                     </div>
                   </CardContent>
               </Card>
-            </div>}
+            </div>
             </div>
           </div>
         </div>
@@ -211,7 +291,10 @@ export default function TestCheckInFlower() {
                     color: currColor.name
                   });
                 }
-              } id="submit" className="text-sm md:text-base fixed bottom-2 rounded-full bg-white hover:bg-gray-200 text-black py-2 px-4">Submit</button>
+              } id="submit" className="text-sm md:text-base fixed bottom-2 rounded-full bg-white hover:bg-gray-200 text-black py-2 px-5 mb-2"
+              style={{
+                ...submitButtonStyle
+              }}>Submit</button>
     </div>
   )
 }

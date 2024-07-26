@@ -32,7 +32,7 @@ const App = () => {
           <Route exact path="/" element={<Landing />}></Route>
           {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
           {/* <Route exact path="/check-in" element={<CheckIn />}></Route> */}
-          <Route exact path="/check-in" element={<TestCheckInFlower />}></Route>
+          <Route exact path="/check-in" element={<TestCheckIn />}></Route>
           <Route exact path="/mood-tracker" element={<Moodtracker />}></Route>
           <Route exact path="/activities" element={<Activities />}></Route>
           <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
