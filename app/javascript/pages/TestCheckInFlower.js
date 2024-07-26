@@ -74,22 +74,22 @@ export default function TestCheckInFlower() {
   const [h1Style, setH1Style] = useState({
     opacity: 0,
     transform: "translateY(-100%)",
-    transition: "opacity 0.5s, transform 0.5s",
+    transition: "opacity 0.5s, transform 0.7s",
   });
   const [moodButtonStyle, setmoodButtonStyle] = useState({
     opacity: 0,
     transform: "translateX(-100%)",
-    transition: "opacity 0.5s, transform 0.6s",
+    transition: "opacity 0.5s, transform 0.8s",
   });
   const [colorButtonStyle, setcolorButtonStyle] = useState({
     opacity: 0,
     transform: "translateX(100%)",
-    transition: "opacity 0.5s, transform 0.6s",
+    transition: "opacity 0.5s, transform 0.8s",
   });
   const [flowerStyle, setFlowerStyle] = useState({
     opacity: 0,
     transform: "translateY(100%)",
-    transition: "opacity 0.5s, transform 0.6s",
+    transition: "opacity 0.5s, transform 0.8s",
   });
   const [submitButtonStyle, setSubmitButtonStyle] = useState({
     opacity: 0,
@@ -101,22 +101,22 @@ export default function TestCheckInFlower() {
       setH1Style({
         opacity: 1,
         transform: "translateY(0)",
-        transition: "opacity 0.5s, transform 0.5s",
+        transition: "opacity 0.5s, transform 0.7s",
       });
       setmoodButtonStyle({
         opacity: 1,
         transform: "translateX(0)",
-        transition: "opacity 0.5s, transform 0.6s",
+        transition: "opacity 0.5s, transform 0.8s",
       });
       setcolorButtonStyle({
         opacity: 1,
         transform: "translateX(0)",
-        transition: "opacity 0.5s, transform 0.6s",
+        transition: "opacity 0.5s, transform 0.8s",
       });
       setFlowerStyle({
         opacity: 1,
         transform: "translateY(0)",
-        transition: "opacity 0.5s, transform 0.6s",
+        transition: "opacity 0.5s, transform 0.8s",
       });
     }, 100);
     
@@ -183,7 +183,7 @@ export default function TestCheckInFlower() {
 
 
   return (
-    <div className='bg-[#77CDC0] w-screen h-screen flex flex-col items-center'>
+    <div className='w-full h-full flex flex-col items-center'>
         <h1
           style={{ ...h1Style, fontSize: "3.75rem", paddingTop: "10vh" }}
           className="italic bold text-black text-center"
@@ -200,7 +200,7 @@ export default function TestCheckInFlower() {
           style={{
             ...moodButtonStyle
           }}>
-            <div className="flex flex-col w-1/2 h-full">
+            <div className="flex flex-col w-1/2 h-full md:w-3/4">
             <button onClick={toggleMoodDropdown} type="button" style={{
               fontSize: "1.125rem",
               width: 'fit-content'
