@@ -42,9 +42,6 @@ async function generateTip(input_text) {
   }
 }
 
-
-
-
 async function guideMe(input_text) {
     try {
       // Initialize the model
@@ -82,13 +79,91 @@ async function guideMe(input_text) {
   }
   
 
-// Export functions
+
+  async function galleryTip(input_text) {
+    try {
+      // Initialize the model
+      let model = genAI.getGenerativeModel({
+        model: "gemini-1.5-pro",
+        systemInstruction: "You are an expert art critic providing constructive and encouraging feedback on user-generated art descriptions. Focus on the user's observations, thoughts, and emotions. Avoid leading questions or requests for additional information. Maintain a supportive and informative tone throughout the interaction.Any provided helplines shoud be in singapore context. The output should be in JSON format. There should not be any reference to chat history."
+      });
+  
+      // Define the generation configuration
+      const generationConfig = {
+        temperature: 0.7,
+        maxOutputTokens: 8192,
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: "object",
+          properties: {
+            response: { type: "string" },
+          },
+          required: ["response"],
+        }
+      };
+  
+      // Generate content
+      let result = await model.generateContent(input_text, generationConfig);
+      
+      result = result.response.text().replace("```json\n", "").replace("\n```", "");
+      return JSON.parse(result);
+  
+    } catch (error) {
+      console.error('Error generating content:', error);
+      return error;
+    }
+  }
+
+
+
+  async function echoTip(input_text) {
+    try {
+      // Initialize the model
+      let model = genAI.getGenerativeModel({
+        model: "gemini-1.5-pro",
+        systemInstruction: "You are an art critic specializing in providing age-appropriate, constructive, and encouraging feedback to adolescents on their thoughts about their artwork. Analyze the text for depth, creativity, and coherence and offer direct suggestions for improvement without asking questions. Maintain a supportive and informative tone throughout the interaction. If the user's emotional state seems to be negatively impacted, provide relevant helplines specific to Singapore.Provide feedback in a single JSON object with a 'response' key containing the entire feedback.There should be no references to chat history."
+      });
+  
+      // Define the generation configuration
+      const generationConfig = {
+        temperature: 0.7,
+        maxOutputTokens: 8192,
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: "object",
+          properties: {
+            response: { type: "string" },
+          },
+          required: ["response"],
+        }
+      };
+  
+      // Generate content
+      let result = await model.generateContent(input_text, generationConfig);
+      
+      result = result.response.text().replace("```json\n", "").replace("\n```", "");
+      console.log(JSON.parse(result))
+      return JSON.parse(result);
+  
+    } catch (error) {
+      console.error('Error generating content:', error);
+      return error;
+    }
+  }
+
+
+
+// Export both functions
 module.exports = {
     generateTip,
     guideMe,
+    galleryTip,
+    echoTip
   };
 
 
 // Call the function
-//generateTip("I have done my homework today!");
-//guideMe("i went to school today")
+//generateTip("i wonder what i can do later");
+//guideMe("I felt a bit depressed, finding life meaningless I'm worried about recurring of illness")
+//galleryTip("red dressfoldarmcross")
+//echoTip("")
