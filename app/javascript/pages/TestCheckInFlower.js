@@ -64,7 +64,9 @@ export default function TestCheckInFlower() {
   const [isColorDropDownVisible, setColorDropDownVisible] = useState(false);
   const [currMood, setCurrMood] = useState(moods[0]);
   const [currColor, setCurrColor] = useState(colors[0]);
-  const [currFlower, setCurrFlower] = useState(`images/flowers/${currColor.name.replace(/\s+/g, '').toLowerCase()}/${currColor.name.replace(/\s+/g, '').toLowerCase()}_flower_6.svg`);
+  const [flowerNumber, setFlowerNumber] = useState(6);
+  const [flowerColor, setFlowerColor] = useState(currColor.name.replace(/\s+/g, '').toLowerCase());
+  const [currFlower, setCurrFlower] = useState(`images/flowers/${flowerColor}/${flowerColor}_flower_${flowerNumber}.svg`);
   const moodDropDownRef = useRef(null);
   const colorDropDownRef = useRef(null);
 
@@ -148,18 +150,19 @@ export default function TestCheckInFlower() {
 
   const changeMood = (newMood) => {
     console.log(newMood);
+    const newFlowerNumber = moods.findIndex(mood => mood.name === newMood.name) + 1;
+    setFlowerNumber(newFlowerNumber);
     setCurrMood(newMood);
-    // setMoodDropDownVisible(false);
+    setCurrFlower(`images/flowers/${flowerColor}/${flowerColor}_flower_${newFlowerNumber}.svg`);
+    
   }
 
   const changeColor = (newColor) => {
     console.log(newColor);
+    const newFlowerColor = newColor.name.replace(/\s+/g, '').toLowerCase();
+    setFlowerColor(newFlowerColor);
     setCurrColor(newColor);
-    const flowerColor = newColor.name.replace(/\s+/g, '').toLowerCase();
-    const flowerNumber = Math.floor(Math.random() * 6) + 1;
-    const flowerName = `images/flowers/${flowerColor}/${flowerColor}_flower_${flowerNumber}.svg`;
-    setCurrFlower(flowerName);
-    // setColorDropDownVisible(false);
+    setCurrFlower(`images/flowers/${newFlowerColor}/${newFlowerColor}_flower_${flowerNumber}.svg`);
   }
 
 
