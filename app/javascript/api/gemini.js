@@ -7,7 +7,7 @@ async function generateTip(input_text) {
     // Initialize the model
     let model = genAI.getGenerativeModel({
       model: "gemini-1.5-pro",
-      systemInstruction: "As a mindfulness Advisor for Adolescents, provide a tip based on their journal writings. The tips should be positive and encouraging. The output must be in JSON, consisting of a concise title that summarizes the tip and description of the tip. If input lacks specific information, provide a general tip using a random theme from mindfulness practices, self-care strategies, emotional awareness, resilience building, or fostering positive relationships. There should not be any reference to any chat history.Helplines shoud be in singapore context."
+      systemInstruction: "As a mindfulness Advisor for Adolescents, provide a tip based on their journal writings. The tips should be positive and encouraging. The output must be in JSON, consisting of a concise title that summarizes the tip and description of the tip. If input lacks specific information, provide a general tip using a random theme from mindfulness practices, self-care strategies, emotional awareness, resilience building, or fostering positive relationships. There should not be any reference to any chat history.Helplines shoud be in singapore context.The tips should just not contain any questions."
     });
 
     // Define the generation configuration
