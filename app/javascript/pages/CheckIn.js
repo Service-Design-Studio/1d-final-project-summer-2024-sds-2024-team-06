@@ -6,6 +6,23 @@ export default function CheckIn() {
 
   const [chooseFlower, setChooseFlower] = useState(false);
   const [exit, setExit] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState("#77CDC0");
+
+  useEffect(() => {
+    const handleBackgroundColorChange = (event) => {
+      if (event.detail.backgroundColor) {
+        setBackgroundStyle({
+          backgroundColor, transition: 'background-color 1s'});
+        setBackgroundColor(event.detail.backgroundColor);
+      }
+    };
+
+    window.addEventListener('backgroundColorChange', handleBackgroundColorChange);
+
+    return () => {
+      window.removeEventListener('backgroundColorChange', handleBackgroundColorChange);
+    };
+  }, []);
 
   const [backgroundStyle, setBackgroundStyle] = useState({
     opacity: 0,
@@ -109,8 +126,9 @@ export default function CheckIn() {
 
   return (
     <div style={{
-      ...backgroundStyle
-    }} className="bg-[#77CDC0] w-screen h-screen">
+      ...backgroundStyle,
+      backgroundColor: backgroundColor
+    }} className="w-screen h-screen">
     {chooseFlower ? <FlowerSelect /> : <div className='w-screen h-screen flex justify-center items-center' onClick={handleExit}>
       <div className='flex flex-row justify-between w-5/6'>
         <div className='w-3/4 flex flex-col justify-center'>
