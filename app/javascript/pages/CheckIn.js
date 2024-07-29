@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import TestCheckInFlower from './TestCheckInFlower';
+import FlowerSelect from './FlowerSelect';
 
-export default function TestCheckIn() {
+export default function CheckIn() {
 
   const [chooseFlower, setChooseFlower] = useState(false);
   const [exit, setExit] = useState(false);
@@ -111,7 +111,7 @@ export default function TestCheckIn() {
     <div style={{
       ...backgroundStyle
     }} className="bg-[#77CDC0] w-screen h-screen">
-    {chooseFlower ? <TestCheckInFlower /> : <div className='w-screen h-screen flex justify-center items-center' onClick={handleExit}>
+    {chooseFlower ? <FlowerSelect /> : <div className='w-screen h-screen flex justify-center items-center' onClick={handleExit}>
       <div className='flex flex-row justify-between w-5/6'>
         <div className='w-3/4 flex flex-col justify-center'>
           <h1 

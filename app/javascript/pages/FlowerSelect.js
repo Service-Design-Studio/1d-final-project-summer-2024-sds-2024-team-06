@@ -58,13 +58,13 @@ const colors = [
   }
 ]
 
-export default function TestCheckInFlower() {
+export default function FlowerSelect() {
 
   const [isMoodDropDownVisible, setMoodDropDownVisible] = useState(false);
   const [isColorDropDownVisible, setColorDropDownVisible] = useState(false);
   const [currMood, setCurrMood] = useState(moods[0]);
   const [currColor, setCurrColor] = useState(colors[0]);
-  const [flowerNumber, setFlowerNumber] = useState(6);
+  const [flowerNumber, setFlowerNumber] = useState(1);
   const [flowerColor, setFlowerColor] = useState(currColor.name.replace(/\s+/g, '').toLowerCase());
   const [currFlower, setCurrFlower] = useState(`images/flowers/${flowerColor}/${flowerColor}_flower_${flowerNumber}.svg`);
   const moodDropDownRef = useRef(null);
@@ -176,8 +176,7 @@ export default function TestCheckInFlower() {
     })
     .then(response => response.json())
     .then(data => {
-      console.log('Flower created:', data);
-      onAddFlower(data);
+      console.log('Flower created:', data);;
     })
     .catch((error) => {
       console.error('Error creating flower:', error);
