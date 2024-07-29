@@ -145,6 +145,61 @@ GoalJournal.create!(
     journal_third: "I will continue eating well."
   )
 
+GalleryJournal.create!(
+  user_id: user.id,
+  journal_title: "This artwork makes me realise i feel sad",
+  journal_entry: "I am so depressed.",
+  tip_title: "Process your emotions",
+  tip_body: "It is okay to feel sad sometimes.",
+  imageURL: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg"
+)
+
+GalleryJournal.create!(
+  user_id: user.id,
+  journal_title: "This artwork makes me realise i feel happy",
+  journal_entry: "I am so happy.",
+  tip_title: "Relish in your joy!",
+  tip_body: "It is okay to be happy sometimes.",
+  imageURL: "https://www.thehistoryofart.org/caspar-david-friedrich/Wanderer%20above%20the%20Sea%20of%20Fog%20Caspar%20David%20Friedrich.jpg?ezimgfmt=rs:400x512/rscb16/ngcb15/notWebP"
+)
+
+GalleryJournal.create!(
+  user_id: user.id,
+  journal_title: "This artwork makes me realise i dont feel anything",
+  journal_entry: "I am so nonchalant.",
+  tip_title: "We all have feelings",
+  tip_body: "It is okay to feel nothing sometimes.",
+  imageURL: "https://miro.medium.com/v2/resize:fit:786/format:webp/0*qEnR_kFsH5UpcWBT.jpg"
+)
+
+EchoesJournal.create!(
+  user_id: user.id,
+  journal_title: "Today I am really sad i am so blue",
+  journal_entry: "I am so depressed.",
+  tip_title: "Process your emotions",
+  tip_body: "It is okay to feel sad sometimes.",
+  imageURL: "https://i.pinimg.com/736x/cf/c3/9c/cfc39c914be5d417267efd58db9c5cb6.jpg"
+)
+
+EchoesJournal.create!(
+  user_id: user.id,
+  journal_title: "Today I am really happy i am so red",
+  journal_entry: "I am so happy.",
+  tip_title: "Relish in your joy!",
+  tip_body: "It is okay to be happy sometimes.",
+  imageURL: "https://static.wikia.nocookie.net/cow-and-chicken/images/e/ef/The_Red_Guy.jpg/revision/latest?cb=20140204163038"
+)
+
+EchoesJournal.create!(
+  user_id: user.id,
+  journal_title: "Today i am so nonchalant i am so beige",
+  journal_entry: "I am so nonchalant.",
+  tip_title: "We all have feelings",
+  tip_body: "It is okay to feel nothing sometimes.",
+  imageURL: "https://static.vecteezy.com/system/resources/previews/003/687/305/original/beige-muslim-man-free-vector.jpg"
+)
+
+
 # Create 3 Journal entries
 # 3.times do |i|
 #   Journal.create!(
@@ -167,18 +222,18 @@ GoalJournal.create!(
 #   )
 # end
 
-standard_moods.each do |mood_attributes|
-  mood = user.moods.find_or_initialize_by(name: mood_attributes[:name])
-  if mood.new_record?
-    mood.hexcode = mood_attributes[:hexcode]
-    mood.color = mood_attributes[:color]
-    if mood.save
-      puts "Mood created: #{mood.name}"
-    else
-      puts "Failed to create mood: #{mood.errors.full_messages.join(", ")}"
-    end
-  end
-end
+# standard_moods.each do |mood_attributes|
+#   mood = user.moods.find_or_initialize_by(name: mood_attributes[:name])
+#   if mood.new_record?
+#     mood.hexcode = mood_attributes[:hexcode]
+#     mood.color = mood_attributes[:color]
+#     if mood.save
+#       puts "Mood created: #{mood.name}"
+#     else
+#       puts "Failed to create mood: #{mood.errors.full_messages.join(", ")}"
+#     end
+#   end
+# end
 
 def random_datetime
   start_date = Time.new(2024, 1, 1)
@@ -188,16 +243,16 @@ def random_datetime
 end
 
 flowers = [
-  {color: "Blue", mood: "Sad", created_at: random_datetime()},
-  {color: "Red", mood: "Happy", created_at: random_datetime()},
-  {color: "Yellow", mood: "Excited", created_at: random_datetime()},
-  {color: "Green", mood: "Happy", created_at: random_datetime()},
-  {color: "Purple", mood: "Sad", created_at: random_datetime()},
-  {color: "Orange", mood: "Excited", created_at: random_datetime()},
+  {color: "Blue", mood: "Upset", created_at: random_datetime()},
+  {color: "DarkBlue", mood: "Happy", created_at: random_datetime()},
+  {color: "Grey", mood: "Excited", created_at: random_datetime()},
+  {color: "Orange", mood: "Meh", created_at: random_datetime()},
+  {color: "Pink", mood: "Confused", created_at: random_datetime()},
+  {color: "Purple", mood: "Tired", created_at: random_datetime()},
+  {color: "Red", mood: "Angry", created_at: random_datetime()},
+  {color: "Yellow", mood: "In Love", created_at: random_datetime()},
   {color: "Pink", mood: "Happy", created_at: random_datetime()},
-  {color: "White", mood: "Happy", created_at: random_datetime()},
-  {color: "Black", mood: "Sad", created_at: random_datetime()},
-  {color: "Brown", mood: "Meh", created_at: random_datetime()}
+  {color: "Orange", mood: "Tired", created_at: random_datetime()}
 ]
 
 flowers.each do |flower_attributes|

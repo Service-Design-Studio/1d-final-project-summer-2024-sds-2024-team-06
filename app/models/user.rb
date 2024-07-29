@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :moods, dependent: :destroy
   has_many :journals, dependent: :destroy
   has_many :goal_journals, dependent: :destroy
+  has_many :echoes_journals, dependent: :destroy
+  has_many :gallery_journals, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true
@@ -28,4 +30,3 @@ class User < ApplicationRecord
   end
 
 end
-

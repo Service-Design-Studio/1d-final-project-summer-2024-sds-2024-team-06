@@ -1,6 +1,6 @@
 Given('I have logged in') do
-    @user = User.create!(email: "user1@example.com", password: "password", password_confirmation: "password")
-    visit root_path
+    # @user = User.create!(email: "user1@example.com", password: "password", password_confirmation: "password")
+    visit '/landing'
     fill_in 'Email', with: "bob@example.com"
     fill_in 'Password', with: "password"
     click_button 'Log in'

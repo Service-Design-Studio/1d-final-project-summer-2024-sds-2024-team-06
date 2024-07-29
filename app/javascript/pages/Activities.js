@@ -28,7 +28,7 @@ export default function Activities() {
                 <h1 className="text-black text-xs md:text-base block font-sans text-left">Analyse yourself and create art. Take a minute to breath deeply. How are you feeling?</h1>
                 <div>&nbsp;</div>
                 <button id="echoesWithin" className="text-xs md:text-base border border-black bg-transparent text-black py-2 px-2 absolute bottom-0 right-0"
-                        onClick={() => {window.location.href="#"}}>Visit activity</button>
+                        onClick={() => {window.location.href="/echoes-within"}}>Visit activity</button>
               </div>
             </div>
           </div>

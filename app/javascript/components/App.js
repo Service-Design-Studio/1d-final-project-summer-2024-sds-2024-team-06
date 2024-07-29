@@ -14,8 +14,10 @@ import Journal from '../pages/JournalEntryHistory';
 import JournalGoalForm from './JournalGoalForm';
 import JournalOpenForm from './JournalOpenForm';
 import JournalDetail from '../pages/JournalDetail';
+import EchoesWithin from '../pages/EchoesWithin'
 import { useUser } from '../pages/User';
 import CheckIn from '../pages/CheckIn';
+
 
 
 // Routing
@@ -25,7 +27,7 @@ const App = () => {
     <div>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Landing />}></Route>
+          <Route exact path="/landing" element={<Landing />}></Route>
           {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
           {/* <Route exact path="/check-in" element={<CheckIn />}></Route> */}
           <Route exact path="/check-in" element={<CheckIn />}></Route>
@@ -39,13 +41,21 @@ const App = () => {
           {/* <Route exact path="/journal/create" element={<JournalEntryForm />}></Route> */}
           <Route exact path="/journal/goal-setting" element={<JournalGoalForm />}></Route>
           <Route exact path="/journal/open-ended" element={<JournalOpenForm />}></Route>
-
+          <Route exact path="/echoes-within" element={<EchoesWithin />}></Route>
         </Routes>
         
         {/*<Toaster id=".toaster"/>*/}
     </Router>
     </div>
   );
+  
+  // document.addEventListener('DOMContentLoaded', () => {
+  //   ReactDOM.render(
+  //     <App />,
+  //     document.body.appendChild(document.createElement('div')),
+  //   );
+  // });
+
 }
 
 export default App;

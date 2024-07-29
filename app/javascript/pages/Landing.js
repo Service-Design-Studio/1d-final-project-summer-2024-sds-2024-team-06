@@ -35,13 +35,13 @@ export default function Landing() {
   }, [exit]);
 
 
-   // To use NGS paper background: <div style={NGSLanding}></div>
-  const NGSLanding = {
-    height: '100vh',
-    width: '100vw',
-    background: 'url(/images/background-ngs.png) no-repeat center bottom fixed',
-    backgroundSize: 'cover',
-  };
+// To use NGS paper background: <div style={NGSLanding}></div>
+const NGSLanding = {
+  height: '100vh',
+  width: '100vw',
+  background: 'url(/images/background-ngs.png) no-repeat center bottom fixed',
+  backgroundSize: 'cover',
+};
 
   return (
     <div style={NGSLanding} class="flex justify-center no-scrollbar"

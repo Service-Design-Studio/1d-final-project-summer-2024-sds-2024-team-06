@@ -1,0 +1,52 @@
+.drawing-app {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .toolbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+  
+  .left {
+    order: 1;
+  }
+  
+  .right {
+    order: 3;
+  }
+  
+  .canvas-container {
+    order: 2;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+  }
+  
+  .prompt-container {
+    order: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #f0f0f0;
+  }
+  
+  .prompt-container input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  .prompt-container button {
+    padding: 10px 20px;
+  }
+  
