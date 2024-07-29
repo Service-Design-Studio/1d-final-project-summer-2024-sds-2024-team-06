@@ -61,7 +61,13 @@ export default function JournalEntryHistory() {
     <div className="flex flex-col h-screen">
       <Navigation />
       <div style={brownPaper} className="flex-1 flex-grow p-4 lg:p-10">
-        <Journal entries={entries}></Journal>
+      <Journal
+          entries={entries}
+          openIsPending={openIsPending}
+          goalIsPending={goalIsPending}
+          openError={openError}
+          goalError={goalError}
+        />
       </div>
     </div>
   );
