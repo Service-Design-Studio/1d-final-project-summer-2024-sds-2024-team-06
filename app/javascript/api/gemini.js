@@ -30,14 +30,17 @@ async function generateTip(input_text) {
     // Generate content
     let result = await model.generateContent(input_text, generationConfig);
     result = result.response.text().replace("```json\n", "").replace("\n```", "");
-    return JSON.parse(result);
+    result = JSON.parse(result)
+    // Adds new line & parses it as json
+    //result = JSON.parse(result).description.replace(/([.!?])/g, '$1\n')
+    console.log(result)
+    return result;
 
   } catch (error) { 
     console.error('Error generating content:', error);
     return error;
   }
 }
-
 
 
 
@@ -68,7 +71,7 @@ async function guideMe(input_text) {
       // Generate content
       let result = await model.generateContent(input_text, generationConfig);
       result = result.response.text().replace("```json\n", "").replace("\n```", "");
-      //console.log(typeof result);
+      console.log(result);
       return JSON.parse(result);
   
     } catch (error) {
@@ -78,7 +81,7 @@ async function guideMe(input_text) {
   }
   
 
-// Export both functions
+// Export functions
 module.exports = {
     generateTip,
     guideMe,
@@ -86,5 +89,5 @@ module.exports = {
 
 
 // Call the function
-generateTip("I have done my homework today!");
+//generateTip("I have done my homework today!");
 //guideMe("i went to school today")

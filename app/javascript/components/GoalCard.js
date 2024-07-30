@@ -1,21 +1,13 @@
 import React from 'react';
 
-const GoalCard = ({ title, text, imageUrl }) => {
+export default function GoalCard({ title, text, imageUrl }) {
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden" style={{ height: '45vh' }}>
-      <div className="p-4">
-        <h2 className="text-xl font-bold mb-2">{title}</h2>
-        <p className="text-gray-700">{text}</p>
-      </div>
-      <div className="w-full h-32 bg-gray-200">
-        <img 
-          src={imageUrl} 
-          alt="card image" 
-          className="w-full h-full object-cover" 
-        />
-      </div>
+    <div className="flex flex-col flex-grow bg-white shadow-lg rounded-lg p-4">
+      <h1 className="text-lg md:text-2xl font-bold mb-2" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{title}</h1>
+      <div>&nbsp;</div>
+      <img src={imageUrl} alt="card image" className="w-relative object-cover" />
+      <div>&nbsp;</div>
+      <p className="text-xs md:text-base" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{text}</p>
     </div>
   );
 };
-
-export default GoalCard;

@@ -1,26 +1,24 @@
 import React from 'react';
 
+//function to add newline to the prompt for proper formatting
+function formatPrompt(lines){
+  lines = lines.replace(/([.!?])/g, '$1\n')
+  return lines.split('\n').map((line, index) => (
+    <React.Fragment key={index}>
+      {line}
+      <br />
+    </React.Fragment>
+))}
 
-const TipCard = ({  tipTitle, tipBody }) => {
+// only rendered when tips exist from db records
+export default function TipCard({ tipTitle, tipBody }) {
+
     return (
-        <div className="relative border border-gray-200 rounded-lg overflow-hidden shadow-md flex flex-col flex-1 p-10 mt-4" style={{ height: '20vh', backgroundColor: '#ADD8E6' }}>
-          <div className="flex flex-col space-y-4 mt-4">
-            {tipTitle && (
-              <span className="text-4xl font-bold mb-10">{tipTitle}</span>
-            )}
-            {tipBody ? (
-              <p className="text-m text-gray-700 truncate mt-10">
-                {tipBody}
-              </p>
-            ) : (
-              <p className="text-gray-700">
-                No content available.
-              </p>
-            )}
-          </div>
-        </div>
-      );
+      // change background at journal details page
+      <div>
+        <h1 className="text-lg lg:text-2xl font-sriracha font-bold">{tipTitle}</h1>
+        <div>&nbsp;</div>
+        <p id="tip-body" className="text-xs lg:text-base">{formatPrompt(tipBody)}</p>
+      </div>
+    );
 };
-
-export default TipCard;
-

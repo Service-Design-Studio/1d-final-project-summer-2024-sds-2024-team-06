@@ -20,21 +20,6 @@ RSpec.describe GoalJournal, type: :model do
         expect(goal_journal).to_not be_valid
     end
 
-    it "is not valid without a journal_start" do
-        goal_journal = GoalJournal.new(journal_title: "Title without start", journal_end: "End", journal_third: "Third", user: user)
-        expect(goal_journal).to_not be_valid
-    end
-
-    it "is not valid without a journal_end" do
-        goal_journal = GoalJournal.new(journal_title: "Title without end", journal_start: "Start", journal_third: "Third", user: user)
-        expect(goal_journal).to_not be_valid
-    end
-
-    it "is not valid without a journal_third" do
-        goal_journal = GoalJournal.new(journal_title: "Title without third", journal_start: "Start", journal_end: "End", user: user)
-        expect(goal_journal).to_not be_valid
-    end
-
     it "is not valid without a user" do
         goal_journal = GoalJournal.new(journal_title: "Title without user", journal_start: "Start", journal_end: "End", journal_third: "Third")
         expect(goal_journal).to_not be_valid

@@ -1,15 +1,27 @@
+// export default JournalEntryCard;
 import React from 'react';
 import { Link } from "react-router-dom";
 import './styles.css'; // Make sure to import your CSS file
 
-const JournalEntryCard = ({ id, tag, title, body, date, tipTitle, tipBody }) => {
+export default function JournalEntryCard({ id, tag, title, body, date, tipTitle, tipBody }) {
+
+  // Determine the header text based on the tag
+  const headerText = tag === "open" ? "Open Journal" : "Goal Journal";
+  const headerStyle = tag === "open" ? { fontSize: 'small', color: 'green' } : { fontSize: 'small', color: 'blue' };
+
+ 
 
   return (
-    <Link id="Picture" to={`/journal/${id}?type=${tag}`}>
+    <Link id={`${tag}-${id}`} to={`/journal/${id}?type=${tag}`}>
       <div className="relative bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md flex flex-col p-4" style={{ height: '20vh' }}>
-        {/* Tag */}
+        {/* Header */}
+        <div style={headerStyle}>
+          {headerText}
+        </div>
+
+        {/* Tag with Random Color for Text */}
         {tipTitle && (
-          <div className="text-black text-xs font-semibold rounded-br-lg truncate">
+          <div className="text-xs font-semibold rounded-br-lg truncate" style={{ color: '#ffa6c1' }}>
             {tipTitle}
           </div>
         )}
@@ -45,4 +57,3 @@ const JournalEntryCard = ({ id, tag, title, body, date, tipTitle, tipBody }) => 
   );
 };
 
-export default JournalEntryCard;
