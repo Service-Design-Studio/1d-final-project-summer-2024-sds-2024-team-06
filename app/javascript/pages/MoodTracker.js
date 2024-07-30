@@ -14,8 +14,8 @@ const checkinbg = {
   height: '100vh',
   width: '100vw',
   background: 'url(/images/Landing1cropped.svg) center center',
-  backgroundSize: 'contain',
-  backgroundPosition: 'contain bottom',
+  backgroundSize: 'cover',
+  backgroundPosition: 'cover',
   overflow: 'hidden', // Prevent scrolling
 };
 

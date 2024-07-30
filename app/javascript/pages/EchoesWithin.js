@@ -162,10 +162,6 @@ export default function EchoesWithin() {
                     });
                 });
     
-                const downloadLink = document.createElement('a');
-                downloadLink.href = combinedImageUrl;
-                downloadLink.download = 'combined-image.png';
-                downloadLink.click();
             };
         };
     }
