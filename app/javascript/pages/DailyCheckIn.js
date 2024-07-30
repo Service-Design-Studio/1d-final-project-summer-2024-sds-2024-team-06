@@ -49,7 +49,7 @@ export default function Checkin() {
             <div className="row-span-1 flex flex-col justify-center items-center text-center" id="instructions" style={{height:"45vh"}}>
             {/*Instructions layer*/}
               <h1 className='text-4xl font-bold'>Your year in moods</h1>
-              <h1 className='text-lg font-sans-800 text-grey'>Keep yoiur garden flourishing by consistently checking in</h1>
+              <h1 className='text-lg font-sans-800 text-grey'>Keep your garden flourishing by consistently checking in</h1>
             </div>
             <div style={{height:"55vh"}}>
             {/*Flower field layer*/}
