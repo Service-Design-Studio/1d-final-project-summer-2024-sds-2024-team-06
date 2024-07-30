@@ -8,6 +8,8 @@ class Flower < ApplicationRecord
   private
 
   def set_day_date_created
-    update_columns(date_created: created_at.to_date, day: created_at.to_date.yday) if created_at.present?
+    update_columns(
+      date_created: created_at.to_date,
+      day: created_at.to_date.yday) if created_at.present?
   end
 end

@@ -108,6 +108,7 @@ switch (activeFilter) {
 
 
       <JournalCardGrid data={displayEntries} />
+
     </>
   );
 };

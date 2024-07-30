@@ -76,7 +76,7 @@ function hidePopup(popupID) {
   popup.classList.add('opacity-0');
   popup.classList.remove('opacity-1');
 }
-
+ 
 //function to disable buttons
 function disableButton(buttonID){
   const button = document.getElementById(buttonID);
@@ -165,7 +165,9 @@ export default function JournalOpenForm() {
                                                 return;
                                               };
                                               // llm to generate a tip with tip title
-                                                const generatedTip = await generateTip(title+journalEntry);
+
+                                              const generatedTip = await generateTip(title + journalEntry);
+
                                               // post to end-api
                                               let data_id = await createJournalForUser({
                                                 //user_id: currentUser.id,
@@ -186,7 +188,6 @@ export default function JournalOpenForm() {
                                     <div>&nbsp;</div>
                                     <div className='flex flex-col flex-grow justify-between'>
                                         <div id="prompt" className="flex-wrap border border-black rounded-md p-2">
-                                            {/* {tipBody}</div> */}
                                           <p id="prompt-content" className='text-xs lg:text-base'>{tipBody}</p></div>
                                         <div>&nbsp;</div>
                                         <div className="flex justify-center">

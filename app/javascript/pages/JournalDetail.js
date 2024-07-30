@@ -105,7 +105,7 @@ export default function JournalDetail() {
                               <p className="text-xs lg:text-base" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{journalEntry.journalentry}</p>
                             </div>
                             {/*Tip space if it exists*/}
-                            {journalEntry.tip_title !== undefined && (
+                            {journalEntry.tip_title !== null && (
                               // To change background dynamically later on
                               <div className='sm:col-span-1 rounded-md p-4 lg:p-10 bg-[#ADD8E6]'>
                                 <TipCard tipTitle={journalEntry.tip_title} tipBody={journalEntry.tip_body} />
@@ -139,7 +139,7 @@ export default function JournalDetail() {
                             <div>
                             <h1 className="block text-lg md:text-2xl font-sriracha font-bold">One thing I will start...</h1>
                             <div>&nbsp;</div>
-                            <p id = "journal-start" className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word' }}>{journalEntry.journal_start}</p>
+                            <p id = "journal-start" className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{journalEntry.journal_start}</p>
                             </div>
                         </div>
                     </div>
@@ -171,4 +171,3 @@ export default function JournalDetail() {
     </div>
   );
 };
-
