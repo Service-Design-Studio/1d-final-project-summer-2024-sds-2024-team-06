@@ -159,7 +159,7 @@ export default function FlowerSelect() {
     setFlowerNumber(newFlowerNumber);
     setCurrMood(newMood);
     setCurrFlower(`images/flowers/${flowerColor}/${flowerColor}_flower_${newFlowerNumber}.svg`);
-    
+    console.log(`images/flowers/${flowerColor}/${flowerColor}_flower_${newFlowerNumber}.svg`);
   }
 
   const changeColor = (newColor) => {
@@ -168,6 +168,7 @@ export default function FlowerSelect() {
     setFlowerColor(newFlowerColor);
     setCurrColor(newColor);
     setCurrFlower(`images/flowers/${newFlowerColor}/${newFlowerColor}_flower_${flowerNumber}.svg`);
+    console.log(`images/flowers/${newFlowerColor}/${newFlowerColor}_flower_${flowerNumber}.svg`);
   }
 
 
