@@ -31,6 +31,14 @@ const somePreserveAspectRatio = [
     "xMaxYMax",
   ];
 
+const prompts = [
+  "Count from one to five and take a deep breath.",
+  "Take a moment to think about a happy memory.",
+  "Focus on your breathing for the next few seconds.",
+  "Think about something you are grateful for.",
+  "Visualize a place where you feel at peace."
+];
+
 export default function EchoesWithin() {
     const presetColors = [
         "#FF4747", "#F7C100", "#D172C1", "#3FC6C6", "#1BC77F", "#302D2D", "#FFFFFF"
@@ -44,6 +52,7 @@ export default function EchoesWithin() {
     const [strokeWidth, setStrokeWidth] = useState(5);
     const [eraserWidth, setEraserWidth] = useState(10);
     const [strokeColor, setStrokeColor] = useState("#000000");
+    const [currentPromptIndex, setCurrentPromptIndex] = useState(0);
 
     useEffect(() => {
         const leftCardHeight = leftCardRef.current.clientHeight;
@@ -71,6 +80,10 @@ export default function EchoesWithin() {
         };
     }, [backgroundImage]);
 
+    useEffect(() => {
+          speakText(prompts[currentPromptIndex]);
+        }, [currentPromptIndex]);
+
 
     const handleEraserClick = () => {
         setEraseMode(true);
@@ -89,6 +102,19 @@ export default function EchoesWithin() {
     const handleEraserWidthChange = (event) => {
         setEraserWidth(+event.target.value);
     };
+
+    const [isMuted, setIsMuted] = useState(false);
+
+    const muteText = () => {
+      if (isMuted) {
+        setIsMuted(false);
+        // Add logic to unmute if necessary
+      } else {
+        setIsMuted(true);
+        speechSynthesis.cancel(); // Stop any ongoing speech
+      }
+    };
+
 
     const handleEraserWidthButtonClick = (add) => {
         if (add) {
@@ -113,6 +139,23 @@ export default function EchoesWithin() {
     const handlePresetColorChange = (color) => {
         console.log(color);
         setStrokeColor(color);
+    }
+
+    const handleNextPrompt = () => {
+      setCurrentPromptIndex((prevIndex) => (prevIndex + 1) % prompts.length);
+    };
+  
+    const handlePreviousPrompt = () => {
+      setCurrentPromptIndex((prevIndex) =>
+        prevIndex === 0 ? prompts.length - 1 : prevIndex - 1
+      );
+    };
+
+    function speakText(text) {
+      if (!isMuted) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        speechSynthesis.speak(utterance);
+      }
     }
 
     async function handleImageSubmit() {
@@ -198,18 +241,33 @@ export default function EchoesWithin() {
                 {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-10 w-10 absolute left-0 top-1/2 transform -translate-y-1/2">
                     <path fill-rule="evenodd" d="M7.72 12.53a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 1 1 1.06 1.06L9.31 12l6.97 6.97a.75.75 0 1 1-1.06 1.06l-7.5-7.5Z" clip-rule="evenodd" />
                 </svg> */}
-                <img src="images/left_arrow.svg" class="h-7 w-7 absolute left-0 ml-3 top-1/2 transform -translate-y-1/2"></img>
-                <img src="images/right_arrow.svg" class="h-7 w-7 absolute right-0 mr-3 top-1/2 transform -translate-y-1/2"></img>
+                {/* <img src="images/left_arrow.svg" class="h-7 w-7 absolute left-0 ml-3 top-1/2 transform -translate-y-1/2" onClick={handlePreviousPrompt}></img>
+                <img src="images/right_arrow.svg" class="h-7 w-7 absolute right-0 mr-3 top-1/2 transform -translate-y-1/2" onClick={handleNextPrompt}></img> */}
+                <button 
+                  class="h-7 w-7 absolute left-0 ml-3 top-1/2 transform -translate-y-1/2" 
+                  onClick={handlePreviousPrompt} 
+                  style={{ backgroundImage: 'url(images/left_arrow.svg)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
+                </button>
+                <button 
+                  class="h-7 w-7 absolute right-0 mr-3 top-1/2 transform -translate-y-1/2" 
+                  onClick={handleNextPrompt} 
+                  style={{ backgroundImage: 'url(images/right_arrow.svg)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
+                </button>
                 <div className="absolute top-0 right-0 px-3 py-3 flex flex-row justify-between gap-x-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                    <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                    <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM17.78 9.22a.75.75 0 1 0-1.06 1.06L18.44 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 1 0 1.06-1.06L20.56 12l1.72-1.72a.75.75 0 1 0-1.06-1.06l-1.72 1.72-1.72-1.72Z" />
-                    </svg>
+                    {/* <button onClick={muteText} id="muteButton">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                      <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                    <button onClick={speakText} id="speakButton">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                      <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM17.78 9.22a.75.75 0 1 0-1.06 1.06L18.44 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 1 0 1.06-1.06L20.56 12l1.72-1.72a.75.75 0 1 0-1.06-1.06l-1.72 1.72-1.72-1.72Z" />
+                      </svg>
+                    </button>
+                     */}
                 </div>
                 <span className='text-2xl font-extrabold'>Prompt</span>
-                <p className='text-base'>Count from one to five and take a deep breath.</p></CardContent>
+                <p className='text-base'>{prompts[currentPromptIndex]}</p></CardContent>
                 <div
                 style={{
                     width: '70vw',
@@ -218,6 +276,7 @@ export default function EchoesWithin() {
                 className='flex flex-row items-center justify-center fixed bottom-2 mb-2'>
                     <Button onClick={handleImageSubmit} variant="outline">Publish to journal</Button>
                 </div>
+                
             </Card>
            
         
@@ -419,3 +478,4 @@ function Circle({color, handlePresetColorChange}) {
     </span>
   )
 }
+

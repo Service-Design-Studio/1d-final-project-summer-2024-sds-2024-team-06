@@ -27,7 +27,7 @@ const airplaneStyle = {
       </style>
       <img
         style={airplaneStyle}
-        src="./app/assets/images/Aeroplane.svg"
+        src="images/Aeroplane.svg"
         alt="Airplane"
         className="airplane"
       />
