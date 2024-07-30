@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
+import TestAirplane from '../components/TestAirplane';
 
 export default function Landing() {
 
@@ -44,10 +45,12 @@ const NGSLanding = {
 };
 
   return (
+    
     <div style={NGSLanding} class="flex justify-center no-scrollbar"
         onClick={handleExit}>
       {/*Continue button*/}
       <button style={{...continueButtonStyle}} id="continue" className="text-sm md:text-base fixed bottom-2 rounded-full bg-white hover:bg-gray-200 text-black py-2 px-4">Click anywhere to continue</button>
+      <TestAirplane />
     </div>
 
   // <main>
@@ -58,4 +61,5 @@ const NGSLanding = {
   //   <section class="w-full h-screen bg-yellow-200">Section 5</section>
   // </main>
   )
+  
 }
