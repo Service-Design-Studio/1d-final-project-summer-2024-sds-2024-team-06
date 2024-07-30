@@ -6,6 +6,7 @@ import useFetch from '../api/useFetch'
 import CarouselSwipe from '../components/CarouselSwipe'
 import HorizontalScroll from '../components/HorizontalScroll'
 import CalendarGrid from '../components/CalendarGrid'
+import LoadingScreen from './Loading';
 
 
 
@@ -23,8 +24,8 @@ const checkinbg = {
 
 export default function Checkin() {
   const apiUrl = gon.api_url;
-  const {data: checkinData, error, isPending} = useFetch(`${apiUrl}/api/flowers`)
-  const checkedIn = false
+  const {data: checkinData, error, isPending, loadingProgress} = useFetch(`${apiUrl}/api/flowers`)
+  const [isLoaded, setIsLoaded] = useState(false);
   const [currData, setCurrData] = useState(null);
 
   useEffect(() => {
@@ -37,14 +38,25 @@ export default function Checkin() {
     setCurrData([...currData, flowerData]);
   };
 
+  useEffect(() => {
+    if (!isPending && !error) {
+      setIsLoaded(true);
+    }
+  }, [isPending, error]);
+
+  if (!isLoaded) {
+    return <LoadingScreen loadingProgress={loadingProgress} />;
+  }
+
+
   return (
     <>
-    {isPending && 
+    {/* {isPending && 
     <div className="h-full w-full flex justify-center items-center">
         <h1 className='h-full w-full'>Loading...</h1>
-    </div>}
+    </div>} */}
     {error && <div>{error}</div>} 
-    {currData && (
+    {currData && isLoaded && (
           <div style={checkinbg} className="flex flex-col flex-grow" > 
             <div className="row-span-1 flex flex-col justify-center items-center text-center" id="instructions" style={{height:"45vh"}}>
             {/*Instructions layer*/}

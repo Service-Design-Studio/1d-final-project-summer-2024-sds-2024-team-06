@@ -17,6 +17,7 @@ import JournalDetail from '../pages/JournalDetail';
 import EchoesWithin from '../pages/EchoesWithin'
 import { useUser } from '../pages/User';
 import CheckIn from '../pages/CheckIn';
+import Test from '../pages/Test';
 
 
 
@@ -31,6 +32,7 @@ const App = () => {
           {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
           {/* <Route exact path="/check-in" element={<CheckIn />}></Route> */}
           <Route exact path="/check-in" element={<CheckIn />}></Route>
+          <Route exact path="/test" element={<Test />}></Route>
           <Route exact path="/mood-tracker" element={<Moodtracker />}></Route>
           <Route exact path="/activities" element={<Activities />}></Route>
           <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>

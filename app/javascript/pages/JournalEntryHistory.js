@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useFetch from '../api/useFetch'
 import Navigation from '../components/Navigation'
 import Journal from '../components/JournalContainer'
+import LoadingScreen from './Loading';
 
 // to use brown paper paper background: <div style={dottedPaper}></div>
 const brownPaper = {
@@ -16,8 +17,8 @@ export default function JournalEntryHistory() {
   const apiUrl = gon.api_url;
 
    // Fetch data from two endpoints
-   const { data: openJournals, error: openError, isPending: openIsPending } = useFetch(`${apiUrl}api/journals`);
-   const { data: goalJournals, error: goalError, isPending: goalIsPending } = useFetch(`${apiUrl}api/goal_journals`);
+   const { data: openJournals, error: openError, isPending: openIsPending, loadingProgress: openLoadingProgress } = useFetch(`${apiUrl}api/journals`);
+   const { data: goalJournals, error: goalError, isPending: goalIsPending, loadingProgress: goalLoadingProgress } = useFetch(`${apiUrl}api/goal_journals`);
 
   // Combined state for loading, error, and data
   const [entries, setEntries] = useState([]);
@@ -53,8 +54,11 @@ export default function JournalEntryHistory() {
   // console.log("my goal journals: ", goalJournals)
   // console.log("all journals: ", entries)
 
+  if (loading) {
+    return <LoadingScreen loadingProgress={goalLoadingProgress} />;
+  }
 
-  if (loading) return <div className="h-full w-full flex justify-center items-center"><h1 className='text-4xl font-bold'>Loading journals...</h1></div>;
+  // if (loading) return <div className="h-full w-full flex justify-center items-center"><h1 className='text-4xl font-bold'>Loading journals...</h1></div>;
   if (error) return <div>{error}</div>;
 
   return (
