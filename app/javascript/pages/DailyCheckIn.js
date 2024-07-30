@@ -10,11 +10,13 @@ import CalendarGrid from '../components/CalendarGrid'
 
 
 // To use dotted paper background: <div style={dottedPaper}></div>
-const greenLand = {
+const checkinbg = {
   height: '100vh',
   width: '100vw',
-  background: 'url("https://t3.ftcdn.net/jpg/01/89/65/62/360_F_189656244_Z8CvqnmXU50rO0vwTLSPF5y3aUn1Pszp.jpg") no-repeat center center fixed',
-  backgroundSize: 'cover',
+  background: 'url(/images/Landing1cropped.svg) center center',
+  backgroundSize: 'contain',
+  backgroundPosition: 'contain bottom',
+  overflow: 'hidden', // Prevent scrolling
 };
 
 
@@ -43,20 +45,17 @@ export default function Checkin() {
     </div>}
     {error && <div>{error}</div>} 
     {currData && (
-          <div style={greenLand} className="grid grid-rows-8 no-scrollbar"> 
-            <div className="row-span-1" id="instructions">
+          <div style={checkinbg} className="flex flex-col flex-grow" > 
+            <div className="row-span-1 flex flex-col justify-center items-center text-center" id="instructions" style={{height:"45vh"}}>
             {/*Instructions layer*/}
-              <h1 className='text-4xl font-bold'>Daily Check-in</h1>
-              <h1 className='text-lg font-sans-800 text-grey'>How would you describe your mood?</h1>
+              <h1 className='text-4xl font-bold'>Your year in moods</h1>
+              <h1 className='text-lg font-sans-800 text-grey'>Keep yoiur garden flourishing by consistently checking in</h1>
             </div>
-            <div className="row-span-6">
+            <div style={{height:"55vh"}}>
             {/*Flower field layer*/}
+              <div className= "grid grid-rows-6 gap-4">
               <CalendarGrid checkinData={currData} />
-            </div>
-            <div className="row-span-1">
-            {/*Mood carousel layer*/}
-              {/*<HorizontalScroll  CarouselSwipe/>*/}
-              <HorizontalScroll checkedIn={checkedIn} onAddFlower={addedFlower} />
+              </div>
             </div>
           </div>
         )}

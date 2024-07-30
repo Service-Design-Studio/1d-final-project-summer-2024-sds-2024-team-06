@@ -8,10 +8,10 @@ import CalendarGrid from '../components/CalendarGrid'
 
 
 // To use dotted paper background: <div style={dottedPaper}></div>
-const greenLand = {
+const moodbg = {
   height: '100vh',
   width: '100vw',
-  background: 'url("https://t3.ftcdn.net/jpg/01/89/65/62/360_F_189656244_Z8CvqnmXU50rO0vwTLSPF5y3aUn1Pszp.jpg") no-repeat center center fixed',
+  background: 'url(/images/Landing1.svg) no-repeat center center fixed',
   backgroundSize: 'cover',
 };
 
@@ -30,7 +30,7 @@ export default function Moodtracker() {
     </div>}
     {error && <div>{error}</div>} 
     {checkinData && (
-          <div style={greenLand} className="grid grid-rows-8 no-scrollbar"> 
+          <div style={moodbg} className="grid grid-rows-8 no-scrollbar"> 
             <div className="row-span-1" id="instructions">
             {/*Instructions layer*/}
               <h1 className='text-4xl font-bold'>Mood tracker</h1>
