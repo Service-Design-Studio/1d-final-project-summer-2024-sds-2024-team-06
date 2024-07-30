@@ -6,6 +6,7 @@ module Api
     before_action :set_echoes_journal, only: [:show]
     before_action :authorize_user!, only: [:show]
 
+
     # def index
     #   @echoes_journals = current_user.echoes_journals
     #   render json: @echoes_journals, status: :ok
@@ -26,15 +27,6 @@ module Api
       render json: @echoes_journal, status: :ok
     end
 
-    # def create
-    #   @echoes_journal = current_user.echoes_journals.build(echoes_journal_params)
-
-    #   if @echoes_journal.save
-    #     render json: @echoes_journal, status: :created
-    #   else
-    #     render json: @echoes_journal.errors, status: :unprocessable_entity
-    #   end
-    # end
 
     def create
       file = params[:image]
@@ -49,7 +41,6 @@ module Api
       else
         render json: @echoes_journal.errors, status: :unprocessable_entity
       end
-
     end
 
     private
