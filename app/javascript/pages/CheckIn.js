@@ -127,8 +127,11 @@ export default function CheckIn() {
   return (
     <div style={{
       ...backgroundStyle,
-      backgroundColor: backgroundColor
-    }} className="w-screen h-screen">
+      backgroundColor: backgroundColor,
+      width: "100%",
+      height: "100%",
+      position: "fixed",
+    }}>
     {chooseFlower ? <FlowerSelect /> : <div className='w-screen h-screen flex justify-center items-center' onClick={handleExit}>
       <div className='flex flex-row justify-between w-5/6'>
         <div className='w-3/4 flex flex-col justify-center'>

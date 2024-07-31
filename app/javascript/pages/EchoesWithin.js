@@ -53,6 +53,11 @@ export default function EchoesWithin() {
     const [eraserWidth, setEraserWidth] = useState(10);
     const [strokeColor, setStrokeColor] = useState("#000000");
     const [currentPromptIndex, setCurrentPromptIndex] = useState(0);
+    const [isEraserPlusPressed, setisEraserPlusPressed] = useState(false);
+    const [isEraserMinusPressed, setisEraserMinusPressed] = useState(false);
+    const [isBrushPlusPressed, setisBrushPlusPressed] = useState(false);
+    const [isBrushMinusPressed, setisBrushMinusPressed] = useState(false);
+    const [intervalId, setIntervalId] = useState(null);
 
     useEffect(() => {
         const leftCardHeight = leftCardRef.current.clientHeight;
@@ -62,7 +67,7 @@ export default function EchoesWithin() {
     }, []);
 
     const [backgroundImage, setBackgroundImage] = useState(
-        "images/echoes-within-canvas.png",
+        "images/echoes-within-canvas-new.svg",
       );
     const [canvasDimensions, setCanvasDimensions] = useState({ width: '70vw', height: '78vh' });
       
@@ -115,13 +120,28 @@ export default function EchoesWithin() {
       }
     };
 
-
-    const handleEraserWidthButtonClick = (add) => {
-        if (add) {
-            setEraserWidth(eraserWidth + 2);
+    const handleWidthButtonClick = (isAdd, isBrush) => {
+        console.log('handleWidthButtonClick');
+        if (isBrush) {
+            setStrokeWidth(prevWidth => prevWidth + (isAdd ? 2 : -2));
         } else {
-            setEraserWidth(eraserWidth - 2);
+            setEraserWidth(prevWidth => prevWidth + (isAdd ? 2 : -2));
         }
+    }
+
+    const handleMouseDown = (isAdd, isBrush) => {
+        console.log('mouse down');
+        const id = setInterval(() => {
+            console.log('interval');
+            handleWidthButtonClick(isAdd, isBrush);
+        }, 100);
+        setIntervalId(id);
+    };
+
+    const handleMouseUp = () => {
+        console.log('mouse up');
+        clearInterval(intervalId);
+        setIntervalId(null);
     };
 
     const handleStrokeWidthButtonClick = (add) => {
@@ -208,12 +228,81 @@ export default function EchoesWithin() {
             };
         };
     }
+
+    function PlusAdjustButton({isPressed, isBrush, setPressed}) {
+        return (
+            isPressed ? 
+                <svg onClick={() => {
+                    handleWidthButtonClick(true, isBrush);
+                }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10" 
+                onMouseDown={() =>{
+                    setPressed(true); 
+                    handleMouseDown(true, isBrush);
+                }} 
+                onMouseUp={() => {
+                    setPressed(false);
+                    handleMouseUp();
+                }}>
+                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
+                </svg>
+                : <svg onClick={() => {
+                    handleWidthButtonClick(true, isBrush);
+                }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer hover:bg-gray-300 hover:rounded-full"  
+                onMouseDown={() => {
+                    setPressed(true);
+                    handleMouseDown(true, isBrush)
+                }} 
+                onMouseUp={() => {
+                    setPressed(false);
+                    handleMouseUp();
+                }}>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+        )
+    }
+
+    function MinusAdjustButton({isPressed, isBrush, setPressed}) {
+        return (
+            isPressed ? 
+                <svg onClick={() => {
+                    handleWidthButtonClick(false, isBrush);
+                }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10"
+                onMouseDown={() => {
+                    setPressed(true);
+                    handleMouseDown(false, isBrush)
+                }} 
+                onMouseUp={() => {
+                    setPressed(false);
+                    handleMouseUp();
+                }}>
+                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm3 10.5a.75.75 0 0 0 0-1.5H9a.75.75 0 0 0 0 1.5h6Z" clip-rule="evenodd" />
+                </svg>
+          
+                : <svg onClick={() => {
+                    handleWidthButtonClick(false, isBrush);
+                }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer hover:bg-gray-300 hover:rounded-full"
+                onMouseDown={() => {
+                    setPressed(true);
+                    handleMouseDown(false, isBrush);
+                }}
+                onMouseUp={() => {
+                    setPressed(false);
+                    handleMouseUp();
+                }}>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+        )
+    }
     
     
 
 
   return (
-    <div className='w-screen h-screen'>
+    <div style={{
+        width: '100%',
+        height: '100%',
+        position: 'fixed'
+    }}>
         <Navigation />
         <div className='bg-[#E19C25] w-full h-full flex flex-col items-center'>
           
@@ -238,11 +327,6 @@ export default function EchoesWithin() {
             }} 
             className="fixed bottom-2 py-2 px-7 text-black">
                 <CardContent>
-                {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-10 w-10 absolute left-0 top-1/2 transform -translate-y-1/2">
-                    <path fill-rule="evenodd" d="M7.72 12.53a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 1 1 1.06 1.06L9.31 12l6.97 6.97a.75.75 0 1 1-1.06 1.06l-7.5-7.5Z" clip-rule="evenodd" />
-                </svg> */}
-                {/* <img src="images/left_arrow.svg" class="h-7 w-7 absolute left-0 ml-3 top-1/2 transform -translate-y-1/2" onClick={handlePreviousPrompt}></img>
-                <img src="images/right_arrow.svg" class="h-7 w-7 absolute right-0 mr-3 top-1/2 transform -translate-y-1/2" onClick={handleNextPrompt}></img> */}
                 <button 
                   class="h-7 w-7 absolute left-0 ml-3 top-1/2 transform -translate-y-1/2" 
                   onClick={handlePreviousPrompt} 
@@ -288,17 +372,21 @@ export default function EchoesWithin() {
                 paddingTop: '20px',
                 paddingBottom: '20px',
                 marginTop: '7vh',
+                overflow: 'hidden'
             }} className="absolute left-0 ml-5 mr-20 items-center justify-center">
-                <CardContent className="p-0 flex flex-col gap-y-3">
-                    <div className='flex flex-col text-xs text-center justify-center items-center'>
-                        <span className="mb-1">Brush</span>
-                        <div disabled={!eraseMode} onClick={handlePenClick} className="flex items-center justify-center hover:cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
+                <CardContent className="p-0 flex flex-col gap-y-1">
+                    <div disabled={!eraseMode} onClick={handlePenClick} className='flex flex-col text-xs text-center justify-center items-center'>
+                        <span className="">Brush</span>
+                        <div className="flex items-center justify-center hover:cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 p-2 hover:bg-gray-300 hover:rounded-lg" style={{
+                                backgroundColor: eraseMode ? "" : "#9ca3af",
+                                borderRadius: eraseMode ? "" : "0.5rem",
+                            }}>
                             <path fill-rule="evenodd" d="M20.599 1.5c-.376 0-.743.111-1.055.32l-5.08 3.385a18.747 18.747 0 0 0-3.471 2.987 10.04 10.04 0 0 1 4.815 4.815 18.748 18.748 0 0 0 2.987-3.472l3.386-5.079A1.902 1.902 0 0 0 20.599 1.5Zm-8.3 14.025a18.76 18.76 0 0 0 1.896-1.207 8.026 8.026 0 0 0-4.513-4.513A18.75 18.75 0 0 0 8.475 11.7l-.278.5a5.26 5.26 0 0 1 3.601 3.602l.502-.278ZM6.75 13.5A3.75 3.75 0 0 0 3 17.25a1.5 1.5 0 0 1-1.601 1.497.75.75 0 0 0-.7 1.123 5.25 5.25 0 0 0 9.8-2.62 3.75 3.75 0 0 0-3.75-3.75Z" clip-rule="evenodd" />
                             </svg>
                         </div>
                     </div>
-                    <div className="flex items-center justify-center">
+                    <div className="flex justify-center">
                         <hr style={{
                             width: '75%',
                             color: 'black',
@@ -308,12 +396,15 @@ export default function EchoesWithin() {
                         }} />
                     </div>
                     <div disabled={eraseMode} onClick={handleEraserClick} className='flex flex-col text-xs text-center justify-center items-center hover:cursor-pointer'>
-                        <span className='mb-1'>Eraser</span>
+                        <span className="mt-1">Eraser</span>
                         <div className="flex items-center justify-center">
-                            <img src="/images/Eraser.svg" className='w-10 h-10' alt="" />
+                            <img src="/images/Eraser.svg" className='w-12 h-12 p-2 hover:bg-gray-300 hover:rounded-lg' style={{
+                                backgroundColor: eraseMode ? "#9ca3af" : "",
+                                borderRadius: eraseMode ? "0.5rem" : "",
+                            }}/>
                         </div>
                     </div>
-                    <div className="flex items-center justify-center">
+                    <div className="flex justify-center">
                         <hr style={{
                             width: '75%',
                             color: 'black',
@@ -324,7 +415,7 @@ export default function EchoesWithin() {
                     </div>
                     <div className='flex flex-col text-xs text-center items-center'>
                         <Popover className="mb-1">
-                            <PopoverTrigger className='hover:font-bold'>Eraser Size</PopoverTrigger>
+                            <PopoverTrigger className='hover:font-bold mt-1 mb-1'>Eraser Size</PopoverTrigger>
                             <PopoverContent side="left"><input
                                 type="range"
                                 className="form-range"
@@ -337,16 +428,8 @@ export default function EchoesWithin() {
                                 />
                             </PopoverContent>
                         </Popover>
-                        <svg onClick={() => {
-                            handleEraserWidthButtonClick(true);
-                        }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                        <svg onClick={() => {
-                            handleEraserWidthButtonClick(false);
-                        }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
+                        <PlusAdjustButton isPressed={isEraserPlusPressed} isBrush={false} setPressed={setisEraserPlusPressed}/>
+                        <MinusAdjustButton isPressed={isEraserMinusPressed} isBrush={false} setPressed={setisEraserMinusPressed}/>
                     </div>
                     <div className="flex items-center justify-center">
                         <hr style={{
@@ -357,7 +440,7 @@ export default function EchoesWithin() {
                             border: 'none',
                         }} />
                     </div>
-                    <div className='flex flex-col text-sm text-center items-center'>
+                    <div className='flex flex-col text-sm text-center items-center mt-1'>
                         <p>If feelings were patterns, what would yours look like?</p>
                         <img src="/images/echoes-within-extra-image.svg" className='mt-3 5-vh' alt="" />
                     </div>
@@ -376,7 +459,7 @@ export default function EchoesWithin() {
                 <CardContent className="p-0 flex flex-col gap-y-3">
                     <div className='flex flex-col text-xs text-center justify-center items-center'>
                         <Popover className="mb-1">
-                            <PopoverTrigger className='hover:font-bold'>Brush Size</PopoverTrigger>
+                            <PopoverTrigger className='hover:font-bold mb-1'>Brush Size</PopoverTrigger>
                             <PopoverContent side="left"><input
                                 type="range"
                                 className="form-range"
@@ -389,16 +472,8 @@ export default function EchoesWithin() {
                                 />
                             </PopoverContent>
                         </Popover>
-                        <svg onClick={ () => 
-                            {handleStrokeWidthButtonClick(true);}
-                        } xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                        <svg onClick={ () => 
-                            {handleStrokeWidthButtonClick(false);}
-                        } xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
+                        <PlusAdjustButton isPressed={isBrushPlusPressed} isBrush={true} setPressed={setisBrushPlusPressed}/>
+                        <MinusAdjustButton isPressed={isBrushMinusPressed} isBrush={true} setPressed={setisBrushMinusPressed}/>
                     </div>
                     <div className="flex items-center justify-center">
                         <hr style={{
@@ -447,7 +522,9 @@ export default function EchoesWithin() {
 
 function Circle({color, handlePresetColorChange}) {
   return (
-    <span onClick={() => {
+    <span
+    className="hover:bg-gray-300 hover:rounded-lg hover:cursor-pointer"  
+    onClick={() => {
         handlePresetColorChange(color);
     }} 
      style={{

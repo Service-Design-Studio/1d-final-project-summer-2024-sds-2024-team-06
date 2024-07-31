@@ -207,6 +207,10 @@ export default function FlowerSelect() {
         transform: "translateZ(250px)",
         transition: "opacity 1s transform 1s ease-in",
       });
+      setSubmitButtonStyle({
+        opacity: 0,
+        transition: "opacity 0.5s ease-in",
+      });
       setTimeout(() => {
         navigate('/mood-tracker');
       }, 1500);
