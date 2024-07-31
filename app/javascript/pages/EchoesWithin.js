@@ -244,11 +244,13 @@ export default function EchoesWithin() {
                 {/* <img src="images/left_arrow.svg" class="h-7 w-7 absolute left-0 ml-3 top-1/2 transform -translate-y-1/2" onClick={handlePreviousPrompt}></img>
                 <img src="images/right_arrow.svg" class="h-7 w-7 absolute right-0 mr-3 top-1/2 transform -translate-y-1/2" onClick={handleNextPrompt}></img> */}
                 <button 
+                  id="previousPrompt"
                   class="h-7 w-7 absolute left-0 ml-3 top-1/2 transform -translate-y-1/2" 
                   onClick={handlePreviousPrompt} 
                   style={{ backgroundImage: 'url(images/left_arrow.svg)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
                 </button>
                 <button 
+                  id="nextPrompt"
                   class="h-7 w-7 absolute right-0 mr-3 top-1/2 transform -translate-y-1/2" 
                   onClick={handleNextPrompt} 
                   style={{ backgroundImage: 'url(images/right_arrow.svg)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
@@ -274,7 +276,7 @@ export default function EchoesWithin() {
                     maxWidth: '1600px',
                 }} 
                 className='flex flex-row items-center justify-center fixed bottom-2 mb-2'>
-                    <Button onClick={handleImageSubmit} variant="outline">Publish to journal</Button>
+                    <Button id="publish" onClick={handleImageSubmit} variant="outline">Publish to journal</Button>
                 </div>
                 
             </Card>

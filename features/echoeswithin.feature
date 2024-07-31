@@ -26,14 +26,8 @@ Feature: EchoesWithin
     Scenario: Save Drawing
         Given I have completed my Drawing
         When I click Publish to journal
-        Then a
-        
-
-    Scenario: Submission of echoes journal
-        Given I have finished echoes journalling
-        When I click Submitjournal
-        Then I should be redirected to journalentrieshistory
-        And I will see my echoes journal with the picture i made
+        Then a pop-up will appear asking the user to caption their work
+        And the user will be redirected to the journalentrieshistory page
     
     Scenario: Incomplete submission exit pop-up
         Given I have completed my Drawing

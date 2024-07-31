@@ -1,6 +1,6 @@
 import React from 'react';
 const airplaneStyle = {
-    width: '100px',
+    width: '250px',
     position: 'absolute',
     top: '150px', // adjust to satisfactory position
     right: '-200px',
@@ -29,7 +29,7 @@ const airplaneStyle = {
         style={airplaneStyle}
         src="images/Aeroplane.svg"
         alt="Airplane"
-        className="airplane"
+        className="airplane h-auto object-contain"
       />
     </div>
     )
