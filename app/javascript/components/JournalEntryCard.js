@@ -1,19 +1,35 @@
-// export default JournalEntryCard;
-import React from 'react';
-import { Link } from "react-router-dom";
-import './styles.css'; // Make sure to import your CSS file
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-export default function JournalEntryCard({ id, tag, title, body, date, tipTitle, tipBody }) {
+export default function JournalEntryCard({ id, tag, title, body, pic, date, tipTitle, tipBody }) {
 
-  // Determine the header text based on the tag
-  const headerText = tag === "open" ? "Open Journal" : "Goal Journal";
-  const headerStyle = tag === "open" ? { fontSize: 'small', color: 'green' } : { fontSize: 'small', color: 'blue' };
+  // Define background images
 
- 
+  // Determine the header text and style based on the tag
+  const headerCase = {
+    open: { text: "Open Journal", style: { fontSize: 'small', color: 'green' }, cardClassName: 'bg-white' },
+    goal: { text: "Goal Journal", style: { fontSize: 'small', color: 'blue' }, cardClassName: 'bg-white' },
+    gallery: {
+      text: "Gallery Walk",
+      style: { fontSize: 'small', color: '#FFBF00' },
+      cardClassName: 'bg-white',
+      bodyStyle: { display: 'none' }},
+    default: { text: "Journal Entry", style: { fontSize: 'small', color: 'gray' }, cardClassName: 'bg-white' },
+  };
+
+  const { text: headerText, style: headerStyle, cardClassName, bodyStyle,fadetext } = headerCase[tag] || headerCase.default;
 
   return (
     <Link id={`${tag}-${id}`} to={`/journal/${id}?type=${tag}`}>
-      <div className="relative bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md flex flex-col p-4" style={{ height: '20vh' }}>
+      <div
+        className={"relative border border-gray-200 bg-white rounded-lg overflow-hidden shadow-md flex flex-col p-4"}
+        style={{
+          height: '20vh',
+          backgroundImage: tag === 'gallery' ? `url(${pic})` : undefined,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         {/* Header */}
         <div style={headerStyle}>
           {headerText}
@@ -21,20 +37,20 @@ export default function JournalEntryCard({ id, tag, title, body, date, tipTitle,
 
         {/* Tag with Random Color for Text */}
         {tipTitle && (
-          <div className="text-xs font-semibold rounded-br-lg truncate" style={{ color: '#ffa6c1' }}>
+          <div className="text-xs font-semibold rounded-br-lg truncate" style={{ color: '#ffa6c1', fadetext }}>
             {tipTitle}
           </div>
         )}
-        
+
         {/* Title */}
         {title && (
-          <h2 className="text-xl font-semibold mb-2 truncate">
+          <h2 className="text-xl font-semibold mb-2 truncate" style={{fadetext}}>
             {title}
           </h2>
         )}
-        
+
         {/* Body */}
-        <div className="flex-grow">
+        <div className="flex-grow" style={bodyStyle}>
           {body ? (
             <p className="text-gray-700 text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
               {body}
@@ -45,15 +61,14 @@ export default function JournalEntryCard({ id, tag, title, body, date, tipTitle,
             </p>
           )}
         </div>
-        
+
         {/* Date */}
         {date && (
-          <div className="absolute bottom-0 right-0 p-4 text-gray-500 text-sm truncate">
+          <div className="absolute bottom-0 right-0 p-4 text-gray-500 text-sm truncate" style={{fadetext}}>
             {date}
           </div>
         )}
       </div>
     </Link>
   );
-};
-
+}
