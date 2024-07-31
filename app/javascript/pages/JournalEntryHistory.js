@@ -19,6 +19,8 @@ export default function JournalEntryHistory() {
    // Fetch data from two endpoints
    const { data: openJournals, error: openError, isPending: openIsPending, loadingProgress: openLoadingProgress } = useFetch(`${apiUrl}api/journals`);
    const { data: goalJournals, error: goalError, isPending: goalIsPending, loadingProgress: goalLoadingProgress } = useFetch(`${apiUrl}api/goal_journals`);
+   const { data: galleryJournals, error: galleryError, isPending: galleryIsPending, loadingProgress: galleryLoadingProgress } = useFetch(`${apiUrl}api/gallery_journals`);
+
 
   // Combined state for loading, error, and data
   const [entries, setEntries] = useState([]);
@@ -26,13 +28,15 @@ export default function JournalEntryHistory() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!openIsPending && !goalIsPending) {
+    if (!openIsPending && !goalIsPending && !galleryIsPending) {
       setLoading(false);
 
       if (openError) {
         setError(openError);
       } else if (goalError) {
         setError(goalError);
+      } else if (galleryError) {
+          setError(galleryError);
       } else {
         // Add source information and combine data
         const openJournalsWithSource = openJournals.map(entry => ({
@@ -43,15 +47,22 @@ export default function JournalEntryHistory() {
           ...entry,
           source: 'goal'
         }));
-        const combinedEntries = [...openJournalsWithSource, ...goalJournalsWithSource];
+        const galleryJournalsWithSource = galleryJournals.map(entry => ({
+          ...entry,
+          source: 'gallery'
+        }));
+
+        const combinedEntries = [...openJournalsWithSource, ...goalJournalsWithSource,...galleryJournalsWithSource];
         combinedEntries.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         setEntries(combinedEntries);
       }
     }
-  }, [openIsPending, goalIsPending, openError, goalError, openJournals, goalJournals]);
+  }, [openIsPending, goalIsPending,galleryIsPending, openError, goalError,galleryError, openJournals, goalJournals,galleryJournals,,]);
+
 
   // console.log("my open journals: ", openJournals)
   // console.log("my goal journals: ", goalJournals)
+   console.log("my gallery journals: ", galleryJournals)
   // console.log("all journals: ", entries)
 
   if (loading) {
@@ -69,8 +80,10 @@ export default function JournalEntryHistory() {
           entries={entries}
           openIsPending={openIsPending}
           goalIsPending={goalIsPending}
+          galleryIsPending={galleryIsPending}
           openError={openError}
           goalError={goalError}
+          galleryError={galleryError}
         />
       </div>
     </div>

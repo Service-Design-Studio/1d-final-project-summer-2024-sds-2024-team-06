@@ -10,8 +10,10 @@ export default function Journal({
     entries,
     openIsPending,
     goalIsPending,
+    galleryIsPending,
     openError,
-    goalError
+    goalError,
+    galleryError
   }) {
   const [activeFilter, setActiveFilter] = useState('all');  // Add state for activeFilter
 
@@ -42,13 +44,11 @@ switch (activeFilter) {
         displayError = goalError;
         displayIsPending = goalIsPending;
         break;
-
-        //update this part when ready.
-    // case 'gallery':
-    //     displayEntries = entries;
-    //     displayError = openError || goalError;
-    //     displayIsPending = openIsPending || goalIsPending;
-    //     break;
+    case 'gallery':
+        displayEntries = entries.filter(entry => entry.source === 'gallery');
+        displayError = galleryError;
+        displayIsPending = galleryIsPending;
+        break;
     // case 'echo':
     //     displayEntries = entries.filter(entry => entry.source === 'open');
     //     displayError = openError;
@@ -101,8 +101,8 @@ switch (activeFilter) {
             <FilterChip label="All" onClick={() => handleFilterClick('all')} isActive={activeFilter === 'all'} />
             <FilterChip label="Open" onClick={() => handleFilterClick('open')} isActive={activeFilter === 'open'} />
             <FilterChip label="Goal" onClick={() => handleFilterClick('goal')} isActive={activeFilter === 'goal'} />
-            {/* <FilterChip label="Gallery Walk" onClick={() => handleFilterClick('gallery')} isActive={activeFilter === 'gallery'} />
-            <FilterChip label="Echos Within" onClick={() => handleFilterClick('echo')} isActive={activeFilter === 'echo'} /> */}
+            <FilterChip label="Gallery Walk" onClick={() => handleFilterClick('gallery')} isActive={activeFilter === 'gallery'} />
+            {/* <FilterChip label="Echos Within" onClick={() => handleFilterClick('echo')} isActive={activeFilter === 'echo'} /> */}
             
       </div>
 

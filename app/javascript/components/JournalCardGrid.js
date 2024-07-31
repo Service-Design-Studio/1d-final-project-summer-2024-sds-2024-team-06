@@ -1,5 +1,6 @@
 import React from 'react';
 import JournalEntryCard from './JournalEntryCard';
+import { nil } from 'ajv';
 
 const JournalCardGrid = ({ data }) => {
   return (
@@ -12,6 +13,7 @@ const JournalCardGrid = ({ data }) => {
           tag={item.source || 'open'}  // Default tag value if source is not provided
           title={item.journal_title}
           body={item.journal_start || item.journalentry}  // Adjust as needed
+          pic={item.imageURL||"none"}
           date={item.date_created}
           tipTitle={item.tip_title}
           tipBody={item.tip_body}
