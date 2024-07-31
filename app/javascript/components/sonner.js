@@ -2,12 +2,12 @@
 
 import { useTheme } from "next-themes";
 import { Toaster as Sonner } from "sonner";
-import React from "react"; // Ensure React is imported if using JSX
+import React from "react";
 
-// Removed TypeScript type definitions for props
+
 
 const Toaster = (props) => {
-  const { theme = "system" } = useTheme();
+  const { theme = "light" } = useTheme();
 
   return (
     <Sonner
@@ -24,7 +24,7 @@ const Toaster = (props) => {
             "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
         },
       }}
-      {...props} // Now correctly spreading the props parameter
+      {...props}
     />
   );
 };
