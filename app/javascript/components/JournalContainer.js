@@ -11,9 +11,11 @@ export default function Journal({
     openIsPending,
     goalIsPending,
     galleryIsPending,
+    echoIsPending,
     openError,
     goalError,
-    galleryError
+    galleryError,
+    echoError
   }) {
   const [activeFilter, setActiveFilter] = useState('all');  // Add state for activeFilter
 
@@ -31,8 +33,8 @@ let displayIsPending = false;
 switch (activeFilter) {
     case 'all':
         displayEntries = entries;
-        displayError = openError || goalError;
-        displayIsPending = openIsPending || goalIsPending;
+        displayError = openError || goalError || galleryError || echoError;
+        displayIsPending = openIsPending || goalIsPending || galleryIsPending || echoIsPending;
         break;
     case 'open':
         displayEntries = entries.filter(entry => entry.source === 'open');
@@ -49,16 +51,16 @@ switch (activeFilter) {
         displayError = galleryError;
         displayIsPending = galleryIsPending;
         break;
-    // case 'echo':
-    //     displayEntries = entries.filter(entry => entry.source === 'open');
-    //     displayError = openError;
-    //     displayIsPending = openIsPending;
-    //     break;
+    case 'echo':
+        displayEntries = entries.filter(entry => entry.source === 'echo');
+        displayError = echoError;
+        displayIsPending = echoIsPending;
+        break;
         
     default:
         displayEntries = entries;
-        displayError = openError || goalError;
-        displayIsPending = openIsPending || goalIsPending;
+        displayError = openError || goalError || galleryError || echoError;
+        displayIsPending = openIsPending || goalIsPending || galleryIsPending || echoIsPending;
         break;
 }
 
@@ -102,7 +104,7 @@ switch (activeFilter) {
             <FilterChip label="Open" onClick={() => handleFilterClick('open')} isActive={activeFilter === 'open'} />
             <FilterChip label="Goal" onClick={() => handleFilterClick('goal')} isActive={activeFilter === 'goal'} />
             <FilterChip label="Gallery Walk" onClick={() => handleFilterClick('gallery')} isActive={activeFilter === 'gallery'} />
-            {/* <FilterChip label="Echos Within" onClick={() => handleFilterClick('echo')} isActive={activeFilter === 'echo'} /> */}
+            <FilterChip label="Echos Within" onClick={() => handleFilterClick('echo')} isActive={activeFilter === 'echo'} />
             
       </div>
 

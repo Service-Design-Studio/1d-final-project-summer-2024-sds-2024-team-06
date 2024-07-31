@@ -20,6 +20,7 @@ export default function JournalEntryHistory() {
    const { data: openJournals, error: openError, isPending: openIsPending, loadingProgress: openLoadingProgress } = useFetch(`${apiUrl}api/journals`);
    const { data: goalJournals, error: goalError, isPending: goalIsPending, loadingProgress: goalLoadingProgress } = useFetch(`${apiUrl}api/goal_journals`);
    const { data: galleryJournals, error: galleryError, isPending: galleryIsPending, loadingProgress: galleryLoadingProgress } = useFetch(`${apiUrl}api/gallery_journals`);
+   const { data: echoJournals, error: echoError, isPending: echoIsPending, loadingProgress: echoLoadingProgress } = useFetch(`${apiUrl}api/echoes_journals`);
 
 
   // Combined state for loading, error, and data
@@ -28,7 +29,7 @@ export default function JournalEntryHistory() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!openIsPending && !goalIsPending && !galleryIsPending) {
+    if (!openIsPending && !goalIsPending && !galleryIsPending && !echoIsPending) {
       setLoading(false);
 
       if (openError) {
@@ -37,7 +38,9 @@ export default function JournalEntryHistory() {
         setError(goalError);
       } else if (galleryError) {
           setError(galleryError);
-      } else {
+      } else if (echoError) {
+        setError(echoError);
+      }else {
         // Add source information and combine data
         const openJournalsWithSource = openJournals.map(entry => ({
           ...entry,
@@ -51,18 +54,23 @@ export default function JournalEntryHistory() {
           ...entry,
           source: 'gallery'
         }));
+        const echoJournalsWithSource = echoJournals.map(entry => ({
+          ...entry,
+          source: 'echo'
+        }));
 
-        const combinedEntries = [...openJournalsWithSource, ...goalJournalsWithSource,...galleryJournalsWithSource];
+        const combinedEntries = [...openJournalsWithSource, ...goalJournalsWithSource,...galleryJournalsWithSource,...echoJournalsWithSource];
         combinedEntries.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         setEntries(combinedEntries);
       }
     }
-  }, [openIsPending, goalIsPending,galleryIsPending, openError, goalError,galleryError, openJournals, goalJournals,galleryJournals,,]);
+  }, [openIsPending, goalIsPending,galleryIsPending,echoIsPending, openError, goalError,galleryError,echoError, openJournals, goalJournals,galleryJournals,echoJournals]);
 
 
   // console.log("my open journals: ", openJournals)
   // console.log("my goal journals: ", goalJournals)
-   console.log("my gallery journals: ", galleryJournals)
+  //console.log("my gallery journals: ", galleryJournals)
+   console.log("Echo: ", echoJournals)
   // console.log("all journals: ", entries)
 
   if (loading) {
@@ -81,9 +89,11 @@ export default function JournalEntryHistory() {
           openIsPending={openIsPending}
           goalIsPending={goalIsPending}
           galleryIsPending={galleryIsPending}
+          echoIsPending={echoIsPending}
           openError={openError}
           goalError={goalError}
           galleryError={galleryError}
+          echoError={echoError}
         />
       </div>
     </div>
