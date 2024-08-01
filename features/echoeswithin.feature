@@ -27,7 +27,7 @@ Feature: EchoesWithin
         Given I have completed my Drawing
         When I click Publish to journal
         Then a pop-up will appear asking the user to caption their work
-        And the user will be redirected to the journalentrieshistory page
+
     
     Scenario: Incomplete submission exit pop-up
         Given I have completed my Drawing

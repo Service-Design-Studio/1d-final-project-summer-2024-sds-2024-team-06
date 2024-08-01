@@ -41,21 +41,29 @@ const moods = [
 
 const colors = [
   {
-    name: "Blue"
+    name: "Blue",
+    hexcode: "#85D4FF",
   }, {
-    name: "Dark Blue"
+    name: "Dark Blue",
+    hexcode: "#11055C",
   }, {
-    name: "Grey"
+    name: "Grey",
+    hexcode: "#ADADAD",
   },{
-    name: "Orange"
+    name: "Orange",
+    hexcode: "#ED6D48",
   },{
-    name: "Pink"
+    name: "Pink",
+    hexcode: "#FFC7E7", 
   },{
-    name: "Purple"
+    name: "Purple",
+    hexcode: "#5309CD",
   },{
-    name: "Red"
+    name: "Red",
+    hexcode: "#D0453B",
   },{
-    name: "Yellow"
+    name: "Yellow",
+    hexcode: "#FDDF19",
   }
 ]
 
@@ -309,15 +317,17 @@ export default function FlowerSelect() {
                   <CardHeader>
                     <CardDescription>Which color represents your emotions?</CardDescription>
                   </CardHeader>
-                  <CardContent className="grid grid-cols-2 gap-5">
-                    <div className="flex flex-col space-y-4">
+                  <CardContent className="grid grid-cols-2 gap-5 pb-0">
+                    <div className="flex flex-col space-y-2">
                     {colors.filter((_, index) => index % 2 === 0).map((color) => (
-                      <p className="hover:cursor-pointer hover:font-bold" onClick={() => changeColor(color)} key={color.name}>{color.name}</p>
+                      // <p className="hover:cursor-pointer hover:font-bold" onClick={() => changeColor(color)} key={color.name}>{color.name}</p>
+                      <Circle key={color.name} color={color} handlePresetColorChange={changeColor}/>
                     ))}
                     </div>
-                    <div className="flex flex-col space-y-4">
+                    <div className="flex flex-col space-y-2">
                     {colors.filter((_, index) => index % 2 != 0).map((color) => (
-                      <p className="hover:cursor-pointer hover:font-bold" onClick={() => changeColor(color)} key={color.name}>{color.name}</p>
+                      // <p className="hover:cursor-pointer hover:font-bold" onClick={() => changeColor(color)} key={color.name}>{color.name}</p>
+                      <Circle key={color.name} color={color} handlePresetColorChange={changeColor}/>
                     ))}
                     </div>
                   </CardContent>
@@ -347,5 +357,27 @@ export default function FlowerSelect() {
                 ...submitButtonStyle
               }}>Submit</button>}
     </div>
+  )
+}
+
+
+function Circle({color, handlePresetColorChange}) {
+  return (
+    <span
+    className="hover:bg-gray-300 hover:rounded-lg hover:cursor-pointer"  
+    onClick={() => {
+        handlePresetColorChange(color);
+    }} 
+     style={{
+        width: "40%",
+        paddingTop: "40%",
+        background: color.hexcode,
+        borderRadius: "50%",
+        display: "inline-block",
+        marginBottom: "15px",
+        boxSizing: "border-box",
+        position: "relative"
+    }}>
+    </span>
   )
 }
