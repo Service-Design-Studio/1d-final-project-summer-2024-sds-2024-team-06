@@ -47,7 +47,7 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
         )}
 
         {/* Body */}
-        <div className="flex-grow" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="flex-grow p-1" style={{ position: 'relative', overflow: 'hidden' }}>
           {tag === 'echo' || tag === 'gallery' ? (
             <div style={{ width: '100%', height: '100%', position: 'relative' }}>
               <img
@@ -65,7 +65,7 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
             </div>
           ) : (
             body ? (
-              <p className="text-gray-700 text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
+              <p className="text-gray-700 text-base overflow-hidden overflow-ellipsis whitespace-normal "style={{ position: 'relative', overflow: 'hidden',height:'15vh' }}> 
                 {body}
               </p>
             ) : (
@@ -78,7 +78,7 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
 
         {/* Date */}
         {date && (
-          <div className="absolute bottom-0 right-0 p-4 text-gray-500 text-sm truncate" >
+          <div className="absolute bottom-0 right-0 p-2 text-gray-500 text-sm truncate " >
             {date}
           </div>
         )}

@@ -70,7 +70,7 @@ export default function JournalEntryHistory() {
   // console.log("my open journals: ", openJournals)
   // console.log("my goal journals: ", goalJournals)
   //console.log("my gallery journals: ", galleryJournals)
-   console.log("Echo: ", echoJournals)
+  //console.log("Echo: ", echoJournals)
   // console.log("all journals: ", entries)
 
   if (loading) {
