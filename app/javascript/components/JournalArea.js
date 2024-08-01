@@ -48,7 +48,7 @@ export default function JournalArea() {
 
   return (
     <div>
-      
+      <form>
 
         
       </form>
