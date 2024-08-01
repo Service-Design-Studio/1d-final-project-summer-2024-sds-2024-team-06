@@ -1,7 +1,21 @@
 import React from "react";
 
 const FlowerImage = ({ checkinMood, checkinColor, height }) => {
-  const baseImageUrl = `/images/flowers/${checkinMood}/${checkinColor}.svg`;
+  //const baseImageUrl = `/images/flowers/${checkinMood}/${checkinColor}.svg`;
+
+  const moodDict = {
+    "Happy": 1,
+    "Upset": 2,
+    "Angry": 3,
+    "Anxious":4,
+    "Confused":5,
+    "InLove":6,
+    "Tired":7,
+    "Meh":8,
+  };
+
+  const flowerNumber = moodDict[checkinMood]
+  const baseImageUrl = `images/flowers/${checkinColor}/${checkinColor}_flower_${flowerNumber}.svg`
 
   const containerStyle = {
     position: 'relative',

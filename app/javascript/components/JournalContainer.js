@@ -104,7 +104,7 @@ switch (activeFilter) {
             <FilterChip label="Open" onClick={() => handleFilterClick('open')} isActive={activeFilter === 'open'} />
             <FilterChip label="Goal" onClick={() => handleFilterClick('goal')} isActive={activeFilter === 'goal'} />
             <FilterChip label="Gallery Walk" onClick={() => handleFilterClick('gallery')} isActive={activeFilter === 'gallery'} />
-            <FilterChip label="Echos Within" onClick={() => handleFilterClick('echo')} isActive={activeFilter === 'echo'} />
+            <FilterChip label="Echoes Within" onClick={() => handleFilterClick('echo')} isActive={activeFilter === 'echo'} />
             
       </div>
 

@@ -7,17 +7,14 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
 
   // Determine the header text and style based on the tag
   const headerCase = {
-    open: { text: "Open Journal", style: { fontSize: 'small', color: 'green' },text_sizing:'text-xl'},
-    goal: { text: "Goal Journal", style: { fontSize: 'small', color: 'blue' },text_sizing:'text-xl' },
-    echo: { text: "Echoes Within", style: { fontSize: 'small', color: '#FF0000' },text_sizing:'text-l' },
-    gallery: {
-      text: "Gallery Walk",
-      style: { fontSize: 'small', color: '#FFBF00' },
-      text_sizing:'text-l'},
-    default: { text: "Journal Entry", style: { fontSize: 'small', color: 'gray' },text_sizing:'text-xl' },
+    open: { text: "Open Journal", style: { fontSize: 'small', color: 'green' },text_sizing:'text-xl',tiphide: ""},
+    goal: { text: "Goal Journal", style: { fontSize: 'small', color: 'blue' },text_sizing:'text-xl' ,tiphide: ""},
+    echo: { text: "Echoes Within", style: { fontSize: 'small', color: '#FF0000' },text_sizing:'text-l',tiphide:"hidden" },
+    gallery: { text: "Gallery Walk", style: { fontSize: 'small', color: '#FFBF00' },text_sizing:'text-l',tiphide:"hidden"},
+    default: { text: "Journal Entry", style: { fontSize: 'small', color: 'gray' },text_sizing:'text-xl' ,tiphide: ""},
   };
 
-  const { text: headerText, style: headerStyle,text_sizing } = headerCase[tag] || headerCase.default;
+  const { text: headerText, style: headerStyle,text_sizing,tiphide } = headerCase[tag] || headerCase.default;
 
   return (
     <Link id={`${tag}-${id}`} to={`/journal/${id}?type=${tag}`}>
@@ -34,7 +31,7 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
 
         {/* Tag with Random Color for Text */}
         {tipTitle && (
-          <div className="text-xs font-semibold rounded-br-lg truncate" style={{ color: '#ffa6c1'}}>
+          <div className={`text-xs font-semibold rounded-br-lg truncate ${tiphide}`} style={{ color: '#ffa6c1'}}>
             {tipTitle}
           </div>
         )}
@@ -47,7 +44,7 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
         )}
 
         {/* Body */}
-        <div className="flex-grow p-1" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="flex-grow p-1 " style={{ position: 'relative', overflow: 'hidden' }}>
           {tag === 'echo' || tag === 'gallery' ? (
             <div style={{ width: '100%', height: '100%', position: 'relative' }}>
               <img
@@ -63,9 +60,23 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
                 alt="Journal"
               />
             </div>
+          ) : tag === 'goal' ? (
+            <div >
+              <p className="text-black-500 text-base truncate overflow-hidden overflow-ellipsis mb-2">
+                <span className="font-semibold" style={{ color: 'green' }}>Start:</span> {body[0]}
+              </p>
+              <p className="text-black-500 text-base truncate overflow-hidden overflow-ellipsis mb-2">
+                <span className="font-semibold" style={{ color: 'red' }}>Stop:</span> <span className="text-black">{body[1]}</span>
+              </p>
+              <p className="text-black-500 text-base truncate overflow-hidden overflow-ellipsis mb-2">
+                <span className="font-semibold" style={{ color: '#3b82f6' }}>Continue:</span> <span className="text-black">{body[2]}</span>
+              </p>
+
+
+            </div>
           ) : (
             body ? (
-              <p className="text-gray-700 text-base overflow-hidden overflow-ellipsis whitespace-normal "style={{ position: 'relative', overflow: 'hidden',height:'15vh' }}> 
+              <p className="text-gray-700 text-base overflow-hidden overflow-ellipsis whitespace-normal "style={{ position: 'relative',height:'15vh' }}> 
                 {body}
               </p>
             ) : (
@@ -78,7 +89,7 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
 
         {/* Date */}
         {date && (
-          <div className="absolute bottom-0 right-0 p-2 text-gray-500 text-sm truncate " >
+          <div className=" bottom-0 absolute right-0 mr-3 text-gray-500 text-sm ">
             {date}
           </div>
         )}
