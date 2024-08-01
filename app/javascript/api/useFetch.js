@@ -12,6 +12,7 @@ export default function useFetch(url) {
 
         setTimeout(() => {
             setTimeout(() => {
+                console.log("fetching data from: ", url);
                 setLoadingProgress(25);
             }, 250);
             fetch(url, {signal: abortCont.signal})
@@ -20,18 +21,22 @@ export default function useFetch(url) {
                     throw Error("Could not fetch data for that resource.");
                 }
                 setTimeout(() => {
+                    console.log("data fetched");
                     setLoadingProgress(50);
                 }, 500);
                 return res.json();
             }).then(data => {
                 setData(data);
                 setTimeout(() => {
+                    console.log("data set");
                     setLoadingProgress(75);
                 }, 1000);
                 setTimeout(() => {
+                    console.log("loading complete");
                     setLoadingProgress(100);
                 }, 1500);
                 setTimeout(() => {
+                    console.log("setting isPending to false");
                     setIsPending(false);
                     setError(null);
                 }, 2500);

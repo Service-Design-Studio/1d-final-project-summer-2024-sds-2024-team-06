@@ -3,6 +3,7 @@ import useFetch from '../api/useFetch'
 import Navigation from '../components/Navigation'
 import Journal from '../components/JournalContainer'
 import LoadingScreen from './Loading';
+import JournalLoadScreen from './JournalLoadScreen';
 
 // to use brown paper paper background: <div style={dottedPaper}></div>
 const brownPaper = {
@@ -30,8 +31,8 @@ export default function JournalEntryHistory() {
 
   useEffect(() => {
     if (!openIsPending && !goalIsPending && !galleryIsPending && !echoIsPending) {
-      setLoading(false);
 
+      setLoading(false);
       if (openError) {
         setError(openError);
       } else if (goalError) {
@@ -74,7 +75,7 @@ export default function JournalEntryHistory() {
   // console.log("all journals: ", entries)
 
   if (loading) {
-    return <LoadingScreen loadingProgress={goalLoadingProgress} />;
+    return <JournalLoadScreen loadingProgress={echoLoadingProgress} />;
   }
 
   // if (loading) return <div className="h-full w-full flex justify-center items-center"><h1 className='text-4xl font-bold'>Loading journals...</h1></div>;

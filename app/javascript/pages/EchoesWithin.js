@@ -613,27 +613,17 @@ export default function EchoesWithin() {
                             {presetColors.map((color, index) => (
                                 <Circle key={index} color={color} handlePresetColorChange={handlePresetColorChange} />
                             ))}
-                            
-                            <Popover>
-                                    <PopoverTrigger asChild>
-                                        <label className="w-full h-full" htmlFor="colorPicker">
-                                            <span style={{
-                                            width: "35%",
-                                            paddingTop: "35%",
-                                            background: "conic-gradient(red, yellow, lime, aqua, blue, magenta, red)",
-                                            borderRadius: "50%",
-                                            display: "inline-block",
-                                            marginBottom: "15px",
-                                            boxSizing: "border-box",
-                                            position: "relative",
-                                            cursor: "pointer"
-                                            }} />
-                                        </label>
-                                    </PopoverTrigger>
-                                    <PopoverContent side="left">
-                                        <input type="color" id="colorPicker" value={strokeColor} onChange={handleStrokeColorChange} />
-                                    </PopoverContent>
-                                </Popover>
+                            <input style={{
+                                width: "35%",
+                                paddingTop: "35%",
+                                background: "conic-gradient(red, yellow, lime, aqua, blue, magenta, red)",
+                                borderRadius: "50%",
+                                display: "inline-block",
+                                marginBottom: "15px",
+                                boxSizing: "border-box",
+                                position: "relative",
+                                cursor: "pointer"
+                                }} type="color" id="colorPicker" value={strokeColor} onChange={handleStrokeColorChange} />
                         </div>
                     </div>
                 </CardContent>
