@@ -12,7 +12,7 @@ const JournalCardGrid = ({ data }) => {
           id={item.id}
           tag={item.source || 'open'}  // Default tag value if source is not provided
           title={item.journal_title}
-          body={item.journal_start || item.journalentry}  // Adjust as needed
+          body={item.journalentry || [item.journal_start,item.journal_end,item.journal_third] }  // Adjust as needed
           pic={item.imageURL||"none"}
           date={item.date_created}
           tipTitle={item.tip_title}

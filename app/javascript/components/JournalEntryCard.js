@@ -60,9 +60,23 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
                 alt="Journal"
               />
             </div>
+          ) : tag === 'goal' ? (
+            <div >
+              <p className="text-black-500 text-base truncate overflow-hidden overflow-ellipsis mb-2">
+                <span className="font-semibold" style={{ color: 'green' }}>Start:</span> {body[0]}
+              </p>
+              <p className="text-black-500 text-base truncate overflow-hidden overflow-ellipsis mb-2">
+                <span className="font-semibold" style={{ color: 'red' }}>Stop:</span> <span className="text-black">{body[1]}</span>
+              </p>
+              <p className="text-black-500 text-base truncate overflow-hidden overflow-ellipsis mb-2">
+                <span className="font-semibold" style={{ color: '#3b82f6' }}>Continue:</span> <span className="text-black">{body[2]}</span>
+              </p>
+
+
+            </div>
           ) : (
             body ? (
-              <p className="text-gray-700 text-base overflow-hidden overflow-ellipsis whitespace-normal "style={{ position: 'relative', overflow: 'hidden',height:'15vh' }}> 
+              <p className="text-gray-700 text-base overflow-hidden overflow-ellipsis whitespace-normal "style={{ position: 'relative',height:'15vh' }}> 
                 {body}
               </p>
             ) : (
