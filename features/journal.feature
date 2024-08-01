@@ -24,7 +24,7 @@ Feature: Journal
     
     Scenario: View pinned goal-setting journal entry
         Given I am on journal entries history and user has completed a goal-setting journal
-        When I click on the first entry
+        When I click on the first goal entry
         Then I will be redirected to my most recent goal-setting journal
 
     Scenario: Create open-ended journal entry
@@ -65,5 +65,15 @@ Feature: Journal
         When I click on a open-ended journal entry item
         Then I will be redirected to the open-ended journal past entry page
         And I will see my journal entry and final tip generated
+
+    Scenario: Attempt to leave before open journal submission
+        Given I have completed writing my open-ended journal entry
+        When I click on the close button
+        Then I will see a pop-up cautioning me that I will lose my progress
+
+    Scenario: Attempt to leave before goal journal submission
+        Given I have completed writing my goal-setting journal entry
+        When I click on the close button
+        Then I will see a pop-up cautioning me that I will lose my progress
 
 

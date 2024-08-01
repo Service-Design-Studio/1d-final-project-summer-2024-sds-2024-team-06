@@ -44,7 +44,6 @@ async function generateTip(input_text) {
 
 
 
-
 async function guideMe(input_text) {
     try {
       // Initialize the model

@@ -55,7 +55,7 @@ Given('I am on journal entries history and user has completed a goal-setting jou
   # ky to create a profile with a goal-setting journal entry
 end
 
-When('I click on the first entry') do
+When('I click on the first goal entry') do
   first_link = first('#journal-grid a')
   first_link.click
   # first('#Picture').click
@@ -143,7 +143,7 @@ Then('I will be redirected to open submission page') do
 end
 
 Then('I will be redirected to goal submission page') do
-  latest_journal_id = user.journals.last.id
+  latest_journal_id = user.goal_journals.last.id
   latest_journal_id += 1
   expect(page).to have_current_path("/journal/#{latest_journal_id}?type=goal")
 end
@@ -201,4 +201,12 @@ Then("I will be redirected to journal entries history") do
   user = User.find_by(email: "bob@example.com")
   latest_journal_id = user.goal_journals.last.id
   expect(page).to have_current_path("/journal/#{latest_journal_id}?type=goal", wait: 5)
+end
+
+When("I click on the close button") do
+  find('#close').click
+end
+
+Then("I will see a pop-up cautioning me that I will lose my progress") do
+  expect(page).to have_css('div#popup-exit')
 end
