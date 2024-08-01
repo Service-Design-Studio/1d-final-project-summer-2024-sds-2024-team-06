@@ -50,7 +50,7 @@ const CalendarGrid = ({ checkinData, width }) => {
               <div key={dayIndex} style={{ ...gridItemStyle, marginTop: rowIndex > 0 ? '-20px' : '0', zIndex: getZIndexForRow(rowIndex) }}>
                 {checkin && (
                   <div className="flex flex-col justify-between">
-                    <FlowerImage checkinMood={checkin.mood} checkinColor={checkin.color} height={parseFloat(width) * 0.025}/>
+                    <FlowerImage checkinMood={checkin.mood.replace(/\s+/g, '')} checkinColor={checkin.color} height={parseFloat(width) * 0.025}/>
                   </div>
                 )}
               </div>
