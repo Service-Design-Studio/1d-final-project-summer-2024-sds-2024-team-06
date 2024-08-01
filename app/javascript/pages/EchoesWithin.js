@@ -1,14 +1,11 @@
 import React from 'react'
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ReactSketchCanvas } from 'react-sketch-canvas'
 import Navigation from '../components/Navigation'
 import {
     Card,
     CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle, 
   } from "../components/Card";
 import {
     Popover,
@@ -17,6 +14,19 @@ import {
 } from "../components/Popover"
 import { Button } from '../components/Button';
 import axios from 'axios';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+  } from "../components/AlertDialog";
+import { toast } from 'sonner';
+  
   
 const somePreserveAspectRatio = [
     "none",
@@ -40,6 +50,7 @@ const prompts = [
 ];
 
 export default function EchoesWithin() {
+    const navigate = useNavigate();
     const presetColors = [
         "#FF4747", "#F7C100", "#D172C1", "#3FC6C6", "#1BC77F", "#302D2D", "#FFFFFF"
     ]
@@ -47,7 +58,10 @@ export default function EchoesWithin() {
     const rightCardRef = useRef(null);
     const [cardHeight, setCardHeight] = useState('auto');
 
+    const navRef = useRef(null);
+    const [navHeight, setNavHeight] = useState(0);
     const canvasRef = useRef(null);
+    const [open, setOpen] = useState(false);
     const [eraseMode, setEraseMode] = useState(false);
     const [strokeWidth, setStrokeWidth] = useState(5);
     const [eraserWidth, setEraserWidth] = useState(10);
@@ -58,13 +72,24 @@ export default function EchoesWithin() {
     const [isBrushPlusPressed, setisBrushPlusPressed] = useState(false);
     const [isBrushMinusPressed, setisBrushMinusPressed] = useState(false);
     const [intervalId, setIntervalId] = useState(null);
+    const [caption, setCaption] = useState('');
 
     useEffect(() => {
         const leftCardHeight = leftCardRef.current.clientHeight;
         const rightCardHeight = rightCardRef.current.clientHeight;
         const maxHeight = Math.max(leftCardHeight, rightCardHeight);
         setCardHeight(maxHeight);
+
+        if (navRef.current) {
+            setNavHeight(navRef.current.clientHeight);
+            console.log(navRef.current.clientHeight);
+        }
     }, []);
+
+    const handleLeave = () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+        window.location.href = "/activities";
+    };
 
     const [backgroundImage, setBackgroundImage] = useState(
         "images/echoes-within-canvas-new.svg",
@@ -108,6 +133,15 @@ export default function EchoesWithin() {
         setEraserWidth(+event.target.value);
     };
 
+    const handleWidthButtonClick = (isAdd, isBrush) => {
+        console.log('handleWidthButtonClick');
+        if (isBrush) {
+            setStrokeWidth(prevWidth => prevWidth + (isAdd ? 2 : -2));
+        } else {
+            setEraserWidth(prevWidth => prevWidth + (isAdd ? 2 : -2));
+        }
+    }
+
     const [isMuted, setIsMuted] = useState(false);
 
     const muteText = () => {
@@ -119,15 +153,6 @@ export default function EchoesWithin() {
         speechSynthesis.cancel(); // Stop any ongoing speech
       }
     };
-
-    const handleWidthButtonClick = (isAdd, isBrush) => {
-        console.log('handleWidthButtonClick');
-        if (isBrush) {
-            setStrokeWidth(prevWidth => prevWidth + (isAdd ? 2 : -2));
-        } else {
-            setEraserWidth(prevWidth => prevWidth + (isAdd ? 2 : -2));
-        }
-    }
 
     const handleMouseDown = (isAdd, isBrush) => {
         console.log('mouse down');
@@ -142,14 +167,6 @@ export default function EchoesWithin() {
         console.log('mouse up');
         clearInterval(intervalId);
         setIntervalId(null);
-    };
-
-    const handleStrokeWidthButtonClick = (add) => {
-        if (add) {
-            setStrokeWidth(strokeWidth + 2);
-        } else {
-            setStrokeWidth(strokeWidth - 2);
-        }
     };
 
     const handleStrokeColorChange = (event) => {
@@ -210,7 +227,7 @@ export default function EchoesWithin() {
                 .then(blob => {
                     const formData = new FormData();
                     formData.append('image', blob, 'drawing.png');
-                    formData.append('journal_title', 'My Journal Title');
+                    formData.append('journal_title', caption);
                     formData.append('journal_entry', prompt);
                     formData.append('tip_title', 'My Tip Title');
                     formData.append('tip_body', 'This is my tip body.');
@@ -219,9 +236,20 @@ export default function EchoesWithin() {
                     axios.post('/api/echoes_journals', formData)
                     .then(response => {
                         console.log('Image saved:', response.data);
+                        toast.success("Drawing saved!", {
+                            description: "Head over to Journals to see your drawing.",
+                        });
+                        navigate("/activities");
                     })
                     .catch(error => {
                         console.error('Error saving image:', error);
+                        toast.error("Error saving drawing.",{
+                            description: "Please try again.",
+                            action: {
+                                label: "Retry",
+                                onClick: () => handleImageSubmit()
+                            }
+                        });
                     });
                 });
     
@@ -303,9 +331,34 @@ export default function EchoesWithin() {
         height: '100%',
         position: 'fixed'
     }}>
-        <Navigation />
-        <div className='bg-[#E19C25] w-full h-full flex flex-col items-center'>
-          
+        <Navigation ref={navRef} />
+
+        <div className='bg-[#E19C25] w-full h-full'>
+            <div className='w-full h-full flex flex-col items-center' style={{ position: 'relative' }}>
+                <div style={{
+                    width: 'fit-content',
+                    marginTop: `${navHeight + 2}px`
+                }} className='absolute top-0 right-0 mr-5'>
+                    <AlertDialog>
+                        <AlertDialogTrigger>
+                            <button id="close" className="text-3xl lg:text-5xl text-[#382C0D] border-none bg-transparent hover:text-white focus:outline-none"
+                                    >&times;
+                            </button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                            <AlertDialogTitle className="text-[#C0564B] text-lg lg:text-xl font-bold">Are you leaving?</AlertDialogTitle>
+                            <AlertDialogDescription className="text-xs lg:text-base text-bold">
+                                Leaving would not save any changes to your journal.
+                            </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                            <AlertDialogAction id="continue" onClick={() => {window.location.href="/activities"}} className="bg-[#C0564B] hover:bg-[#A0453A] text-white">Okay, I'll leave</AlertDialogAction>
+                            <AlertDialogCancel className="bg-[#3655F4] hover:bg-[#2B44C1] hover:text-white text-white">No, I'll continue drawing</AlertDialogCancel>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
+                </div>
             <ReactSketchCanvas
                 ref={canvasRef}
                 className="mt-5"
@@ -340,7 +393,7 @@ export default function EchoesWithin() {
                   style={{ backgroundImage: 'url(images/right_arrow.svg)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
                 </button>
                 <div className="absolute top-0 right-0 px-3 py-3 flex flex-row justify-between gap-x-5">
-                    {/* <button onClick={muteText} id="muteButton">
+                {/* <button onClick={muteText} id="muteButton">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                       <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
                       </svg>
@@ -360,9 +413,33 @@ export default function EchoesWithin() {
                     maxWidth: '1600px',
                 }} 
                 className='flex flex-row items-center justify-center fixed bottom-2 mb-2'>
-                    <Button id="publish" onClick={handleImageSubmit} variant="outline">Publish to journal</Button>
+                    <AlertDialog open={open} onOpenChange={setOpen}>
+                        <AlertDialogTrigger><Button id="publish" variant="outline">Publish to journal</Button></AlertDialogTrigger>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                            <AlertDialogTitle>Write a caption for your drawing</AlertDialogTitle>
+                            <AlertDialogDescription>
+                                <input value={caption} onChange={(e) => setCaption(e.target.value)} className='w-full h-full mx-auto mt-2' type="text" placeholder="Time you enjoy wasting is not wasted time..." />
+                            </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter className="mt-5">
+                            <AlertDialogCancel onClick={() => {
+                                setCaption('');
+                            }}>Cancel</AlertDialogCancel>
+                            <AlertDialogAction id="continue" onClick={(e) => {
+                                if (caption === '') {
+                                    e.preventDefault();
+                                    toast.error("Please enter a caption for your drawing.");
+                                } else {
+                                    handleImageSubmit().then(() => {
+                                        setOpen(false);
+                                    });
+                                }
+                            }}>Continue</AlertDialogAction>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
                 </div>
-                
             </Card>
            
         
@@ -418,7 +495,10 @@ export default function EchoesWithin() {
                     <div className='flex flex-col text-xs text-center items-center'>
                         <Popover className="mb-1">
                             <PopoverTrigger className='hover:font-bold mt-1 mb-1'>Eraser Size</PopoverTrigger>
-                            <PopoverContent side="left"><input
+                            <PopoverContent side="left" style={{ width: 'fit-content' }}
+                            className="flex flex-row justify-center">
+                            <label htmlFor='eraserWidth' className="text-xs mr-3">Eraser Size</label>
+                            <input
                                 type="range"
                                 className="form-range"
                                 min="1"
@@ -462,14 +542,17 @@ export default function EchoesWithin() {
                     <div className='flex flex-col text-xs text-center justify-center items-center'>
                         <Popover className="mb-1">
                             <PopoverTrigger className='hover:font-bold mb-1'>Brush Size</PopoverTrigger>
-                            <PopoverContent side="left"><input
+                            <PopoverContent side="left" style={{ width: 'fit-content' }}
+                            className="flex flex-row justify-center">
+                            <label htmlFor='strokeWidth' className="text-xs mr-3">Stroke Size</label>
+                            <input
                                 type="range"
                                 className="form-range"
                                 min="1"
                                 max="100"
                                 step="1"
                                 id="strokeWidth"
-                                value={strokeWidth}
+                                value={eraserWidth}
                                 onChange={handleStrokeWidthChange}
                                 />
                             </PopoverContent>
@@ -517,6 +600,7 @@ export default function EchoesWithin() {
                     </div>
                 </CardContent>
             </Card>
+        </div>
         </div>
     </div>
   )

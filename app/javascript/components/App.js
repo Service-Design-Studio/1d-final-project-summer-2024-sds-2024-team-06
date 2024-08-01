@@ -46,7 +46,7 @@ const App = () => {
           <Route exact path="/echoes-within" element={<EchoesWithin />}></Route>
         </Routes>
         
-        {/*<Toaster id=".toaster"/>*/}
+        <Toaster richColors id=".toaster"/>
     </Router>
     </div>
   );

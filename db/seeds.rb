@@ -197,6 +197,7 @@ EchoesJournal.create!(
   tip_title: "We all have feelings",
   tip_body: "It is okay to feel nothing sometimes.",
   imageURL: "user_2/1722234399_drawing.png"
+)
 
 
 # Create 3 Journal entries
