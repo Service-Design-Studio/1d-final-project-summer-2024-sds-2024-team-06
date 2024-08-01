@@ -20,8 +20,8 @@ module Api
 
       if @gallery_journal.save
         render json: @gallery_journal, status: :created
-      else
-        render json: @gallery_journal.errors, status: :unprocessable_entity
+      # else
+        # render json: @gallery_journal.errors, status: :unprocessable_entity
       end
     end
 
