@@ -19,6 +19,9 @@ export default function JournalEntryHistory() {
    // Fetch data from two endpoints
    const { data: openJournals, error: openError, isPending: openIsPending, loadingProgress: openLoadingProgress } = useFetch(`${apiUrl}api/journals`);
    const { data: goalJournals, error: goalError, isPending: goalIsPending, loadingProgress: goalLoadingProgress } = useFetch(`${apiUrl}api/goal_journals`);
+   const { data: galleryJournals, error: galleryError, isPending: galleryIsPending, loadingProgress: galleryLoadingProgress } = useFetch(`${apiUrl}api/gallery_journals`);
+   const { data: echoJournals, error: echoError, isPending: echoIsPending, loadingProgress: echoLoadingProgress } = useFetch(`${apiUrl}api/echoes_journals`);
+
 
   // Combined state for loading, error, and data
   const [entries, setEntries] = useState([]);
@@ -26,14 +29,18 @@ export default function JournalEntryHistory() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!openIsPending && !goalIsPending) {
+    if (!openIsPending && !goalIsPending && !galleryIsPending && !echoIsPending) {
       setLoading(false);
 
       if (openError) {
         setError(openError);
       } else if (goalError) {
         setError(goalError);
-      } else {
+      } else if (galleryError) {
+          setError(galleryError);
+      } else if (echoError) {
+        setError(echoError);
+      }else {
         // Add source information and combine data
         const openJournalsWithSource = openJournals.map(entry => ({
           ...entry,
@@ -43,15 +50,27 @@ export default function JournalEntryHistory() {
           ...entry,
           source: 'goal'
         }));
-        const combinedEntries = [...openJournalsWithSource, ...goalJournalsWithSource];
+        const galleryJournalsWithSource = galleryJournals.map(entry => ({
+          ...entry,
+          source: 'gallery'
+        }));
+        const echoJournalsWithSource = echoJournals.map(entry => ({
+          ...entry,
+          source: 'echo'
+        }));
+
+        const combinedEntries = [...openJournalsWithSource, ...goalJournalsWithSource,...galleryJournalsWithSource,...echoJournalsWithSource];
         combinedEntries.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         setEntries(combinedEntries);
       }
     }
-  }, [openIsPending, goalIsPending, openError, goalError, openJournals, goalJournals]);
+  }, [openIsPending, goalIsPending,galleryIsPending,echoIsPending, openError, goalError,galleryError,echoError, openJournals, goalJournals,galleryJournals,echoJournals]);
+
 
   // console.log("my open journals: ", openJournals)
   // console.log("my goal journals: ", goalJournals)
+  //console.log("my gallery journals: ", galleryJournals)
+  //console.log("Echo: ", echoJournals)
   // console.log("all journals: ", entries)
 
   if (loading) {
@@ -69,8 +88,12 @@ export default function JournalEntryHistory() {
           entries={entries}
           openIsPending={openIsPending}
           goalIsPending={goalIsPending}
+          galleryIsPending={galleryIsPending}
+          echoIsPending={echoIsPending}
           openError={openError}
           goalError={goalError}
+          galleryError={galleryError}
+          echoError={echoError}
         />
       </div>
     </div>
