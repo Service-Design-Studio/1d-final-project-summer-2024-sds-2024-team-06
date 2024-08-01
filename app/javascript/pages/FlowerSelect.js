@@ -28,13 +28,13 @@ const moods = [
     name: "Confused",
     color: "#FF69B4",
   },{
-    name: "Excited",
+    name: "In Love",
     color: "#FF1493",
   },{
-    name: "Grateful",
+    name: "Tired",
     color: "#FF69B4",
   },{
-    name: "Hopeful",
+    name: "Meh",
     color: "#FFD700",
   }
 ]
