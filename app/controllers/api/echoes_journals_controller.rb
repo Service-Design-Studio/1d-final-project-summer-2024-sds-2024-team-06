@@ -6,17 +6,35 @@ module Api
     before_action :set_echoes_journal, only: [:show]
     before_action :authorize_user!, only: [:show]
 
+
+    # def index
+    #   @echoes_journals = current_user.echoes_journals
+    #   render json: @echoes_journals, status: :ok
+    # end
+
     def index
       @echoes_journals = current_user.echoes_journals
-      render json: @echoes_journals, status: :ok
+
+      # Modify the imageURL attribute for each journal entry
+      @modified_journals = @echoes_journals.map do |journal|
+        journal.attributes.merge('imageURL' => GoogleCloudStorageService.file_url(journal.imageURL))
+      end
+
+      render json: @modified_journals, status: :ok
     end
 
     def show
       render json: @echoes_journal, status: :ok
     end
 
+
     def create
-      @echoes_journal = current_user.echoes_journals.build(echoes_journal_params)
+      file = params[:image]
+      filename = "user_#{current_user.id}/#{Time.now.to_i}_drawing.png"
+
+      GoogleCloudStorageService.upload_file(file, filename)
+
+      @echoes_journal = current_user.echoes_journals.create(imageURL: filename, journal_title: params[:journal_title], journal_entry: params[:journal_entry], tip_title: params[:tip_title], tip_body: params[:tip_body], date_created: params[:date_created])
 
       if @echoes_journal.save
         render json: @echoes_journal, status: :created

@@ -5,7 +5,6 @@ import { Toaster } from './sonner';
 
 // import from pages
 import Landing from '../pages/Landing';
-import CheckIn from '../pages/DailyCheckIn';
 import Moodtracker from '../pages/MoodTracker';
 import Activities from '../pages/Activities';
 import GalleryWalk from '../pages/GalleryWalk';
@@ -16,6 +15,11 @@ import Journal from '../pages/JournalEntryHistory';
 import JournalGoalForm from './JournalGoalForm';
 import JournalOpenForm from './JournalOpenForm';
 import JournalDetail from '../pages/JournalDetail';
+import EchoesWithin from '../pages/EchoesWithin'
+import { useUser } from '../pages/User';
+import CheckIn from '../pages/CheckIn';
+import Test from '../pages/Test';
+
 
 
 // Routing
@@ -27,7 +31,9 @@ const App = () => {
         <Routes>
           <Route exact path="/landing" element={<Landing />}></Route>
           {/*currentUser?.guest ? null : <Route exact path="/check-in" element={<Checkin />}></Route>*/}
+          {/* <Route exact path="/check-in" element={<CheckIn />}></Route> */}
           <Route exact path="/check-in" element={<CheckIn />}></Route>
+          <Route exact path="/test" element={<Test />}></Route>
           <Route exact path="/mood-tracker" element={<Moodtracker />}></Route>
           <Route exact path="/activities" element={<Activities />}></Route>
 
@@ -42,13 +48,21 @@ const App = () => {
           <Route exact path="/journal/:id" element={<JournalDetail />}></Route>
           <Route exact path="/journal/goal-setting" element={<JournalGoalForm />}></Route>
           <Route exact path="/journal/open-ended" element={<JournalOpenForm />}></Route>
-
+          <Route exact path="/echoes-within" element={<EchoesWithin />}></Route>
         </Routes>
         
-        {/*<Toaster id=".toaster"/>*/}
+        <Toaster richColors id=".toaster"/>
     </Router>
     </div>
   );
+  
+  // document.addEventListener('DOMContentLoaded', () => {
+  //   ReactDOM.render(
+  //     <App />,
+  //     document.body.appendChild(document.createElement('div')),
+  //   );
+  // });
+
 }
 
 export default App;

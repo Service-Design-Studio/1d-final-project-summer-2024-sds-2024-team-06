@@ -1,6 +1,8 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import useFetch from '../api/useFetch';
+import LoadingScreen from './Loading';
 
 import Navigation from "../components/Navigation";
 import TipCard from "../components/TipCard";
@@ -61,16 +63,29 @@ export default function JournalDetail() {
   // Get the type from the query params
   const type = queryParams.get('type'); 
   const apiUrl = gon.api_url;
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // Determine which endpoint to use based on type
   const endpoint = type === 'open' ? `/api/journals/${id}` : `/api/goal_journals/${id}`;
 
   // Fetch data
-  const { data: journalEntry, error, isPending } = useFetch(`${apiUrl}${endpoint}`);
+  const { data: journalEntry, error, isPending, loadingProgress } = useFetch(`${apiUrl}${endpoint}`);
 
   console.log(journalEntry);
 
-  if (isPending) return (<div>Loading...</div>);
+  useEffect(() => {
+    if (!isPending && !error) {
+      setIsLoaded(true);
+    }
+  }, [isPending, error]);
+
+  // if (!isLoaded) {
+  //   return <LoadingScreen loadingProgress={loadingProgress} />;
+  // }
+  if (isPending){
+    return <div className="h-full w-full flex justify-center items-center"><h1 className='text-4xl font-bold'>Loading journals...</h1></div>;
+  }
+
   if (error) return <div>Error: {error}</div>;
 
 

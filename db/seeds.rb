@@ -178,7 +178,7 @@ EchoesJournal.create!(
   journal_entry: "I am so depressed.",
   tip_title: "Process your emotions",
   tip_body: "It is okay to feel sad sometimes.",
-  imageURL: "https://i.pinimg.com/736x/cf/c3/9c/cfc39c914be5d417267efd58db9c5cb6.jpg"
+  imageURL: "user_2/1722233931_drawing.png"
 )
 
 EchoesJournal.create!(
@@ -187,7 +187,7 @@ EchoesJournal.create!(
   journal_entry: "I am so happy.",
   tip_title: "Relish in your joy!",
   tip_body: "It is okay to be happy sometimes.",
-  imageURL: "https://static.wikia.nocookie.net/cow-and-chicken/images/e/ef/The_Red_Guy.jpg/revision/latest?cb=20140204163038"
+  imageURL: "user_2/1722234225_drawing.png"
 )
 
 EchoesJournal.create!(
@@ -196,7 +196,7 @@ EchoesJournal.create!(
   journal_entry: "I am so nonchalant.",
   tip_title: "We all have feelings",
   tip_body: "It is okay to feel nothing sometimes.",
-  imageURL: "https://static.vecteezy.com/system/resources/previews/003/687/305/original/beige-muslim-man-free-vector.jpg"
+  imageURL: "user_2/1722234399_drawing.png"
 )
 
 

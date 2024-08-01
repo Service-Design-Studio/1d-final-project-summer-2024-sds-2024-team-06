@@ -55,7 +55,8 @@ export default function GalleryWalk() {
 
   //fecth all art pieces from api
   const apiUrl = gon.api_url;
-  const {data: artPieces, error, isPending} = useFetch(`${apiUrl}api/art_pieces`)
+
+  const {data: artPieces, error, isPending, loadingProgress} = useFetch(`${apiUrl}api/art_pieces`)
   //console.log(artPieces)
     
   return (
