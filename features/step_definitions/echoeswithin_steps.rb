@@ -48,14 +48,16 @@ end
 Given('I have completed my Drawing') do
   # Code to ensure the drawing is completed
   # page.execute_script("completeDrawing()")
+  visit '/echoes-within'
 end
 
 When('I click Publish to journal') do
-  find_button('#publish').click
+  find('#publish').click
 end
 
 Then('a pop-up will appear asking the user to caption their work') do
-  expect(page).to have_selector('.popup', text: 'caption your work')
+  # expect(page).to have_selector('.popup', text: 'caption your work')
+  expect(page).to have_text("Write a caption for your drawing")
 end
 
 Then('the user will be redirected to the journalentrieshistory page') do
@@ -63,9 +65,11 @@ Then('the user will be redirected to the journalentrieshistory page') do
 end #And?
 
 When('I click the exit cross button at the top of the screen') do
-  find('.exit-cross-button').click
+  # binding.pry
+  find('#close').click
 end
 
 Then('a pop-up will appear ensuring the user wants to leave') do
-  expect(page).to have_selector('.pop-up-confirmation')
+  # expect(page).to have_selector('.pop-up-confirmation')
+  expect(page).to have_text("Are you leaving?")
 end

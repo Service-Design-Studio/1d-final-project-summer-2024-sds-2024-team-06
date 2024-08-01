@@ -38,6 +38,7 @@ end
 Given('I am on journal entries history') do
   visit '/journal-quote'
   step 'I click anywhere'
+  sleep 3
 end
 
 When('I click the new entry button') do
@@ -53,6 +54,7 @@ Given('I am on journal entries history and user has completed a goal-setting jou
   visit '/journal'
   # Ensure there is at least one goal-setting journal entry, adjust as necessary
   # ky to create a profile with a goal-setting journal entry
+  sleep 3
 end
 
 When('I click on the first goal entry') do
@@ -77,6 +79,7 @@ end
 ##
 Given('I opened create journal menu') do
   visit '/journal'
+  sleep 3
   find('#newJournalButton').click
 end
 
@@ -160,6 +163,7 @@ Then('I will be redirected to the goal-setting journal past entry page') do
 end
 
 And('I will see three template fields') do
+  sleep 2
   first_journal = user.goal_journals.first
   expect(page).to have_selector('p#journal-start', text: first_journal.journal_start)
   expect(page).to have_selector('p#journal-end', text: first_journal.journal_end)
@@ -179,6 +183,7 @@ Then('I will be redirected to the open-ended journal past entry page') do
 end
 
 And('I will see my journal entry and final tip generated') do
+  sleep 2
   first_journal = user.journals.first
   expect(page).to have_content(first_journal.journal_title)
   expect(page).to have_content(first_journal.journalentry)
