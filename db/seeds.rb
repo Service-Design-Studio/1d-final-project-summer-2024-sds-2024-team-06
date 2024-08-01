@@ -200,40 +200,6 @@ EchoesJournal.create!(
 )
 
 
-# Create 3 Journal entries
-# 3.times do |i|
-#   Journal.create!(
-#     user_id: user.id,
-#     journal_title: "Journal Title #{i + 1}",
-#     journalentry: "This is the content of journal entry #{i + 1}.",
-#     tip_title: "Tip Title #{i + 1}",
-#     tip_body: "This is the body of tip #{i + 1}."
-#   )
-# end
-
-# # Create 3 GoalJournal entries
-# 3.times do |i|
-#   GoalJournal.create!(
-#     user_id: user.id,
-#     journal_title: "Goal Journal Title #{i + 1}",
-#     journal_start: "This is the start of goal journal entry #{i + 1}.",
-#     journal_end: "This is the end of goal journal entry #{i + 1}.",
-#     journal_third: "This is the third part of goal journal entry #{i + 1}."
-#   )
-# end
-
-# standard_moods.each do |mood_attributes|
-#   mood = user.moods.find_or_initialize_by(name: mood_attributes[:name])
-#   if mood.new_record?
-#     mood.hexcode = mood_attributes[:hexcode]
-#     mood.color = mood_attributes[:color]
-#     if mood.save
-#       puts "Mood created: #{mood.name}"
-#     else
-#       puts "Failed to create mood: #{mood.errors.full_messages.join(", ")}"
-#     end
-#   end
-# end
 
 def random_datetime
   start_date = Time.new(2024, 1, 1)
@@ -243,18 +209,20 @@ def random_datetime
 end
 
 flowers = [
-  {color: "Blue", mood: "Upset", created_at: random_datetime()},
-  {color: "DarkBlue", mood: "Happy", created_at: random_datetime()},
-  {color: "Grey", mood: "Excited", created_at: random_datetime()},
-  {color: "Orange", mood: "Meh", created_at: random_datetime()},
-  {color: "Pink", mood: "Confused", created_at: random_datetime()},
-  {color: "Purple", mood: "Tired", created_at: random_datetime()},
-  {color: "Red", mood: "Angry", created_at: random_datetime()},
-  {color: "Yellow", mood: "In Love", created_at: random_datetime()},
-  {color: "Pink", mood: "Happy", created_at: random_datetime()},
-  {color: "Orange", mood: "Tired", created_at: random_datetime()}
+  {color: "Blue", mood: "Upset"},
+  {color: "DarkBlue", mood: "Happy"},
+  {color: "Grey", mood: "Excited"},
+  {color: "Orange", mood: "Meh"},
+  {color: "Pink", mood: "Confused"},
+  {color: "Purple", mood: "Tired"},
+  {color: "Red", mood: "Angry"},
+  {color: "Yellow", mood: "In Love"},
+  {color: "Pink", mood: "Happy"},
+  {color: "Orange", mood: "Tired"}
 ]
 
-flowers.each do |flower_attributes|
-  user.flowers.find_or_create_by!(flower_attributes)
+30.times do
+  flowers.each do |flower_attributes|
+    user.flowers.find_or_create_by!(flower_attributes.merge(created_at: random_datetime))
+  end
 end

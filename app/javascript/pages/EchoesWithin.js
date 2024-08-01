@@ -49,6 +49,9 @@ const prompts = [
   "Visualize a place where you feel at peace."
 ];
 
+const MIN_ERASER_WIDTH = 1;
+const MIN_STROKE_WIDTH = 1;
+
 export default function EchoesWithin() {
     const navigate = useNavigate();
     const presetColors = [
@@ -71,6 +74,7 @@ export default function EchoesWithin() {
     const [isEraserMinusPressed, setisEraserMinusPressed] = useState(false);
     const [isBrushPlusPressed, setisBrushPlusPressed] = useState(false);
     const [isBrushMinusPressed, setisBrushMinusPressed] = useState(false);
+    const [isSliding, setIsSliding] = useState(false);
     const [intervalId, setIntervalId] = useState(null);
     const [caption, setCaption] = useState('');
 
@@ -136,9 +140,19 @@ export default function EchoesWithin() {
     const handleWidthButtonClick = (isAdd, isBrush) => {
         console.log('handleWidthButtonClick');
         if (isBrush) {
-            setStrokeWidth(prevWidth => prevWidth + (isAdd ? 2 : -2));
+            setStrokeWidth(prevWidth => {
+                const newWidth = prevWidth + (isAdd ? 2 : -2);
+                const clampedWidth = Math.max(newWidth, MIN_STROKE_WIDTH);
+                console.log('New Stroke Width:', clampedWidth);
+                return clampedWidth;
+            });
         } else {
-            setEraserWidth(prevWidth => prevWidth + (isAdd ? 2 : -2));
+            setEraserWidth(prevWidth => {
+                const newWidth = prevWidth + (isAdd ? 2 : -2);
+                const clampedWidth = Math.max(newWidth, MIN_ERASER_WIDTH);
+                console.log('New Eraser Width:', clampedWidth);
+                return clampedWidth;
+            });
         }
     }
 
@@ -497,17 +511,29 @@ export default function EchoesWithin() {
                             <PopoverTrigger className='hover:font-bold mt-1 mb-1'>Eraser Size</PopoverTrigger>
                             <PopoverContent side="left" style={{ width: 'fit-content' }}
                             className="flex flex-row justify-center">
-                            <label htmlFor='eraserWidth' className="text-xs mr-3">Eraser Size</label>
-                            <input
-                                type="range"
-                                className="form-range"
-                                min="1"
-                                max="100"
-                                step="1"
-                                id="eraserWidth"
-                                value={eraserWidth}
-                                onChange={handleEraserWidthChange}
+                            <span className="text-xs mr-3">Eraser Size</span>
+                            <div className="relative w-full flex flex-col items-center">
+                                <input
+                                    type="range"
+                                    className="form-range w-full"
+                                    min="1"
+                                    max="100"
+                                    step="1"
+                                    id="eraserWidth"
+                                    value={eraserWidth}
+                                    onChange={handleEraserWidthChange}
+                                    onMouseDown={() => setIsSliding(true)}
+                                    onMouseUp={() => setIsSliding(false)}
                                 />
+                                    {isSliding && (
+                                        <div
+                                        className="absolute -top-6 bg-gray-300 text-black text-xs rounded p-1 transform -translate-x-1/2 mb-3"
+                                        style={{ left: `${(eraserWidth - 1) * (100 / 99)}%` }}
+                                        >
+                                        {eraserWidth}
+                                        </div>
+                                    )}
+                            </div>
                             </PopoverContent>
                         </Popover>
                         <PlusAdjustButton isPressed={isEraserPlusPressed} isBrush={false} setPressed={setisEraserPlusPressed}/>
@@ -544,17 +570,29 @@ export default function EchoesWithin() {
                             <PopoverTrigger className='hover:font-bold mb-1'>Brush Size</PopoverTrigger>
                             <PopoverContent side="left" style={{ width: 'fit-content' }}
                             className="flex flex-row justify-center">
-                            <label htmlFor='strokeWidth' className="text-xs mr-3">Stroke Size</label>
-                            <input
-                                type="range"
-                                className="form-range"
-                                min="1"
-                                max="100"
-                                step="1"
-                                id="strokeWidth"
-                                value={eraserWidth}
-                                onChange={handleStrokeWidthChange}
+                            <span className="text-xs mr-3">Stroke Size</span>
+                            <div className="relative w-full flex flex-col items-center">
+                                <input
+                                    type="range"
+                                    className="form-range"
+                                    min="1"
+                                    max="100"
+                                    step="1"
+                                    id="strokeWidth"
+                                    value={strokeWidth}
+                                    onChange={handleStrokeWidthChange}
+                                    onMouseDown={() => setIsSliding(true)}
+                                    onMouseUp={() => setIsSliding(false)}
                                 />
+                                    {isSliding && (
+                                        <div
+                                        className="absolute -top-6 bg-gray-300 text-black text-xs rounded p-1 transform -translate-x-1/2 mb-3"
+                                        style={{ left: `${(strokeWidth - 1) * (100 / 99)}%` }}
+                                        >
+                                        {strokeWidth}
+                                        </div>
+                                    )}
+                                </div>
                             </PopoverContent>
                         </Popover>
                         <PlusAdjustButton isPressed={isBrushPlusPressed} isBrush={true} setPressed={setisBrushPlusPressed}/>
