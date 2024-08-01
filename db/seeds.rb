@@ -211,14 +211,12 @@ end
 flowers = [
   {color: "Blue", mood: "Upset"},
   {color: "DarkBlue", mood: "Happy"},
-  {color: "Grey", mood: "Excited"},
+  {color: "Grey", mood: "Anxious"},
   {color: "Orange", mood: "Meh"},
   {color: "Pink", mood: "Confused"},
   {color: "Purple", mood: "Tired"},
   {color: "Red", mood: "Angry"},
   {color: "Yellow", mood: "In Love"},
-  {color: "Pink", mood: "Happy"},
-  {color: "Orange", mood: "Tired"}
 ]
 
 30.times do
