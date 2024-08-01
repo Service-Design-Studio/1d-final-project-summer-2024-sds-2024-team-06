@@ -1,4 +1,8 @@
+require "rails"
 require "active_support/core_ext/integer/time"
+require "rspec/rails" # If using RSpec
+require "capybara/rails" # If using Capybara for integration tests
+require "factory_bot_rails" # If using FactoryBot for test data
 
 # The test environment is used exclusively to run your application's
 # test suite. You never need to work with it otherwise. Remember that
