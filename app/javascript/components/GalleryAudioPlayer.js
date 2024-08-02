@@ -60,8 +60,8 @@ export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}
   return (
     <>
     {/* Background image */}
-    <div className="flex-1 flex justify-center items-center grow bg-[#0D0D0D] p-4 relative no-scrollbar" onClick={() => hidePopup("popup-leaving")}>
-        <img id="picture" src={imageUrl} alt={id} style={{ height: `calc(100vh - 96px)`}}/>
+    <div className="flex-1 flex justify-center items-center grow bg-[#0D0D0D] relative no-scrollbar" onClick={() => hidePopup("popup-leaving")}>
+        <img id="picture" src={imageUrl} alt={id} style={{ height: `calc(100vh - 64px)`}}/>
         {/* Black tint */}
         <div className="absolute inset-0 bg-black bg-opacity-10"></div>
     </div>
@@ -71,7 +71,7 @@ export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}
     <div className='fixed top-1/2 transform p-4'>
         {/* Title and artist name */}
         <title className="text-white text-2xl lg:text-4xl font-sans block text-left">{title}</title>
-        <h1 className="text-white text-xs md:text-base font-sans block text-left">Artist: {artist}</h1>
+        <h1 className="text-white text-xs md:text-base font-sans block text-left">By: {artist}</h1>
         <div>&nbsp;</div>
         {/* Audio control */}
         <div id="audio-player"><Controls mp3={mp3}/></div>

@@ -24,25 +24,34 @@ export default function HorizontalScroll({ slides }) {
         }}
       >
         {slides.map((s, i) => {
-          return <>
-                <div key={i} className="h-[calc(100vh-96px)] w-screen flex-shrink-0 flex justify-center items-center">
-                    <img id="Picture" src={s.imageURL} alt={`Art piece ${i}`} className='object-contain h-full cursor-pointer'
-                    onClick={() => {window.location.href=`/gallery-walk/${s.id}`, console.log('clocked')}}/>
+            return <div key={"image" + i} className="h-relative w-screen flex-shrink-0 flex flex-col justify-center items-center">
+                      <h1 className="text-white text-2xl lg:text-4xl font-sans block text-left">{s.artTitle}</h1>
+                      <h1 className="text-white text-xs md:text-base font-sans block text-left">By: {s.artist}, {s.dateYear}</h1>
+                      <img id="Picture" src={s.imageURL} alt={`Art piece ${i}`} style={{ height: `calc(100vh - 200px)`}} className='block object-contain cursor-pointer'
+                      onClick={() => {window.location.href=`/gallery-walk/${s.id}`, console.log('clocked')}}/>
 
-                </div>
-                  {/* Description & audio control area */}
-                {/* <div className='absolute top-1/2 transform p-4'> */}
-                  {/* Title and artist name */}
-                {/* <title className="text-white text-2xl lg:text-4xl font-sans block text-left">{s.artTitle}</title> */}
-                {/* <h1 className="text-white text-xs md:text-base font-sans block text-left">Artist: {s.artist}</h1> */}
-                {/* <div>&nbsp;</div> */}
-              {/* </div> */}
-                </>
+
+                  </div>
         })}
       </div>
 
-      {/* Black tint */}
-      {/* <div className="absolute inset-0 bg-black bg-opacity-10"></div> */}
+      {/* Description area */}
+      {/* <div className='absolute top-1/2 transform p-4'>
+        <div
+          className= "flex transition ease-out duration-40"
+          style={{
+            transform: `translateX(-${current * 100}%)`,
+          }}
+        > */}
+        {/* Title and artist name */}
+        {/* {slides.map((s, i) => {
+          return (<div key={"description" + i}>
+                    <title className="text-white text-2xl lg:text-4xl font-sans block text-left">{s.artTitle}</title>
+                    <h1 className="text-white text-xs md:text-base font-sans block text-left">By: {s.artist}, {s.dateYear}</h1>
+                </div>);
+        })}
+        </div>
+      </div> */}
 
       <div className="absolute top-1/2 px-10">
         {/* Back button icon */}
