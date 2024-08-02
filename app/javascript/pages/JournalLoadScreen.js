@@ -58,8 +58,8 @@ export default function JournalLoadScreen({ loadingProgress }) {
         width: '100%',
         height: '100%',
       }}>
-        <h1>Loading Journals</h1>
-        <div className="flex space-x-1 mt-2">
+        <div className="flex flex-row space-x-1 mt-2 items-center">
+          <h1 style={{marginBottom: "0.5rem"}} className="self-end text-2xl">Loading Journals</h1>
           <span className="dot"></span>
           <span className="dot"></span>
           <span className="dot"></span>
