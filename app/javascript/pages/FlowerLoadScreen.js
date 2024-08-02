@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const LoadingScreen = ({ loadingProgress }) => {
+const FlowerLoadScreen = ({ loadingProgress }) => {
   const [currentFrame, setCurrentFrame] = useState(1);
   const [isFinalFrame, setIsFinalFrame] = useState(false);
   const totalFrames = 71;
@@ -56,6 +56,12 @@ const LoadingScreen = ({ loadingProgress }) => {
         width: '100%',
         height: '100%',
       }}>
+        <div className="flex flex-row space-x-1 mt-2 items-center">
+          <h1 style={{marginBottom: "0.5rem"}} className="self-end text-2xl text-green-600">Growing your flower</h1>
+          <div className="dot-green"></div>
+          <div className="dot-green"></div>
+          <div className="dot-green"></div>
+        </div>
         <img
           src={`/images/flower-frames/${currentFrame}.png`}
           alt={`Loading frame ${currentFrame}`}
@@ -68,4 +74,4 @@ const LoadingScreen = ({ loadingProgress }) => {
   );
 };
 
-export default LoadingScreen;
+export default FlowerLoadScreen;

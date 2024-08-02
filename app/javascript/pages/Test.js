@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import LoadingScreen from './Loading';
+import LoadingScreen from './FlowerLoadScreen';
 
 const Test = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);

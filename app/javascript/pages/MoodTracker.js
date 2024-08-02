@@ -2,12 +2,12 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
-import useFetch from '../api/useFetch'
+import loadingUseFetch from '../api/loadingUseFetch';
 //import mockUseFetch from '../components/mockUseFetch' // data to show flowers rendering
 import CarouselSwipe from '../components/CarouselSwipe'
 import HorizontalScroll from '../components/HorizontalScroll'
 import CalendarGrid from '../components/CalendarGrid'
-import LoadingScreen from './Loading';
+import FlowerLoadScreen from './FlowerLoadScreen';
 import AspectRatioGrid from '../components/AspectRatioGrid';
 
 
@@ -25,7 +25,7 @@ const checkinbg = {
 
 export default function Checkin() {
   const apiUrl = gon.api_url;
-  const {data: checkinData, error, isPending, loadingProgress} = useFetch(`${apiUrl}/api/flowers`)
+  const {data: checkinData, error, isPending, loadingProgress} = loadingUseFetch(`${apiUrl}/api/flowers`)
   const [isLoaded, setIsLoaded] = useState(false);
   const [currData, setCurrData] = useState(null);
   
@@ -52,7 +52,7 @@ export default function Checkin() {
   }, [isPending, error]);
 
   if (!isLoaded) {
-    return <LoadingScreen loadingProgress={loadingProgress} />;
+    return <FlowerLoadScreen loadingProgress={loadingProgress} />;
   }
 
 

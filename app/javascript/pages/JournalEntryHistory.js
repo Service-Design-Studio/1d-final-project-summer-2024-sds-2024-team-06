@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import useFetch from '../api/useFetch'
+import loadingUseFetch from '../api/loadingUseFetch';
 import Navigation from '../components/Navigation'
 import Journal from '../components/JournalContainer'
-import LoadingScreen from './Loading';
+import LoadingScreen from './FlowerLoadScreen';
 import JournalLoadScreen from './JournalLoadScreen';
 
 // to use brown paper paper background: <div style={dottedPaper}></div>
@@ -18,10 +18,10 @@ export default function JournalEntryHistory() {
   const apiUrl = gon.api_url;
 
    // Fetch data from two endpoints
-   const { data: openJournals, error: openError, isPending: openIsPending, loadingProgress: openLoadingProgress } = useFetch(`${apiUrl}api/journals`);
-   const { data: goalJournals, error: goalError, isPending: goalIsPending, loadingProgress: goalLoadingProgress } = useFetch(`${apiUrl}api/goal_journals`);
-   const { data: galleryJournals, error: galleryError, isPending: galleryIsPending, loadingProgress: galleryLoadingProgress } = useFetch(`${apiUrl}api/gallery_journals`);
-   const { data: echoJournals, error: echoError, isPending: echoIsPending, loadingProgress: echoLoadingProgress } = useFetch(`${apiUrl}api/echoes_journals`);
+   const { data: openJournals, error: openError, isPending: openIsPending, loadingProgress: openLoadingProgress } = loadingUseFetch(`${apiUrl}api/journals`);
+   const { data: goalJournals, error: goalError, isPending: goalIsPending, loadingProgress: goalLoadingProgress } = loadingUseFetch(`${apiUrl}api/goal_journals`);
+   const { data: galleryJournals, error: galleryError, isPending: galleryIsPending, loadingProgress: galleryLoadingProgress } = loadingUseFetch(`${apiUrl}api/gallery_journals`);
+   const { data: echoJournals, error: echoError, isPending: echoIsPending, loadingProgress: echoLoadingProgress } = loadingUseFetch(`${apiUrl}api/echoes_journals`);
 
 
   // Combined state for loading, error, and data
@@ -75,7 +75,8 @@ export default function JournalEntryHistory() {
   // console.log("all journals: ", entries)
 
   if (loading) {
-    return <JournalLoadScreen loadingProgress={echoLoadingProgress} />;
+    const minLoadingProgress = Math.min(openLoadingProgress, goalLoadingProgress, galleryLoadingProgress, echoLoadingProgress);
+    return <JournalLoadScreen loadingProgress={minLoadingProgress} />;
   }
 
   // if (loading) return <div className="h-full w-full flex justify-center items-center"><h1 className='text-4xl font-bold'>Loading journals...</h1></div>;
