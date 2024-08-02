@@ -80,6 +80,7 @@ export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}
     {/* Journal area */}
     <div className='fixed top-1/2 right-0 transform p-4'>
           <h1 className="text-white text-xs md:text-base font-sans block text-left">Let's pen down some thoughts...</h1>
+          <p className="text-white text-xs font-sans block text-left">*You can zoom into the picture to see the finer details</p>
           <div>&nbsp;</div>
           <input id="goalsetting-title" className="text-xs md:text-base shadow appearance-none border w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-transparent text-white" 
                         value={userTitle} onChange={(e) => setUserTitle(e.target.value)} type="text" placeholder="Title"></input>
