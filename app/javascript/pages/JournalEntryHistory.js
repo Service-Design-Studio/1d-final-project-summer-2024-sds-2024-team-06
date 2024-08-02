@@ -58,7 +58,6 @@ export default function JournalEntryHistory() {
     return <LoadingScreen loadingProgress={goalLoadingProgress} />;
   }
 
-  // if (loading) return <div className="h-full w-full flex justify-center items-center"><h1 className='text-4xl font-bold'>Loading journals...</h1></div>;
   if (error) return <div>{error}</div>;
 
   return (

@@ -2,9 +2,6 @@ import React from 'react'
 import { useState, useEffect } from "react";
 
 import useFetch from '../api/useFetch'
-//import mockUseFetch from '../components/mockUseFetch' // data to show flowers rendering
-import CarouselSwipe from '../components/CarouselSwipe'
-import HorizontalScroll from '../components/HorizontalScroll'
 import CalendarGrid from '../components/CalendarGrid'
 import LoadingScreen from './Loading';
 

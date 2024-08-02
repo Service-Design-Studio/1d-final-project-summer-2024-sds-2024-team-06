@@ -13,8 +13,10 @@ export default function Controls({mp3}) {
   
 
     const [howlInstance] = useState(new Howl({
-        src: ["/images/ageOfFullBloommp3.mp3"],
-        volume: 0.5,
+        // src: ["/images/ageOfFullBloommp3.mp3"],
+        src: [mp3],
+        // src:["https://storage.googleapis.com/art_storage/Slow%20Art%20Guide%20for%20%F0%9D%98%88%F0%9D%98%A8%F0%9D%98%A6%20%F0%9D%98%B0%F0%9D%98%A7%20%F0%9D%98%8D%F0%9D%98%B6%F0%9D%98%AD%F0%9D%98%AD%20%F0%9D%98%89%F0%9D%98%AD%F0%9D%98%B0%F0%9D%98%B0%F0%9D%98%AE%20by%20San%20Minn.mp3"],
+        volume: 0.2,
     }));
 
     useEffect(() => {

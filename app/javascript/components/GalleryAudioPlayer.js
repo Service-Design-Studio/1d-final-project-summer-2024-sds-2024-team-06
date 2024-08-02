@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import Controls from './Controls'
+import Controls from './GalleryControls'
 import Captions from './Captions'
 import { useParams } from 'react-router-dom'
 
@@ -53,16 +53,19 @@ function createGalleryJournalForUser(journalEntry) {
 
 export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}) {
 
-  const [currentTrack, setCurrentTrack] = useState(null)
+  const [currentTrack, setCurrentTrack] = useState(null);
+  const [userTitle, setUserTitle] = useState("");
   const [journalbits, setJournalbits] = useState("");
 
   return (
     <>
     {/* Background image */}
     <div className="flex-1 flex justify-center items-center grow bg-[#0D0D0D] p-4 relative no-scrollbar" onClick={() => hidePopup("popup-leaving")}>
-        <img id="picture" src={imageUrl} alt={id} style={{ height: `calc(100vh - 96px)`}} 
-              className="object-cover before:content-[''] before:absolute before:inset-0 before:block before:bg-gradient-to-r before:from-green-400 before:to-blue-500 before:opacity-75" />
+        <img id="picture" src={imageUrl} alt={id} style={{ height: `calc(100vh - 96px)`}}/>
+        {/* Black tint */}
+        <div className="absolute inset-0 bg-black bg-opacity-10"></div>
     </div>
+    
 
     {/* Description & audio control area */}
     <div className='fixed top-1/2 transform p-4'>
@@ -76,12 +79,17 @@ export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}
 
     {/* Journal area */}
     <div className='fixed top-1/2 right-0 transform p-4'>
+          <h1 className="text-white text-xs md:text-base font-sans block text-left">Let's pen down some thoughts...</h1>
+          <div>&nbsp;</div>
+          <input id="goalsetting-title" className="text-xs md:text-base shadow appearance-none border w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-transparent text-white" 
+                        value={userTitle} onChange={(e) => setUserTitle(e.target.value)} type="text" placeholder="Title"></input>
+          {/* <div>&nbsp;</div> */}
           <textarea
             id="text-box"
             value={journalbits}
             onChange={(e) => setJournalbits(e.target.value)}
             rows="5"
-            placeholder="Pen down some thoughts..."
+            placeholder=""
             className="w-full bg-transparent text-white"
           />
         <div>&nbsp;</div>
@@ -104,7 +112,6 @@ export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}
               // accept empty fields?
               // post to end-api
               createGalleryJournalForUser({
-                //user_id: currentUser.id,
                 journal_title: title,
                 journal_entry: journalbits,
                 tip_title: '',
@@ -123,7 +130,7 @@ export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}
               <div>&nbsp;</div>
               <div className="block flex justify-between gap-4">
                 <button id="home" className="text-xs lg:text-base bg-[#713a35] hover:bg-[#5e2c29] text-white font-bold py-2 px-4"
-                    onClick={() => {window.location.href="/activities"}}>Okay, I'll leave</button>
+                    onClick={() => {window.location.href="/gallery-walk"}}>Okay, I'll leave</button>
                 <button id="return" className="text-xs lg:text-base bg-[#21687f] hover:bg-[#1a4e63] text-white font-bold py-2 px-4"
                     onClick={() => hidePopup("popup-leaving")}>No, I'll continue reflecting</button> 
               </div>
