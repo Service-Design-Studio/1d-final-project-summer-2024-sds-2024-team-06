@@ -39,7 +39,7 @@ export default function loadingUseFetch(url) {
                     console.log("setting isPending to false");
                     setIsPending(false);
                     setError(null);
-                }, 2500);
+                }, 2000);
             }).catch(err =>{
                 if(err.name === "AbortError"){
                     console.log("fetch aborted");
