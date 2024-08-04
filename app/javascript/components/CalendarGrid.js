@@ -46,8 +46,9 @@ const CalendarGrid = ({ checkinData, width }) => {
             const dayOfYear = monthIndex * 32 + dayIndex;
             const checkin = getCheckinForDay(dayOfYear);
             const rowIndex = Math.floor(dayIndex / 8); // Calculate row index within month grid
+            const marginTop = `${-parseFloat(width) * 0.008 *rowIndex}px`; // Dynamic margin
             return (
-              <div key={dayIndex} style={{ ...gridItemStyle, marginTop: rowIndex > 0 ? '-20px' : '0', zIndex: getZIndexForRow(rowIndex) }}>
+              <div key={dayIndex} style={{ ...gridItemStyle, marginTop: rowIndex > 0 ? marginTop : '0', zIndex: getZIndexForRow(rowIndex) }}>
                 {checkin && (
                   <div className="flex flex-col justify-between">
                     <FlowerImage checkinMood={checkin.mood.replace(/\s+/g, '')} checkinColor={checkin.color} height={parseFloat(width) * 0.025}/>

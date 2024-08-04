@@ -16,7 +16,7 @@ import AspectRatioGrid from '../components/AspectRatioGrid';
 const checkinbg = {
   height: '100vh',
   width: '100vw',
-  background: 'url(/images/background-mood.svg) center top',
+  background: 'url(/images/background-mood1.svg) center top',
   backgroundSize: 'cover',
   overflow: 'hidden', // Prevent scrolling
 };
@@ -68,10 +68,6 @@ export default function Checkin() {
             <div className="row-span-1 flex flex-col justify-center items-center text-center" id="instructions"
             style={{height:"35vh"}}>
             {/*Instructions layer*/}
-            <div className="p-2 rounded shadow-md" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', position: 'absolute', top: '5vh' , right: '2vw'}}>
-              {/* <h1 className='text-lg font-sans-800'>Keep your garden flourishing by consistently checking in</h1> */}
-              <h1 className='w-full h-full text-sm font-sans-800 text-black hover:cursor-pointer hover:bg-gray-300'>Click to activities</h1>
-            </div>
             </div>
             <div style={{height:"65vh", backgroundImage: `url(/images/foreground1.svg)`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
             {/*Flower field layer*/}
