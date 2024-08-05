@@ -246,11 +246,15 @@ export default function FlowerSelect() {
       setIsLoading(false);
     });
 
-  const [isHelpTextVisible, setIsHelpTextVisible] = useState(false);
+    
+      
+  }
 
-  const toggleHelpText = () => {
-    setIsHelpTextVisible(!isHelpTextVisible);
-  };
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => {
+        setIsVisible(!isVisible);
   }
 
 
@@ -383,15 +387,15 @@ export default function FlowerSelect() {
               style={{
                 ...submitButtonStyle
               }}>Submit</button>}
-        <div className="help-icon" onClick={toggleHelpText}>
-        ?
-        {isHelpTextVisible && (
-          <div className="help-text">
+      
+          <div className="help-icon" onClick={toggleVisibility}>
+              ?
+          </div>
+          <div className={`help-text ${isVisible ? 'visible' : ''}`}>
             <h1>Welcome to Your Mood Tracker! 🌸</h1>
-            <p>We're excited to have you here on your journey to better understanding and managing your emotions. To make this process engaging and meaningful, we've chosen a unique and vibrant way for you to express how you're feeling each day—through the language of flowers!</p>
+            <p>We're excited to have you here on your journey to better understanding and managing your emotions. To make this process engaging, we've chosen a vibrant way for you to express how you're feeling each day—through the language of flowers!</p>
 
-            <h2>Why Flowers?</h2>
-            <p>Flowers have been symbols of emotions and sentiments for centuries. Each type of flower carries its own special meaning and can convey a wide range of feelings. By using flowers to represent your mood, you'll not only add a touch of beauty to your daily reflections but also connect with the rich tradition of floral symbolism.</p>
+            <p>Flowers have been symbols of emotions for centuries. Each type of flower carries its own special meaning and can convey a wide range of feelings. By using flowers to represent your mood, you'll not only add a touch of beauty to your daily reflections but also connect with the rich tradition of floral symbolism.</p>
 
             <h2>How It Works:</h2>
             <ul>
@@ -400,19 +404,14 @@ export default function FlowerSelect() {
               <li><strong>Submit and Reflect:</strong> Submit your chosen flower and colour each day. Over time, you'll build a visual diary of your emotional journey. You can look back and see patterns, highs, and lows, which can provide valuable insights into your emotional well-being.</li>
             </ul>
 
-            <h2>Example:</h2>
-            <p><strong>Flower Type:</strong> Tulip (symbolizing hope)<br />
-              <strong>Colour:</strong> Blue (indicating a calm and serene mood)</p>
-
-            <h2>Why This Matters:</h2>
+ 
             <p>Tracking your mood through flowers and colours allows you to express your emotions creatively and intuitively. It's not just about tracking your feelings but also about understanding them in a deeper, more visual way. Plus, it's a lovely reminder that even on challenging days, there's always beauty to be found.</p>
 
             <p>We're here to support you every step of the way. If you have any questions or need assistance, don't hesitate to reach out. Enjoy your journey through the world of flowers and emotions!</p>
 
             <p><strong>Happy Tracking!</strong></p>
           </div>
-        )}
-      </div>
+      
         
     </div>
     

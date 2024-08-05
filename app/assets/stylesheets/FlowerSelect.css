@@ -1,38 +1,41 @@
 .help-icon {
+    cursor: pointer;
+    font-size: 24px;
+    color: #3498db;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    z-index: 1001;
     position: fixed;
     bottom: 20px;
     left: 20px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .help-text {
-    display: none;
-    position: absolute;
-    bottom: 50px;
-    left: 0;
-    background-color: #f9f9f9; /* Softer background color */
-    color: #333; /* Softer text color */
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 8px;
-    width: 400px; /* Increased width for better text wrapping */
-    max-height: 500px; /* Set a maximum height */
-    overflow-y: auto; /* Make it scrollable if content exceeds max height */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    word-wrap: break-word; /* Ensure text wraps properly */
-    z-index: 1000; /* Ensure it appears above other elements */
-  }
-  
-  .help-icon:hover .help-text {
+    justify-content: center;
+}
+
+.help-text {
     display: block;
-  }
+    background: rgba(255, 255, 255, 0.9); /* Translucent background */
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    max-width: 1000px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+}
+
+.help-text.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
