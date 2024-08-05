@@ -1,6 +1,7 @@
 # spec/controllers/flower_controller_spec.rb
 require 'rails_helper'
 
+
 RSpec.describe Api::FlowersController, type: :controller do
   let!(:user) { User.create(email: "rspec@example.com", password: "password", password_confirmation: "password", dateLastLoggedIn: Date.today) }
   let!(:flower_params) { {color: "blue", mood: "sad" }}

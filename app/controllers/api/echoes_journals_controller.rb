@@ -42,6 +42,22 @@ module Api
         render json: @echoes_journal.errors, status: :unprocessable_entity
       end
     end
+    # def create
+    #   @echoes_journal = current_user.echoes_journals.build(echoes_journal_params)
+
+    #   if @echoes_journal.save
+    #     file = params[:image]
+    #     filename = "user_#{current_user.id}/#{Time.now.to_i}_drawing.png"
+    #     if GoogleCloudStorageService.upload_file(file, filename)
+    #       image_url = GoogleCloudStorageService.file_url(filename)
+    #       @echoes_journal.update(imageURL: image_url)
+    #     end
+    #     # GoogleCloudStorageService.upload_file(params[:image])
+    #     render json: @echoes_journal, status: :created
+    #   # else
+    #   #   render json: { errors: @echoes_journal.errors.full_messages }, status: :unprocessable_entity
+    #   end
+    # end
 
     private
 
@@ -56,7 +72,7 @@ module Api
     end
 
     def echoes_journal_params
-      params.require(:echoes_journal).permit(:journal_title, :journal_entry, :tip_title, :tip_body, :imageurl, :date)
+      params.permit(:journal_title, :journal_entry, :tip_title, :tip_body, :imageURL, :date)
     end
   end
 end

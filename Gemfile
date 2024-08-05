@@ -22,9 +22,7 @@ gem "dotenv"
 
 gem "gon"
 
-group :development, :test do
-  gem 'factory_bot_rails'
-end
+
 
 
 # Use Redis adapter to run Action Cable in production
@@ -44,6 +42,7 @@ gem "bootsnap", require: false
 
 gem "pry"
 
+gem 'irb', '1.14.0'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -62,10 +61,11 @@ group :development, :test do
 
 
   # Use sqlite3 as the database for Active Record
-  gem "sqlite3", "~> 1.4"
+  gem "sqlite3"#, "~> 1.4"
 
   gem 'rspec-rails'
   gem 'guard-rspec'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -81,7 +81,7 @@ group :test do
   gem "selenium-webdriver"
   gem "cucumber-rails", require: false
   gem "database_cleaner"
-  gem 'simplecov', require: false, group: :test
+  gem 'simplecov', require: false
   gem "rack_session_access"
 
 

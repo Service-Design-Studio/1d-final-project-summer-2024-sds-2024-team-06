@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import useFetch from '../api/useFetch'
+import React, { useState, useEffect, useRef } from 'react';
+import loadingUseFetch from '../api/loadingUseFetch';
 import Navigation from '../components/Navigation'
 import Journal from '../components/JournalContainer'
-import LoadingScreen from './Loading';
+import LoadingScreen from './FlowerLoadScreen';
+import JournalLoadScreen from './JournalLoadScreen';
 
 // to use brown paper paper background: <div style={dottedPaper}></div>
 const brownPaper = {
@@ -17,8 +18,11 @@ export default function JournalEntryHistory() {
   const apiUrl = gon.api_url;
 
    // Fetch data from two endpoints
-   const { data: openJournals, error: openError, isPending: openIsPending, loadingProgress: openLoadingProgress } = useFetch(`${apiUrl}api/journals`);
-   const { data: goalJournals, error: goalError, isPending: goalIsPending, loadingProgress: goalLoadingProgress } = useFetch(`${apiUrl}api/goal_journals`);
+   const { data: openJournals, error: openError, isPending: openIsPending, loadingProgress: openLoadingProgress } = loadingUseFetch(`${apiUrl}api/journals`);
+   const { data: goalJournals, error: goalError, isPending: goalIsPending, loadingProgress: goalLoadingProgress } = loadingUseFetch(`${apiUrl}api/goal_journals`);
+   const { data: galleryJournals, error: galleryError, isPending: galleryIsPending, loadingProgress: galleryLoadingProgress } = loadingUseFetch(`${apiUrl}api/gallery_journals`);
+   const { data: echoJournals, error: echoError, isPending: echoIsPending, loadingProgress: echoLoadingProgress } = loadingUseFetch(`${apiUrl}api/echoes_journals`);
+
 
   // Combined state for loading, error, and data
   const [entries, setEntries] = useState([]);
@@ -26,14 +30,18 @@ export default function JournalEntryHistory() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!openIsPending && !goalIsPending) {
-      setLoading(false);
+    if (!openIsPending && !goalIsPending && !galleryIsPending && !echoIsPending) {
 
+      setLoading(false);
       if (openError) {
         setError(openError);
       } else if (goalError) {
         setError(goalError);
-      } else {
+      } else if (galleryError) {
+          setError(galleryError);
+      } else if (echoError) {
+        setError(echoError);
+      }else {
         // Add source information and combine data
         const openJournalsWithSource = openJournals.map(entry => ({
           ...entry,
@@ -43,19 +51,32 @@ export default function JournalEntryHistory() {
           ...entry,
           source: 'goal'
         }));
-        const combinedEntries = [...openJournalsWithSource, ...goalJournalsWithSource];
+        const galleryJournalsWithSource = galleryJournals.map(entry => ({
+          ...entry,
+          source: 'gallery'
+        }));
+        const echoJournalsWithSource = echoJournals.map(entry => ({
+          ...entry,
+          source: 'echo'
+        }));
+
+        const combinedEntries = [...openJournalsWithSource, ...goalJournalsWithSource,...galleryJournalsWithSource,...echoJournalsWithSource];
         combinedEntries.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         setEntries(combinedEntries);
       }
     }
-  }, [openIsPending, goalIsPending, openError, goalError, openJournals, goalJournals]);
+  }, [openIsPending, goalIsPending,galleryIsPending,echoIsPending, openError, goalError,galleryError,echoError, openJournals, goalJournals,galleryJournals,echoJournals]);
+
 
   // console.log("my open journals: ", openJournals)
   // console.log("my goal journals: ", goalJournals)
+  //console.log("my gallery journals: ", galleryJournals)
+  //console.log("Echo: ", echoJournals)
   // console.log("all journals: ", entries)
 
   if (loading) {
-    return <LoadingScreen loadingProgress={goalLoadingProgress} />;
+    const minLoadingProgress = Math.min(openLoadingProgress, goalLoadingProgress, galleryLoadingProgress, echoLoadingProgress);
+    return <JournalLoadScreen loadingProgress={minLoadingProgress} />;
   }
 
   if (error) return <div>{error}</div>;
@@ -68,8 +89,12 @@ export default function JournalEntryHistory() {
           entries={entries}
           openIsPending={openIsPending}
           goalIsPending={goalIsPending}
+          galleryIsPending={galleryIsPending}
+          echoIsPending={echoIsPending}
           openError={openError}
           goalError={goalError}
+          galleryError={galleryError}
+          echoError={echoError}
         />
       </div>
     </div>

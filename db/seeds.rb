@@ -180,40 +180,6 @@ EchoesJournal.create!(
 )
 
 
-# Create 3 Journal entries
-# 3.times do |i|
-#   Journal.create!(
-#     user_id: user.id,
-#     journal_title: "Journal Title #{i + 1}",
-#     journalentry: "This is the content of journal entry #{i + 1}.",
-#     tip_title: "Tip Title #{i + 1}",
-#     tip_body: "This is the body of tip #{i + 1}."
-#   )
-# end
-
-# # Create 3 GoalJournal entries
-# 3.times do |i|
-#   GoalJournal.create!(
-#     user_id: user.id,
-#     journal_title: "Goal Journal Title #{i + 1}",
-#     journal_start: "This is the start of goal journal entry #{i + 1}.",
-#     journal_end: "This is the end of goal journal entry #{i + 1}.",
-#     journal_third: "This is the third part of goal journal entry #{i + 1}."
-#   )
-# end
-
-# standard_moods.each do |mood_attributes|
-#   mood = user.moods.find_or_initialize_by(name: mood_attributes[:name])
-#   if mood.new_record?
-#     mood.hexcode = mood_attributes[:hexcode]
-#     mood.color = mood_attributes[:color]
-#     if mood.save
-#       puts "Mood created: #{mood.name}"
-#     else
-#       puts "Failed to create mood: #{mood.errors.full_messages.join(", ")}"
-#     end
-#   end
-# end
 
 def random_datetime
   start_date = Time.new(2024, 1, 1)
@@ -223,18 +189,56 @@ def random_datetime
 end
 
 flowers = [
-  {color: "Blue", mood: "Upset", created_at: random_datetime()},
-  {color: "DarkBlue", mood: "Happy", created_at: random_datetime()},
-  {color: "Grey", mood: "Excited", created_at: random_datetime()},
-  {color: "Orange", mood: "Meh", created_at: random_datetime()},
-  {color: "Pink", mood: "Confused", created_at: random_datetime()},
-  {color: "Purple", mood: "Tired", created_at: random_datetime()},
-  {color: "Red", mood: "Angry", created_at: random_datetime()},
-  {color: "Yellow", mood: "In Love", created_at: random_datetime()},
-  {color: "Pink", mood: "Happy", created_at: random_datetime()},
-  {color: "Orange", mood: "Tired", created_at: random_datetime()}
+  {color: "Blue", mood: "Upset"},
+  {color: "DarkBlue", mood: "Happy"},
+  {color: "Grey", mood: "Anxious"},
+  {color: "Orange", mood: "Meh"},
+  {color: "Pink", mood: "Confused"},
+  {color: "Purple", mood: "Tired"},
+  {color: "Red", mood: "Angry"},
+  {color: "Yellow", mood: "In Love"},
 ]
 
-flowers.each do |flower_attributes|
-  user.flowers.find_or_create_by!(flower_attributes)
+def random_datetime_for_day(day)
+  start_date = Time.new(2024, 1, 1) + (day - 1).days
+  end_date = start_date.end_of_day
+  random_time = rand(start_date.to_f..end_date.to_f)
+  Time.at(random_time)
 end
+
+def create_unique_flowers(user, flowers)
+  total_days = (1..365).to_a.shuffle # Generate all days of the year and shuffle them
+
+  flowers.each do |flower_attributes|
+    30.times do
+      day = total_days.pop # Get a unique day from the shuffled list
+      break if day.nil? # Ensure we don't run out of days
+
+      created_at = random_datetime_for_day(day)
+      user.flowers.create!(flower_attributes.merge(created_at: created_at))
+
+      puts "Creating flower for #{user.email} on day #{day}, created_at #{created_at}"
+    end
+  end
+
+  remove_duplicate_flowers(user)
+end
+
+def remove_duplicate_flowers(user)
+  flower_days = {}
+  user.flowers.order(:day).each do |flower|
+    day = flower.day
+    if flower_days.key?(day)
+      puts "Removing duplicate flower for #{user.email} on day #{day}"
+      flower.destroy
+    else
+      flower_days[day] = true
+    end
+  end
+end
+
+
+create_unique_flowers(user, flowers)
+puts user.flowers.uniq(&:day).count
+
+

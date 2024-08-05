@@ -2,8 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import useFetch from '../api/useFetch';
-import LoadingScreen from './Loading';
-
 import Navigation from "../components/Navigation";
 import JournalDetailOpen from '../components/JournalDetailOpen';
 import JournalDetailGoal from '../components/JournalDetailGoal';
@@ -30,7 +28,7 @@ export default function JournalDetail() {
   const endpoint = type === 'open' ? `/api/journals/${id}` : `/api/goal_journals/${id}`;
 
   // Fetch data
-  const { data: journalEntry, error, isPending, loadingProgress } = useFetch(`${apiUrl}${endpoint}`);
+  const { data: journalEntry, error, isPending } = useFetch(`${apiUrl}${endpoint}`);
 
   // console.log(journalEntry);
 
@@ -40,9 +38,6 @@ export default function JournalDetail() {
     }
   }, [isPending, error]);
 
-  // if (!isLoaded) {
-  //   return <LoadingScreen loadingProgress={loadingProgress} />;
-  // }
   if (isPending){
     return <div className="h-full w-full flex justify-center items-center"><h1 className='text-4xl text-center font-bold'>Loading journal...</h1></div>;
   }

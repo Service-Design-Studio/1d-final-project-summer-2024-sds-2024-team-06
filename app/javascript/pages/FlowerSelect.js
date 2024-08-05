@@ -13,49 +13,49 @@ import {
 
 const moods = [
   {
-    name: "Happy",
-    color: "#FFD700",
+    name: "Happy"
   },{
-    name: "Sad",
-    color: "#FF0000",
+    name: "Upset"
   },{
-    name: "Angry",
-    color: "#FF4500",
+    name: "Angry"
   },{
-    name: "Anxious",
-    color: "#FF8C00",
+    name: "Anxious"
   },{
-    name: "Confused",
-    color: "#FF69B4",
+    name: "Confused"
   },{
-    name: "Excited",
-    color: "#FF1493",
+    name: "In Love"
   },{
-    name: "Grateful",
-    color: "#FF69B4",
+    name: "Tired"
   },{
-    name: "Hopeful",
-    color: "#FFD700",
+    name: "Meh"
   }
 ]
 
 const colors = [
   {
-    name: "Blue"
+    name: "Blue",
+    hexcode: "#85D4FF",
   }, {
-    name: "Dark Blue"
+    name: "Dark Blue",
+    hexcode: "#11055C",
   }, {
-    name: "Grey"
+    name: "Grey",
+    hexcode: "#ADADAD",
   },{
-    name: "Orange"
+    name: "Orange",
+    hexcode: "#ED6D48",
   },{
-    name: "Pink"
+    name: "Pink",
+    hexcode: "#FFC7E7", 
   },{
-    name: "Purple"
+    name: "Purple",
+    hexcode: "#5309CD",
   },{
-    name: "Red"
+    name: "Red",
+    hexcode: "#D0453B",
   },{
-    name: "Yellow"
+    name: "Yellow",
+    hexcode: "#FDDF19",
   }
 ]
 
@@ -171,6 +171,31 @@ export default function FlowerSelect() {
     console.log(`images/flowers/${newFlowerColor}/${newFlowerColor}_flower_${flowerNumber}.svg`);
   }
 
+  const getLuminance = (hex) => {
+    const rgb = parseInt(hex.slice(1), 16);
+    const r = (rgb >> 16) & 0xff;
+    const g = (rgb >>  8) & 0xff;
+    const b = (rgb >>  0) & 0xff;
+    const l = 0.2126 * r + 0.7152 * g + 0.0722 * b; 
+    return l;
+  };
+
+  function darkenColor(hex, percent) {
+    let num = parseInt(hex.slice(1), 16),
+        amt = Math.round(2.55 * percent),
+        R = (num >> 16) - amt,
+        G = (num >> 8 & 0x00FF) - amt,
+        B = (num & 0x0000FF) - amt;
+
+    console.log("#" + (0x1000000 + (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 + (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 + (B < 255 ? (B < 1 ? 0 : B) : 255)).toString(16).slice(1).toUpperCase());
+  
+    return "#" + (
+      0x1000000 +
+      (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+      (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+      (B < 255 ? (B < 1 ? 0 : B) : 255)
+    ).toString(16).slice(1).toUpperCase();
+  }
 
   const submitFlower = (flowerData) => {
     fetch(`/api/flowers`, {
@@ -241,7 +266,7 @@ export default function FlowerSelect() {
             ...moodButtonStyle
           }}>
             <div className="flex flex-col w-full h-full items-end">
-            <button onClick={toggleMoodDropdown} type="button" style={{
+            <button id="mood-dropdown" onClick={toggleMoodDropdown} type="button" style={{
               fontSize: "1.125rem",
               width: 'fit-content'
             }} className="flex items-center text-black bg-white hover:bg-gray-200 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 focus:ring-4 focus:ring-gray-300 focus:font-bold">
@@ -250,7 +275,7 @@ export default function FlowerSelect() {
               <path d="M14.6401 2.7986e-05L7.50011 7.61603L0.360107 2.86102e-05L14.6401 2.7986e-05Z" fill="#222222"/>
               </svg>
             </button>
-            <div id="moodDropDown" ref={moodDropDownRef} 
+            <div id="mood-dropdown" ref={moodDropDownRef} 
               style={{
                 transition: 'max-height 0.35s ease-in-out',
                 overflow: 'hidden',
@@ -282,20 +307,23 @@ export default function FlowerSelect() {
             ...flowerStyle,
             height: '56.25vh'
           }}>
-            <img src={currFlower} className="object-contain h-full w-full"></img>
+            <img id="flower-image" src={currFlower} className="object-contain h-full w-full"></img>
           </div>
           <div className="flex flex-col justify-center items-start"
           style={{
             ...colorButtonStyle
           }}>
             <div className="flex flex-col h-full w-full items-start">
-            <button type="button" onClick={toggleColorDropdown} style={{
+            <button id="color-dropdown" type="button" onClick={toggleColorDropdown} style={{
               fontSize: "1.125rem",
-              width: 'fit-content' 
-            }} className="inline-flex items-center text-black bg-yellow-300 hover:bg-yellow-400 hover:text-gray-200 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 focus:ring-4 focus:ring-yellow-500 focus:font-bold focus:text-gray-200">
+              width: 'fit-content',
+              background: currColor.hexcode,
+              color: getLuminance(currColor.hexcode) > 128 ? 'black' : 'white',
+              outline: `3px solid ${darkenColor(currColor.hexcode, 20)}`
+            }} className="inline-flex items-center font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 focus:font-bold">
               {currColor.name}
               <svg className="ml-6 flex-shrink-0" width="10" height="10" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.6401 2.7986e-05L7.50011 7.61603L0.360107 2.86102e-05L14.6401 2.7986e-05Z" fill="#222222"/>
+              <path d="M14.6401 2.7986e-05L7.50011 7.61603L0.360107 2.86102e-05L14.6401 2.7986e-05Z" fill={getLuminance(currColor.hexcode) > 128 ? '#222222' : '#FFFFFF'}/>
               </svg>
             </button>
            <div ref={ colorDropDownRef } 
@@ -309,15 +337,17 @@ export default function FlowerSelect() {
                   <CardHeader>
                     <CardDescription>Which color represents your emotions?</CardDescription>
                   </CardHeader>
-                  <CardContent className="grid grid-cols-2 gap-5">
-                    <div className="flex flex-col space-y-4">
+                  <CardContent className="grid grid-cols-2 gap-5 pb-0">
+                    <div className="flex flex-col space-y-2">
                     {colors.filter((_, index) => index % 2 === 0).map((color) => (
-                      <p className="hover:cursor-pointer hover:font-bold" onClick={() => changeColor(color)} key={color.name}>{color.name}</p>
+                      // <p className="hover:cursor-pointer hover:font-bold" onClick={() => changeColor(color)} key={color.name}>{color.name}</p>
+                      <Circle key={color.name} color={color} handlePresetColorChange={changeColor}/>
                     ))}
                     </div>
-                    <div className="flex flex-col space-y-4">
+                    <div className="flex flex-col space-y-2">
                     {colors.filter((_, index) => index % 2 != 0).map((color) => (
-                      <p className="hover:cursor-pointer hover:font-bold" onClick={() => changeColor(color)} key={color.name}>{color.name}</p>
+                      // <p className="hover:cursor-pointer hover:font-bold" onClick={() => changeColor(color)} key={color.name}>{color.name}</p>
+                      <Circle key={color.name} color={color} handlePresetColorChange={changeColor}/>
                     ))}
                     </div>
                   </CardContent>
@@ -346,6 +376,31 @@ export default function FlowerSelect() {
               style={{
                 ...submitButtonStyle
               }}>Submit</button>}
+    </div>
+  )
+}
+
+
+function Circle({color, handlePresetColorChange}) {
+  return (
+    <div>
+      <span
+      id={color.name}
+      className="hover:bg-gray-300 hover:rounded-lg hover:cursor-pointer justify-center flex"  
+      onClick={() => {
+          handlePresetColorChange(color);
+      }} 
+      style={{
+          width: "42%",
+          paddingTop: "42%",
+          background: color.hexcode,
+          borderRadius: "50%",
+          display: "inline-block",
+          marginBottom: "15px",
+          boxSizing: "border-box",
+          position: "relative"
+      }}>
+      </span>
     </div>
   )
 }

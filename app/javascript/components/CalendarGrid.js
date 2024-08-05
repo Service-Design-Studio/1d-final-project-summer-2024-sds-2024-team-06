@@ -1,16 +1,21 @@
 import React from 'react';
 import FlowerImage from './FlowerImage';
 
-const CalendarGrid = ({ checkinData }) => {
+const CalendarGrid = ({ checkinData, width }) => {
+  let data = [];
   const getCheckinForDay = (day) => {
+    let newFlower = checkinData.find((checkin) => checkin.day === day + 1);
+    if (newFlower !== undefined) {
+      data.push(newFlower.day);
+    }
     return checkinData.find((checkin) => checkin.day === day + 1);
   };
 
   const parentGridContainerStyle = {
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 1fr)',
-    columnGap: '7vw', // Horizontal gap between month grids
-    rowGap: '5vh', // Vertical gap between rows of month grids
+    columnGap: `${parseFloat(width) * 0.07}px`, // Horizontal gap between month grids
+    rowGap: `${parseFloat(width) * 0.025}px`,
     height: 'inherit',
     width: 'w-full',
     overflow: 'hidden',
@@ -20,14 +25,14 @@ const CalendarGrid = ({ checkinData }) => {
     display: 'grid',
     gridTemplateColumns: 'repeat(8, 1fr)',
     gridTemplateRows: 'repeat(4, 1fr)',
-    gap: '5px', // Adjust gap between days
+    gap: '0px', // Adjust gap between days
     height: 'inherit',
     width: 'inherit',
   };
 
   const gridItemStyle = {
-    height: '31px',
-    width: 'auto',
+    height: `${parseFloat(width) * 0.020}px`,
+    width: 'inherit',
     padding: '0px',
     border: 'none',
     background: 'transparent',
@@ -38,6 +43,8 @@ const CalendarGrid = ({ checkinData }) => {
     return rowIndex; // Higher z-index for lower rows
   };
 
+  let flowerImageCount = 0;
+
   return (
     <div style={parentGridContainerStyle}>
       {Array.from({ length: 12 }, (_, monthIndex) => (
@@ -46,11 +53,16 @@ const CalendarGrid = ({ checkinData }) => {
             const dayOfYear = monthIndex * 32 + dayIndex;
             const checkin = getCheckinForDay(dayOfYear);
             const rowIndex = Math.floor(dayIndex / 8); // Calculate row index within month grid
+            const marginTop = `${-parseFloat(width) * 0.008 *rowIndex}px`; // Dynamic margin
+            const uniqueValues = new Set(data);
+            console.log(`Number of unique values: ${uniqueValues.size}`);
             return (
-              <div key={dayIndex} style={{ ...gridItemStyle, marginTop: rowIndex > 0 ? '-20px' : '0', zIndex: getZIndexForRow(rowIndex) }}>
+              <div key={dayIndex} style={{ ...gridItemStyle, marginTop: rowIndex > 0 ? marginTop : '0', zIndex: getZIndexForRow(rowIndex) }}>
                 {checkin && (
                   <div className="flex flex-col justify-between">
-                    <FlowerImage checkinMood={checkin.mood} checkinColor={checkin.color}/>
+                    <FlowerImage checkinMood={checkin.mood.replace(/\s+/g, '')} checkinColor={checkin.color} height={parseFloat(width) * 0.025}/>
+                    {flowerImageCount++}
+                    {console.log(`Number of flowers: ${flowerImageCount}`)}
                   </div>
                 )}
               </div>

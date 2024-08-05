@@ -40,7 +40,7 @@ Feature: Journal
     Scenario: Writing open-ended journal entry
         Given I am on open-ended journal page
         When I click on "Guide Me" button
-        Then a sidebar should open with a prompt
+        Then I should see a prompt generated
 
     @journal-submission
     Scenario: Submit open-ended journal entry

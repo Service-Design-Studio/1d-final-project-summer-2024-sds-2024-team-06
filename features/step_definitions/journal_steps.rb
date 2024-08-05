@@ -38,6 +38,7 @@ end
 Given('I am on journal entries history') do
   visit '/journal-quote'
   step 'I click anywhere'
+  sleep 5
 end
 
 When('I click the new entry button') do
@@ -53,30 +54,32 @@ Given('I am on journal entries history and user has completed a goal-setting jou
   visit '/journal'
   # Ensure there is at least one goal-setting journal entry, adjust as necessary
   # ky to create a profile with a goal-setting journal entry
+  sleep 5
 end
 
 When('I click on the first goal entry') do
   first_link = first('#journal-grid a')
   first_link.click
-  # first('#Picture').click
 end
 
 Then('I will be redirected to my most recent goal-setting journal') do
-  # Assuming the most recent goal-setting journal has a specific path or identifier
   latest_entry = latest_journal_entry(user)
   if latest_entry.is_a?(GoalJournal)
     expect(page).to have_current_path("/journal/#{latest_entry.id}?type=goal")
-  else
+  elsif latest_entry.is_a?(Journal)
     expect(page).to have_current_path("/journal/#{latest_entry.id}?type=open")
+  elsif latest_entry.is_a?(EchoesJournal)
+    expect(page).to have_current_path("/journal/#{latest_entry.id}?type=echo")
+  elsif latest_entry.is_a?(GalleryJournal)
+    expect(page).to have_current_path("/journal/#{latest_entry.id}?type=gallery")
   end
   # expect(page).to have_current_path(/\/journal\/\d+\?type=open/)
 end
 
-
-
 ##
 Given('I opened create journal menu') do
   visit '/journal'
+  sleep 3
   find('#newJournalButton').click
 end
 
@@ -106,25 +109,11 @@ When('I click on "Guide Me" button') do
   sleep 8
 end
 
-Then('a sidebar should open with a prompt') do
+Then('I should see a prompt generated') do
   expect(page).to have_css('#prompt')
-  # expect(find('#prompt')).to have_text(/\S/)
+  expect(find('#prompt')).to have_text(/\S/)
 end
 
-# ##
-# Given('I am on goal-setting journal page') do
-#   visit '/journal/goal-setting'
-# end
-
-# When('I click on "Generate Tip" button') do
-#   find('.generate-tip-button').click
-# end
-
-# Then('a sidebar should open with a tip') do
-#   expect(page).to have_selector('.sidebar-tip')
-# end
-
-#
 Given('I have completed writing my open-ended journal entry') do
   visit '/journal/open-ended'
   fill_in 'openended-title', with: 'Today was a good day.'
@@ -160,6 +149,7 @@ Then('I will be redirected to the goal-setting journal past entry page') do
 end
 
 And('I will see three template fields') do
+  sleep 2
   first_journal = user.goal_journals.first
   expect(page).to have_selector('p#journal-start', text: first_journal.journal_start)
   expect(page).to have_selector('p#journal-end', text: first_journal.journal_end)
@@ -173,12 +163,12 @@ When('I click on a open-ended journal entry item') do
 end
 
 Then('I will be redirected to the open-ended journal past entry page') do
-  # Assuming the past entry page has a specific path or identifier
   first_journal_id = user.journals.first.id
   expect(page).to have_current_path("/journal/#{first_journal_id}?type=open")
 end
 
 And('I will see my journal entry and final tip generated') do
+  sleep 2
   first_journal = user.journals.first
   expect(page).to have_content(first_journal.journal_title)
   expect(page).to have_content(first_journal.journalentry)
