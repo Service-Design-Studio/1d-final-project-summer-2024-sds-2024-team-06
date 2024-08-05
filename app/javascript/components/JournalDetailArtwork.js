@@ -34,7 +34,7 @@ export default function JournalDetailArtwork({journalEntry}) {
                 <div className='col-span-3'>
                         <div className="flex justify-between">
                               <div>
-                                <title className="text-[#382C0D] text-2xl lg:text-4xl font-sriracha block text-left font-bold" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>Goal: {journalEntry.journal_title}</title>
+                                <title className="text-[#382C0D] text-2xl lg:text-4xl font-sriracha block text-left font-bold" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{journalEntry.journal_title}</title>
                                 <h1 className="text-[#382C0D] text-bold text-sm lg:text-base block text-left">{journalEntry.date_created}</h1>
                               </div>
                               {/*Exit button*/}
@@ -44,12 +44,17 @@ export default function JournalDetailArtwork({journalEntry}) {
                     <div>&nbsp;</div>
                     {/*Main gallery-journal entry space*/}
                     <div style={dottedPaper} className="flex-grow rounded-md p-4 lg:p-10">
-                        <div className="flex justify-between">
-                            <div>
+                        <div className="flex flex-col  justify-between">
+                            <div className='block flex justify-center items-center'>
                             <img src={journalEntry.imageURL} alt="art-piece" className="w-relative object-cover" />
-                            <div>&nbsp;</div>
-                            <p id = "journal-start" className="block text-xs lg:text-base" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{journalEntry.journal_entry}</p>
                             </div>
+                            <div>&nbsp;</div>
+                            {journalEntry.journal_entry && (
+                              <p id="journal-start" className="block text-left text-xs lg:text-base" style={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>
+                                {journalEntry.journal_entry}
+                              </p>
+                            )}
+                            
                         </div>
                     </div>
                 </div>
