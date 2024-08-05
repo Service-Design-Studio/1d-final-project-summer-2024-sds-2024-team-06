@@ -31,29 +31,10 @@ export default function HorizontalScroll({ slides }) {
                       <h1 className="text-white text-xs md:text-base font-sans block text-left">{s.artTitle}</h1>
                       <h1 className="text-white text-xs md:text-base font-sans block text-left">By: {s.artist}, {s.dateYear}</h1>
                       <h1 className="text-white text-xs font-sans block text-left">Click on the image to experience slow art</h1>
-
-
+                      <div>&nbsp;</div>
                   </div>
         })}
       </div>
-
-      {/* Description area */}
-      {/* <div className='absolute top-1/2 transform p-4'>
-        <div
-          className= "flex transition ease-out duration-40"
-          style={{
-            transform: `translateX(-${current * 100}%)`,
-          }}
-        > */}
-        {/* Title and artist name */}
-        {/* {slides.map((s, i) => {
-          return (<div key={"description" + i}>
-                    <title className="text-white text-2xl lg:text-4xl font-sans block text-left">{s.artTitle}</title>
-                    <h1 className="text-white text-xs md:text-base font-sans block text-left">By: {s.artist}, {s.dateYear}</h1>
-                </div>);
-        })}
-        </div>
-      </div> */}
 
       <div className="absolute top-1/2 px-10">
         {/* Back button icon */}
