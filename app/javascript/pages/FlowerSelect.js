@@ -307,7 +307,7 @@ export default function FlowerSelect() {
             ...flowerStyle,
             height: '56.25vh'
           }}>
-            <img src={currFlower} className="object-contain h-full w-full"></img>
+            <img id="flower-image" src={currFlower} className="object-contain h-full w-full"></img>
           </div>
           <div className="flex flex-col justify-center items-start"
           style={{

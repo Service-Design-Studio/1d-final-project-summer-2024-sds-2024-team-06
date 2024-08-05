@@ -219,8 +219,46 @@ flowers = [
   {color: "Yellow", mood: "In Love"},
 ]
 
-30.times do
+def random_datetime_for_day(day)
+  start_date = Time.new(2024, 1, 1) + (day - 1).days
+  end_date = start_date.end_of_day
+  random_time = rand(start_date.to_f..end_date.to_f)
+  Time.at(random_time)
+end
+
+def create_unique_flowers(user, flowers)
+  total_days = (1..365).to_a.shuffle # Generate all days of the year and shuffle them
+
   flowers.each do |flower_attributes|
-    user.flowers.find_or_create_by!(flower_attributes.merge(created_at: random_datetime))
+    30.times do
+      day = total_days.pop # Get a unique day from the shuffled list
+      break if day.nil? # Ensure we don't run out of days
+
+      created_at = random_datetime_for_day(day)
+      user.flowers.create!(flower_attributes.merge(created_at: created_at))
+
+      puts "Creating flower for #{user.email} on day #{day}, created_at #{created_at}"
+    end
+  end
+
+  remove_duplicate_flowers(user)
+end
+
+def remove_duplicate_flowers(user)
+  flower_days = {}
+  user.flowers.order(:day).each do |flower|
+    day = flower.day
+    if flower_days.key?(day)
+      puts "Removing duplicate flower for #{user.email} on day #{day}"
+      flower.destroy
+    else
+      flower_days[day] = true
+    end
   end
 end
+
+
+create_unique_flowers(user, flowers)
+puts user.flowers.uniq(&:day).count
+
+
