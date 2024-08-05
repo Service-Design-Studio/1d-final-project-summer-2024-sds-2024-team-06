@@ -79,8 +79,7 @@ export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}
 
     {/* Journal area */}
     <div className='fixed top-1/2 right-0 transform p-4'>
-          <h1 className="text-white text-xs md:text-base font-sans block text-left">Let's pen down some thoughts...</h1>
-          <p className="text-white text-xs font-sans block text-left">*You can zoom into the picture to see the finer details</p>
+          <p className="text-white text-xs font-sans block text-left">*You can zoom to see the finer details with your mousepad</p>
           <div>&nbsp;</div>
           <input id="goalsetting-title" className="text-xs md:text-base shadow appearance-none border w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-transparent text-white" 
                         value={userTitle} onChange={(e) => setUserTitle(e.target.value)} type="text" placeholder="Title"></input>
@@ -90,7 +89,7 @@ export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}
             value={journalbits}
             onChange={(e) => setJournalbits(e.target.value)}
             rows="5"
-            placeholder=""
+            placeholder="Let's pen down some thoughts..."
             className="w-full bg-transparent text-white"
           />
         <div>&nbsp;</div>
@@ -113,12 +112,12 @@ export default function AudioPlayer({imageUrl, id, mp3, title, artist, captions}
               // accept empty fields?
               // post to end-api
               createGalleryJournalForUser({
-                journal_title: title,
+                journal_title: userTitle,
                 journal_entry: journalbits,
-                tip_title: '',
-                tip_body: '',
+                // tip_title: '',
+                // tip_body: '',
                 imageURL: imageUrl,
-                date_created: new Date().toISOString(),
+                // date_created: new Date().toISOString(),
               });}}
             >Publish to journal</button>
         </div>
