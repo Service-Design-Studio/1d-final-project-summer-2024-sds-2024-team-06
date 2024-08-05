@@ -8,6 +8,7 @@ import Landing from '../pages/Landing';
 import Moodtracker from '../pages/MoodTracker';
 import Activities from '../pages/Activities';
 import GalleryWalk from '../pages/GalleryWalk';
+import GalleryCarousel from './GalleryCarousel';
 import GalleryWalkSession from '../pages/GalleryWalkSession';
 import JournalSplashArt from '../pages/JournalSplashArt';
 import Journal from '../pages/JournalEntryHistory';
@@ -35,12 +36,16 @@ const App = () => {
           <Route exact path="/test" element={<Test />}></Route>
           <Route exact path="/mood-tracker" element={<Moodtracker />}></Route>
           <Route exact path="/activities" element={<Activities />}></Route>
-          <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route>
+
+          {/* Gallery routes */}
+          {/* <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route> */}
+          <Route exact path="/gallery-walk" element={<GalleryWalk />}></Route> 
           <Route exact path="/gallery-walk/:id" element={<GalleryWalkSession />}></Route>
+
+          {/* Journal routes */}
           <Route exact path="/journal-quote" element={<JournalSplashArt />}></Route>
           <Route exact path="/journal" element={<Journal />}></Route>
           <Route exact path="/journal/:id" element={<JournalDetail />}></Route>
-          {/* <Route exact path="/journal/create" element={<JournalEntryForm />}></Route> */}
           <Route exact path="/journal/goal-setting" element={<JournalGoalForm />}></Route>
           <Route exact path="/journal/open-ended" element={<JournalOpenForm />}></Route>
           <Route exact path="/echoes-within" element={<EchoesWithin />}></Route>

@@ -1,32 +1,47 @@
-import React from 'react'
-//import GalleryCarousel from '../components/GalleryCarousel'
-import useFetch from '../api/useFetch'
+import React, { useState, useEffect } from 'react';
+import loadingUseFetch from '../api/loadingUseFetch';
 
-import MansoryGrid from '../components/MansoryGrid'
 import Navigation from '../components/Navigation'
+import HorizontalScroll from '../components/GalleryHorizontalScroll'
+import FlowerLoadScreen from './FlowerLoadScreen';
+
 
 
 export default function GalleryWalk() {
-
+  //fecth all art pieces from api
   const apiUrl = gon.api_url;
 
-  const {data: artPieces, error, isPending } = useFetch(`${apiUrl}api/art_pieces`)
+  const {data: artPieces, artPieceError, isPending, loadingProgress} = loadingUseFetch(`${apiUrl}api/art_pieces`)
   //console.log(artPieces)
+
+  // Combined state for loading, error
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!isPending) {
+      setLoading(false);
+
+      if (artPieceError) {
+        setError(artPieceError);
+      } 
+    }
+  });
+
+  if (loading) {
+    return <FlowerLoadScreen loadingProgress={loadingProgress} />;
+  }
+
+  if (error) return <div>{error}</div>;
     
   return (
-    <div>
+    <div className='flex flex-col h-screen'>
       <Navigation />
-      {isPending && 
-      <div className="h-full w-full flex justify-center items-center">
-        <h1 className='text-4xl font-bold'>Loading gallery...</h1>
-      </div>}
-      {error && <div>{error}</div>}
-      {artPieces && 
-      <>
-      <h1 className='text-4xl font-bold'>Gallery walk</h1>
-      <br/>
-      <MansoryGrid artPieces={artPieces}/>
-      </>}
+      <div className="flex-1 grow p-4 bg-[#0D0D0D]">
+      <div style={{ height: `calc(100vh - 96px)`}} className=''>
+        <HorizontalScroll slides={artPieces } />
+      </div>
+      </div>
     </div>
   )
 }
