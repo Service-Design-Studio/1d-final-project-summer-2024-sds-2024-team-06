@@ -136,7 +136,7 @@ GalleryJournal.create!(
   journal_entry: "I am so depressed.",
   tip_title: "Process your emotions",
   tip_body: "It is okay to feel sad sometimes.",
-  imageURL: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg"
+  imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Age%20of%20Full%20Bloom.svg"
 )
 
 GalleryJournal.create!(
@@ -145,7 +145,7 @@ GalleryJournal.create!(
   journal_entry: "I am so happy.",
   tip_title: "Relish in your joy!",
   tip_body: "It is okay to be happy sometimes.",
-  imageURL: "https://www.thehistoryofart.org/caspar-david-friedrich/Wanderer%20above%20the%20Sea%20of%20Fog%20Caspar%20David%20Friedrich.jpg?ezimgfmt=rs:400x512/rscb16/ngcb15/notWebP"
+  imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Rain%2C%20Steam%2C%20and%20Speed.svg"
 )
 
 GalleryJournal.create!(

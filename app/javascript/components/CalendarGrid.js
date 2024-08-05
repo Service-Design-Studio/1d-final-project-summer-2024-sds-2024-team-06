@@ -61,8 +61,6 @@ const CalendarGrid = ({ checkinData, width }) => {
                 {checkin && (
                   <div className="flex flex-col justify-between">
                     <FlowerImage checkinMood={checkin.mood.replace(/\s+/g, '')} checkinColor={checkin.color} height={parseFloat(width) * 0.025}/>
-                    {flowerImageCount++}
-                    {console.log(`Number of flowers: ${flowerImageCount}`)}
                   </div>
                 )}
               </div>
