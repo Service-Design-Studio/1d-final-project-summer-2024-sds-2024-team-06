@@ -25,10 +25,12 @@ export default function HorizontalScroll({ slides }) {
       >
         {slides.map((s, i) => {
             return <div key={"image" + i} className="h-relative w-screen flex-shrink-0 flex flex-col justify-center items-center">
-                      <h1 className="text-white text-2xl lg:text-4xl font-sans block text-left">{s.artTitle}</h1>
-                      <h1 className="text-white text-xs md:text-base font-sans block text-left">By: {s.artist}, {s.dateYear}</h1>
+                      
                       <img id="Picture" src={s.imageURL} alt={`Art piece ${i}`} style={{ height: `calc(100vh - 200px)`}} className='block object-contain cursor-pointer'
                       onClick={() => {window.location.href=`/gallery-walk/${s.id}`, console.log('clocked')}}/>
+                      <h1 className="text-white text-xs md:text-base font-sans block text-left">{s.artTitle}</h1>
+                      <h1 className="text-white text-xs md:text-base font-sans block text-left">By: {s.artist}, {s.dateYear}</h1>
+                      <h1 className="text-white text-xs font-sans block text-left">Click on the image to experience slow art</h1>
 
 
                   </div>
@@ -74,7 +76,7 @@ export default function HorizontalScroll({ slides }) {
       </div>
 
       {/* Dots below */}
-      <div className="absolute bottom-0 py-4  w-full">
+      <div className="absolute bottom-0 py-1  w-full">
         <div className='flex justify-center gap-3'>
           {slides.map((s, i) => {
             return (
