@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 // imports from components
 import useFetch from '../api/useFetch';
 import Navigation from '../components/Navigation';
-import LoadingScreen from './Loading';
 
 import AudioPlayer from '../components/GalleryAudioPlayer';
 
@@ -13,7 +12,7 @@ export default function GalleryWalkSession() {
   const apiUrl = gon.api_url;
   console.log(id);
 
-  const {data: artPiece, artPieceError, isPending, loadingProgress} = useFetch(`${apiUrl}/api/art_pieces/${id}`)
+  const {data: artPiece, artPieceError, isPending } = useFetch(`${apiUrl}/api/art_pieces/${id}`)
   // console.log(artPiece);
 
   // Combined state for loading, error
@@ -31,7 +30,7 @@ export default function GalleryWalkSession() {
   });
 
   if (loading) {
-    return <LoadingScreen loadingProgress={loadingProgress} />;
+    return <div>Loading session...</div>
   }
 
   if (error) return <div>{error}</div>;

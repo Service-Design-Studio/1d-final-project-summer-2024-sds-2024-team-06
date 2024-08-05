@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import loadingUseFetch from '../api/loadingUseFetch';
 import Navigation from '../components/Navigation'
 import Journal from '../components/JournalContainer'
-import LoadingScreen from './FlowerLoadScreen';
 import JournalLoadScreen from './JournalLoadScreen';
 
 // to use brown paper paper background: <div style={dottedPaper}></div>

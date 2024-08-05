@@ -25,7 +25,10 @@ export default function JournalDetail() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Determine which endpoint to use based on type
-  const endpoint = type === 'open' ? `/api/journals/${id}` : `/api/goal_journals/${id}`;
+  const endpoint = type === 'open' ? `/api/journals/${id}` :
+                type === 'goal' ? `/api/goal_journals/${id}` :
+                type === 'gallery' ? `/api/gallery_journal/${id}` :
+                `/api/echoes_journal/${id}`;
 
   // Fetch data
   const { data: journalEntry, error, isPending } = useFetch(`${apiUrl}${endpoint}`);
