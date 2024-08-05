@@ -266,7 +266,7 @@ export default function FlowerSelect() {
             ...moodButtonStyle
           }}>
             <div className="flex flex-col w-full h-full items-end">
-            <button onClick={toggleMoodDropdown} type="button" style={{
+            <button id="mood-dropdown" onClick={toggleMoodDropdown} type="button" style={{
               fontSize: "1.125rem",
               width: 'fit-content'
             }} className="flex items-center text-black bg-white hover:bg-gray-200 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 focus:ring-4 focus:ring-gray-300 focus:font-bold">
@@ -275,7 +275,7 @@ export default function FlowerSelect() {
               <path d="M14.6401 2.7986e-05L7.50011 7.61603L0.360107 2.86102e-05L14.6401 2.7986e-05Z" fill="#222222"/>
               </svg>
             </button>
-            <div id="moodDropDown" ref={moodDropDownRef} 
+            <div id="mood-dropdown" ref={moodDropDownRef} 
               style={{
                 transition: 'max-height 0.35s ease-in-out',
                 overflow: 'hidden',
@@ -307,14 +307,14 @@ export default function FlowerSelect() {
             ...flowerStyle,
             height: '56.25vh'
           }}>
-            <img src={currFlower} className="object-contain h-full w-full"></img>
+            <img id="flower-image" src={currFlower} className="object-contain h-full w-full"></img>
           </div>
           <div className="flex flex-col justify-center items-start"
           style={{
             ...colorButtonStyle
           }}>
             <div className="flex flex-col h-full w-full items-start">
-            <button type="button" onClick={toggleColorDropdown} style={{
+            <button id="color-dropdown" type="button" onClick={toggleColorDropdown} style={{
               fontSize: "1.125rem",
               width: 'fit-content',
               background: currColor.hexcode,
@@ -385,6 +385,7 @@ function Circle({color, handlePresetColorChange}) {
   return (
     <div>
       <span
+      id={color.name}
       className="hover:bg-gray-300 hover:rounded-lg hover:cursor-pointer justify-center flex"  
       onClick={() => {
           handlePresetColorChange(color);

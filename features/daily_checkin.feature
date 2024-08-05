@@ -15,17 +15,34 @@ Feature: Daily Check-in
 
   Scenario: User is logged in as guest and visits landing page
     Given I am logged in as guest
-    When I visit the landing page
     Then the webpage should be displayed
 
-  Scenario: Mood Selection on check-in Page
+  Scenario: User checking in
     Given I am logged in on the check-in page
-    When I click on 'Excited' mood block
-    Then I should see the mood chosen to be Excited
+    When I have not checked in today
+    And I click anywhere on the page
+    Then I should see a flower image
+    And I should see 2 dropdown menus
+
+  Scenario: Mood and Color Selection on check-in Page
+    Given I am logged in on the check-in page
+    And I click anywhere on the page
+    When I select "Meh" from the mood dropdown
+    And I select "Red" from the color dropdown
+    Then I should see a "Meh" flower of "Red" color
+  
+  Scenario: Submitting a flower
+    Given I am logged in on the check-in page
+    And I click anywhere on the page
+    When I select "In Love" from the mood dropdown
+    And I select "Yellow" from the color dropdown
+    And I click 'Submit'
+    Then I should see a loading screen
+    And I should be redirected to the mood tracker page
 
   Scenario: Correct number of flowers displayed
     Given I am logged into an account with flowers
-    When I visit the check-in page
+    When I visit the mood-tracker page
     Then I should see the correct number of flowers shown in the grids
 
   Scenario: Returning to check-in page again

@@ -51,6 +51,8 @@ const prompts = [
 
 const MIN_ERASER_WIDTH = 1;
 const MIN_STROKE_WIDTH = 1;
+const MAX_ERASER_WIDTH = 100;
+const MAX_STROKE_WIDTH = 100;
 
 export default function EchoesWithin() {
     const navigate = useNavigate();
@@ -142,14 +144,14 @@ export default function EchoesWithin() {
         if (isBrush) {
             setStrokeWidth(prevWidth => {
                 const newWidth = prevWidth + (isAdd ? 2 : -2);
-                const clampedWidth = Math.max(newWidth, MIN_STROKE_WIDTH);
+                const clampedWidth = Math.max(Math.min(newWidth, MAX_STROKE_WIDTH), MIN_STROKE_WIDTH);
                 console.log('New Stroke Width:', clampedWidth);
                 return clampedWidth;
             });
         } else {
             setEraserWidth(prevWidth => {
                 const newWidth = prevWidth + (isAdd ? 2 : -2);
-                const clampedWidth = Math.max(newWidth, MIN_ERASER_WIDTH);
+                const clampedWidth = Math.max(Math.min(newWidth, MAX_STROKE_WIDTH), MIN_ERASER_WIDTH);
                 console.log('New Eraser Width:', clampedWidth);
                 return clampedWidth;
             });
@@ -170,6 +172,7 @@ export default function EchoesWithin() {
 
     const handleMouseDown = (isAdd, isBrush) => {
         console.log('mouse down');
+        handleWidthButtonClick(isAdd, isBrush);
         const id = setInterval(() => {
             console.log('interval');
             handleWidthButtonClick(isAdd, isBrush);
@@ -272,31 +275,31 @@ export default function EchoesWithin() {
     }
 
     function PlusAdjustButton({isPressed, isBrush, setPressed}) {
+        let id = ""
+
+        if (isBrush) {
+            id = "brush-plus-button";
+        } else {
+            id = "eraser-plus-button";
+        }
+
         return (
             isPressed ? 
-                <svg onClick={() => {
-                    handleWidthButtonClick(true, isBrush);
-                }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10" 
-                onMouseDown={() =>{
-                    setPressed(true); 
-                    handleMouseDown(true, isBrush);
-                }} 
+                <svg 
+                id={id}
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10" 
                 onMouseUp={() => {
                     setPressed(false);
                     handleMouseUp();
                 }}>
                     <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
                 </svg>
-                : <svg onClick={() => {
-                    handleWidthButtonClick(true, isBrush);
-                }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer hover:bg-gray-300 hover:rounded-full"  
+                : <svg
+                id={id} 
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer hover:bg-gray-300 hover:rounded-full"
                 onMouseDown={() => {
                     setPressed(true);
-                    handleMouseDown(true, isBrush)
-                }} 
-                onMouseUp={() => {
-                    setPressed(false);
-                    handleMouseUp();
+                    handleMouseDown(true, isBrush);
                 }}>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
@@ -304,15 +307,18 @@ export default function EchoesWithin() {
     }
 
     function MinusAdjustButton({isPressed, isBrush, setPressed}) {
+        let id = ""
+        if (isBrush) {
+            id = "brush-minus-button";
+        } else {
+            id = "eraser-minus-button";
+        }
+        
         return (
             isPressed ? 
-                <svg onClick={() => {
-                    handleWidthButtonClick(false, isBrush);
-                }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10"
-                onMouseDown={() => {
-                    setPressed(true);
-                    handleMouseDown(false, isBrush)
-                }} 
+                <svg
+                id={id} 
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10"
                 onMouseUp={() => {
                     setPressed(false);
                     handleMouseUp();
@@ -320,16 +326,12 @@ export default function EchoesWithin() {
                     <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm3 10.5a.75.75 0 0 0 0-1.5H9a.75.75 0 0 0 0 1.5h6Z" clip-rule="evenodd" />
                 </svg>
           
-                : <svg onClick={() => {
-                    handleWidthButtonClick(false, isBrush);
-                }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer hover:bg-gray-300 hover:rounded-full"
+                : <svg
+                id={id}
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer hover:bg-gray-300 hover:rounded-full"
                 onMouseDown={() => {
                     setPressed(true);
                     handleMouseDown(false, isBrush);
-                }}
-                onMouseUp={() => {
-                    setPressed(false);
-                    handleMouseUp();
                 }}>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
@@ -433,11 +435,11 @@ export default function EchoesWithin() {
                             <AlertDialogHeader>
                             <AlertDialogTitle>Write a caption for your drawing</AlertDialogTitle>
                             <AlertDialogDescription>
-                                <input value={caption} onChange={(e) => setCaption(e.target.value)} className='w-full h-full mx-auto mt-2' type="text" placeholder="Time you enjoy wasting is not wasted time..." />
+                                <input id="caption" value={caption} onChange={(e) => setCaption(e.target.value)} className='w-full h-full mx-auto mt-2' type="text" placeholder="Time you enjoy wasting is not wasted time..." />
                             </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter className="mt-5">
-                            <AlertDialogCancel onClick={() => {
+                            <AlertDialogCancel id="cancel" onClick={() => {
                                 setCaption('');
                             }}>Cancel</AlertDialogCancel>
                             <AlertDialogAction id="continue" onClick={(e) => {
@@ -449,7 +451,7 @@ export default function EchoesWithin() {
                                         setOpen(false);
                                     });
                                 }
-                            }}>Continue</AlertDialogAction>
+                            }}>Publish</AlertDialogAction>
                             </AlertDialogFooter>
                         </AlertDialogContent>
                     </AlertDialog>
@@ -468,7 +470,7 @@ export default function EchoesWithin() {
                 overflow: 'hidden'
             }} className="absolute left-0 ml-5 mr-20 items-center justify-center">
                 <CardContent className="p-0 flex flex-col gap-y-1">
-                    <div disabled={!eraseMode} onClick={handlePenClick} className='flex flex-col text-xs text-center justify-center items-center'>
+                    <div id="brush" disabled={!eraseMode} onClick={handlePenClick} className='flex flex-col text-xs text-center justify-center items-center'>
                         <span className="">Brush</span>
                         <div className="flex items-center justify-center hover:cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 p-2 hover:bg-gray-300 hover:rounded-lg" style={{
@@ -488,7 +490,7 @@ export default function EchoesWithin() {
                             border: 'none',
                         }} />
                     </div>
-                    <div disabled={eraseMode} onClick={handleEraserClick} className='flex flex-col text-xs text-center justify-center items-center hover:cursor-pointer'>
+                    <div id="eraser" disabled={eraseMode} onClick={handleEraserClick} className='flex flex-col text-xs text-center justify-center items-center hover:cursor-pointer'>
                         <span className="mt-1">Eraser</span>
                         <div className="flex items-center justify-center">
                             <img src="/images/Eraser.svg" className='w-12 h-12 p-2 hover:bg-gray-300 hover:rounded-lg' style={{
@@ -508,7 +510,7 @@ export default function EchoesWithin() {
                     </div>
                     <div className='flex flex-col text-xs text-center items-center'>
                         <Popover className="mb-1">
-                            <PopoverTrigger className='hover:font-bold mt-1 mb-1'>Eraser Size</PopoverTrigger>
+                            <PopoverTrigger id="eraser-size" className='hover:font-bold mt-1 mb-1'>Eraser Size</PopoverTrigger>
                             <PopoverContent side="left" style={{ width: 'fit-content' }}
                             className="flex flex-row justify-center">
                             <span className="text-xs mr-3">Eraser Size</span>
@@ -567,7 +569,7 @@ export default function EchoesWithin() {
                 <CardContent className="p-0 flex flex-col gap-y-3">
                     <div className='flex flex-col text-xs text-center justify-center items-center'>
                         <Popover className="mb-1">
-                            <PopoverTrigger className='hover:font-bold mb-1'>Brush Size</PopoverTrigger>
+                            <PopoverTrigger id="brush-size" className='hover:font-bold mb-1'>Brush Size</PopoverTrigger>
                             <PopoverContent side="left" style={{ width: 'fit-content' }}
                             className="flex flex-row justify-center">
                             <span className="text-xs mr-3">Stroke Size</span>
@@ -637,6 +639,7 @@ export default function EchoesWithin() {
 function Circle({color, handlePresetColorChange}) {
   return (
     <span
+    id={`color-${color.substring(1)}`}
     className="hover:bg-gray-300 hover:rounded-lg hover:cursor-pointer"  
     onClick={() => {
         handlePresetColorChange(color);

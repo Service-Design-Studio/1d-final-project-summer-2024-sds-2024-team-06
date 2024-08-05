@@ -7,7 +7,8 @@ Given('participant chosen to partake in the Gallery Walk') do
 end
 
 When('I choose a picture from the carousel') do
-  visit '/gallery-walk/2'
+  # visit '/gallery-walk/2'
+  first("a#Picture").click
 end
 
 Then('a mp3 audio player and text box will be displayed alongside picture') do
@@ -35,6 +36,14 @@ end
 
 Given('I am listening to the voice-over') do
   visit '/gallery-walk/2'
+  step 'I click the play button'
+
+  click_on 'forward'
+  click_on 'rewind'
+
+  find("svg#volume").click
+  expect(page).to have_selector('#volume-slider')
+  find('#volume-slider').set(0.5)
 end
 
 When('I want to express my emotions in writing') do
@@ -49,6 +58,8 @@ end
 
 Given('User is done with the gallery walk') do
   visit '/gallery-walk/2'
+  step 'I click the play button'
+  step 'I want to express my emotions in writing'
 end
 
 When('they click the end activity button') do
@@ -56,6 +67,8 @@ When('they click the end activity button') do
 end
 
 Then('the journal entry is automatically saved to their journal tab, browser redirect to journal') do
+  expect(page).to have_current_path('/gallery-walk')
+  expect(page).to have_content('Journal saved!')
 end
 
 ##Scenario 5: Viewing the list of art gallery

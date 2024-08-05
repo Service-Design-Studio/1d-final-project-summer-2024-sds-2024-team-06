@@ -11,7 +11,7 @@ export default function GalleryWalkSession() {
   const apiUrl = gon.api_url;
   console.log(id);
   const imageUrl = "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg"
-  const {data: artPiece, error, isPending, loadingProgress} = useFetch(`${apiUrl}/api/art_pieces/${id}`)
+  const {data: artPiece, error, isPending} = useFetch(`${apiUrl}/api/art_pieces/${id}`)
   console.log(artPiece);
 
   return (

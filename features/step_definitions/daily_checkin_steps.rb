@@ -1,4 +1,13 @@
-
+MOOD_MAP = {
+  "Happy" => 1,
+  "Upset" => 2,
+  "Angry" => 3,
+  "Anxious" => 4,
+  "Confused" => 5,
+  "In Love" => 6,
+  "Tired" => 7,
+  "Meh" => 8
+}
 
 Given("I am on a new browser") do
   logout(:user)
@@ -6,7 +15,7 @@ Given("I am on a new browser") do
 end
 
 When("I visit the landing page") do
-  visit '/landing' #brings to base url home#index in routes.rb
+  visit '/landing'
 end
 
 Then("I should be redirected to the log in page") do
@@ -23,12 +32,49 @@ Given("I am logged in on the check-in page") do
   visit '/check-in'
 end
 
-When("I click on 'Excited' mood block") do
-  click_on('Excited')
+When("I have not checked in today") do
 end
 
-Then("I should see the mood chosen to be Excited") do
-  expect(page).to have_css('h1#mood-chosen', text: 'Excited')
+And("I click anywhere on the page") do
+  sleep 1
+  find('button#continue').click
+end
+
+Then("I should see a flower image") do
+  expect(page).to have_css('img#flower-image')
+end
+
+And("I should see 2 dropdown menus") do
+  expect(page).to have_css('button#mood-dropdown')
+  expect(page).to have_css('button#color-dropdown')
+end
+
+When(/^I select "(.*)" from the mood dropdown$/) do |mood|
+  find('button#mood-dropdown').click
+  find('p', text: mood).click
+end
+
+And(/^I select "(.*)" from the color dropdown$/) do |color|
+  find('button#color-dropdown').click
+  find('span#' + color).click
+end
+
+Then(/^I should see a "(.*)" flower of "(.*)" color$/) do |mood, color|
+  mood_value = MOOD_MAP[mood]
+  expect(page).to have_selector("img[src='images/flowers/#{color.downcase}/#{color.downcase}_flower_#{mood_value}.svg']")
+end
+
+And("I click 'Submit'") do
+  find('button#submit').click
+end
+
+Then("I should see a loading screen") do
+  sleep 1
+  expect(page).to have_content('Growing your flower')
+end
+
+And("I should be redirected to the mood tracker page") do
+  expect(page).to have_current_path('/mood-tracker')
 end
 
 Given("I am logged into an account with flowers") do
@@ -39,9 +85,16 @@ When("I visit the check-in page") do
   visit '/check-in'
 end
 
+When("I visit the mood-tracker page") do
+  visit '/mood-tracker'
+end
+
 Then("I should see the correct number of flowers shown in the grids") do
   user = User.find_by(email: "bob@example.com")
   expected_flower_count = user.flowers.count
+  puts expected_flower_count
+  puts user.flowers.last.id
+  sleep 5
   actual_flower_count = page.all('img.flower-image').size
   expect(actual_flower_count).to eq(expected_flower_count)
 end
@@ -82,7 +135,8 @@ end
 
 
 After do
-  User.delete_all
+  user = User.find_by(email: "bob@example.com")
+  user.flowers.last.destroy if user.flowers.last
 end
 
 

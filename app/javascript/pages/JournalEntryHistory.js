@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import loadingUseFetch from '../api/loadingUseFetch';
 import Navigation from '../components/Navigation'
 import Journal from '../components/JournalContainer'
