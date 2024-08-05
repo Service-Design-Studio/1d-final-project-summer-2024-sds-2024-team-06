@@ -155,7 +155,7 @@ RSpec.feature "ViewingJournals", type: :feature do
         click_on 'Echoes Within'
         find("a#echo-100").click
         sleep 2
-        expect(page).to have_current_path("/journal/100?type=echoes")
+        expect(page).to have_current_path("/journal/100?type=echo")
         # expect(page).to have_content("Today I am really sad i am so blue")
         # expect(page).to have_content("I am so depressed.")
         # expect(page).to have_content("Process your emotions")

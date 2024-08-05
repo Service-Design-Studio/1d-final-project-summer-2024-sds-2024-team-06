@@ -28,7 +28,6 @@ Feature: EchoesWithin
         When I click Publish to journal
         Then a pop-up will appear asking the user to caption their work
 
-    
     Scenario: Incomplete submission exit pop-up
         Given I have completed my Drawing
         When I click the exit cross button at the top of the screen

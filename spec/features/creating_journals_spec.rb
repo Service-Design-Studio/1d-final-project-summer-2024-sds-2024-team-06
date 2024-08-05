@@ -30,7 +30,9 @@ RSpec.feature "CreateJournals", type: :feature do
         fill_in 'goalsetting-stop', with: 'journal stop'
         fill_in 'goalsetting-continue', with: 'journal continue'
 
-        click_button 'Submit'
+        submit_button = find_button('Submit')
+        page.scroll_to(submit_button)
+        submit_button.click
         sleep 3
         expect(page).to have_current_path("/journal/#{user.goal_journals.last.id}?type=goal")
     end
@@ -56,7 +58,7 @@ RSpec.feature "CreateJournals", type: :feature do
         expect(page).to have_current_path('/journal/open-ended')
     end
 
-    scenario "User writes a new open-ended jorurnal" do
+    scenario "User writes a new open-ended journal" do
         visit '/journal/open-ended'
         fill_in 'openended-title', with: 'journal title'
         fill_in 'openended-entry', with: 'journal entry.'
@@ -67,8 +69,9 @@ RSpec.feature "CreateJournals", type: :feature do
         expect(find('#prompt')).to have_text(/\S/)
 
         click_button 'Submit'
-        sleep 3
+        sleep 5
         last_journal = user.journals.last
+        puts last_journal
         expect(page).to have_current_path("/journal/#{last_journal.id}?type=open")
         expect(page).to have_content('journal title')
         expect(page).to have_content('journal entry.')

@@ -38,7 +38,7 @@ module Api
     end
 
     def gallery_journal_params
-      params.require(:gallery_journal).permit(:journal_title, :journal_entry, :tip_title, :tip_body, :imageurl, :date)
+      params.require(:gallery_journal).permit(:journal_title, :journal_entry, :tip_title, :tip_body, :imageurl, :date_created)
     end
   end
 end

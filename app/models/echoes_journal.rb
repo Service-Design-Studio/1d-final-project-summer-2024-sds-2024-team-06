@@ -1,6 +1,6 @@
 class EchoesJournal < ApplicationRecord
   belongs_to :user
-
+  validates :journal_title, presence: true
 
   after_create :set_date_created
   private

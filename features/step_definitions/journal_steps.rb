@@ -3,7 +3,7 @@
 ##
 
 def latest_journal_entry(user)
-  all_journals = user.journals + user.goal_journals
+  all_journals = user.journals + user.goal_journals + user.echoes_journals + user.gallery_journals
   all_journals.max_by(&:created_at)
 end
 
@@ -79,7 +79,7 @@ end
 ##
 Given('I opened create journal menu') do
   visit '/journal'
-  sleep 3
+  sleep 5
   find('#newJournalButton').click
 end
 
