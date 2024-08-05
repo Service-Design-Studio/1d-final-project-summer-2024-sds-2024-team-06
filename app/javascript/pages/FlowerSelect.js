@@ -12,6 +12,18 @@ import {
   CardTitle, 
 } from "../components/Card";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../components/AlertDialog";
+
 const moods = [
   {
     name: "Happy"
@@ -102,6 +114,12 @@ export default function FlowerSelect() {
   const [submitButtonStyle, setSubmitButtonStyle] = useState({
     opacity: 0,
     transition: "opacity 0.5s ease-in",
+  });
+
+  const [tipStyle, setTipStyle] = useState({
+    opacity: 0,
+    transform: "translate(-50%, -50%)",
+    transition: "opacity 0.3s ease, transform 0.3s ease",
   });
 
   useEffect(() => {
@@ -254,7 +272,24 @@ export default function FlowerSelect() {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
+      if (isVisible) {
+          console.log("opening");
+          setTipStyle({
+            opacity: 0,
+            transform: "translate(50%, 50%)",
+            transition: "opacity 0.3s ease, transform 0.5s ease",
+          });
+      } else {
+        console.log("opening");
+        setTipStyle({
+          opacity: 1,
+          transform: "translate(-50%, -50%)",
+          transition: "opacity 0.3s ease, transform 0.3s ease",
+        });
+      }
+      setTimeout(() => {
         setIsVisible(!isVisible);
+      }, 300);
   }
 
 
@@ -387,32 +422,38 @@ export default function FlowerSelect() {
               style={{
                 ...submitButtonStyle
               }}>Submit</button>}
-      
           <div className="help-icon" onClick={toggleVisibility}>
               ?
           </div>
-          <div className={`help-text ${isVisible ? 'visible' : ''}`}>
-            <h1>Welcome to Your Mood Tracker! 🌸</h1>
-            <p>We're excited to have you here on your journey to better understanding and managing your emotions. To make this process engaging, we've chosen a vibrant way for you to express how you're feeling each day—through the language of flowers!</p>
+          {
+            isVisible ? <div style={{
+              ...tipStyle
+            }} className="help-text">
+            <h1 className="w-full text-center font-bold text-2xl pb-4">Welcome to Your Mood Tracker! 🌸</h1>
+            <p className="pb-2">We're excited to have you here on your journey to better understanding and managing your emotions. To make this process engaging, we've chosen a vibrant way for you to express how you're feeling each day—through the language of flowers!</p>
 
-            <p>Flowers have been symbols of emotions for centuries. Each type of flower carries its own special meaning and can convey a wide range of feelings. By using flowers to represent your mood, you'll not only add a touch of beauty to your daily reflections but also connect with the rich tradition of floral symbolism.</p>
+            <p className="pb-4">Flowers have been symbols of emotions for centuries. Each type of flower carries its own special meaning and can convey a wide range of feelings. By using flowers to represent your mood, you'll not only add a touch of beauty to your daily reflections but also connect with the rich tradition of floral symbolism.</p>
 
-            <h2>How It Works:</h2>
-            <ul>
-              <li><strong>Choose Your Flower:</strong> We've selected different flower types, each associated with a specific emotion. For example, a sunflower might represent joy, while a rose could symbolize love or passion. You'll find a list of flowers in our app, each linked to an emotion.</li>
-              <li><strong>Select Your Colour:</strong> The beauty of our mood tracker lies in the personal touch you can add. Once you've chosen a flower, pick a colour that best reflects your mood for the day. Feel free to use any colour that resonates with how you're feeling.</li>
-              <li><strong>Submit and Reflect:</strong> Submit your chosen flower and colour each day. Over time, you'll build a visual diary of your emotional journey. You can look back and see patterns, highs, and lows, which can provide valuable insights into your emotional well-being.</li>
+            <h2 className="pb-2 font-bold text-xl">How It Works:</h2>
+            <ul className="pb-4">
+              <li className="pb-1"><strong>Choose Your Flower:</strong> We've selected different flower types, each associated with a specific emotion. For example, a sunflower might represent joy, while a rose could symbolize love or passion. You'll find a list of flowers in our app, each linked to an emotion.</li>
+              <li className="pb-1"><strong>Select Your Colour:</strong> The beauty of our mood tracker lies in the personal touch you can add. Once you've chosen a flower, pick a colour that best reflects your mood for the day. Feel free to use any colour that resonates with how you're feeling.</li>
+              <li className="pb-1"><strong>Submit and Reflect:</strong> Submit your chosen flower and colour each day. Over time, you'll build a visual diary of your emotional journey. You can look back and see patterns, highs, and lows, which can provide valuable insights into your emotional well-being.</li>
             </ul>
 
  
-            <p>Tracking your mood through flowers and colours allows you to express your emotions creatively and intuitively. It's not just about tracking your feelings but also about understanding them in a deeper, more visual way. Plus, it's a lovely reminder that even on challenging days, there's always beauty to be found.</p>
+            <p className="pb-2">Tracking your mood through flowers and colours allows you to express your emotions creatively and intuitively. It's not just about tracking your feelings but also about understanding them in a deeper, more visual way. Plus, it's a lovely reminder that even on challenging days, there's always beauty to be found.</p>
 
-            <p>We're here to support you every step of the way. If you have any questions or need assistance, don't hesitate to reach out. Enjoy your journey through the world of flowers and emotions!</p>
+            <p className="pb-4">We're here to support you every step of the way. If you have any questions or need assistance, don't hesitate to reach out. Enjoy your journey through the world of flowers and emotions!</p>
 
-            <p><strong>Happy Tracking!</strong></p>
-          </div>
-      
-        
+            {/* <p className="w-full text-center text-4xl"><strong>Happy Tracking!</strong></p> */}
+            <div className="w-full flex flex-row items-end justify-center pb-3">
+              <button type="button" onClick={toggleVisibility} class="text-black transition-all ease-in duration-75 hover:text-white border border-black hover:bg-[#77CDC0] hover:border-[#77CDC0] font-extrabold rounded-lg text-4xl px-5 py-2.5 text-center me-2 mb-2">
+                Happy Tracking!
+              </button>
+            </div>
+          </div> : <div></div>
+          }    
     </div>
     
   )
