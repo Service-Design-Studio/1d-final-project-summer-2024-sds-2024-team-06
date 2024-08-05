@@ -37,8 +37,8 @@ export default function GalleryWalk() {
   return (
     <div className='flex flex-col h-screen'>
       <Navigation />
-      <div className="flex-1 grow p-4 bg-[#0D0D0D]">
-      <div style={{ height: `calc(100vh - 96px)`}} className=''>
+      <div className="flex-1 grow p-2 bg-[#0D0D0D]">
+      <div style={{ height: `calc(100vh - 64px)`}} className=''>
         <HorizontalScroll slides={artPieces } />
       </div>
       </div>
