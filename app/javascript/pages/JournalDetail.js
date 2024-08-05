@@ -42,7 +42,7 @@ export default function JournalDetail() {
   }, [isPending, error]);
 
   if (isPending){
-    return <div className="h-full w-full flex justify-center items-center"><h1 className='text-4xl text-center font-bold'>Loading journal...</h1></div>;
+    return <div className="h-full w-full flex justify-center items-center">Loading journal...</div>;
   }
 
   if (error) return <div>Error: {error}</div>;

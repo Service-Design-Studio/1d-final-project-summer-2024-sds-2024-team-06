@@ -100,8 +100,8 @@ switch (activeFilter) {
 
         {/* Filter chips */}
         <div className="flex flex-wrap mb-4">
-            <FilterChip label="All" onClick={() => handleFilterClick('all')} isActive={activeFilter === 'all'} />
-            <FilterChip label="Open" onClick={() => handleFilterClick('open')} isActive={activeFilter === 'open'} />
+            <FilterChip label="All types" onClick={() => handleFilterClick('all')} isActive={activeFilter === 'all'} />
+            <FilterChip label="Open-ended" onClick={() => handleFilterClick('open')} isActive={activeFilter === 'open'} />
             <FilterChip label="Goal" onClick={() => handleFilterClick('goal')} isActive={activeFilter === 'goal'} />
             <FilterChip label="Gallery Walk" onClick={() => handleFilterClick('gallery')} isActive={activeFilter === 'gallery'} />
             <FilterChip label="Echoes Within" onClick={() => handleFilterClick('echo')} isActive={activeFilter === 'echo'} />
