@@ -1,12 +1,11 @@
 import React from 'react';
 import JournalEntryCard from './JournalEntryCard';
-import { nil } from 'ajv';
 
 const JournalCardGrid = ({ data }) => {
   return (
-    <div id="journal-grid" className="grid grid-cols-4 gap-4 p-4">
+    <div id="journal-grid" className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
       {data.map((item) => (
-        console.log(item),
+        // console.log(item),
 
         <JournalEntryCard
           id={item.id}

@@ -7,10 +7,10 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
 
   // Determine the header text and style based on the tag
   const headerCase = {
-    open: { text: "Open Journal", style: { fontSize: 'small', color: 'green' },text_sizing:'text-xl',tiphide: ""},
-    goal: { text: "Goal Journal", style: { fontSize: 'small', color: 'blue' },text_sizing:'text-xl' ,tiphide: ""},
-    echo: { text: "Echoes Within", style: { fontSize: 'small', color: '#FF0000' },text_sizing:'text-l',tiphide:"hidden" },
-    gallery: { text: "Gallery Walk", style: { fontSize: 'small', color: '#FFBF00' },text_sizing:'text-l',tiphide:"hidden"},
+    open: { text: "Open Journal", style: { fontSize: 'small', color: '#4d4637' },text_sizing:'text-xl',tiphide: ""},
+    goal: { text: "Goal Journal", style: { fontSize: 'small', color: '#d7bd7c' },text_sizing:'text-xl' ,tiphide: ""},
+    echo: { text: "Echoes Within", style: { fontSize: 'small', color: '#779834' },text_sizing:'text-xl',tiphide:"hidden" },
+    gallery: { text: "Gallery Walk", style: { fontSize: 'small', color: '#0082ab' },text_sizing:'text-xl',tiphide:"hidden"},
     default: { text: "Journal Entry", style: { fontSize: 'small', color: 'gray' },text_sizing:'text-xl' ,tiphide: ""},
   };
 
@@ -29,19 +29,20 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
           {headerText}
         </div>
 
-        {/* Tag with Random Color for Text */}
-        {tipTitle && (
-          <div className={`text-xs font-semibold rounded-br-lg truncate ${tiphide}`} style={{ color: '#ffa6c1'}}>
-            {tipTitle}
-          </div>
-        )}
-
         {/* Title */}
         {title && (
           <h2 className={` font-semibold mb-2 truncate ${text_sizing}`} >
             {title}
           </h2>
         )}
+
+        {/* Tag with Random Color for Text */}
+        {tipTitle && (
+          <div className={`text-xs font-semibold rounded-br-lg truncate ${tiphide}`} style={{ color: '#946990'}}>
+            {tipTitle}
+          </div>
+        )}
+
 
         {/* Body */}
         <div className="flex-grow p-1 " style={{ position: 'relative', overflow: 'hidden' }}>
@@ -63,13 +64,13 @@ export default function JournalEntryCard({ id, tag, title, body, pic, date, tipT
           ) : tag === 'goal' ? (
             <div >
               <p className="text-black-500 text-base truncate overflow-hidden overflow-ellipsis mb-2">
-                <span className="font-semibold" style={{ color: 'green' }}>Start:</span> {body[0]}
+                <span className="font-semibold" style={{ color: '#00ac93' }}>Start:</span> <span className="text-black text-xs md:text-base">{body[1]}</span>
               </p>
               <p className="text-black-500 text-base truncate overflow-hidden overflow-ellipsis mb-2">
-                <span className="font-semibold" style={{ color: 'red' }}>Stop:</span> <span className="text-black">{body[1]}</span>
+                <span className="font-semibold" style={{ color: '#fd598d' }}>Stop:</span> <span className="text-black text-xs md:text-base">{body[1]}</span>
               </p>
               <p className="text-black-500 text-base truncate overflow-hidden overflow-ellipsis mb-2">
-                <span className="font-semibold" style={{ color: '#3b82f6' }}>Continue:</span> <span className="text-black">{body[2]}</span>
+                <span className="font-semibold" style={{ color: '#00aeee' }}>Continue:</span> <span className="text-black text-xs md:text-base">{body[2]}</span>
               </p>
 
 
