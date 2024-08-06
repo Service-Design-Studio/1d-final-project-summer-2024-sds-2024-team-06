@@ -160,15 +160,23 @@ export default function EchoesWithin() {
 
     const [isMuted, setIsMuted] = useState(false);
 
-    const muteText = () => {
-      if (isMuted) {
-        setIsMuted(false);
-        // Add logic to unmute if necessary
-      } else {
-        setIsMuted(true);
-        speechSynthesis.cancel(); // Stop any ongoing speech
-      }
+    const toggleMute = () => {
+        if(isMuted) {
+            setIsMuted(false);
+            speakText(prompts[currentPromptIndex]);
+        } else {
+            setIsMuted(true);
+            speechSynthesis.cancel();
+        }
     };
+
+    function speakText(text) {
+        if (!isMuted) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          speechSynthesis.speak(utterance);
+          console.log('Speaking:', text);
+        }
+    }
 
     const handleMouseDown = (isAdd, isBrush) => {
         console.log('mouse down');
@@ -205,13 +213,6 @@ export default function EchoesWithin() {
       );
     };
 
-    function speakText(text) {
-      if (!isMuted) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        speechSynthesis.speak(utterance);
-      }
-    }
-
     async function handleImageSubmit() {
         const canvas = canvasRef.current;
         const sketchDataUrl = await canvas.exportImage('png');
@@ -244,19 +245,17 @@ export default function EchoesWithin() {
                 .then(blob => {
                     const formData = new FormData();
                     formData.append('image', blob, 'drawing.png');
-                    formData.append('journal_title', caption);
-                    formData.append('journal_entry', prompt);
-                    formData.append('tip_title', 'My Tip Title');
-                    formData.append('tip_body', 'This is my tip body.');
-                    formData.append('date_created', new Date().toISOString().split('T')[0]);
-    
+                    formData.append('echoes_journal[journal_title]', caption);
+                    formData.append('echoes_journal[date_created]', new Date().toISOString().split('T')[0]);
+                
                     axios.post('/api/echoes_journals', formData)
                     .then(response => {
                         console.log('Image saved:', response.data);
+                        const data = response.data
                         toast.success("Drawing saved!", {
                             description: "Head over to Journals to see your drawing.",
                         });
-                        navigate("/activities");
+                        navigate(`/journal/${data.id}?type=echo`);
                     })
                     .catch(error => {
                         console.error('Error saving image:', error);
@@ -391,35 +390,36 @@ export default function EchoesWithin() {
             <Card
             style={{
                 width: '70vw',
-                height: '13vh',
+                height: '14vh',
                 maxWidth: '1600px',
             }} 
             className="fixed bottom-2 py-2 px-7 text-black">
                 <CardContent>
                 <button 
                   id="previousPrompt"
-                  class="h-7 w-7 absolute left-0 ml-3 top-1/2 transform -translate-y-1/2" 
+                  class="h-5 w-5 absolute left-0 ml-3 top-1/2 transform -translate-y-1/2" 
                   onClick={handlePreviousPrompt} 
                   style={{ backgroundImage: 'url(images/left_arrow.svg)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
                 </button>
                 <button 
                   id="nextPrompt"
-                  class="h-7 w-7 absolute right-0 mr-3 top-1/2 transform -translate-y-1/2" 
+                  class="h-5 w-5 absolute right-0 mr-3 top-1/2 transform -translate-y-1/2" 
                   onClick={handleNextPrompt} 
                   style={{ backgroundImage: 'url(images/right_arrow.svg)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
                 </button>
-                <div className="absolute top-0 right-0 px-3 py-3 flex flex-row justify-between gap-x-5">
-                {/* <button onClick={muteText} id="muteButton">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                      <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
-                      </svg>
+                <div className="absolute top-0 right-0 px-3 pt-1 pb-3">
+                    { isMuted ? <button onClick={toggleMute} id="speakButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM17.78 9.22a.75.75 0 1 0-1.06 1.06L18.44 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 1 0 1.06-1.06L20.56 12l1.72-1.72a.75.75 0 1 0-1.06-1.06l-1.72 1.72-1.72-1.72Z" />
+                        </svg>
+                    </button> : 
+                    <button onClick={toggleMute} id="muteButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM18.584 5.106a.75.75 0 0 1 1.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 0 1-1.06-1.06 8.25 8.25 0 0 0 0-11.668.75.75 0 0 1 0-1.06Z" />
+                        <   path d="M15.932 7.757a.75.75 0 0 1 1.061 0 6 6 0 0 1 0 8.486.75.75 0 0 1-1.06-1.061 4.5 4.5 0 0 0 0-6.364.75.75 0 0 1 0-1.06Z" />
+                        </svg>
                     </button>
-                    <button onClick={speakText} id="speakButton">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                      <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM17.78 9.22a.75.75 0 1 0-1.06 1.06L18.44 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 1 0 1.06-1.06L20.56 12l1.72-1.72a.75.75 0 1 0-1.06-1.06l-1.72 1.72-1.72-1.72Z" />
-                      </svg>
-                    </button>
-                     */}
+                    }
                 </div>
                 <span className='text-2xl font-extrabold'>Prompt</span>
                 <p className='text-base'>{prompts[currentPromptIndex]}</p></CardContent>

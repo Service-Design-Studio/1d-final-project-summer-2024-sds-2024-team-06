@@ -23,12 +23,18 @@ Feature: EchoesWithin
         When I require guidance and click the next prompt arrow
         Then the next audio prompt will play 
 
-    Scenario: Save Drawing
+    Scenario: User wishes to save drawing
         Given I have completed my Drawing
-        When I click Publish to journal
+        When I click "Publish to journal"
         Then a pop-up will appear asking the user to caption their work
-
     
+    Scenario: User saves drawing
+        Given I have completed my Drawing
+        And I filled in a caption
+        When I click on "Publish"
+        Then I will redirected to the journal entry page
+        And a pop-up will appear saying Drawing saved
+
     Scenario: Incomplete submission exit pop-up
         Given I have completed my Drawing
         When I click the exit cross button at the top of the screen

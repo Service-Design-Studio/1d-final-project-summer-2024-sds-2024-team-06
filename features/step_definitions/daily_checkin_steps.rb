@@ -71,6 +71,7 @@ end
 Then("I should see a flower loading screen") do
   sleep 1
   expect(page).to have_content('Growing your flower')
+  sleep 3
 end
 
 And("I should be redirected to the mood tracker page") do

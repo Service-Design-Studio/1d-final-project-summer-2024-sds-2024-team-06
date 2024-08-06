@@ -3,7 +3,7 @@
 ##
 
 def latest_journal_entry(user)
-  all_journals = user.journals + user.goal_journals
+  all_journals = user.journals + user.goal_journals + user.echoes_journals + user.gallery_journals
   all_journals.max_by(&:created_at)
 end
 
@@ -38,7 +38,7 @@ end
 Given('I am on journal entries history') do
   visit '/journal-quote'
   step 'I click anywhere'
-  sleep 5
+  sleep 10
 end
 
 When('I click the new entry button') do
@@ -54,7 +54,7 @@ Given('I am on journal entries history and user has completed a goal-setting jou
   visit '/journal'
   # Ensure there is at least one goal-setting journal entry, adjust as necessary
   # ky to create a profile with a goal-setting journal entry
-  sleep 5
+  sleep 10
 end
 
 When('I click on the first goal entry') do
@@ -79,7 +79,7 @@ end
 ##
 Given('I opened create journal menu') do
   visit '/journal'
-  sleep 3
+  sleep 10
   find('#newJournalButton').click
 end
 
@@ -106,7 +106,7 @@ end
 
 When('I click on "Guide Me" button') do
   find('#guideMe').click
-  sleep 8
+  sleep 6
 end
 
 Then('I should see a prompt generated') do
@@ -126,14 +126,16 @@ When('I click submit') do
 end
 
 Then('I will be redirected to open submission page') do
+  sleep 2
+  user.reload
   latest_journal_id = user.journals.last.id
-  latest_journal_id += 1
   expect(page).to have_current_path("/journal/#{latest_journal_id}?type=open")
 end
 
 Then('I will be redirected to goal submission page') do
+  sleep 2
+  user.reload
   latest_journal_id = user.goal_journals.last.id
-  latest_journal_id += 1
   expect(page).to have_current_path("/journal/#{latest_journal_id}?type=goal")
 end
 

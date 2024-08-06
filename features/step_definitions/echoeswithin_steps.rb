@@ -51,7 +51,28 @@ Given('I have completed my Drawing') do
   visit '/echoes-within'
 end
 
-When('I click Publish to journal') do
+# When('I click Publish to journal') do
+#   find('#publish').click
+# end
+
+And('I filled in a caption') do
+  step 'I click "Publish to journal"'
+  find("input[placeholder=\"Time you enjoy wasting is not wasted time...\"]").set('I feel happy')
+end
+
+Then('I will redirected to the journal entry page') do
+  sleep 5
+  user = User.find_by('email': 'bob@example.com')
+  latest_echoes_journal = user.echoes_journals.last
+  expect(page).to have_current_path("/journal/#{latest_echoes_journal.id}?type=echo")
+  expect(page).to have_content(latest_echoes_journal.journal_title)
+end
+
+And('a pop-up will appear saying Drawing saved') do
+  expect(page).to have_content('Drawing saved!')
+end
+
+When('I click "Publish to journal"') do
   find('#publish').click
 end
 
@@ -59,10 +80,6 @@ Then('a pop-up will appear asking the user to caption their work') do
   # expect(page).to have_selector('.popup', text: 'caption your work')
   expect(page).to have_text("Write a caption for your drawing")
 end
-
-Then('the user will be redirected to the journalentrieshistory page') do
-  expect(page).to have_current_path('/journalentrieshistory')
-end #And?
 
 When('I click the exit cross button at the top of the screen') do
   # binding.pry

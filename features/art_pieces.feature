@@ -10,7 +10,7 @@ Feature: Gallery Walk
   Scenario: Participant visits the Gallery Walk activity
     Given participant chosen to partake in the Gallery Walk
     When I navigate to the activities page
-    And I click on "Visit Gallery Walk"
+    And I click on "Let's meditate"
     Then I should see a flower loading screen
     And I should see a carousel of art pieces
   

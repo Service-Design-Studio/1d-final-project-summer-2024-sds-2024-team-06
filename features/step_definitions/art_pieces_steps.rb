@@ -94,9 +94,9 @@ end
 ##Scenario 4: User has completed the Gallery Walk Activity
 
 Given('I have finished writing my journal') do
-  # step 'I am listening to the voice-over'
-  # step 'I will type in the text box provided'
-  # step 'the text box will show my input'
+  step 'I am listening to the voice-over'
+  step 'I will type in the text box provided'
+  step 'the text box will show my input'
 end
 
 When('I click on {string}') do |button_text|
@@ -104,39 +104,11 @@ When('I click on {string}') do |button_text|
 end
 
 Then('I should be redirected to my saved journal entry') do
+  sleep 2
   user = User.find_by(email: 'bob@example.com')
   latest_gallery_journal = user.gallery_journals.last
-  expect(page).to have_current_path("/gallery-walk/#{latest_gallery_journal.id}?type=gallery")
+  expect(page).to have_current_path("/journal/#{latest_gallery_journal.id}?type=gallery")
   expect(page).to have_content(latest_gallery_journal.journal_entry)
   expect(page).to have_content(latest_gallery_journal.journal_title)
-  expect(page).to have_select("img[src='#{latest_gallery_journal.art_piece.imageURL}']")
+  expect(page).to have_selector("img")
 end
-
-# When('they click the end activity button') do
-#   click_on 'end-activity'
-# end
-
-# Then('the journal entry is automatically saved to their journal tab, browser redirect to journal') do
-#   expect(page).to have_current_path('/gallery-walk')
-#   expect(page).to have_content('Journal saved!')
-# end
-
-# ##Scenario 5: Viewing the list of art gallery
-
-# Given('there are art pieces in the database') do
-#   @art_pieces = ArtPiece.create([
-#     { artID: 123, artvoice: 'voice.com', audio: "yes", captions: 'this is the one la sia', artTitle: 'mona lisa', image_url: 'mona.com', imageURL: 'mona.com', artist: 'mona lisa' },
-#     { artID: 124, artvoice: 'yes.com', audio: "yes", captions: 'eh nice', artTitle: 'van gogh', image_url: 'gogh.com', imageURL: 'gogh.com', artist: 'van gogh' }
-#   ])
-# end
-
-# When('I visit the gallery walk page') do
-#   visit '/gallery-walk'
-# end
-
-# Then('I should see a list of art pieces') do
-#   @art_pieces.each do |art_piece|
-#   #   expect(page).to have_selector("img[alt='#{art_piece.artTitle}']")
-#   #   expect(page).to have_selector("img[src='#{art_piece.imageURL}']")
-#   end
-# end

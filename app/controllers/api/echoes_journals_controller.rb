@@ -29,36 +29,34 @@ module Api
     end
 
 
+    # def create
+    #   file = params[:image]
+    #   filename = "user_#{current_user.id}/#{Time.now.to_i}_drawing.png"
+
+    #   GoogleCloudStorageService.upload_file(file, filename)
+    #   @echoes_journal = current_user.echoes_journals.build(echoes_journal_params.merge(imageURL: filename))
+    #   #@echoes_journal = current_user.echoes_journals.build(imageURL: filename, journal_title: params[:journal_title], journal_entry: params[:journal_entry], tip_title: params[:tip_title], tip_body: params[:tip_body], date_created: params[:date_created])
+
+    #   if @echoes_journal.save
+    #     render json: @echoes_journal, status: :created
+    #   else
+    #     render json: @echoes_journal.errors, status: :unprocessable_entity
+    #   end
+    # end
+
     def create
       file = params[:image]
       filename = "user_#{current_user.id}/#{Time.now.to_i}_drawing.png"
-
+    
       GoogleCloudStorageService.upload_file(file, filename)
-
-      @echoes_journal = current_user.echoes_journals.create(imageURL: filename, journal_title: params[:journal_title], journal_entry: params[:journal_entry], tip_title: params[:tip_title], tip_body: params[:tip_body], date_created: params[:date_created])
-
+      @echoes_journal = current_user.echoes_journals.build(echoes_journal_params.merge(imageURL: filename))
+    
       if @echoes_journal.save
         render json: @echoes_journal, status: :created
       else
         render json: @echoes_journal.errors, status: :unprocessable_entity
       end
     end
-    # def create
-    #   @echoes_journal = current_user.echoes_journals.build(echoes_journal_params)
-
-    #   if @echoes_journal.save
-    #     file = params[:image]
-    #     filename = "user_#{current_user.id}/#{Time.now.to_i}_drawing.png"
-    #     if GoogleCloudStorageService.upload_file(file, filename)
-    #       image_url = GoogleCloudStorageService.file_url(filename)
-    #       @echoes_journal.update(imageURL: image_url)
-    #     end
-    #     # GoogleCloudStorageService.upload_file(params[:image])
-    #     render json: @echoes_journal, status: :created
-    #   # else
-    #   #   render json: { errors: @echoes_journal.errors.full_messages }, status: :unprocessable_entity
-    #   end
-    # end
 
     private
 
@@ -72,8 +70,12 @@ module Api
       render json: { error: 'Not authorized' }, status: :forbidden unless @echoes_journal.user == current_user
     end
 
+    # def echoes_journal_params
+    #   params.require(:echoes_journal).permit(:journal_title, :journal_entry, :tip_title, :tip_body, :imageURL, :date)
+    # end
+
     def echoes_journal_params
-      params.permit(:journal_title, :journal_entry, :tip_title, :tip_body, :imageURL, :date)
+      params.require(:echoes_journal).permit(:journal_title, :journal_entry, :tip_title, :tip_body, :date_created)
     end
   end
 end
