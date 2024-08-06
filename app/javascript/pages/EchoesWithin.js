@@ -42,8 +42,8 @@ const somePreserveAspectRatio = [
   ];
 
 const prompts = [
-  "Count from one to five and take a deep breath.",
-  "Take a moment to think about a happy memory.",
+  "Take a deep breath. Notice the physical sensations in your body.",
+  "What patterns do the sensations take? What colour are they?",
   "Focus on your breathing for the next few seconds.",
   "Think about something you are grateful for.",
   "Visualize a place where you feel at peace."
