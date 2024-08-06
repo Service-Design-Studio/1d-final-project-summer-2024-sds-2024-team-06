@@ -17,6 +17,10 @@ Then('I will hear an audio prompt begin to play') do ##and?
   expect(is_speaking).to be true
 end
 
+When('I click the "Publish" button') do
+  click_on 'Publish'
+end
+
 Given('I am on the EchoesWithin page') do
   visit '/echoes-within'
 end
@@ -46,14 +50,8 @@ Then('the next audio prompt will play') do
 end
 
 Given('I have completed my Drawing') do
-  # Code to ensure the drawing is completed
-  # page.execute_script("completeDrawing()")
   visit '/echoes-within'
 end
-
-# When('I click Publish to journal') do
-#   find('#publish').click
-# end
 
 And('I filled in a caption') do
   step 'I click "Publish to journal"'
@@ -61,7 +59,7 @@ And('I filled in a caption') do
 end
 
 Then('I will redirected to the journal entry page') do
-  sleep 5
+  sleep 3
   user = User.find_by('email': 'bob@example.com')
   latest_echoes_journal = user.echoes_journals.last
   expect(page).to have_current_path("/journal/#{latest_echoes_journal.id}?type=echo")
@@ -69,7 +67,8 @@ Then('I will redirected to the journal entry page') do
 end
 
 And('a pop-up will appear saying Drawing saved') do
-  expect(page).to have_content('Drawing saved!')
+  sleep 2
+  expect(page).to have_text('Drawing saved!')
 end
 
 When('I click "Publish to journal"') do
@@ -77,25 +76,13 @@ When('I click "Publish to journal"') do
 end
 
 Then('a pop-up will appear asking the user to caption their work') do
-  # expect(page).to have_selector('.popup', text: 'caption your work')
   expect(page).to have_text("Write a caption for your drawing")
 end
 
 When('I click the exit cross button at the top of the screen') do
-  # binding.pry
   find('#close').click
 end
 
 Then('a pop-up will appear ensuring the user wants to leave') do
-  # expect(page).to have_selector('.pop-up-confirmation')
   expect(page).to have_text("Are you leaving?")
 end
-
-# Given('I have written my caption') do
-# end
-
-# When("I click Publish") do
-# end
-
-# Then("I will be re-directed to the activities page") do
-# end

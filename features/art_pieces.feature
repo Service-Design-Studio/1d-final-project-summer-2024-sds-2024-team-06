@@ -10,7 +10,7 @@ Feature: Gallery Walk
   Scenario: Participant visits the Gallery Walk activity
     Given participant chosen to partake in the Gallery Walk
     When I navigate to the activities page
-    And I click on "Let's meditate"
+    And I click on "Visit the gallery"
     Then I should see a flower loading screen
     And I should see a carousel of art pieces
   
@@ -24,12 +24,6 @@ Feature: Gallery Walk
     Given I am in a Gallery Walk session
     When I click the play button
     Then audio will play
-
-  Scenario: During the activity, the participant writes their journal
-    Given I am listening to the voice-over
-    When I want to express my emotions in writing
-    Then I will type in the text box provided
-    And the text box will show my input
 
   Scenario: The participant submits their journal
     Given I have finished writing my journal

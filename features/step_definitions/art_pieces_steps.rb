@@ -11,19 +11,15 @@ When('I navigate to the activities page') do
   page.execute_script('document.elementFromPoint(0, 0).click();')
 end
 
-# And(/I click on "(*.)"/) do |activity|
-#   click_on activity
-# end
-
 And('I should see a carousel of art pieces') do
   ArtPiece.all.each do |art_piece|
-    
-    Capybara.using_wait_time(3) do
+
+    Capybara.using_wait_time(1) do
       while !page.has_text?(art_piece.artTitle)
         find('button#next-button').click
       end
     end
-    
+
     expect(page).to have_selector("img[src='#{art_piece.imageURL}']", visible: true)
     expect(page).to have_content(art_piece.dateYear)
     expect(page).to have_content(art_piece.artist)
@@ -79,16 +75,14 @@ end
 
 When('I want to express my emotions in writing') do
   text_box = find("textarea[placeholder=\"Let's pen down some thoughts...\"]")
-  text_box.click
 end
 
 Then("I will type in the text box provided") do
-  find("textarea[placeholder=\"Let's pen down some thoughts...\"]").set('I feel excited')
+  fill_in "Let's pen down some thoughts...", with: 'I feel excited'
 end
 
 And('the text box will show my input') do
   expect(page).to have_field("Let's pen down some thoughts...", with: 'I feel excited')
-  sleep 1
 end
 
 ##Scenario 4: User has completed the Gallery Walk Activity
