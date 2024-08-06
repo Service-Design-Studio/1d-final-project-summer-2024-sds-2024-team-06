@@ -222,8 +222,10 @@ export default function EchoesWithin() {
     
         background.onload = () => {
             const offScreenCanvas = document.createElement('canvas');
-            offScreenCanvas.width = background.width;
-            offScreenCanvas.height = background.height;
+            const highResWidth = background.width * 5;
+            const highResHeight = background.height * 5;
+            offScreenCanvas.width = highResWidth;
+            offScreenCanvas.height = highResHeight;
             const context = offScreenCanvas.getContext('2d');
     
             // Draw the background image
@@ -233,8 +235,8 @@ export default function EchoesWithin() {
             sketch.src = sketchDataUrl;
     
             sketch.onload = () => {
-                const scaleX = background.width / canvasDimensions.width;
-                const scaleY = background.height / canvasDimensions.height;
+                const scaleX = highResWidth / canvasDimensions.width;
+                const scaleY = highResHeight / canvasDimensions.height;
 
                 context.drawImage(sketch, 0, 0, sketch.width * scaleX, sketch.height * scaleY);
     
