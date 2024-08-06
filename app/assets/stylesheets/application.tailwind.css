@@ -4,6 +4,9 @@
 
 @import url("https://use.typekit.net/sgc6atj.css");
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap'); 
+/* ^import nunito font here */
 
 @layer base {
     :root {
@@ -76,7 +79,8 @@
   @layer base {
     * {
       @apply border-border;
-      @apply font-sriracha;
+      /* @apply font-sriracha; */
+      @apply font-nunito;
     }
     body {
       @apply bg-background text-foreground;
@@ -95,3 +99,4 @@
         scrollbar-width: none;  /* Firefox */
   }
 }
+
