@@ -52,7 +52,7 @@ export default function Activities() {
               {/*Button contents*/}
                 <div className="flex justify-end">
                   <button id="galleryWalk" className="block text-xs md:text-lg border border-black bg-white bg-opacity-50 rounded text-black py-2 px-2"
-                        onClick={() => {window.location.href="/gallery-walk"}}>Let's meditate</button>
+                        onClick={() => {window.location.href="/gallery-walk"}}>Visit the gallery</button>
                 </div>
               </div>
             </div>
@@ -69,11 +69,11 @@ export default function Activities() {
               <div className='row-span-2 relative'>
                 <title className="text-black text-2xl lg:text-4xl font-sriracha block text-left font-bold">Journal</title>
                 <div>&nbsp;</div>
-                <h1 className="text-black text-xs md:text-lg block font-sans text-left">Have a seat and pen down your thoughts or focus on your goals and accomplishments. Keep it yours and private.</h1>
+                <h1 className="text-black text-xs md:text-lg block font-sans text-left">Have a seat and reflect on your day, or focus on your goals and accomplishments. Keep it yours and private.</h1>
               {/*Button contents*/}
                 <div className="flex justify-end">
                   <button id="journal" className="block text-xs md:text-lg border border-black bg-white bg-opacity-50 rounded text-black py-2 px-2"
-                        onClick={() => {window.location.href="/journal-quote"}}>Write a journal</button>
+                        onClick={() => {window.location.href="/journal-quote"}}>Pen down your thoughts</button>
                 </div>
               </div>
 
