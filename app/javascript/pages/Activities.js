@@ -25,12 +25,12 @@ export default function Activities() {
               <div className='row-span-2 relative'>
                 <title className="text-black text-2xl lg:text-4xl font-sriracha block text-left font-bold">Echoes Within</title>
                 <div>&nbsp;</div>
-                <h1 className="text-black text-xs md:text-lg block font-sans text-left">Practice deep breathing and analyse yourself through a simple doodle. Take a minute to breath deeply. How are you feeling?</h1>
+                <h1 className="text-black text-xs md:text-lg block font-sans text-left">Practice deep breathing and analyse yourself through a simple doodle.</h1>
                 <div>&nbsp;</div>
               {/*Button contents*/}
                 <div className="flex justify-end">
-                  <button id="echoesWithin" className="block text-xs md:text-lg border border-black bg-transparent text-black py-2 px-2"
-                          onClick={() => {window.location.href="/echoes-within"}}>Visit Echoes Within</button>
+                  <button id="echoesWithin" className="block text-xs md:text-lg border border-black bg-white bg-opacity-50 rounded text-black py-2 px-2"
+                          onClick={() => {window.location.href="/echoes-within"}}>Lost for words? Try starting with art.</button>
                 </div>
               </div>
             </div>
@@ -51,7 +51,7 @@ export default function Activities() {
                 <div>&nbsp;</div>
               {/*Button contents*/}
                 <div className="flex justify-end">
-                  <button id="galleryWalk" className="text-xs md:text-lg border border-black bg-transparent text-black py-2 px-2"
+                  <button id="galleryWalk" className="block text-xs md:text-lg border border-black bg-white bg-opacity-50 rounded text-black py-2 px-2"
                         onClick={() => {window.location.href="/gallery-walk"}}>Visit Gallery Walk</button>
                 </div>
               </div>
@@ -72,7 +72,7 @@ export default function Activities() {
                 <h1 className="text-black text-xs md:text-lg block font-sans text-left">Have a seat and pen down your thoughts or focus on your goals and accomplishment. Keep it yours and private.</h1>
               {/*Button contents*/}
                 <div className="flex justify-end">
-                  <button id="journal" className="text-xs md:text-lg border border-black bg-transparent text-black py-2 px-2"
+                  <button id="journal" className="block text-xs md:text-lg border border-black bg-white bg-opacity-50 rounded text-black py-2 px-2"
                         onClick={() => {window.location.href="/journal-quote"}}>Visit Journal</button>
                 </div>
               </div>

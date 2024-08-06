@@ -68,7 +68,7 @@ And("I click 'Submit'") do
   find('button#submit').click
 end
 
-Then("I should see a loading screen") do
+Then("I should see a flower loading screen") do
   sleep 1
   expect(page).to have_content('Growing your flower')
 end
