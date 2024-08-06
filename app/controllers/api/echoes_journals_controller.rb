@@ -24,6 +24,7 @@ module Api
     end
 
     def show
+      @echoes_journal.imageURL = GoogleCloudStorageService.file_url(@echoes_journal.imageURL)
       render json: @echoes_journal, status: :ok
     end
 

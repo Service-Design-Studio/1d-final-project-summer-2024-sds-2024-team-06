@@ -3,9 +3,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import loadingUseFetch from '../api/loadingUseFetch';
-//import mockUseFetch from '../components/mockUseFetch' // data to show flowers rendering
-import CarouselSwipe from '../components/CarouselSwipe'
-import HorizontalScroll from '../components/HorizontalScroll'
 import CalendarGrid from '../components/CalendarGrid'
 import FlowerLoadScreen from './FlowerLoadScreen';
 import AspectRatioGrid from '../components/AspectRatioGrid';
