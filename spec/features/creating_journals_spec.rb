@@ -71,7 +71,6 @@ RSpec.feature "CreateJournals", type: :feature do
         click_button 'Submit'
         sleep 5
         last_journal = user.journals.last
-        puts last_journal
         expect(page).to have_current_path("/journal/#{last_journal.id}?type=open")
         expect(page).to have_content('journal title')
         expect(page).to have_content('journal entry.')

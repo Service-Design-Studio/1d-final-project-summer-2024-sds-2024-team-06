@@ -42,7 +42,6 @@ RSpec.feature "ArtSelect", type: :feature do
         while !page.has_text?(art_piece.artTitle)
           find('button#next-button').click
         end
-        binding.pry
         find("img[src='#{art_piece.imageURL}']").click
     end
 end

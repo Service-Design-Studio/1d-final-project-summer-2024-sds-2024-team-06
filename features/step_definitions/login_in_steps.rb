@@ -9,6 +9,6 @@ Given('I have logged in') do
 end
 
 Then('the webpage should be displayed') do
-    sleep 1
+    sleep 2
     expect(page).to have_content('Click anywhere to continue')
 end

@@ -66,6 +66,18 @@ Feature: Journal
         Then I will be redirected to the open-ended journal past entry page
         And I will see my journal entry and final tip generated
 
+    Scenario: View past gallery walk journal entry
+        Given I am on journal entries history
+        When I click on a gallery walk journal entry item
+        Then I will be redirected to the gallery walk journal past entry page
+        And I will see my journal entry, title and the corresponding image
+
+    Scenario: View past echoes within journal entry
+        Given I am on journal entries history
+        When I click on a echoes within journal entry item
+        Then I will be redirected to the echoes within journal past entry page
+        And I will see my journal entry and my sketch
+
     Scenario: Attempt to leave before open journal submission
         Given I have completed writing my open-ended journal entry
         When I click on the close button

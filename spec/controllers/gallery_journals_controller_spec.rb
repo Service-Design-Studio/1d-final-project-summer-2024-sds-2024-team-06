@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::GalleryJournalsController, type: :controller do
   let!(:user) { User.create(email: "rspec@example.com", password: "password", password_confirmation: "password", dateLastLoggedIn: Date.today) }
-  let!(:gallery_journal) { GalleryJournal.create(journal_title: "My Gallery Journal", journal_entry: "A beautiful sunset.", tip_title: "yes", tip_body: "no", user: user) }
+  let!(:gallery_journal) { GalleryJournal.create(journal_title: "My Gallery Journal", journal_entry: "A beautiful sunset.", tip_title: "yes", tip_body: "no", imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Age%20of%20Full%20Bloom.svg",user: user) }
 
   before do
     sign_in user
@@ -29,24 +29,8 @@ RSpec.describe Api::GalleryJournalsController, type: :controller do
   describe "POST #create" do
     it "creates a new GalleryJournal" do
       expect {
-        post :create, params: { gallery_journal: { journal_title: "New Journal", journal_entry: "New entry", tip_title: "yes", tip_body: "no", user_id: user.id } }
+        post :create, params: { gallery_journal: { journal_title: "New Journal", journal_entry: "New entry", tip_title: "yes", tip_body: "no", imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Age%20of%20Full%20Bloom.svg", user_id: user.id } }
       }.to change(GalleryJournal, :count).by(1)
     end
   end
-
-  # describe "PUT #update" do
-  #   it "updates the requested GalleryJournal" do
-  #     put :update, params: { id: gallery_journal.id, gallery_journal: { journal_title: "Updated Journal" } }
-  #     gallery_journal.reload
-  #     expect(gallery_journal.journal_title).to eq("Updated Journal")
-  #   end
-  # end
-
-  # describe "DELETE #destroy" do
-  #   it "destroys the requested GalleryJournal" do
-  #     expect {
-  #       delete :destroy, params: { id: gallery_journal.id }
-  #     }.to change(GalleryJournal, :count).by(-1)
-  #   end
-  # end
 end

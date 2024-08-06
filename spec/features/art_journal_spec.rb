@@ -55,10 +55,15 @@ RSpec.feature "ArtJournal", type: :feature do
     scenario "User ends activity" do
         visit "/gallery-walk/100"
         fill_in "Let's pen down some thoughts...", with: 'I feel excited'
-        click_on 'end-activity'
+        click_on 'Publish to journal'
 
-        expect(page).to have_current_path("/gallery-walk")
-        expect(page).to have_content("Journal saved!")
+        sleep 1
+
+        latest_gallery_journal = user.gallery_journals.last
+        expect(page).to have_current_path("/journal/#{latest_gallery_journal.id}?type=gallery")
+        expect(page).to have_content(latest_gallery_journal.journal_entry)
+        expect(page).to have_content(latest_gallery_journal.journal_title)
+        expect(page).to have_selector("img")
     end
 
     scenario "User completes gallery walk activity" do
@@ -69,8 +74,14 @@ RSpec.feature "ArtJournal", type: :feature do
         fill_in "Let's pen down some thoughts...", with: 'I feel excited'
         expect(page).to have_field("Let's pen down some thoughts...", with: 'I feel excited')
 
-        click_on 'end-activity'
-        expect(page).to have_current_path("/gallery-walk")
-        expect(page).to have_content("Journal saved!")
+        click_on 'Publish to journal'
+
+        sleep 1
+
+        latest_gallery_journal = user.gallery_journals.last
+        expect(page).to have_current_path("/journal/#{latest_gallery_journal.id}?type=gallery")
+        expect(page).to have_content(latest_gallery_journal.journal_entry)
+        expect(page).to have_content(latest_gallery_journal.journal_title)
+        expect(page).to have_selector("img")
     end
 end

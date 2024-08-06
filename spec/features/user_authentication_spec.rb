@@ -7,6 +7,7 @@ RSpec.feature "UserAuthentication", type: :feature do
 
     scenario "User signs up" do
         visit '/'
+        sleep 1
         find('a#continue').click
         expect(page).to have_current_path('/users/sign_in')
         click_link 'Sign up'
@@ -14,6 +15,7 @@ RSpec.feature "UserAuthentication", type: :feature do
         fill_in 'Password', with: 'password'
         fill_in 'Password confirmation', with: 'password'
         click_button 'Sign up'
+        sleep 1
 
         expect(page).to have_current_path('/landing')
         expect(page).to have_selector('button#continue')
