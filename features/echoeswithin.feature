@@ -28,6 +28,10 @@ Feature: EchoesWithin
         When I click Publish to journal
         Then a pop-up will appear asking the user to caption their work
 
+    Scenario: Publish Drawing
+        Given I have written my caption
+        When I click Publish
+        Then I will be re-directed to the activities page
     
     Scenario: Incomplete submission exit pop-up
         Given I have completed my Drawing
