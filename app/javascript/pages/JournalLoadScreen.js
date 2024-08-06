@@ -58,6 +58,7 @@ export default function JournalLoadScreen({ loadingProgress }) {
         width: '100%',
         height: '100%',
       }}>
+      <div className="h-2/3 w-full flex flex-col items-center">
         <div className="flex flex-row space-x-1 mt-2 items-center">
           <h1 style={{marginBottom: "0.5rem"}} className="self-end text-2xl">Loading Journals</h1>
           <span className="dot"></span>
@@ -65,13 +66,15 @@ export default function JournalLoadScreen({ loadingProgress }) {
           <span className="dot"></span>
         </div>
         <img
-          src={`/images/journal-frames/${(currentFrame % actualFrames) + 1}.png`}
+          // src={`/images/journal-frames/${(currentFrame % actualFrames) + 1}.png`}
+          src="/images/journal-writing-gif.gif"
           alt={`Loading frame ${(currentFrame % actualFrames) + 1}`}
-          className='w-1/2 h-auto object-contain'
+          className='w-1/3 h-auto object-contain'
         />
         <div class="w-3/12 bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
             <div class="bg-blue-600 h-2.5 rounded-full" style={{width: `${loadingProgress}%`}}></div>
         </div>
+      </div>
     </div>
   );
 }

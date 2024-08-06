@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import loadingUseFetch from '../api/loadingUseFetch';
 import Navigation from '../components/Navigation'
 import Journal from '../components/JournalContainer'
-import LoadingScreen from './FlowerLoadScreen';
 import JournalLoadScreen from './JournalLoadScreen';
 
 // to use brown paper paper background: <div style={dottedPaper}></div>
@@ -79,7 +78,6 @@ export default function JournalEntryHistory() {
     return <JournalLoadScreen loadingProgress={minLoadingProgress} />;
   }
 
-  // if (loading) return <div className="h-full w-full flex justify-center items-center"><h1 className='text-4xl font-bold'>Loading journals...</h1></div>;
   if (error) return <div>{error}</div>;
 
   return (

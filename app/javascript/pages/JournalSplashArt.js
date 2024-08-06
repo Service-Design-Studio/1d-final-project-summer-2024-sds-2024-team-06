@@ -15,7 +15,7 @@ const journalQuotes = [{message: "You are the author of your own story. If you'r
   imageUrl: "/images/quote-placeholder.png"},
   {message: "The keeping of a journal is a way to focus on what is important, to set goals, to celebrate achievements, and to reflect on lessons learned.", 
   author: "Jim Rohn",
-  imageUrl: "/images/quote-placeholder.png"},
+  imageUrl: "/images/quote-1.svg"},
   {message: "Writing in a journal each day allows you to direct your focus to what you accomplished, what you’re grateful for, and what you’re committed to doing better tomorrow.", 
   author: "Hal Elrod",
   imageUrl: "/images/quote-placeholder.png"},
@@ -24,7 +24,7 @@ const journalQuotes = [{message: "You are the author of your own story. If you'r
   imageUrl: "/images/quote-placeholder.png"},
   {message: "You must remember that your story matters. What you write has the power to save a life, sometimes that life is your own.", 
   author: " Stalina Goodwin",
-  imageUrl: "/images/quote-placeholder.png"},
+  imageUrl: "/images/quote-2.svg"},
 ];
 
 

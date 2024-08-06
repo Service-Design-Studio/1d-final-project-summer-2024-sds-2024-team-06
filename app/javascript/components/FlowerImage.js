@@ -3,6 +3,10 @@ import React from "react";
 const FlowerImage = ({ checkinMood, checkinColor, height }) => {
   //const baseImageUrl = `/images/flowers/${checkinMood}/${checkinColor}.svg`;
 
+  const sanitizeString = (str) => str.replace(/\s+/g, '').toLowerCase();
+
+  const sanitizedColor = sanitizeString(checkinColor);
+
   const moodDict = {
     "Happy": 1,
     "Upset": 2,
@@ -12,10 +16,10 @@ const FlowerImage = ({ checkinMood, checkinColor, height }) => {
     "InLove":6,
     "Tired":7,
     "Meh":8,
-  };
+  }
 
   const flowerNumber = moodDict[checkinMood]
-  const baseImageUrl = `images/flowers/${checkinColor}/${checkinColor}_flower_${flowerNumber}.svg`
+  const baseImageUrl = `/images/flowers/${sanitizedColor}/${sanitizedColor}_flower_${flowerNumber}.svg`;
 
   const containerStyle = {
     position: 'relative',

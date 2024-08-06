@@ -1,8 +1,8 @@
 import React from 'react';
 const airplaneStyle = {
-    width: '250px',
+    width: '350px',
     position: 'absolute',
-    top: '150px', // adjust to satisfactory position
+    top: '300px', // adjust to satisfactory position
     right: '-200px',
     animation: 'plane 20s linear infinite',
     transformOrigin: '100% 50%',

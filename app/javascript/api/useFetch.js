@@ -20,6 +20,7 @@ export default function useFetch(url) {
                 return res.json();
             }).then(data => {
                 setData(data);
+                setIsPending(false);
             }).catch(err =>{
                 if(err.name === "AbortError"){
                     console.log("fetch aborted");

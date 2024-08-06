@@ -36,64 +36,49 @@ end
 
 ArtPiece.create!([
   {artID: 00001,
-  artTitle: "The Face of Mediation",
+  artTitle: "The Face of Meditation",
   artist: "Abdul Ghani Hamid",
   dateYear: 1975,
-  imageURL: "https://www.nationalgallery.sg/sites/default/files/P-0233_Abd-Ghani-Hamid.jpg",
-  audio:"https://www.youtube.com/watch?v=ZKiXa4kI7ns",
+  imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/The%20Face%20of%20Meditation.svg",
+  # imageURL: "https://www.nationalgallery.sg/sites/default/files/P-0233_Abd-Ghani-Hamid.jpg",
+  audio:"https://storage.googleapis.com/art_storage/gallery_walk/The%20Face%20of%20Mediation.mp3",
   captions: ""},
 
   {artID: 00002,
   artTitle: "Age of Full Bloom",
   artist: "San Min",
   dateYear: 1975,
-  imageURL: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg",
-  audio:"https://www.youtube.com/watch?v=q84AzQy-spw",
-  captions: ""},
-  {artID: 00002,
-  artTitle: "Age of Full Bloom",
-  artist: "San Min",
-  dateYear: 1975,
-  imageURL: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg",
-  audio:"https://www.youtube.com/watch?v=q84AzQy-spw",
+  imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Age%20of%20Full%20Bloom.svg",
+  # resizedURL: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg",
+  audio:"https://storage.googleapis.com/art_storage/gallery_walk/Slow%20Art%20Guide%20for%20%F0%9D%98%88%F0%9D%98%A8%F0%9D%98%A6%20%F0%9D%98%B0%F0%9D%98%A7%20%F0%9D%98%8D%F0%9D%98%B6%F0%9D%98%AD%F0%9D%98%AD%20%F0%9D%98%89%F0%9D%98%AD%F0%9D%98%B0%F0%9D%98%B0%F0%9D%98%AE%20by%20San%20Minn.mp3",
   captions: ""},
 
   {artID: 00003,
   artTitle: "Irrawaddy",
   artist: "Kim Lim",
   dateYear: 1979,
-  imageURL: "https://www.roots.gov.sg/-/media/Roots/60-objects/112-irrawaddy.ashx",
-  audio:"https://www.youtube.com/watch?v=7GYc_pj583M&t=2s",
-  captions: ""},
-  {artID: 00003,
-  artTitle: "Irrawaddy",
-  artist: "Kim Lim",
-  dateYear: 1979,
-  imageURL: "https://www.roots.gov.sg/-/media/Roots/60-objects/112-irrawaddy.ashx",
-  audio:"https://www.youtube.com/watch?v=7GYc_pj583M&t=2s",
+  imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Irrawaddy.svg",
+  # resizedURL: "https://www.roots.gov.sg/CollectionImages/1323535.jpg",
+  audio:"https://storage.googleapis.com/art_storage/gallery_walk/Irrawaddy.mp3",
   captions: ""},
 
   {artID: 00004,
   artTitle: "Wanderer above the Sea of Fog",
   artist: "Caspar David Friedrich",
   dateYear: 1818,
-  imageURL: "https://www.thehistoryofart.org/caspar-david-friedrich/Wanderer%20above%20the%20Sea%20of%20Fog%20Caspar%20David%20Friedrich.jpg?ezimgfmt=rs:400x512/rscb16/ngcb15/notWebP",
-  audio:"https://www.youtube.com/watch?v=42CPOtE8pGU",
+  imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Wanderer%20above%20the%20Sea%20of%20Fog.svg",
+  # imageURL: "https://www.arthistoryproject.com/site/assets/files/15801/caspar-david-friedrich-the-wanderer-above-the-sea-of-fog-1818-obelisk-art-history.jpg",
+  audio:"https://storage.googleapis.com/art_storage/gallery_walk/Wanderer%20above%20the%20Sea%20of%20Fog.mp3",
   captions: ""},
-  {artID: 00004,
-  artTitle: "Wanderer above the Sea of Fog",
-  artist: "Caspar David Friedrich",
-  dateYear: 1818,
-  imageURL: "https://www.thehistoryofart.org/caspar-david-friedrich/Wanderer%20above%20the%20Sea%20of%20Fog%20Caspar%20David%20Friedrich.jpg?ezimgfmt=rs:400x512/rscb16/ngcb15/notWebP",
-  audio:"https://www.youtube.com/watch?v=42CPOtE8pGU",
-  captions: ""},
+
 
   {artID: 00005,
   artTitle: "Rain, Steam, and Speed",
   artist: "Joseph Mallord William Turner",
   dateYear: 1844,
-  imageURL: "https://miro.medium.com/v2/resize:fit:786/format:webp/0*qEnR_kFsH5UpcWBT.jpg",
-  audio:"https://www.youtube.com/watch?v=LQ3AC6CzlBA",
+  imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Rain%2C%20Steam%2C%20and%20Speed.svg",
+  # imageURL: "https://miro.medium.com/v2/resize:fit:786/format:webp/0*qEnR_kFsH5UpcWBT.jpg",
+  audio:"https://storage.googleapis.com/art_storage/gallery_walk/Rain%2C%20Steam%2C%20and%20Speed.mp3",
   captions: ""},
 ])
 
@@ -151,7 +136,7 @@ GalleryJournal.create!(
   journal_entry: "I am so depressed.",
   tip_title: "Process your emotions",
   tip_body: "It is okay to feel sad sometimes.",
-  imageURL: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg"
+  imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Age%20of%20Full%20Bloom.svg"
 )
 
 GalleryJournal.create!(
@@ -160,7 +145,7 @@ GalleryJournal.create!(
   journal_entry: "I am so happy.",
   tip_title: "Relish in your joy!",
   tip_body: "It is okay to be happy sometimes.",
-  imageURL: "https://www.thehistoryofart.org/caspar-david-friedrich/Wanderer%20above%20the%20Sea%20of%20Fog%20Caspar%20David%20Friedrich.jpg?ezimgfmt=rs:400x512/rscb16/ngcb15/notWebP"
+  imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Rain%2C%20Steam%2C%20and%20Speed.svg"
 )
 
 GalleryJournal.create!(
@@ -219,8 +204,44 @@ flowers = [
   {color: "Yellow", mood: "In Love"},
 ]
 
-30.times do
+def random_datetime_for_day(day)
+  start_date = Time.new(2024, 1, 1) + (day - 1).days
+  end_date = start_date.end_of_day
+  random_time = rand(start_date.to_f..end_date.to_f)
+  Time.at(random_time)
+end
+
+def create_unique_flowers(user, flowers)
+  total_days = (1..365).to_a.shuffle # Generate all days of the year and shuffle them
+
   flowers.each do |flower_attributes|
-    user.flowers.find_or_create_by!(flower_attributes.merge(created_at: random_datetime))
+    30.times do
+      day = total_days.pop # Get a unique day from the shuffled list
+      break if day.nil? # Ensure we don't run out of days
+
+      created_at = random_datetime_for_day(day)
+      user.flowers.create!(flower_attributes.merge(created_at: created_at))
+
+      puts "Creating flower for #{user.email} on day #{day}, created_at #{created_at}"
+    end
+  end
+
+  remove_duplicate_flowers(user)
+end
+
+def remove_duplicate_flowers(user)
+  flower_days = {}
+  user.flowers.order(:day).each do |flower|
+    day = flower.day
+    if flower_days.key?(day)
+      puts "Removing duplicate flower for #{user.email} on day #{day}"
+      flower.destroy
+    else
+      flower_days[day] = true
+    end
   end
 end
+
+
+create_unique_flowers(user, flowers)
+puts user.flowers.uniq(&:day).count

@@ -51,6 +51,8 @@ const prompts = [
 
 const MIN_ERASER_WIDTH = 1;
 const MIN_STROKE_WIDTH = 1;
+const MAX_ERASER_WIDTH = 100;
+const MAX_STROKE_WIDTH = 100;
 
 export default function EchoesWithin() {
     const navigate = useNavigate();
@@ -142,14 +144,14 @@ export default function EchoesWithin() {
         if (isBrush) {
             setStrokeWidth(prevWidth => {
                 const newWidth = prevWidth + (isAdd ? 2 : -2);
-                const clampedWidth = Math.max(newWidth, MIN_STROKE_WIDTH);
+                const clampedWidth = Math.max(Math.min(newWidth, MAX_STROKE_WIDTH), MIN_STROKE_WIDTH);
                 console.log('New Stroke Width:', clampedWidth);
                 return clampedWidth;
             });
         } else {
             setEraserWidth(prevWidth => {
                 const newWidth = prevWidth + (isAdd ? 2 : -2);
-                const clampedWidth = Math.max(newWidth, MIN_ERASER_WIDTH);
+                const clampedWidth = Math.max(Math.min(newWidth, MAX_STROKE_WIDTH), MIN_ERASER_WIDTH);
                 console.log('New Eraser Width:', clampedWidth);
                 return clampedWidth;
             });
@@ -170,6 +172,7 @@ export default function EchoesWithin() {
 
     const handleMouseDown = (isAdd, isBrush) => {
         console.log('mouse down');
+        handleWidthButtonClick(isAdd, isBrush);
         const id = setInterval(() => {
             console.log('interval');
             handleWidthButtonClick(isAdd, isBrush);
@@ -273,22 +276,18 @@ export default function EchoesWithin() {
 
     function PlusAdjustButton({isPressed, isBrush, setPressed}) {
         let id = ""
+
         if (isBrush) {
             id = "brush-plus-button";
         } else {
             id = "eraser-plus-button";
         }
+
         return (
             isPressed ? 
                 <svg 
                 id={id}
-                onClick={() => {
-                    handleWidthButtonClick(true, isBrush);
-                }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10" 
-                onMouseDown={() =>{
-                    setPressed(true); 
-                    handleMouseDown(true, isBrush);
-                }} 
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10" 
                 onMouseUp={() => {
                     setPressed(false);
                     handleMouseUp();
@@ -297,16 +296,10 @@ export default function EchoesWithin() {
                 </svg>
                 : <svg
                 id={id} 
-                onClick={() => {
-                    handleWidthButtonClick(true, isBrush);
-                }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer hover:bg-gray-300 hover:rounded-full"  
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer hover:bg-gray-300 hover:rounded-full"
                 onMouseDown={() => {
                     setPressed(true);
-                    handleMouseDown(true, isBrush)
-                }} 
-                onMouseUp={() => {
-                    setPressed(false);
-                    handleMouseUp();
+                    handleMouseDown(true, isBrush);
                 }}>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
@@ -320,17 +313,12 @@ export default function EchoesWithin() {
         } else {
             id = "eraser-minus-button";
         }
+        
         return (
             isPressed ? 
                 <svg
                 id={id} 
-                onClick={() => {
-                    handleWidthButtonClick(false, isBrush);
-                }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10"
-                onMouseDown={() => {
-                    setPressed(true);
-                    handleMouseDown(false, isBrush)
-                }} 
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10"
                 onMouseUp={() => {
                     setPressed(false);
                     handleMouseUp();
@@ -339,17 +327,11 @@ export default function EchoesWithin() {
                 </svg>
           
                 : <svg
-                 id={id}
-                 onClick={() => {
-                    handleWidthButtonClick(false, isBrush);
-                }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer hover:bg-gray-300 hover:rounded-full"
+                id={id}
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-10 h-10 hover:cursor-pointer hover:bg-gray-300 hover:rounded-full"
                 onMouseDown={() => {
                     setPressed(true);
                     handleMouseDown(false, isBrush);
-                }}
-                onMouseUp={() => {
-                    setPressed(false);
-                    handleMouseUp();
                 }}>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
@@ -453,11 +435,11 @@ export default function EchoesWithin() {
                             <AlertDialogHeader>
                             <AlertDialogTitle>Write a caption for your drawing</AlertDialogTitle>
                             <AlertDialogDescription>
-                                <input value={caption} onChange={(e) => setCaption(e.target.value)} className='w-full h-full mx-auto mt-2' type="text" placeholder="Time you enjoy wasting is not wasted time..." />
+                                <input id="caption" value={caption} onChange={(e) => setCaption(e.target.value)} className='w-full h-full mx-auto mt-2' type="text" placeholder="Time you enjoy wasting is not wasted time..." />
                             </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter className="mt-5">
-                            <AlertDialogCancel onClick={() => {
+                            <AlertDialogCancel id="cancel" onClick={() => {
                                 setCaption('');
                             }}>Cancel</AlertDialogCancel>
                             <AlertDialogAction id="continue" onClick={(e) => {
@@ -557,7 +539,7 @@ export default function EchoesWithin() {
                             </PopoverContent>
                         </Popover>
                         <PlusAdjustButton isPressed={isEraserPlusPressed} isBrush={false} setPressed={setisEraserPlusPressed}/>
-                        <MinusAdjustButton id="eraser-minus-button" isPressed={isEraserMinusPressed} isBrush={false} setPressed={setisEraserMinusPressed}/>
+                        <MinusAdjustButton isPressed={isEraserMinusPressed} isBrush={false} setPressed={setisEraserMinusPressed}/>
                     </div>
                     <div className="flex items-center justify-center">
                         <hr style={{
@@ -615,8 +597,8 @@ export default function EchoesWithin() {
                                 </div>
                             </PopoverContent>
                         </Popover>
-                        <PlusAdjustButton id="brush-plus-button" isPressed={isBrushPlusPressed} isBrush={true} setPressed={setisBrushPlusPressed}/>
-                        <MinusAdjustButton id="brush-minus-button" isPressed={isBrushMinusPressed} isBrush={true} setPressed={setisBrushMinusPressed}/>
+                        <PlusAdjustButton isPressed={isBrushPlusPressed} isBrush={true} setPressed={setisBrushPlusPressed}/>
+                        <MinusAdjustButton isPressed={isBrushMinusPressed} isBrush={true} setPressed={setisBrushMinusPressed}/>
                     </div>
                     <div className="flex items-center justify-center">
                         <hr style={{
@@ -657,7 +639,7 @@ export default function EchoesWithin() {
 function Circle({color, handlePresetColorChange}) {
   return (
     <span
-    id={color.substring(1)}
+    id={`color-${color.substring(1)}`}
     className="hover:bg-gray-300 hover:rounded-lg hover:cursor-pointer"  
     onClick={() => {
         handlePresetColorChange(color);
