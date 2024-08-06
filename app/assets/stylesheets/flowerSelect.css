@@ -16,9 +16,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.help-text {
+  }
+  
+  .help-text {
     display: block;
     background: rgba(255, 255, 255, 0.9); /* Translucent background */
     border: 1px solid #ddd;
@@ -33,7 +33,6 @@
     max-width: 1000px;
     /* transition: opacity 0.3s ease, transform 0.3s ease;
     opacity: 1; */
-}
-
-
-
+  }
+  
+  

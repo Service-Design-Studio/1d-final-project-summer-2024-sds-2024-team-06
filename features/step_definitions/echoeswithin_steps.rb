@@ -90,3 +90,12 @@ Then('a pop-up will appear ensuring the user wants to leave') do
   # expect(page).to have_selector('.pop-up-confirmation')
   expect(page).to have_text("Are you leaving?")
 end
+
+# Given('I have written my caption') do
+# end
+
+# When("I click Publish") do
+# end
+
+# Then("I will be re-directed to the activities page") do
+# end

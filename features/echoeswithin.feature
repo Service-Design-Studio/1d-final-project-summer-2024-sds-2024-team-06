@@ -35,6 +35,12 @@ Feature: EchoesWithin
         Then I will redirected to the journal entry page
         And a pop-up will appear saying Drawing saved
 
+
+    Scenario: Publish Drawing
+        Given I have written my caption
+        When I click Publish
+        Then I will be re-directed to the activities page
+    
     Scenario: Incomplete submission exit pop-up
         Given I have completed my Drawing
         When I click the exit cross button at the top of the screen

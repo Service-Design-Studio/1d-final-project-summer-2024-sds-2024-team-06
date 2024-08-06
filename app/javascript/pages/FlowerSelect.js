@@ -442,7 +442,7 @@ export default function FlowerSelect() {
  
             <p className="pb-2">Tracking your mood through flowers and colours allows you to express your emotions creatively and intuitively. It's not just about tracking your feelings but also about understanding them in a deeper, more visual way. Plus, it's a lovely reminder that even on challenging days, there's always beauty to be found.</p>
 
-            <p className="pb-4">We're here to support you every step of the way. If you have any questions or need assistance, don't hesitate to reach out. Enjoy your journey through the world of flowers and emotions!</p>
+            {/* <p className="pb-4">We're here to support you every step of the way. If you have any questions or need assistance, don't hesitate to reach out. Enjoy your journey through the world of flowers and emotions!</p> */}
             <div className="w-full flex flex-row items-end justify-center pb-3">
               <button type="button" onClick={toggleVisibility} class="text-black transition-all ease-in duration-75 hover:text-white border border-black hover:bg-[#77CDC0] hover:border-[#77CDC0] font-extrabold rounded-lg text-4xl px-5 py-2.5 text-center me-2 mb-2">
                 Happy Tracking!
