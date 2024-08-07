@@ -42,8 +42,8 @@ const somePreserveAspectRatio = [
   ];
 
 const prompts = [
-  "Count from one to five and take a deep breath.",
-  "Take a moment to think about a happy memory.",
+  "Take a deep breath. Notice the physical sensations in your body.",
+  "What patterns do the sensations take? What colour are they?",
   "Focus on your breathing for the next few seconds.",
   "Think about something you are grateful for.",
   "Visualize a place where you feel at peace."
@@ -222,8 +222,10 @@ export default function EchoesWithin() {
     
         background.onload = () => {
             const offScreenCanvas = document.createElement('canvas');
-            offScreenCanvas.width = background.width;
-            offScreenCanvas.height = background.height;
+            const highResWidth = background.width * 5;
+            const highResHeight = background.height * 5;
+            offScreenCanvas.width = highResWidth;
+            offScreenCanvas.height = highResHeight;
             const context = offScreenCanvas.getContext('2d');
     
             // Draw the background image
@@ -233,8 +235,8 @@ export default function EchoesWithin() {
             sketch.src = sketchDataUrl;
     
             sketch.onload = () => {
-                const scaleX = background.width / canvasDimensions.width;
-                const scaleY = background.height / canvasDimensions.height;
+                const scaleX = highResWidth / canvasDimensions.width;
+                const scaleY = highResHeight / canvasDimensions.height;
 
                 context.drawImage(sketch, 0, 0, sketch.width * scaleX, sketch.height * scaleY);
     
@@ -246,18 +248,16 @@ export default function EchoesWithin() {
                     const formData = new FormData();
                     formData.append('image', blob, 'drawing.png');
                     formData.append('echoes_journal[journal_title]', caption);
-                    formData.append('echoes_journal[journal_entry]', prompt);
-                    formData.append('echoes_journal[tip_title]', 'My Tip Title');
-                    formData.append('echoes_journal[tip_body]', 'This is my tip body.');
                     formData.append('echoes_journal[date_created]', new Date().toISOString().split('T')[0]);
                 
                     axios.post('/api/echoes_journals', formData)
                     .then(response => {
                         console.log('Image saved:', response.data);
+                        const data = response.data
                         toast.success("Drawing saved!", {
                             description: "Head over to Journals to see your drawing.",
                         });
-                        navigate("/activities");
+                        navigate(`/journal/${data.id}?type=echo`);
                     })
                     .catch(error => {
                         console.error('Error saving image:', error);
@@ -392,24 +392,24 @@ export default function EchoesWithin() {
             <Card
             style={{
                 width: '70vw',
-                height: '13vh',
+                height: '14vh',
                 maxWidth: '1600px',
             }} 
             className="fixed bottom-2 py-2 px-7 text-black">
                 <CardContent>
                 <button 
                   id="previousPrompt"
-                  class="h-7 w-7 absolute left-0 ml-3 top-1/2 transform -translate-y-1/2" 
+                  class="h-5 w-5 absolute left-0 ml-3 top-1/2 transform -translate-y-1/2" 
                   onClick={handlePreviousPrompt} 
                   style={{ backgroundImage: 'url(images/left_arrow.svg)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
                 </button>
                 <button 
                   id="nextPrompt"
-                  class="h-7 w-7 absolute right-0 mr-3 top-1/2 transform -translate-y-1/2" 
+                  class="h-5 w-5 absolute right-0 mr-3 top-1/2 transform -translate-y-1/2" 
                   onClick={handleNextPrompt} 
                   style={{ backgroundImage: 'url(images/right_arrow.svg)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
                 </button>
-                <div className="absolute top-0 right-0 px-3 pt-1 pb-5">
+                <div className="absolute top-0 right-0 px-3 pt-1 pb-3">
                     { isMuted ? <button onClick={toggleMute} id="speakButton">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                         <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM17.78 9.22a.75.75 0 1 0-1.06 1.06L18.44 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 1 0 1.06-1.06L20.56 12l1.72-1.72a.75.75 0 1 0-1.06-1.06l-1.72 1.72-1.72-1.72Z" />

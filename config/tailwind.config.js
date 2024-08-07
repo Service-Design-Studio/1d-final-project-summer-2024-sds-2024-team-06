@@ -62,7 +62,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ["brevia"],
-        sriracha: ["sriracha"]
+        sriracha: ["sriracha"],
+        nunito: ['Nunito', 'sans-serif']
         //sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
       },
       keyframes: {

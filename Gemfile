@@ -83,6 +83,7 @@ group :test do
   gem "database_cleaner"
   gem 'simplecov', require: false
   gem "rack_session_access"
+  gem 'ffaker'
 
 
 end

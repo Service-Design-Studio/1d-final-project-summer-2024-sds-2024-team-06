@@ -108,7 +108,7 @@ export default function Controls({mp3}) {
             <div className="col-span-1 ">
                 <div className='flex items-center gap-2'>
                         {/* backward button */}
-                        <button onClick={rewind}>
+                        <button id="rewind" onClick={rewind}>
                             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <polygon points="19 20 9 12 19 4 19 20" />
                                 <line x1="5" y1="19" x2="5" y2="5" />
@@ -130,7 +130,7 @@ export default function Controls({mp3}) {
                             }
                         </button>
                         {/* forward button */}
-                        <button onClick={forward}>
+                        <button id="forward" onClick={forward}>
                             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <polygon points="5 4 15 12 5 20 5 4" />
                                 <line x1="19" y1="5" x2="19" y2="19" />
@@ -140,7 +140,7 @@ export default function Controls({mp3}) {
                 </div>
                 {/* audio */} 
             <div className="col-span-1">
-                <div className='flex flex-row items-center'>
+                <div id="volume-slider" className='flex flex-row items-center'>
                     {isSliderVisible && (
                             <input
                             type="range"
@@ -152,7 +152,7 @@ export default function Controls({mp3}) {
                             style={{ width: `75px` }} 
                             />
                         )}
-                    <img src='/images/gallery-volume.svg' alt="audio player" style={{ height: `30px`}} className='cursor-pointer ml-auto' onClick={toggleSliderVisibility}/>
+                    <img id="volume" src='/images/gallery-volume.svg' alt="audio player" style={{ height: `30px`}} className='cursor-pointer ml-auto' onClick={toggleSliderVisibility}/>
                 </div>
 
             </div>

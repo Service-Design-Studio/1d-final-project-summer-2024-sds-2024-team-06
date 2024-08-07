@@ -40,6 +40,7 @@ ArtPiece.create!([
   artist: "Abdul Ghani Hamid",
   dateYear: 1975,
   imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/The%20Face%20of%20Meditation.svg",
+  # imageURL: "https://www.nationalgallery.sg/sites/default/files/P-0233_Abd-Ghani-Hamid.jpg",
   audio:"https://storage.googleapis.com/art_storage/gallery_walk/The%20Face%20of%20Mediation.mp3",
   captions: ""},
 
@@ -48,6 +49,7 @@ ArtPiece.create!([
   artist: "San Min",
   dateYear: 1975,
   imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Age%20of%20Full%20Bloom.svg",
+  # resizedURL: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg",
   audio:"https://storage.googleapis.com/art_storage/gallery_walk/Slow%20Art%20Guide%20for%20%F0%9D%98%88%F0%9D%98%A8%F0%9D%98%A6%20%F0%9D%98%B0%F0%9D%98%A7%20%F0%9D%98%8D%F0%9D%98%B6%F0%9D%98%AD%F0%9D%98%AD%20%F0%9D%98%89%F0%9D%98%AD%F0%9D%98%B0%F0%9D%98%B0%F0%9D%98%AE%20by%20San%20Minn.mp3",
   captions: ""},
 
@@ -56,6 +58,7 @@ ArtPiece.create!([
   artist: "Kim Lim",
   dateYear: 1979,
   imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Irrawaddy.svg",
+  # resizedURL: "https://www.roots.gov.sg/CollectionImages/1323535.jpg",
   audio:"https://storage.googleapis.com/art_storage/gallery_walk/Irrawaddy.mp3",
   captions: ""},
 
@@ -64,6 +67,7 @@ ArtPiece.create!([
   artist: "Caspar David Friedrich",
   dateYear: 1818,
   imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Wanderer%20above%20the%20Sea%20of%20Fog.svg",
+  # imageURL: "https://www.arthistoryproject.com/site/assets/files/15801/caspar-david-friedrich-the-wanderer-above-the-sea-of-fog-1818-obelisk-art-history.jpg",
   audio:"https://storage.googleapis.com/art_storage/gallery_walk/Wanderer%20above%20the%20Sea%20of%20Fog.mp3",
   captions: ""},
 
@@ -73,6 +77,7 @@ ArtPiece.create!([
   artist: "Joseph Mallord William Turner",
   dateYear: 1844,
   imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Rain%2C%20Steam%2C%20and%20Speed.svg",
+  # imageURL: "https://miro.medium.com/v2/resize:fit:786/format:webp/0*qEnR_kFsH5UpcWBT.jpg",
   audio:"https://storage.googleapis.com/art_storage/gallery_walk/Rain%2C%20Steam%2C%20and%20Speed.mp3",
   captions: ""},
 ])
@@ -131,7 +136,7 @@ GalleryJournal.create!(
   journal_entry: "I am so depressed.",
   tip_title: "Process your emotions",
   tip_body: "It is okay to feel sad sometimes.",
-  imageURL: "https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg"
+  imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Age%20of%20Full%20Bloom.svg"
 )
 
 GalleryJournal.create!(
@@ -140,7 +145,7 @@ GalleryJournal.create!(
   journal_entry: "I am so happy.",
   tip_title: "Relish in your joy!",
   tip_body: "It is okay to be happy sometimes.",
-  imageURL: "https://www.thehistoryofart.org/caspar-david-friedrich/Wanderer%20above%20the%20Sea%20of%20Fog%20Caspar%20David%20Friedrich.jpg?ezimgfmt=rs:400x512/rscb16/ngcb15/notWebP"
+  imageURL: "https://storage.googleapis.com/art_storage/gallery_walk/Rain%2C%20Steam%2C%20and%20Speed.svg"
 )
 
 GalleryJournal.create!(
@@ -158,7 +163,8 @@ EchoesJournal.create!(
   journal_entry: "I am so depressed.",
   tip_title: "Process your emotions",
   tip_body: "It is okay to feel sad sometimes.",
-  imageURL: "user_2/1722233931_drawing.png"
+  imageURL: "user_2/1722233931_drawing.png",
+  date_created: Time.now
 )
 
 EchoesJournal.create!(
@@ -167,7 +173,8 @@ EchoesJournal.create!(
   journal_entry: "I am so happy.",
   tip_title: "Relish in your joy!",
   tip_body: "It is okay to be happy sometimes.",
-  imageURL: "user_2/1722234225_drawing.png"
+  imageURL: "user_2/1722234225_drawing.png",
+  date_created: Time.now
 )
 
 EchoesJournal.create!(
@@ -176,7 +183,8 @@ EchoesJournal.create!(
   journal_entry: "I am so nonchalant.",
   tip_title: "We all have feelings",
   tip_body: "It is okay to feel nothing sometimes.",
-  imageURL: "user_2/1722234399_drawing.png"
+  imageURL: "user_2/1722234399_drawing.png",
+  date_created: Time.now
 )
 
 
@@ -240,5 +248,3 @@ end
 
 create_unique_flowers(user, flowers)
 puts user.flowers.uniq(&:day).count
-
-

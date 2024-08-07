@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::EchoesJournalsController, type: :controller do
   let!(:user) { User.create(email: "rspec@example.com", password: "password", password_confirmation: "password", dateLastLoggedIn: Date.today) }
-  let!(:echoes_journal) { EchoesJournal.create(journal_title: "My Echoes Journal", journal_entry: "A beautiful sunset.", tip_title: "yes", tip_body: "no", imageURL: "test_image.png", user: user) }
+  let!(:echoes_journal) { EchoesJournal.create(journal_title: "My Echoes Journal", journal_entry: "A beautiful sunset.", tip_title: "yes", tip_body: "no", imageURL: "test_image.png", user: user, date_created: Time.now) }
   let(:file) { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'test_image.png'), 'image/png') }
   let(:valid_attributes) {
     { echoes_journal:  {journal_title: "New Journal", journal_entry: "New entry", tip_title: "yes", tip_body: "no", date_created: Time.now}}
@@ -15,6 +15,10 @@ RSpec.describe Api::EchoesJournalsController, type: :controller do
     sign_in user
     allow(GoogleCloudStorageService).to receive(:upload_file).and_return(true)
     allow(GoogleCloudStorageService).to receive(:file_url).and_return("http://example.com/test_image.png")
+  end
+
+  after(:each) do
+    user.destroy if user.persisted?
   end
 
   describe "GET #index" do
@@ -70,6 +74,42 @@ RSpec.describe Api::EchoesJournalsController, type: :controller do
           post :create, params: invalid_attributes
         }.to_not change(EchoesJournal, :count)
 
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
+  describe "Robustness testing with fuzzing" do
+    it "handles random data gracefully" do
+      10.times do
+        random_attributes = {
+          echoes_journal: {
+            journal_title: FFaker::Lorem.sentence,
+            journal_entry: FFaker::Lorem.paragraph,
+            tip_title: FFaker::Lorem.sentence,
+            tip_body: FFaker::Lorem.paragraph,
+            date_created: FFaker::Time.date
+          }
+        }
+
+        post :create, params: random_attributes.merge(image: file)
+        expect(response).to have_http_status(:created).or have_http_status(:unprocessable_entity)
+      end
+    end
+
+    it "handles random invalid data gracefully" do
+      10.times do
+        random_invalid_attributes = {
+          echoes_journal: {
+            journal_title: FFaker::Lorem.characters(256),
+            journal_entry: FFaker::Lorem.characters(1024),
+            tip_title: FFaker::Lorem.characters(256),
+            tip_body: FFaker::Number.number(digits: 1024),
+            date_created: nil
+          }
+        }
+
+        post :create, params: random_invalid_attributes
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end

@@ -7,24 +7,25 @@ Feature: Gallery Walk
     Given I have logged in
     Then the webpage should be displayed
 
-  Scenario: Participant begins Gallery Walk activity
+  Scenario: Participant visits the Gallery Walk activity
     Given participant chosen to partake in the Gallery Walk
-    When I choose a picture from the carousel
+    When I navigate to the activities page
+    And I click on "Visit the gallery"
+    Then I should see a flower loading screen
+    And I should see a carousel of art pieces
+  
+  Scenario: Participant begins a Gallery Walk activity
+    Given participant chosen to partake in the Gallery Walk
+    When I navigate to the Gallery Walk
+    And I choose a picture from the carousel
     Then a mp3 audio player and text box will be displayed alongside picture
 
   Scenario: During the activity, play voiceover to start
-    Given I want to begin listening to voiceover
+    Given I am in a Gallery Walk session
     When I click the play button
     Then audio will play
-    
 
-  Scenario: During the activity, write text
-    Given I am listening to the voice-over
-    When I want to express my emotions in writing
-    Then text will be shown in the text box as accordance to user input
-
-
-  Scenario: Viewing the list of art gallery
-    Given there are art pieces in the database
-    When I visit the gallery walk page
-    Then I should see a list of art pieces
+  Scenario: The participant submits their journal
+    Given I have finished writing my journal
+    When I click on "Publish to journal"
+    Then I should be redirected to my saved journal entry

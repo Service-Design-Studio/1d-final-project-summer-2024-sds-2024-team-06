@@ -55,7 +55,6 @@ const Navigation = () => { return(
             <SetActiveLink href="/mood-tracker">Mood Tracker</SetActiveLink>
             <SetActiveLink href="/activities">Activity</SetActiveLink>
             <SetActiveLink href="/journal-quote">Journal</SetActiveLink>
-            <SetActiveLink href="#">Profile</SetActiveLink>
             <SetActiveLink href="https://www.nationalgallery.sg/start">About stART</SetActiveLink>
           </div>
         </div>
@@ -69,7 +68,6 @@ const Navigation = () => { return(
       <a href="/mood-tracker" className="block rounded-md px-3 py-2 text-sm font-sans-700 text-grey hover:text-orange" >Mood Tracker</a>
       <a href="/activities" className="block rounded-md px-3 py-2 text-sm font-sans-700 text-grey hover:text-orange">Activity</a>
       <a href="/journal-quote" className="block rounded-md px-3 py-2 text-sm font-sans-700 text-grey hover:text-orange">Journal</a>
-      <a href="#" className="block rounded-md px-3 py-2 text-sm font-sans-700 text-grey hover:text-orange">Profile</a>
       <a href="https://www.nationalgallery.sg/start" className="block rounded-md px-3 py-2 text-sm font-sans-700 text-grey hover:text-orange">About stART</a>
     </div>
   </div>

@@ -135,8 +135,10 @@ RSpec.feature "ColorImage", type: :feature do
         
         fill_in 'Time you enjoy wasting is not wasted time...', with: "Excited for what's to come"
         find('#continue').click
-        sleep 1
-        expect(page).to have_current_path("/activities")
+        sleep 2
+        latest_echoes_journal = user.echoes_journals.last
+        puts latest_echoes_journal
+        expect(page).to have_current_path("/journal/#{latest_echoes_journal.id}?type=echo")
         expect(page).to have_content("Drawing saved!")
     end
 

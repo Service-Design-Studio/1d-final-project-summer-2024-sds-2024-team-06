@@ -49,7 +49,8 @@ RSpec.feature "ViewingJournals", type: :feature do
             journal_entry: "I am so depressed.",
             tip_title: "Process your emotions",
             tip_body: "It is okay to feel sad sometimes.",
-            imageURL: "user_4/1722671592_drawing.png"
+            imageURL: "user_4/1722671592_drawing.png",
+            date_created: Time.now
         )
         sign_in user
     end
@@ -78,7 +79,7 @@ RSpec.feature "ViewingJournals", type: :feature do
     scenario "User filters the journals by category" do
         visit "/journal"
         sleep 3
-        click_on 'Open'
+        click_on 'Open-ended'
         expect(page).to have_content("Today my dog died")
         expect(page).to have_content("Today I got fired!")
         expect(page).not_to have_content("This artwork makes me realise i feel sad")
@@ -114,7 +115,7 @@ RSpec.feature "ViewingJournals", type: :feature do
     scenario "User clicks on an open journal entry" do
         visit "/journal"
         sleep 3
-        click_on 'Open'
+        click_on 'Open-ended'
         find("a#open-100").click
         sleep 2
         expect(page).to have_current_path("/journal/100?type=open")
@@ -143,10 +144,9 @@ RSpec.feature "ViewingJournals", type: :feature do
         find("a#gallery-100").click
         sleep 2
         expect(page).to have_current_path("/journal/100?type=gallery")
-        # expect(page).to have_content("This artwork makes me realise i feel sad")
-        # expect(page).to have_content("I am so depressed.")
-        # expect(page).to have_content("Process your emotions")
-        # expect(page).to have_selector('p#tip-body')
+        expect(page).to have_content("This artwork makes me realise i feel sad")
+        expect(page).to have_content("I am so depressed.")
+        expect(page).to have_selector("img[src='https://www.nationalgallery.sg/sites/default/files/blog/San%20Minn-Age%20of%20Full%20Bloom_o4.jpg']")
     end
 
     scenario "User clicks on an echoes journal entry" do
@@ -156,9 +156,8 @@ RSpec.feature "ViewingJournals", type: :feature do
         find("a#echo-100").click
         sleep 2
         expect(page).to have_current_path("/journal/100?type=echo")
-        # expect(page).to have_content("Today I am really sad i am so blue")
-        # expect(page).to have_content("I am so depressed.")
-        # expect(page).to have_content("Process your emotions")
-        # expect(page).to have_selector('p#tip-body')
+        expect(page).to have_content("Today I am really sad i am so blue")
+        expect(page).to have_content("I am so depressed.")
+        expect(page).to have_selector("img[alt='art-piece']")
     end
 end

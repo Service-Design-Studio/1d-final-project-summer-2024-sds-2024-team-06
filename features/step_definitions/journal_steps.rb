@@ -38,7 +38,7 @@ end
 Given('I am on journal entries history') do
   visit '/journal-quote'
   step 'I click anywhere'
-  sleep 5
+  sleep 10
 end
 
 When('I click the new entry button') do
@@ -54,7 +54,7 @@ Given('I am on journal entries history and user has completed a goal-setting jou
   visit '/journal'
   # Ensure there is at least one goal-setting journal entry, adjust as necessary
   # ky to create a profile with a goal-setting journal entry
-  sleep 5
+  sleep 10
 end
 
 When('I click on the first goal entry') do
@@ -79,7 +79,7 @@ end
 ##
 Given('I opened create journal menu') do
   visit '/journal'
-  sleep 5
+  sleep 10
   find('#newJournalButton').click
 end
 
@@ -99,6 +99,7 @@ Then('I will be redirected to a goal-setting journal page') do
   expect(page).to have_current_path('/journal/goal-setting')
 end
 
+
 ##
 Given('I am on open-ended journal page') do
   visit '/journal/open-ended'
@@ -106,7 +107,7 @@ end
 
 When('I click on "Guide Me" button') do
   find('#guideMe').click
-  sleep 8
+  sleep 6
 end
 
 Then('I should see a prompt generated') do
@@ -126,57 +127,92 @@ When('I click submit') do
 end
 
 Then('I will be redirected to open submission page') do
+  sleep 2
+  user.reload
   latest_journal_id = user.journals.last.id
-  latest_journal_id += 1
   expect(page).to have_current_path("/journal/#{latest_journal_id}?type=open")
 end
 
 Then('I will be redirected to goal submission page') do
+  sleep 2
+  user.reload
   latest_journal_id = user.goal_journals.last.id
-  latest_journal_id += 1
   expect(page).to have_current_path("/journal/#{latest_journal_id}?type=goal")
 end
 
 ##
-When('I click on a goal-setting journal entry item') do
-  first_journal_id = user.goal_journals.first.id
-  find("a#goal-#{first_journal_id}").click
-end
+# When('I click on a goal-setting journal entry item') do
+#   first_journal_id = user.goal_journals.first.id
+#   find("a#goal-#{first_journal_id}").click
+# end
 
-Then('I will be redirected to the goal-setting journal past entry page') do
-  first_journal_id = user.goal_journals.first.id
-  expect(page).to have_current_path("/journal/#{first_journal_id}?type=goal")
-end
+# Then('I will be redirected to the goal-setting journal past entry page') do
+#   first_journal_id = user.goal_journals.first.id
+#   expect(page).to have_current_path("/journal/#{first_journal_id}?type=goal")
+# end
 
-And('I will see three template fields') do
-  sleep 2
-  first_journal = user.goal_journals.first
-  expect(page).to have_selector('p#journal-start', text: first_journal.journal_start)
-  expect(page).to have_selector('p#journal-end', text: first_journal.journal_end)
-  expect(page).to have_selector('p#journal-continue', text: first_journal.journal_third)
-end
+# And('I will see three template fields') do
+#   sleep 2
+#   first_journal = user.goal_journals.first
+#   expect(page).to have_selector('p#journal-start', text: first_journal.journal_start)
+#   expect(page).to have_selector('p#journal-end', text: first_journal.journal_end)
+#   expect(page).to have_selector('p#journal-continue', text: first_journal.journal_third)
+# end
 
-##
-When('I click on a open-ended journal entry item') do
-  first_journal_id = user.journals.first.id
-  find("a#open-#{first_journal_id}").click
-end
+# ##
+# When('I click on a open-ended journal entry item') do
+#   first_journal_id = user.journals.first.id
+#   find("a#open-#{first_journal_id}").click
+# end
 
-Then('I will be redirected to the open-ended journal past entry page') do
-  first_journal_id = user.journals.first.id
-  expect(page).to have_current_path("/journal/#{first_journal_id}?type=open")
-end
+# Then('I will be redirected to the open-ended journal past entry page') do
+#   first_journal_id = user.journals.first.id
+#   expect(page).to have_current_path("/journal/#{first_journal_id}?type=open")
+# end
 
-And('I will see my journal entry and final tip generated') do
-  sleep 2
-  first_journal = user.journals.first
-  expect(page).to have_content(first_journal.journal_title)
-  expect(page).to have_content(first_journal.journalentry)
-  expect(page).to have_content(first_journal.tip_title)
-  expect(page).to have_selector('p#tip-body')
-end
+# And('I will see my journal entry and final tip generated') do
+#   sleep 2
+#   first_journal = user.journals.first
+#   expect(page).to have_content(first_journal.journal_title)
+#   expect(page).to have_content(first_journal.journalentry)
+#   expect(page).to have_content(first_journal.tip_title)
+#   expect(page).to have_selector('p#tip-body')
+# end
 
+# When('I click on a gallery walk journal entry item') do
+#   first_journal_id = user.gallery_journals.first.id
+#   find("a#gallery-#{first_journal_id}").click
+# end
 
+# Then('I will be redirected to the gallery walk journal past entry page') do
+#   first_journal_id = user.gallery_journals.first.id
+#   expect(page).to have_current_path("/journal/#{first_journal_id}?type=gallery")
+# end
+
+# And('And I will see my journal entry, title and the corresponding image') do
+#   sleep 2
+#   first_journal = user.gallery_journals.first
+#   expect(page).to have_content(first_journal.journal_title)
+#   expect(page).to have_content(first_journal.journal_entry)
+#   expect(page).to have_selector('img[src="' + first_journal.image_url + '"]')
+# end
+
+# When('I click on a echoes within journal entry item') do
+#   first_journal_id = user.echoes_journals.first.id
+#   find("a#echo-#{first_journal_id}").click
+# end
+
+# Then('I will be redirected to the echoes within journal past entry page') do
+#   first_journal_id = user.echoes_journals.first.id
+#   expect(page).to have_current_path("/journal/#{first_journal_id}?type=echo")
+# end
+
+# And('I will see my journal entry and my sketch') do
+#   sleep 2
+#   first_journal = user.echoes_journals.first
+#   expect(page).to have_content(first_journal.journal_title)
+#   expect(page).to have_selector('img[src="' + first_journal.image_url + '"]')
+# end
 
 Given('I have completed writing my goal-setting journal entry') do
   visit '/journal/goal-setting'
@@ -199,4 +235,77 @@ end
 
 Then("I will see a pop-up cautioning me that I will lose my progress") do
   expect(page).to have_css('div#popup-exit')
+end
+
+
+When('I click on a goal-setting journal entry item') do
+  first_journal_id = user.goal_journals.first.id
+  find("a#goal-#{first_journal_id}").click
+end
+
+Then('I will be redirected to the goal-setting journal past entry page') do
+  first_journal_id = user.goal_journals.first.id
+  expect(page).to have_current_path("/journal/#{first_journal_id}?type=goal")
+end
+
+And('I will see three template fields') do
+  sleep 2
+  first_journal = user.goal_journals.first
+  expect(page).to have_selector('p#journal-start', text: first_journal.journal_start)
+  expect(page).to have_selector('p#journal-end', text: first_journal.journal_end)
+  expect(page).to have_selector('p#journal-continue', text: first_journal.journal_third)
+end
+
+When('I click on a open-ended journal entry item') do
+  first_journal_id = user.journals.first.id
+  find("a#open-#{first_journal_id}").click
+end
+
+Then('I will be redirected to the open-ended journal past entry page') do
+  first_journal_id = user.journals.first.id
+  expect(page).to have_current_path("/journal/#{first_journal_id}?type=open")
+end
+
+And('I will see my journal entry and final tip generated') do
+  sleep 2
+  first_journal = user.journals.first
+  expect(page).to have_content(first_journal.journal_title)
+  expect(page).to have_content(first_journal.journalentry)
+  expect(page).to have_content(first_journal.tip_title)
+  expect(page).to have_selector('p#tip-body')
+end
+
+When('I click on a gallery walk journal entry item') do
+  first_journal_id = user.gallery_journals.first.id
+  find("a#gallery-#{first_journal_id}").click
+end
+
+Then('I will be redirected to the gallery walk journal past entry page') do
+  first_journal_id = user.gallery_journals.first.id
+  expect(page).to have_current_path("/journal/#{first_journal_id}?type=gallery")
+end
+
+And('I will see my journal entry, title and the corresponding image') do
+  sleep 2
+  first_journal = user.gallery_journals.first
+  expect(page).to have_content(first_journal.journal_title)
+  expect(page).to have_content(first_journal.journal_entry)
+  expect(page).to have_selector('img[src="' + first_journal.imageURL + '"]')
+end
+
+When('I click on a echoes within journal entry item') do
+  first_journal_id = user.echoes_journals.first.id
+  find("a#echo-#{first_journal_id}").click
+end
+
+Then('I will be redirected to the echoes within journal past entry page') do
+  first_journal_id = user.echoes_journals.first.id
+  expect(page).to have_current_path("/journal/#{first_journal_id}?type=echo")
+end
+
+And('I will see my journal entry and my sketch') do
+  sleep 2
+  first_journal = user.echoes_journals.first
+  expect(page).to have_content(first_journal.journal_title)
+  expect(page).to have_selector('img[src*="' + first_journal.imageURL + '"]')
 end

@@ -52,6 +52,41 @@ RSpec.describe Api::UsersController, type: :controller do
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
+
+    context "with random invalid data" do
+      it "handles random invalid data gracefully" do
+        10.times do
+          random_invalid_attributes = {
+            email: [FFaker::Lorem.characters(256), nil].sample,
+            password: [FFaker::Lorem.characters(256), nil].sample,
+            password_confirmation: [FFaker::Lorem.characters(256), nil].sample,
+            dateLastLoggedIn: [FFaker::Time.date, nil].sample
+          }
+
+          post :create, params: { user: random_invalid_attributes }
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      end
+    end
+
+    context "with random valid data" do
+      it "handles random valid data gracefully" do
+        10.times do
+          random_password = FFaker::Internet.password
+          random_valid_attributes = {
+            email: FFaker::Internet.email,
+            password: random_password,
+            password_confirmation: random_password,
+            dateLastLoggedIn: FFaker::Time.date
+          }
+
+          post :create, params: { user: random_valid_attributes }
+          expect(response).to have_http_status(:created)
+          expect(assigns(:user)).to be_a(User)
+          expect(assigns(:user)).to be_persisted
+        end
+      end
+    end
   end
 
   describe "POST #guest_login" do

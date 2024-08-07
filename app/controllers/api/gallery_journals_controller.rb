@@ -20,8 +20,8 @@ module Api
 
       if @gallery_journal.save
         render json: @gallery_journal, status: :created
-      # else
-        # render json: @gallery_journal.errors, status: :unprocessable_entity
+      else
+        render json: @gallery_journal.errors, status: :unprocessable_entity
       end
     end
 
@@ -38,7 +38,7 @@ module Api
     end
 
     def gallery_journal_params
-      params.require(:gallery_journal).permit(:journal_title, :journal_entry, :tip_title, :tip_body, :imageurl, :date_created)
+      params.require(:gallery_journal).permit(:journal_title, :journal_entry, :tip_title, :tip_body, :imageURL, :date_created)
     end
   end
 end

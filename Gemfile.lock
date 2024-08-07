@@ -166,6 +166,7 @@ GEM
       logger
     faraday-net_http (3.1.0)
       net-http
+    ffaker (2.23.0)
     ffi (1.17.0-x64-mingw-ucrt)
     ffi (1.17.0-x86_64-linux-gnu)
     formatador (1.1.0)
@@ -475,6 +476,7 @@ DEPENDENCIES
   devise
   dotenv
   factory_bot_rails
+  ffaker
   gon
   google-cloud-storage
   guard-rspec

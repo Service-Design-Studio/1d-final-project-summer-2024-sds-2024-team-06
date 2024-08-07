@@ -37,7 +37,7 @@ Feature: Daily Check-in
     When I select "In Love" from the mood dropdown
     And I select "Yellow" from the color dropdown
     And I click 'Submit'
-    Then I should see a loading screen
+    Then I should see a flower loading screen
     And I should be redirected to the mood tracker page
 
   Scenario: Correct number of flowers displayed

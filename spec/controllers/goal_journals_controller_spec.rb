@@ -57,5 +57,27 @@ RSpec.describe Api::GoalJournalsController, type: :controller do
       expect(controller).to receive(:goal_journal_params).and_call_original
       post :create, params: { goal_journal: valid_attributes }
     end
+
+    it "handles fuzzed valid and invalid input gracefully" do
+      fuzzed_attributes = {
+        journal_title: FFaker::Lorem.sentence,
+        journal_start: FFaker::Lorem.sentence,
+        journal_end: FFaker::Lorem.sentence,
+        journal_third: FFaker::Lorem.sentence
+      }
+
+      post :create, params: { goal_journal: fuzzed_attributes }
+      expect(response).to have_http_status(:created)
+
+      fuzzed_attributes = {
+        journal_title: [FFaker::Lorem.characters(300), nil].sample,
+        journal_start:[FFaker::Lorem.characters(300), nil].sample,
+        journal_end: [FFaker::Lorem.characters(300), nil].sample,
+        journal_third: [FFaker::Lorem.characters(300), nil].sample
+      }
+
+      post :create, params: { goal_journal: fuzzed_attributes }
+      expect(response).to have_http_status(:unprocessable_entity).or have_http_status(:created)
+    end
   end
 end

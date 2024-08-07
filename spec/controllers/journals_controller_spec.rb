@@ -56,5 +56,33 @@ RSpec.describe Api::JournalsController, type: :controller do
       expect(controller).to receive(:journal_params).and_call_original
       post :create, params: { journal: valid_attributes }
     end
+
+    it "handles random valid and invalid data gracefully" do
+      10.times do
+        random_valid_attributes = {
+          journalentry: FFaker::Lorem.sentence,
+          journal_title: FFaker::Lorem.sentence,
+          tip_title: FFaker::Lorem.sentence,
+          tip_body: FFaker::Lorem.paragraph
+        }
+
+        post :create, params: { journal: random_valid_attributes }
+        expect(response).to have_http_status(:created)
+        expect(assigns(:journal)).to be_a(Journal)
+        expect(assigns(:journal)).to be_persisted
+
+        10.times do
+          random_invalid_attributes = {
+            journalentry: [FFaker::Lorem.characters(256), nil].sample,
+            journal_title: [FFaker::Lorem.characters(256), nil].sample,
+            tip_title: [FFaker::Lorem.characters(256), nil].sample,
+            tip_body: [FFaker::Lorem.characters(1024), nil].sample
+          }
+  
+          post :create, params: { journal: random_invalid_attributes }
+          expect(response).to have_http_status(:unprocessable_entity).or have_http_status(:created)
+        end
+      end
+    end
   end
 end
