@@ -17,8 +17,6 @@ RSpec.feature "ColorImage", type: :feature do
 
     scenario "User visits echoes within page" do
         visit "/echoes-within"
-        # is_speaking = page.evaluate_script('window.speechSynthesis.speaking')
-        # expect(is_speaking).to be true
 
         expect(page).to have_selector('#react-sketch-canvas')
         expect(page).to have_selector('#brush')

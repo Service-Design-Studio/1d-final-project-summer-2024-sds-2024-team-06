@@ -26,18 +26,18 @@ RSpec.describe Journal, type: :model do
     expect(journal).to_not be_valid
   end
 
-  # it "is not valid without a tip_title" do
-  #   journal = Journal.new(journal_title: "Title without tip title", journalentry: "Entry", tip_body: "Tip Body", user: user)
-  #   expect(journal).to_not be_valid
-  # end
+  it "is not valid without a tip_title" do
+    journal = Journal.new(journal_title: "Title without tip title", journalentry: "Entry", tip_body: "Tip Body", user: user)
+    expect(journal).to_not be_valid
+  end
 
-  # it "is not valid without a tip_body" do
-  #   journal = Journal.new(journal_title: "Title without tip body", journalentry: "Entry", tip_title: "Tip Title", user: user)
-  #   expect(journal).to_not be_valid
-  # end
+  it "is not valid without a tip_body" do
+    journal = Journal.new(journal_title: "Title without tip body", journalentry: "Entry", tip_title: "Tip Title", user: user)
+    expect(journal).to_not be_valid
+  end
 
-    it "is not valid without a user" do
-        journal = Journal.new(journal_title: "Title without user", journalentry: "Entry", tip_title: "Tip Title", tip_body: "Tip Body")
-        expect(journal).to_not be_valid
-    end
+  it "is not valid without a user" do
+      journal = Journal.new(journal_title: "Title without user", journalentry: "Entry", tip_title: "Tip Title", tip_body: "Tip Body")
+      expect(journal).to_not be_valid
+  end
 end
