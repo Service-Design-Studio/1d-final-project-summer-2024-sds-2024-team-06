@@ -1,6 +1,6 @@
 import React from "react";
 
-const FlowerImage = ({ checkinMood, checkinColor, height }) => {
+const FlowerImage = ({ flowerId, checkinMood, checkinColor, height }) => {
   //const baseImageUrl = `/images/flowers/${checkinMood}/${checkinColor}.svg`;
 
   const sanitizeString = (str) => str.replace(/\s+/g, '').toLowerCase();
@@ -40,6 +40,7 @@ const FlowerImage = ({ checkinMood, checkinColor, height }) => {
   return (
     <div style={containerStyle}>
       <img
+        id={`flower-${flowerId}`}
         className='flower-image'
         src={baseImageUrl}
         alt="Flower"

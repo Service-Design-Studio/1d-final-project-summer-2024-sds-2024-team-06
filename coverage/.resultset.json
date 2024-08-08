@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/user.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/user.rb": {
         "lines": [
           1,
           1,
@@ -22,9 +22,9 @@
           1,
           8,
           8,
-          5,
-          5,
-          5,
+          3,
+          3,
+          3,
           null,
           8,
           8,
@@ -37,14 +37,14 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/application_record.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/art_pieces_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/art_pieces_controller.rb": {
         "lines": [
           1,
           1,
@@ -73,7 +73,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/application_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -82,13 +82,13 @@
           1,
           null,
           1,
-          420,
+          419,
           null,
           null,
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/echoes_journals_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/echoes_journals_controller.rb": {
         "lines": [
           1,
           1,
@@ -116,8 +116,8 @@
           null,
           null,
           1,
-          3,
-          3,
+          2,
+          2,
           null,
           null,
           null,
@@ -153,13 +153,13 @@
           1,
           null,
           1,
-          4,
-          null,
-          1,
-          null,
-          null,
-          1,
           3,
+          null,
+          1,
+          null,
+          null,
+          1,
+          2,
           null,
           null,
           null,
@@ -173,7 +173,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/flowers_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/flowers_controller.rb": {
         "lines": [
           1,
           1,
@@ -221,7 +221,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/gallery_journals_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/gallery_journals_controller.rb": {
         "lines": [
           1,
           1,
@@ -269,7 +269,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/goal_journals_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/goal_journals_controller.rb": {
         "lines": [
           1,
           1,
@@ -317,7 +317,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/journals_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/journals_controller.rb": {
         "lines": [
           1,
           1,
@@ -340,9 +340,9 @@
           115,
           null,
           115,
-          19,
+          23,
           null,
-          96,
+          92,
           null,
           115,
           null,
@@ -367,7 +367,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/moods_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/moods_controller.rb": {
         "lines": [
           1,
           1,
@@ -434,7 +434,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/pages_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/pages_controller.rb": {
         "lines": [
           1,
           1,
@@ -446,7 +446,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/users/registrations_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/users/registrations_controller.rb": {
         "lines": [
           1,
           null,
@@ -493,7 +493,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/users_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/users_controller.rb": {
         "lines": [
           1,
           1,
@@ -523,8 +523,8 @@
           null,
           null,
           1,
-          44,
-          44,
+          45,
+          45,
           null,
           null,
           null,
@@ -537,7 +537,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/echoes_journal.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/echoes_journal.rb": {
         "lines": [
           1,
           1,
@@ -553,26 +553,27 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/flower.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/flower.rb": {
         "lines": [
           1,
           1,
           1,
           1,
-          null,
           1,
           null,
           1,
           null,
           1,
-          44,
           null,
-          44,
+          1,
+          40,
+          null,
+          40,
           null,
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/gallery_journal.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/gallery_journal.rb": {
         "lines": [
           1,
           1,
@@ -593,7 +594,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/goal_journal.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/goal_journal.rb": {
         "lines": [
           1,
           1,
@@ -614,7 +615,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/journal.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/journal.rb": {
         "lines": [
           1,
           1,
@@ -629,12 +630,12 @@
           1,
           null,
           1,
-          47,
+          51,
           null,
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/mood.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/mood.rb": {
         "lines": [
           1,
           1,
@@ -662,7 +663,7 @@
           1,
           null,
           1,
-          101,
+          97,
           1,
           null,
           null,
@@ -670,7 +671,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/services/google_cloud_storage_service.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/services/google_cloud_storage_service.rb": {
         "lines": [
           null,
           1,
@@ -683,15 +684,15 @@
           null,
           null,
           1,
-          9,
-          9,
-          9,
-          9,
+          8,
+          8,
+          8,
+          8,
           null,
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/art_piece.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/art_piece.rb": {
         "lines": [
           1,
           null,
@@ -699,7 +700,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/homepage_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/homepage_controller.rb": {
         "lines": [
           1,
           1,
@@ -707,7 +708,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/users/sessions_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/users/sessions_controller.rb": {
         "lines": [
           1,
           1,
@@ -724,7 +725,7 @@
           1,
           null,
           1,
-          5,
+          4,
           null,
           null,
           1,
@@ -734,11 +735,11 @@
         ]
       }
     },
-    "timestamp": 1723059058
+    "timestamp": 1723101113
   },
   "Cucumber Features": {
     "coverage": {
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/user.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/user.rb": {
         "lines": [
           1,
           1,
@@ -759,9 +760,9 @@
           1,
           1,
           1,
-          1,
-          1,
-          1,
+          0,
+          0,
+          0,
           null,
           1,
           1,
@@ -774,14 +775,14 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/application_record.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/users/sessions_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/users/sessions_controller.rb": {
         "lines": [
           1,
           1,
@@ -807,7 +808,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/application_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -816,13 +817,13 @@
           1,
           null,
           1,
-          280,
+          281,
           null,
           null,
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/homepage_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/homepage_controller.rb": {
         "lines": [
           1,
           1,
@@ -830,7 +831,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/users_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/users_controller.rb": {
         "lines": [
           1,
           1,
@@ -874,7 +875,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/flowers_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/flowers_controller.rb": {
         "lines": [
           1,
           1,
@@ -884,8 +885,8 @@
           1,
           null,
           1,
-          4,
-          4,
+          5,
+          5,
           null,
           null,
           1,
@@ -922,8 +923,9 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/flower.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/flower.rb": {
         "lines": [
+          1,
           1,
           1,
           1,
@@ -941,7 +943,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/art_pieces_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/art_pieces_controller.rb": {
         "lines": [
           1,
           1,
@@ -970,7 +972,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/art_piece.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/art_piece.rb": {
         "lines": [
           1,
           null,
@@ -978,7 +980,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/gallery_journals_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/gallery_journals_controller.rb": {
         "lines": [
           1,
           1,
@@ -1026,7 +1028,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/gallery_journal.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/gallery_journal.rb": {
         "lines": [
           1,
           1,
@@ -1047,7 +1049,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/echoes_journals_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/echoes_journals_controller.rb": {
         "lines": [
           1,
           1,
@@ -1132,7 +1134,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/services/google_cloud_storage_service.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/services/google_cloud_storage_service.rb": {
         "lines": [
           null,
           1,
@@ -1153,7 +1155,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/echoes_journal.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/echoes_journal.rb": {
         "lines": [
           1,
           1,
@@ -1169,55 +1171,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/goal_journals_controller.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          8,
-          8,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          0,
-          null,
-          null,
-          null,
-          1,
-          null,
-          1,
-          2,
-          null,
-          0,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/journals_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/journals_controller.rb": {
         "lines": [
           1,
           1,
@@ -1267,7 +1221,75 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/goal_journal.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/goal_journals_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          8,
+          8,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          0,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/journal.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/goal_journal.rb": {
         "lines": [
           1,
           1,
@@ -1288,27 +1310,7 @@
           null
         ]
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/journal.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/moods_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/api/moods_controller.rb": {
         "lines": [
           0,
           0,
@@ -1377,7 +1379,7 @@
         "branches": {
         }
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/pages_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/pages_controller.rb": {
         "lines": [
           0,
           0,
@@ -1391,7 +1393,7 @@
         "branches": {
         }
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/users/registrations_controller.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/controllers/users/registrations_controller.rb": {
         "lines": [
           0,
           null,
@@ -1440,7 +1442,7 @@
         "branches": {
         }
       },
-      "C:/Users/jonas/OneDrive/Documents/GitHub/1d-final-project-summer-2024-sds-2024-team-06/app/models/mood.rb": {
+      "C:/Users/jonas/Downloads/d2w_mini_projects/1d-final-project-summer-2024-sds-2024-team-06/app/models/mood.rb": {
         "lines": [
           0,
           0,
@@ -1479,6 +1481,6 @@
         }
       }
     },
-    "timestamp": 1723059420
+    "timestamp": 1723101581
   }
 }

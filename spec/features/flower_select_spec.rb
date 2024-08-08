@@ -12,6 +12,10 @@ RSpec.feature "FlowerSelect", type: :feature do
         user.destroy if user.persisted?
     end
 
+    after do
+        user.flowers.last.destroy if user.flowers.last
+    end
+
     def select_flower(mood, color)
         find('button#mood-dropdown').click
         find('p', text: mood).click

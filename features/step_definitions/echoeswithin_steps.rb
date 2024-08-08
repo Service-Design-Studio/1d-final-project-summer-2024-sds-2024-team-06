@@ -10,9 +10,6 @@ Then('I should be redirected to the EchoesWithin page') do
 end
 
 Then('I will hear an audio prompt begin to play') do ##and?
-  # Code to verify that an audio prompt begins to play
-  # This might require JavaScript execution or checking for an audio element
-  # expect(page).to have_selector('audio')
   is_speaking = page.evaluate_script('window.speechSynthesis.speaking')
   expect(is_speaking).to be true
 end
@@ -26,14 +23,21 @@ Given('I am on the EchoesWithin page') do
 end
 
 When('I draw on the canvas') do
-  # Code to simulate drawing on the canvas
-  # This might require JavaScript execution to simulate drawing
-  # page.execute_script("simulateDrawingOnCanvas()")
+  canvas = find('#react-sketch-canvas')
+  canvas_width = page.evaluate_script("document.getElementById('react-sketch-canvas').offsetWidth").to_i
+  canvas_height = page.evaluate_script("document.getElementById('react-sketch-canvas').offsetHeight").to_i
+  find('#brush').click
+  
+  canvas.hover
+  canvas.click
+
+  find("#eraser").click
+  canvas.hover
+  canvas.click
 end
 
 Then('I should see my brushstroke applied onto the background image') do
-  # Code to verify that the brushstroke is applied to the background image
-  # expect(page).to have_selector('canvas.brushstroke-applied')
+  expect(page).to have_css('#react-sketch-canvas')
 end
 
 When('I require guidance and click the next prompt arrow') do
@@ -41,12 +45,8 @@ When('I require guidance and click the next prompt arrow') do
 end
 
 Then('the next audio prompt will play') do
-  # Code to verify that the next audio prompt plays
-  # expect(page).to have_selector('audio')
-
   is_speaking = page.evaluate_script('window.speechSynthesis.speaking')
   expect(is_speaking).to be true
-
 end
 
 Given('I have completed my Drawing') do

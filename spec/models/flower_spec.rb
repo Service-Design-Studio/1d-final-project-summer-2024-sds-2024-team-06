@@ -4,16 +4,13 @@ RSpec.describe Flower, type: :model do
   before do
     # Mood.destroy_all
     @user = User.create(email: "rspec@example.com" , password: "password", password_confirmation: "password", dateLastLoggedIn: Date.today)
-    mood = Mood.create!(name: "happy", color: "yellow", hexcode: "#0000", user: @user)
-    flower = Flower.create!(color: mood.color, mood: mood.name, user: @user)
-    if flower.persisted?
-      Rails.logger.debug "Flower created successfully: #{flower.color}, #{flower.date_created}"
-    else
-      Rails.logger.debug "Flower creation failed: #{flower.errors.full_messages.join(', ')}"
-    end
+    # mood = Mood.create!(name: "happy", color: "yellow", hexcode: "#0000", user: @user)
+    # flower = Flower.create!(color: mood.color, mood: mood.name, user: @user)
   end
 
   it "is valid with valid attributes" do
+    current_date = Date.today
+    Flower.where(date_created: current_date).destroy_all
     flower = Flower.new(color: "red", mood: "angry", user: @user)
     flower.save
     expect(flower).to be_valid

@@ -39,6 +39,7 @@ Feature: Daily Check-in
     And I click 'Submit'
     Then I should see a flower loading screen
     And I should be redirected to the mood tracker page
+    And a "In Love" flower of "Yellow" of today's day should be created
 
   Scenario: Correct number of flowers displayed
     Given I am logged into an account with flowers

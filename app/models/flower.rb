@@ -2,6 +2,7 @@ class Flower < ApplicationRecord
   belongs_to :user
   validates :mood, presence: true
   validates :color, presence: true
+  validates :day, uniqueness: { scope: :user_id }
 
   after_create :set_day_date_created
 

@@ -230,6 +230,7 @@ def create_unique_flowers(user, flowers)
   end
 
   remove_duplicate_flowers(user)
+  remove_duplicate_flowers(user)
 end
 
 def remove_duplicate_flowers(user)
