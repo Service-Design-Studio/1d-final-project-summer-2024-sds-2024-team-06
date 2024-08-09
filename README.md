@@ -1,27 +1,27 @@
-# README
+# Project Overview
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project uses **Ruby on Rails 3.3.3** with **Rails 7.1** for the backend, and **React** for the frontend.
 
-Things you may want to cover:
+## Prerequisites
 
-* Ruby version
+To run this project locally, ensure you have the following installed:
 
-* System dependencies
+- **Ruby 3.3.3**
+- **Node Package Manager (npm)**
 
-* Configuration
+## Setup Instructions
 
-* Database creation
+1. Create a file `master.key` in `app/config`, and save it with the following input: ea7fbffcb7eec24f23d9a5500b76cbea
 
-* Database initialization
+2. In the application directory, run the following command in your terminal: ./setup.ps1
+This serves to install bundler, gems, front-end packages, and setup the database.
 
-* How to run the test suite
+* Deployment
+Deployment has been fully automated and will re-deploy on any push to the branch proddockerpls.
 
-* Services (job queues, cache servers, search engines, etc.)
+* The test suite can be run by running rake test:all. Alternatively, run bundle exec cucumber AND bundle exec rspec.
 
-* Deployment instructions
+* To run it locally, run rails s in your terminal
 
-* ...
+* The deployment webpage can be accessed via the following link: https://ngswebapp-67fxypa3ea-as.a.run.app/
 
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/QpCtzJAE)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=15055497&assignment_repo_type=AssignmentRepo)
