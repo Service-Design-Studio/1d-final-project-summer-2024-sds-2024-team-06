@@ -21,7 +21,7 @@ This serves to install bundler, gems, front-end packages with npm, setup, migrat
 
 * Deployment has been fully automated and will re-deploy on any push to the branch proddockerpls. All credentials have been securely hosted inside credentials.yml (which can be decoded with master.key in config, and by running rails credentials:edit). For convenience, the front-end React application and backend Rails API are deloyed together, but they are functionally completely independent entities. The Rails RESTful API backend serves as a microservice. 
 
-* The test suite can be run by running rake test:all. Alternatively, run ```shell bundle exec cucumber``` AND ```shell bundle exec rspec```. The testing files can be found under app/features/ and app/spec/
+* The test suite can be run by running rake test:all. Alternatively, run ```bundle exec cucumber``` AND ```bundle exec rspec```. The testing files can be found under app/features/ and app/spec/
 * API Endpoint testing for the deployed website has been automated via POSTman, as documented in the team site listed below.
 
 * To run the web-app locally, run rails s in your terminal
